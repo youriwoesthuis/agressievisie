@@ -1,5 +1,82 @@
+# AgressieVisie — https://agressievisie.nl
+# Alle crawlers zijn welkom op de volledige site. Er wordt niets geblokkeerd.
+# De inhoud is bedoeld om gevonden, geciteerd en doorverwezen te worden.
+
 User-agent: *
 Allow: /
+
+# ── AI-antwoordmachines ─────────────────────────────────────────────────
+# Deze bots vallen al onder "User-agent: *" hierboven. Ze staan hier
+# expliciet omdat een crawler altijd de MEEST SPECIFIEKE regelgroep volgt:
+# zodra er ooit een beperking bij "*" wordt toegevoegd, blijven deze
+# groepen ongemoeid en behouden deze bots hun toegang.
+
+# OpenAI (ChatGPT)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google (Gemini, AI Overviews)
+User-agent: Google-Extended
+Allow: /
+
+# Microsoft (Copilot)
+User-agent: Bingbot
+Allow: /
+
+# Apple (Siri, Apple Intelligence)
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Overige AI-crawlers en datasets
+User-agent: CCBot
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+# ── Vindbaarheid ────────────────────────────────────────────────────────
 
 Sitemap: https://agressievisie.nl/sitemap.xml
 
