@@ -1,0 +1,362 @@
+﻿<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bereken het agressierisico van jouw organisatie | AgressieVisie</title>
+<meta name="description" content="Beantwoord zes korte vragen en ontdek het agressierisico van jouw organisatie, met concrete aanbevelingen op maat." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="canonical" href="https://agressievisie.nl/risico-check.html" />
+<meta property="og:url" content="https://agressievisie.nl/risico-check.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="AgressieVisie" />
+<meta property="og:title" content="Bereken het agressierisico van jouw organisatie | AgressieVisie" />
+<meta property="og:description" content="Zes korte vragen, direct een risicoscore met aanbevelingen." />
+<meta property="og:image" content="https://agressievisie.nl/img/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://agressievisie.nl/img/og-image.png" />
+<link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .rc-wrap { max-width: 720px; margin: 0 auto; }
+  .rc-box { background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:36px; box-shadow:var(--shadow-sm); }
+  .rc-q { margin-bottom: 28px; }
+  .rc-q:last-child { margin-bottom: 0; }
+  .rc-q-label { font-weight:700; font-size:15.5px; margin-bottom:12px; display:block; }
+  .rc-options { display:flex; flex-direction:column; gap:8px; }
+  .rc-option {
+    display:flex; align-items:center; gap:10px; padding:12px 16px; border:2px solid var(--line); border-radius:10px;
+    cursor:pointer; font-size:14.5px; transition:border-color .12s ease;
+  }
+  .rc-option:hover { border-color: var(--red); }
+  .rc-option input { accent-color: var(--red); width:16px; height:16px; }
+  .rc-option.selected { border-color: var(--red); background: var(--paper-soft); }
+
+  .risk-meter-wrap { margin: 24px 0 32px; }
+  .risk-meter-label { display:flex; justify-content:space-between; font-size:12.5px; font-weight:700; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:.03em; }
+  .risk-meter-track { height:16px; border-radius:999px; background:var(--paper-soft); overflow:hidden; }
+  .risk-meter-fill { height:100%; border-radius:999px; transition: width .6s ease, background .6s ease; }
+  .risk-tag { display:inline-flex; padding:7px 18px; border-radius:999px; font-weight:800; font-size:14px; color:#fff; margin-bottom:16px; }
+  .risk-tag.laag { background:#2f9e5c; }
+  .risk-tag.gemiddeld { background:#f5a524; }
+  .risk-tag.hoog { background:#b8300f; }
+  .rc-reco { background:var(--paper-soft); border-radius:var(--radius-sm); padding:20px 22px; margin-top:20px; }
+  .rc-reco h4 { font-size:14px; margin-bottom:12px; }
+  .rc-reco ul { padding-left:20px; }
+  .rc-reco li { font-size:14.5px; margin-bottom:8px; color: var(--text); }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agressievisie.nl/"},{"@type":"ListItem","position":2,"name":"Risico-check","item":"https://agressievisie.nl/risico-check.html"}]}
+</script>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a class="brand" href="index.html"><span class="brand-mark"></span>AgressieVisie</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="artikelen.html">Artikelen</a>
+      <a href="methodieken.html">Methodieken</a>
+      <a href="cijfers.html">Cijfers & trends</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button">Meer <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-dropdown-menu nav-mega">
+        <div class="nav-mega-col">
+          <h4>Kennisbank</h4>
+          <a href="lexicon.html">Begrippenlijst</a>
+          <a href="beleid-en-wetgeving.html">Beleid & wetgeving</a>
+          <a href="bronnen.html">Bronnenbank</a>
+          <a href="trendrapport.html">Trendrapport</a>
+          <a href="faq.html">Veelgestelde vragen</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Interactieve tools</h4>
+          <a href="oefengesprek.html">Oefengesprek<span class="nav-badge">Populair</span></a>
+          <a href="protocol-generator.html">Protocol-generator<span class="nav-badge">Populair</span></a>
+          <a href="risico-check.html" class="current">Risico-check</a>
+          <a href="zelftest.html">Zelftest</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Downloads</h4>
+          <a href="gratis-gids.html">Gratis checklist</a>
+          <a href="ebook.html">Gratis e-book</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Platform</h4>
+          <a href="contact.html">Contact</a>
+          <a href="bijdragen.html">Draag bij</a>
+          <a href="over.html">Over dit platform</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="overzicht.html">Sitemap</a>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="nav-cta">
+      <a class="nav-search" href="zoeken.html" aria-label="Zoeken"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+  </nav>
+</header>
+
+<section class="page-header" style="padding:32px 0 24px;">
+  <div class="wrap">
+    <nav class="breadcrumbs"><a href="index.html">Home</a><span class="sep">/</span><span class="current">Risico-check</span></nav>
+    <span class="eyebrow">Interactieve tool</span>
+    <h1>Bereken het agressierisico van jouw organisatie</h1>
+    <p class="lede">Zes korte vragen, direct een risicoscore met concrete aanbevelingen.</p>
+  </div>
+</section>
+
+<section class="section--tight">
+  <div class="wrap rc-wrap">
+    <div class="rc-box" id="rc-root"></div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h2 id="rc-cta-heading">Risico in kaart, wat nu?</h2>
+        <p id="rc-cta-text">Act in Move Training & Coaching biedt een vrijblijvende intake om de situatie in jouw team te bespreken.</p>
+      </div>
+      <a class="btn btn-outline" id="rc-cta-btn" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="footer-accent"></div>
+  <svg class="footer-watermark" viewBox="0 0 200 200" aria-hidden="true">
+    <rect width="200" height="200" rx="44" fill="#ffffff"/>
+    <rect x="58" y="64.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(35 100 72.6)"/>
+    <rect x="58" y="117.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(-35 100 125.6)"/>
+  </svg>
+  <div class="wrap">
+    <div class="footer-top">
+      <a class="footer-brand-block" href="index.html">
+        <span class="brand-mark"></span>
+        <div>
+          <span class="footer-brand-name">AgressieVisie</span>
+          <p class="footer-brand-tag">Kennisplatform over agressie</p>
+        </div>
+      </a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p>Signalen, trends en onderzoek over agressie. Een initiatief van Act in Move Training & Coaching.</p>
+        <a class="footer-aim-logo" href="https://actinmove.nl/" target="_blank" rel="noopener" aria-label="Act in Move Training & Coaching"><span class="aim-logo-mark"></span></a>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="artikelen.html">Artikelen</a></li>
+          <li><a href="risico-check.html">Risico-check</a></li>
+          <li><a href="oefengesprek.html">Oefengesprek</a></li>
+          <li><a href="protocol-generator.html">Protocol-generator</a></li>
+          <li><a href="ebook.html">Gratis e-book</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Meer</h4>
+        <ul>
+          <li><a href="cijfers.html">Cijfers & trends</a></li>
+          <li><a href="zelftest.html">Zelftest</a></li>
+          <li><a href="lexicon.html">Begrippenlijst</a></li>
+          <li><a href="bronnen.html">Bronnenbank</a></li>
+          <li><a href="gratis-gids.html">Gratis checklist</a></li>
+          <li><a href="over.html">Over dit platform</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Juridisch</h4>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="overzicht.html">Sitemap</a></li>
+          <li><a href="privacy.html">Privacy & cookies</a></li>
+          <li><a href="https://actinmove.nl/" target="_blank" rel="noopener">Act in Move ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-mark"><span class="brand-mark"></span>© <span data-year></span> AgressieVisie, onderdeel van Act in Move Training & Coaching</span>
+      <span><a href="https://actinmove.nl/" target="_blank" rel="noopener">actinmove.nl</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+const RC_VRAGEN = [
+  {
+    vraag: 'Hoe vaak ervaren medewerkers verbale agressie (schelden, dreigen, intimideren)?',
+    opties: [
+      { tekst: 'Nooit of zelden', score: 0 },
+      { tekst: 'Af en toe', score: 10 },
+      { tekst: 'Regelmatig', score: 20 },
+      { tekst: 'Vaak, bijna wekelijks', score: 30 },
+    ],
+  },
+  {
+    vraag: 'Is er binnen jouw organisatie een vast protocol voor agressie?',
+    opties: [
+      { tekst: 'Ja, en het is bekend bij alle medewerkers', score: 0 },
+      { tekst: 'Ja, maar niet iedereen kent het goed', score: 10 },
+      { tekst: 'Nee, of ik weet het niet', score: 20 },
+    ],
+  },
+  {
+    vraag: 'Krijgen medewerkers training in het herkennen van signalen?',
+    opties: [
+      { tekst: 'Ja, meerdere keren per jaar', score: 0 },
+      { tekst: 'Ja, één keer per jaar', score: 8 },
+      { tekst: 'Ooit wel eens, niet structureel', score: 15 },
+      { tekst: 'Nee, nooit', score: 20 },
+    ],
+  },
+  {
+    vraag: 'Is nazorg geregeld na een agressie-incident?',
+    opties: [
+      { tekst: 'Ja, standaard binnen 24 uur', score: 0 },
+      { tekst: 'Alleen bij zware incidenten', score: 10 },
+      { tekst: 'Nee, of niet structureel', score: 20 },
+    ],
+  },
+  {
+    vraag: 'Werken medewerkers vaak alleen, zonder collega\'s in de buurt?',
+    opties: [
+      { tekst: 'Nooit, altijd met meerdere collega\'s', score: 0 },
+      { tekst: 'Soms', score: 8 },
+      { tekst: 'Regelmatig of vaak', score: 15 },
+    ],
+  },
+  {
+    vraag: 'Zijn er het afgelopen jaar fysieke escalaties geweest?',
+    opties: [
+      { tekst: 'Nee, geen enkele', score: 0 },
+      { tekst: 'Eén of twee keer', score: 10 },
+      { tekst: 'Meerdere keren', score: 20 },
+    ],
+  },
+];
+
+let rcAntwoorden = new Array(RC_VRAGEN.length).fill(null);
+
+function renderRC() {
+  const root = document.getElementById('rc-root');
+  root.innerHTML = `
+    ${RC_VRAGEN.map((q, qi) => `
+      <div class="rc-q">
+        <span class="rc-q-label">${qi + 1}. ${q.vraag}</span>
+        <div class="rc-options">
+          ${q.opties.map((o, oi) => `
+            <label class="rc-option" data-q="${qi}" data-o="${oi}">
+              <input type="radio" name="rc-q${qi}" value="${oi}" />
+              <span>${o.tekst}</span>
+            </label>
+          `).join('')}
+        </div>
+      </div>
+    `).join('')}
+    <button class="btn btn-primary" id="rc-submit" style="width:100%; justify-content:center; margin-top:10px;">Bereken mijn risico</button>
+  `;
+
+  root.querySelectorAll('.rc-option').forEach(label => {
+    label.addEventListener('click', () => {
+      const qi = Number(label.dataset.q);
+      const oi = Number(label.dataset.o);
+      rcAntwoorden[qi] = oi;
+      root.querySelectorAll(`.rc-option[data-q="${qi}"]`).forEach(l => l.classList.remove('selected'));
+      label.classList.add('selected');
+    });
+  });
+
+  document.getElementById('rc-submit').addEventListener('click', () => {
+    if (rcAntwoorden.includes(null)) {
+      alert('Beantwoord eerst alle vragen.');
+      return;
+    }
+    renderResultaat();
+  });
+}
+
+function renderResultaat() {
+  const maxScore = RC_VRAGEN.reduce((sum, q) => sum + Math.max(...q.opties.map(o => o.score)), 0);
+  const score = RC_VRAGEN.reduce((sum, q, i) => sum + q.opties[rcAntwoorden[i]].score, 0);
+  const pct = Math.round((score / maxScore) * 100);
+
+  let tag, tagClass, kleur, uitleg, aanbevelingen, ctaHeading, ctaText;
+  if (pct <= 30) {
+    tag = 'Laag risico'; tagClass = 'laag'; kleur = '#2f9e5c';
+    uitleg = 'Jullie hebben de basis goed op orde. Blijf dit onderhouden: structurele training en nazorg zijn geen eenmalige actie, maar een doorlopend proces.';
+    aanbevelingen = [
+      'Blijf signaaltraining periodiek herhalen, ook als het nu goed gaat.',
+      'Evalueer het protocol jaarlijks, ook zonder aanleiding.',
+      'Deel successen binnen het team om het onderwerp levend te houden.',
+    ];
+    ctaHeading = 'Goed bezig — hoe borg je dit?';
+    ctaText = 'Act in Move Training & Coaching helpt bij het structureel verankeren van wat al goed gaat, met periodieke opfriscursussen zodat het zo blijft.';
+  } else if (pct <= 65) {
+    tag = 'Gemiddeld risico'; tagClass = 'gemiddeld'; kleur = '#f5a524';
+    uitleg = 'Er zijn goede elementen aanwezig, maar ook duidelijke verbeterpunten. Met gerichte aanpassingen kun je het risico merkbaar verlagen.';
+    aanbevelingen = [
+      'Zorg dat het protocol niet alleen bestaat, maar ook actief bekend is bij iedereen.',
+      'Verhoog de trainingsfrequentie: kortere, vaker terugkerende sessies werken beter dan één keer per jaar.',
+      'Maak nazorg standaard binnen 24 uur, ook bij kleinere incidenten.',
+    ];
+    ctaHeading = 'Ruimte voor verbetering — wij denken mee';
+    ctaText = 'Act in Move Training & Coaching biedt een vrijblijvende intake om samen te bepalen waar de grootste winst te behalen is.';
+  } else {
+    tag = 'Hoog risico'; tagClass = 'hoog'; kleur = '#b8300f';
+    uitleg = 'Er zijn meerdere risicofactoren tegelijk aanwezig. Dit is het moment om agressiebeleid prioriteit te geven, niet iets voor "als er tijd is".';
+    aanbevelingen = [
+      'Stel op korte termijn een concreet protocol op, of herzie het bestaande protocol grondig.',
+      'Investeer in structurele training voor het hele team, niet alleen voor nieuwe medewerkers.',
+      'Zorg voor een laagdrempelige meldroute én standaard nazorg binnen 24 uur.',
+      'Overweeg een vrijblijvende intake met een gespecialiseerde trainingspartner.',
+    ];
+    ctaHeading = 'Dit vraagt om actie — plan een intake';
+    ctaText = 'Bij een hoog risico is snel schakelen belangrijk. Act in Move Training & Coaching biedt een vrijblijvende intake om direct de grootste risico\'s aan te pakken.';
+  }
+
+  const ctaHeadingEl = document.getElementById('rc-cta-heading');
+  const ctaTextEl = document.getElementById('rc-cta-text');
+  if (ctaHeadingEl) ctaHeadingEl.textContent = ctaHeading;
+  if (ctaTextEl) ctaTextEl.textContent = ctaText;
+
+  document.getElementById('rc-root').innerHTML = `
+    <span class="risk-tag ${tagClass}">${tag}</span>
+    <div class="risk-meter-wrap">
+      <div class="risk-meter-label"><span>Risicoscore</span><span>${pct}/100</span></div>
+      <div class="risk-meter-track"><div class="risk-meter-fill" style="width:${pct}%; background:${kleur};"></div></div>
+    </div>
+    <p style="color:var(--text-muted); font-size:15px;">${uitleg}</p>
+    <div class="rc-reco">
+      <h4>Aanbevelingen</h4>
+      <ul>${aanbevelingen.map(a => `<li>${a}</li>`).join('')}</ul>
+    </div>
+    <div style="display:flex; gap:12px; margin-top:24px; flex-wrap:wrap;">
+      <a class="btn btn-primary" href="protocol-generator.html">Maak een basisprotocol</a>
+      <button class="btn btn-outline" id="rc-restart">Opnieuw invullen</button>
+    </div>
+  `;
+  document.getElementById('rc-restart').addEventListener('click', () => {
+    rcAntwoorden = new Array(RC_VRAGEN.length).fill(null);
+    renderRC();
+  });
+}
+
+document.addEventListener('DOMContentLoaded', renderRC);
+</script>
+<link rel="stylesheet" href="css/voorlees.css" />
+<script src="js/voorlees.js" defer data-vl-kleur="#e0401f" data-vl-knoptekst="Lees voor"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://agressievisie.nl/sitemap.xml
+
+# Machineleesbaar platformoverzicht voor AI-tools (zie llms.txt-conventie)
+# https://agressievisie.nl/llms.txt
+# https://agressievisie.nl/ai-index.html

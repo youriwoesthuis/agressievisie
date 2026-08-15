@@ -1,0 +1,828 @@
+﻿<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Methodieken: 8 bewezen modellen interactief uitgelegd | AgressieVisie</title>
+<meta name="description" content="Acht bewezen methodieken voor het herkennen en hanteren van agressie, interactief uitgelegd: escalatieladder, Roos van Leary, geweldloze communicatie en meer." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="canonical" href="https://agressievisie.nl/methodieken.html" />
+<meta property="og:url" content="https://agressievisie.nl/methodieken.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="AgressieVisie" />
+<meta property="og:title" content="Methodieken: 8 bewezen modellen interactief uitgelegd | AgressieVisie" />
+<meta property="og:description" content="Acht bewezen methodieken voor het herkennen en hanteren van agressie, interactief uitgelegd en direct toe te passen." />
+<meta property="og:image" content="https://agressievisie.nl/img/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://agressievisie.nl/img/og-image.png" />
+<link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .method-layout { display:grid; grid-template-columns: 320px 1fr; gap:40px; align-items:start; }
+  @media (max-width: 860px) { .method-layout { grid-template-columns: 1fr; } }
+
+  /* Ladder */
+  .ladder { display:flex; flex-direction:column-reverse; gap:6px; }
+  .rung {
+    display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:10px;
+    border:2px solid transparent; background:var(--paper-soft); cursor:pointer; text-align:left;
+    font-family:inherit; width:100%; transition: transform .12s ease, border-color .12s ease;
+  }
+  .rung:hover { transform: translateX(4px); }
+  .rung.active { border-color: var(--red); background:#fff; box-shadow:var(--shadow-sm); }
+  .rung-num {
+    width:28px; height:28px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:13px; color:#fff;
+  }
+  .rung-label { font-weight:700; font-size:14.5px; }
+  .rung[data-fase="1"] .rung-num { background:#f5a524; }
+  .rung[data-fase="2"] .rung-num { background:#e0701f; }
+  .rung[data-fase="3"] .rung-num { background:#b8300f; }
+
+  .phase-legend { display:flex; flex-direction:column; gap:8px; margin-top:22px; font-size:13px; color:var(--text-muted); }
+  .phase-legend span { display:flex; align-items:center; gap:8px; }
+  .phase-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+
+  .detail-panel {
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:32px; min-height:280px;
+  }
+  .detail-panel .phase-tag {
+    display:inline-flex; padding:5px 12px; border-radius:999px; font-size:12px; font-weight:700; color:#fff; margin-bottom:14px;
+  }
+  .detail-panel .phase-tag.fase-1 { background:#f5a524; }
+  .detail-panel .phase-tag.fase-2 { background:#e0701f; }
+  .detail-panel .phase-tag.fase-3 { background:#b8300f; }
+  .detail-panel h3 { font-size:24px; margin-bottom:12px; }
+  .detail-panel p { color:var(--text-muted); font-size:16px; }
+  .detail-panel .quote { margin-top:18px; padding:14px 18px; background:var(--paper-soft); border-left:3px solid var(--red); border-radius:6px; font-style:italic; font-size:14.5px; }
+
+  /* Roos van Leary */
+  .leary-layout { grid-template-columns: 340px 1fr; }
+  @media (max-width: 860px) { .leary-layout { grid-template-columns: 1fr; } }
+  .leary-wheel-wrap { position: relative; width: min(320px, 100%); aspect-ratio: 1 / 1; margin: 0 auto; }
+  .leary-wheel { width: 100%; height: 100%; }
+  .leary-wheel path { cursor: pointer; stroke: #fff; stroke-width: 2; transition: opacity .12s ease, transform .12s ease; transform-origin: 160px 160px; }
+  .leary-wheel path:hover { opacity: .85; }
+  .leary-wheel path.active { opacity: 1; stroke: #17171a; stroke-width: 2.5; }
+  .leary-wheel text { font-family: inherit; font-weight: 800; font-size: 9px; letter-spacing: -.1px; fill: #fff; pointer-events: none; text-anchor: middle; dominant-baseline: middle; }
+  .leary-axis { position: absolute; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); }
+  .leary-axis-top { top: -22px; left: 50%; transform: translateX(-50%); }
+  .leary-axis-bottom { bottom: -22px; left: 50%; transform: translateX(-50%); }
+  .leary-axis-left { left: -46px; top: 50%; transform: translateY(-50%); }
+  .leary-axis-right { right: -56px; top: 50%; transform: translateY(-50%); }
+  @media (max-width: 860px) { .leary-wheel-wrap { margin: 0 auto 20px; } .leary-axis-left, .leary-axis-right { display: none; } }
+  .leary-principle {
+    margin-top: 28px; padding: 16px 20px; background: var(--paper-soft); border-left: 3px solid var(--red); border-radius: 8px;
+    font-size: 14.5px; color: var(--text); max-width: 760px;
+  }
+
+  /* LSD */
+  .lsd-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; margin-top:30px; }
+  @media (max-width:760px) { .lsd-grid { grid-template-columns:1fr; } }
+  .lsd-card {
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:26px; cursor:pointer;
+    transition: box-shadow .15s ease, transform .15s ease; position:relative;
+  }
+  .lsd-card:hover { box-shadow:var(--shadow-md); transform:translateY(-3px); }
+  .lsd-card .lsd-letter {
+    width:44px; height:44px; border-radius:12px; background:var(--grad-alert); color:#fff; font-weight:800; font-size:20px;
+    display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+  }
+  .lsd-card h3 { font-size:19px; margin-bottom:8px; }
+  .lsd-card p.short { color:var(--text-muted); font-size:14.5px; }
+  .lsd-card .lsd-example {
+    display:none; margin-top:16px; padding:14px 16px; background:var(--paper-soft); border-radius:8px; font-size:13.5px; color:var(--text);
+  }
+  .lsd-card.open .lsd-example { display:block; }
+  .lsd-card .toggle-hint { margin-top:14px; font-size:12.5px; color:var(--red-dark); font-weight:700; }
+
+  /* Geweldloze communicatie */
+  .nvc-builder { background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:32px; margin-top:30px; }
+  .nvc-preview {
+    margin-top:22px; padding:20px 22px; background: var(--grad-alert); border-radius:12px; color:#fff;
+  }
+  .nvc-preview-label { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; opacity:.85; }
+  .nvc-preview p { color:#fff; font-size:17px; font-weight:600; margin-top:8px; line-height:1.5; }
+  .nvc-preview em { font-style:normal; }
+  .nvc-preview em.leeg { opacity:.55; font-weight:600; }
+  .nvc-preview em.ingevuld { font-weight:800; text-decoration:underline; text-decoration-color:rgba(255,255,255,.55); text-underline-offset:3px; }
+
+  /* ABC-model */
+  .abc-builder { background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:32px; margin-top:30px; }
+  .abc-row { display:grid; grid-template-columns: 90px 1fr; gap:16px; align-items:start; margin-bottom:18px; }
+  .abc-letter { width:52px; height:52px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:22px; color:#fff; }
+  .abc-row:nth-child(1) .abc-letter { background:#f5a524; }
+  .abc-row:nth-child(2) .abc-letter { background:#e0701f; }
+  .abc-row:nth-child(3) .abc-letter { background:#b8300f; }
+  .abc-row label { display:block; font-weight:700; font-size:14.5px; margin-bottom:6px; }
+  .abc-row textarea {
+    width:100%; border:1px solid var(--line); border-radius:8px; padding:10px 12px; font-family:inherit; font-size:14.5px;
+    resize:vertical; min-height:56px;
+  }
+  .abc-row textarea:focus { outline:2px solid var(--red); outline-offset:1px; }
+  .abc-hint { font-size:13px; color:var(--text-muted); margin-top:4px; }
+
+  /* Signaleringsplan / stoplichtmethode */
+  .stoplicht-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; margin-top:30px; }
+  @media (max-width:900px) { .stoplicht-grid { grid-template-columns:1fr; } }
+  .stoplicht-kaart { background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:24px; border-top:4px solid var(--line); }
+  .stoplicht-kaart[data-fase="groen"] { border-top-color:#2f9e5c; }
+  .stoplicht-kaart[data-fase="oranje"] { border-top-color:#e0a024; }
+  .stoplicht-kaart[data-fase="rood"] { border-top-color:#b8300f; }
+  .stoplicht-kop { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+  .stoplicht-dot { width:14px; height:14px; border-radius:50%; flex-shrink:0; }
+  .stoplicht-kop h3 { font-size:17px; }
+  .stoplicht-sub { font-size:13.5px; color:var(--text-muted); margin-bottom:16px; }
+  .stoplicht-kaart label { display:block; font-weight:700; font-size:13px; margin-bottom:5px; margin-top:14px; }
+  .stoplicht-kaart label:first-of-type { margin-top:0; }
+  .stoplicht-kaart textarea {
+    width:100%; border:1px solid var(--line); border-radius:8px; padding:9px 11px; font-family:inherit; font-size:13.5px;
+    resize:vertical; min-height:64px;
+  }
+  .stoplicht-kaart textarea:focus { outline:2px solid var(--red); outline-offset:1px; }
+
+  /* HALT-methode */
+  .halt-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; margin-top:30px; }
+  @media (max-width:760px) { .halt-grid { grid-template-columns:repeat(2, 1fr); } }
+  .halt-card {
+    background:#fff; border:2px solid var(--line); border-radius:var(--radius); padding:22px 18px; text-align:center;
+    cursor:pointer; font-family:inherit; transition: border-color .12s ease, background .12s ease, transform .12s ease;
+  }
+  .halt-card:hover { transform:translateY(-2px); }
+  .halt-card.active { border-color:var(--red); background:#fdeee9; box-shadow:var(--shadow-sm); }
+  .halt-letter { width:44px; height:44px; margin:0 auto 12px; border-radius:12px; background:var(--grad-alert); color:#fff; font-weight:800; font-size:19px; display:flex; align-items:center; justify-content:center; transition: transform .12s ease; }
+  .halt-card.active .halt-letter { transform:scale(1.08); }
+  .halt-card h3 { font-size:15px; margin-bottom:4px; }
+  .halt-card p { font-size:12.5px; color:var(--text-muted); }
+  .halt-feedback {
+    margin-top:26px; padding:18px 22px; border-radius:12px; background:var(--paper-soft); border-left:3px solid var(--red);
+    font-size:14.5px; color:var(--text); transition: background .2s ease;
+  }
+  .halt-feedback strong { display:block; margin-bottom:4px; font-size:15px; }
+  .halt-tip-list { margin-top:12px; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .halt-tip-list li { display:flex; gap:10px; align-items:flex-start; font-size:13.5px; color:var(--text); }
+  .halt-tip-letter { width:20px; height:20px; border-radius:6px; background:var(--grad-alert); color:#fff; font-weight:800; font-size:11px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+
+  /* Conflictstijlen quiz (hergebruikt patroon van zelftest.html) */
+  .quiz-box { background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:36px; box-shadow:var(--shadow-sm); }
+  .quiz-progress-text { font-size:13px; font-weight:700; color:var(--text-muted); margin-bottom:6px; }
+  .quiz-progress { display:flex; gap:5px; margin-bottom:26px; }
+  .quiz-progress span { flex:1; height:4px; border-radius:2px; background:var(--line); }
+  .quiz-progress span.done { background: var(--grad-alert); }
+  .quiz-q { font-size:18px; font-weight:700; margin-bottom:22px; line-height:1.5; }
+  .quiz-options { display:flex; flex-direction:column; gap:10px; }
+  .quiz-option {
+    text-align:left; padding:14px 16px; border-radius:10px; border:2px solid var(--line); background:var(--paper-soft);
+    font-family:inherit; font-size:15px; cursor:pointer; transition: border-color .12s ease;
+  }
+  .quiz-option:hover:not(:disabled) { border-color: var(--red); }
+  .quiz-option:disabled { cursor:default; }
+  .quiz-option.gekozen { border-color:var(--red); background:#fdeee9; }
+  .quiz-next { margin-top:20px; display:none; }
+  .quiz-next.show { display:inline-flex; }
+  .quiz-result { text-align:center; }
+  .quiz-result .tk-style-naam { font-size:30px; font-weight:800; color:var(--red-dark); margin-bottom:10px; }
+  .quiz-result h3 { font-size:16px; font-weight:700; color:var(--text-muted); margin-bottom:16px; text-transform:uppercase; letter-spacing:.04em; }
+  .quiz-result p { color:var(--text-muted); font-size:15px; margin-bottom:24px; text-align:left; }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agressievisie.nl/"},{"@type":"ListItem","position":2,"name":"Methodieken","item":"https://agressievisie.nl/methodieken.html"}]}
+</script>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a class="brand" href="index.html"><span class="brand-mark"></span>AgressieVisie</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="artikelen.html">Artikelen</a>
+      <a class="current" href="methodieken.html">Methodieken</a>
+      <a href="cijfers.html">Cijfers & trends</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button">Meer <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-dropdown-menu nav-mega">
+        <div class="nav-mega-col">
+          <h4>Kennisbank</h4>
+          <a href="lexicon.html">Begrippenlijst</a>
+          <a href="beleid-en-wetgeving.html">Beleid & wetgeving</a>
+          <a href="bronnen.html">Bronnenbank</a>
+          <a href="trendrapport.html">Trendrapport</a>
+          <a href="faq.html">Veelgestelde vragen</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Interactieve tools</h4>
+          <a href="oefengesprek.html">Oefengesprek<span class="nav-badge">Populair</span></a>
+          <a href="protocol-generator.html">Protocol-generator<span class="nav-badge">Populair</span></a>
+          <a href="risico-check.html">Risico-check</a>
+          <a href="zelftest.html">Zelftest</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Downloads</h4>
+          <a href="gratis-gids.html">Gratis checklist</a>
+          <a href="ebook.html">Gratis e-book</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Platform</h4>
+          <a href="contact.html">Contact</a>
+          <a href="bijdragen.html">Draag bij</a>
+          <a href="over.html">Over dit platform</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="overzicht.html">Sitemap</a>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="nav-cta">
+      <a class="nav-search" href="zoeken.html" aria-label="Zoeken"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+  </nav>
+</header>
+
+<section class="page-header">
+  <div class="wrap">
+    <nav class="breadcrumbs"><a href="index.html">Home</a><span class="sep">/</span><span class="current">Methodieken</span></nav>
+    <span class="eyebrow">Praktijkmethodieken</span>
+    <h1>Acht bewezen methodieken, uitgelegd</h1>
+    <p class="lede">Van escalatiedynamiek tot gesprekstechniek tot zelfzorg: acht veelgebruikte modellen uit de conflict-, communicatie- en gedragswetenschap, elk interactief om mee te oefenen.</p>
+  </div>
+</section>
+
+<nav class="jumpnav" aria-label="Snel naar een methodiek">
+  <div class="wrap jumpnav-inner">
+    <a href="#escalatieladder">1. Escalatieladder</a>
+    <a href="#roos-van-leary">2. Roos van Leary</a>
+    <a href="#lsd-methode">3. LSD-methode</a>
+    <a href="#geweldloze-communicatie">4. Geweldloze communicatie</a>
+    <a href="#abc-model">5. ABC-model</a>
+    <a href="#signaleringsplan">6. Signaleringsplan</a>
+    <a href="#halt-methode">7. HALT-methode</a>
+    <a href="#conflictstijlen">8. Conflictstijlen</a>
+  </div>
+</nav>
+
+<section class="section" id="escalatieladder">
+  <div class="wrap">
+    <span class="eyebrow">Model 1 van 8 · Verklarend model</span>
+    <h2>De escalatieladder van Glasl</h2>
+    <p class="lede" style="margin-bottom:8px;">Conflictonderzoeker Friedrich Glasl ontwikkelde in 1997 een model met negen treden, verdeeld over drie fasen. Hoe hoger op de ladder, hoe moeilijker de-escalatie wordt. Klik op een trede voor uitleg.</p>
+
+    <div class="method-layout" style="margin-top:32px;">
+      <div>
+        <div class="ladder" id="ladder"></div>
+        <div class="phase-legend">
+          <span><span class="phase-dot" style="background:#f5a524;"></span> Fase 1: rationeel (treden 1-3)</span>
+          <span><span class="phase-dot" style="background:#e0701f;"></span> Fase 2: emotioneel (treden 4-6)</span>
+          <span><span class="phase-dot" style="background:#b8300f;"></span> Fase 3: destructief (treden 7-9)</span>
+        </div>
+      </div>
+      <div class="detail-panel" id="ladder-detail"></div>
+    </div>
+    <p class="chart-note" style="margin-top:24px; border-top:1px solid var(--line); padding-top:14px; font-size:12.5px; color:var(--text-muted);">Bron: F. Glasl (1997), bewerkt via <a href="https://nl.wikipedia.org/wiki/Escalatieladder" target="_blank" rel="noopener" style="text-decoration:underline;">Wikipedia</a> en <a href="https://resultadr.nl/kennisbank/interventies-op-de-escalatieladder-van-glasl" target="_blank" rel="noopener" style="text-decoration:underline;">ResultADR</a>.</p>
+  </div>
+</section>
+
+<section class="section section--soft" id="roos-van-leary">
+  <div class="wrap">
+    <span class="eyebrow">Model 2 van 8 · Verklarend model</span>
+    <h2>De Roos van Leary</h2>
+    <p class="lede" style="margin-bottom:8px;">Psycholoog Timothy Leary ontdekte dat gedrag altijd gedrag oproept: wat jij doet, beïnvloedt direct hoe de ander reageert. Het model kent twee assen, boven/onder (leidend vs. volgend) en samen/tegen (coöperatief vs. confronterend), die samen acht gedragsstijlen vormen. Klik op een segment van het wiel.</p>
+
+    <div class="method-layout leary-layout" style="margin-top:32px;">
+      <div class="leary-wheel-wrap">
+        <svg class="leary-wheel" id="leary-wheel" viewBox="0 0 320 320" role="img" aria-label="Interactief wiel met de acht gedragsstijlen van de Roos van Leary"></svg>
+        <span class="leary-axis leary-axis-top">boven</span>
+        <span class="leary-axis leary-axis-bottom">onder</span>
+        <span class="leary-axis leary-axis-left">tegen</span>
+        <span class="leary-axis leary-axis-right">samen</span>
+      </div>
+      <div class="detail-panel" id="leary-detail"></div>
+    </div>
+    <div class="leary-principle">
+      <strong>De vuistregel:</strong> boven roept onder op (en omgekeerd), samen roept samen op, tegen roept tegen op. Merk je "tegen"-gedrag bij jezelf of de ander (opstandig, offensief, concurrerend)? Reageer dan bewust <em>niet</em> met tegen-gedrag terug: dat voedt de escalatiespiraal. Kies voor "samen"-gedrag om het patroon te doorbreken.
+    </div>
+    <p class="chart-note" style="margin-top:24px; border-top:1px solid var(--line); padding-top:14px; font-size:12.5px; color:var(--text-muted); max-width:none;">Bron: T. Leary (1957), bewerkt via <a href="https://www.wij-leren.nl/roos-van-leary-overzichtsartikel.php" target="_blank" rel="noopener" style="text-decoration:underline;">Wij-leren.nl</a> en <a href="https://www.heteffectievewerken.nl/blog/roos-van-leary.html" target="_blank" rel="noopener" style="text-decoration:underline;">Het Effectieve Werken</a>.</p>
+  </div>
+</section>
+
+<section class="section" id="lsd-methode">
+  <div class="wrap">
+    <span class="eyebrow">Model 3 van 8 · Gesprekstechniek</span>
+    <h2>De LSD-methode</h2>
+    <p class="lede">Een eenvoudige gesprekstechniek: luisteren, samenvatten, doorvragen. Klik op een kaart voor een concreet voorbeeld.</p>
+
+    <div class="lsd-grid" id="lsd-grid"></div>
+    <p class="chart-note" style="margin-top:24px; border-top:1px solid var(--line); padding-top:14px; font-size:12.5px; color:var(--text-muted); max-width:none;">Bron: veelgebruikte gesprekstechniek uit de communicatietheorie, zie o.a. <a href="https://www.carrieretijger.nl/functioneren/communiceren/mondeling/vaardigheden/lsd" target="_blank" rel="noopener" style="text-decoration:underline;">Carrièretijger</a>.</p>
+  </div>
+</section>
+
+<section class="section section--soft" id="geweldloze-communicatie">
+  <div class="wrap">
+    <span class="eyebrow">Model 4 van 8 · Gesprekstechniek</span>
+    <h2>Geweldloze communicatie</h2>
+    <p class="lede">Psycholoog Marshall Rosenberg ontwikkelde vier stappen om een spannend gesprek te voeren zonder verwijt of oordeel: waarneming, gevoel, behoefte en verzoek. Vul de vier velden in: de zin eronder bouwt zich live op.</p>
+
+    <div class="nvc-builder">
+      <div class="abc-row">
+        <div class="abc-letter" style="background:#2f8f5c;">1</div>
+        <div>
+          <label for="nvc-w">Waarneming: wat zag of hoorde je, zonder oordeel?</label>
+          <textarea id="nvc-w" placeholder="Bijvoorbeeld: je hebt de afgelopen twee weken driemaal de deadline gemist." data-nvc="waarneming"></textarea>
+          <p class="abc-hint">Feiten, geen interpretatie. "Je bent onbetrouwbaar" is een oordeel; "de deadline is driemaal gemist" is een waarneming.</p>
+        </div>
+      </div>
+      <div class="abc-row">
+        <div class="abc-letter" style="background:#3fae72;">2</div>
+        <div>
+          <label for="nvc-g">Gevoel: wat roept dat bij jou op?</label>
+          <textarea id="nvc-g" placeholder="Bijvoorbeeld: onzeker en gestrest." data-nvc="gevoel"></textarea>
+          <p class="abc-hint">Benoem een écht gevoel (onzeker, teleurgesteld, opgelucht), geen verkapt verwijt ("genegeerd" is eigenlijk een oordeel over de ander).</p>
+        </div>
+      </div>
+      <div class="abc-row">
+        <div class="abc-letter" style="background:#e0701f;">3</div>
+        <div>
+          <label for="nvc-b">Behoefte: welke behoefte ligt hieronder?</label>
+          <textarea id="nvc-b" placeholder="Bijvoorbeeld: duidelijkheid en betrouwbare afspraken." data-nvc="behoefte"></textarea>
+          <p class="abc-hint">De universele behoefte achter het gevoel: erkenning, rust, duidelijkheid, veiligheid, gehoord worden.</p>
+        </div>
+      </div>
+      <div class="abc-row">
+        <div class="abc-letter" style="background:#b8300f;">4</div>
+        <div>
+          <label for="nvc-v">Verzoek: wat vraag je concreet, nu of binnenkort?</label>
+          <textarea id="nvc-v" placeholder="Bijvoorbeeld: kun je me morgen laten weten of de deadline van vrijdag haalbaar is?" data-nvc="verzoek"></textarea>
+          <p class="abc-hint">Concreet en positief geformuleerd, geen eis. Een verzoek laat ruimte voor een "nee".</p>
+        </div>
+      </div>
+      <div class="nvc-preview">
+        <span class="nvc-preview-label">Jouw zin, live opgebouwd</span>
+        <p id="nvc-preview-text">Als ik zie dat <em class="leeg">…</em>, voel ik me <em class="leeg">…</em>, omdat ik behoefte heb aan <em class="leeg">…</em>. Zou je <em class="leeg">…</em>?</p>
+      </div>
+    </div>
+    <p class="chart-note" style="margin-top:24px; border-top:1px solid var(--line); padding-top:14px; font-size:12.5px; color:var(--text-muted); max-width:none;">Bron: M. Rosenberg, <em>Geweldloze communicatie</em> (2003), zie o.a. <a href="https://www.sameninzicht.nl/geweldloze-communicatie/" target="_blank" rel="noopener" style="text-decoration:underline;">Samen Inzicht</a>.</p>
+  </div>
+</section>
+
+<section class="section" id="abc-model">
+  <div class="wrap">
+    <span class="eyebrow">Model 5 van 8 · Analysemodel</span>
+    <h2>Het ABC-model</h2>
+    <p class="lede">Een gedragsanalyse-model uit de gedragswetenschap: Antecedent (wat ging vooraf), Behavior (het gedrag zelf) en Consequence (wat volgde). Vul 'm in voor een situatie die je hebt meegemaakt, of gebruik 'm als denkoefening.</p>
+
+    <div class="abc-builder">
+      <div class="abc-row">
+        <div class="abc-letter">A</div>
+        <div>
+          <label for="abc-a">Antecedent: wat ging eraan vooraf?</label>
+          <textarea id="abc-a" placeholder="Bijvoorbeeld: lange wachttijd, een eerdere afwijzing, drukte in de ruimte..."></textarea>
+          <p class="abc-hint">De trigger: fysieke omstandigheden, instructies, of iets dat net daarvoor gebeurde.</p>
+        </div>
+      </div>
+      <div class="abc-row">
+        <div class="abc-letter">B</div>
+        <div>
+          <label for="abc-b">Behavior: welk gedrag zag je precies?</label>
+          <textarea id="abc-b" placeholder="Beschrijf waarneembaar gedrag: wat werd er gezegd of gedaan, niet wat je dénkt dat iemand voelde."></textarea>
+          <p class="abc-hint">Blijf bij het observeerbare: geluid, houding, woorden. Niet de interpretatie.</p>
+        </div>
+      </div>
+      <div class="abc-row">
+        <div class="abc-letter">C</div>
+        <div>
+          <label for="abc-c">Consequence: wat volgde erop, en hoe reageerde jij?</label>
+          <textarea id="abc-c" placeholder="Wat gebeurde er direct na het gedrag? Hielp jouw reactie de situatie, of versterkte die het gedrag juist?"></textarea>
+          <p class="abc-hint">Een reactie die het gedrag "beloont" (bijvoorbeeld door snel toe te geven) vergroot de kans dat het patroon terugkeert.</p>
+        </div>
+      </div>
+    </div>
+    <p class="chart-note" style="margin-top:24px; border-top:1px solid var(--line); padding-top:14px; font-size:12.5px; color:var(--text-muted);">Bron: toegepaste gedragsanalyse (ABC-model), zie o.a. <a href="https://www.labvoorgedragsverandering.nl/abc-van-gedrag" target="_blank" rel="noopener" style="text-decoration:underline;">Lab voor Gedragsverandering</a>.</p>
+  </div>
+</section>
+
+<section class="section section--soft" id="signaleringsplan">
+  <div class="wrap">
+    <span class="eyebrow">Model 6 van 8 · Planningsinstrument</span>
+    <h2>Het signaleringsplan (stoplichtmethode)</h2>
+    <p class="lede">Veel gebruikt in de zorg: leg per fase vast welke signalen horen bij oplopende spanning, en welke afspraken daarbij horen. Maak 'm bij voorkeur op een rustig moment, samen met de betrokkene. 3 tot 5 signalen en maximaal 3 afspraken per fase werkt het best.</p>
+
+    <div class="stoplicht-grid">
+      <div class="stoplicht-kaart" data-fase="groen">
+        <div class="stoplicht-kop"><span class="stoplicht-dot" style="background:#2f9e5c;"></span><h3>Groen: stabiel</h3></div>
+        <p class="stoplicht-sub">De evenwichtige fase. Dit is het moment om dit plan samen op te stellen.</p>
+        <label for="sig-groen-signalen">Signalen</label>
+        <textarea id="sig-groen-signalen" placeholder="Bijvoorbeeld: rustige ademhaling, humor, actief meedoen aan gesprekken..."></textarea>
+        <label for="sig-groen-acties">Afspraken</label>
+        <textarea id="sig-groen-acties" placeholder="Bijvoorbeeld: gewone begeleiding, geen extra maatregelen nodig."></textarea>
+      </div>
+      <div class="stoplicht-kaart" data-fase="oranje">
+        <div class="stoplicht-kop"><span class="stoplicht-dot" style="background:#e0a024;"></span><h3>Oranje: oplopend</h3></div>
+        <p class="stoplicht-sub">Beginnende terugval. De eerste voortekenen worden zichtbaar.</p>
+        <label for="sig-oranje-signalen">Signalen</label>
+        <textarea id="sig-oranje-signalen" placeholder="Bijvoorbeeld: slechter slapen, sneller geïrriteerd, terugtrekken uit contact..."></textarea>
+        <label for="sig-oranje-acties">Afspraken</label>
+        <textarea id="sig-oranje-acties" placeholder="Bijvoorbeeld: rustig één-op-één gesprek, prikkels verminderen, collega inlichten."></textarea>
+      </div>
+      <div class="stoplicht-kaart" data-fase="rood">
+        <div class="stoplicht-kop"><span class="stoplicht-dot" style="background:#b8300f;"></span><h3>Rood: crisis</h3></div>
+        <p class="stoplicht-sub">De crisisfase. Veiligheid staat voorop.</p>
+        <label for="sig-rood-signalen">Signalen</label>
+        <textarea id="sig-rood-signalen" placeholder="Bijvoorbeeld: schreeuwen, dreigen, dingen kapotmaken..."></textarea>
+        <label for="sig-rood-acties">Afspraken</label>
+        <textarea id="sig-rood-acties" placeholder="Bijvoorbeeld: afstand nemen, collega's alarmeren, vastgesteld veiligheidsprotocol volgen."></textarea>
+      </div>
+    </div>
+    <p class="chart-note" style="margin-top:24px; border-top:1px solid var(--line); padding-top:14px; font-size:12.5px; color:var(--text-muted); max-width:none;">Bron: stoplichtmethode uit de GGZ, zie o.a. <a href="https://www.ggzkempen.be/signaleringsplan/" target="_blank" rel="noopener" style="text-decoration:underline;">GGZ Kempen</a> en <a href="https://btsg.nl/de-stoplichtmethode/" target="_blank" rel="noopener" style="text-decoration:underline;">BTSG</a>.</p>
+  </div>
+</section>
+
+<section class="section" id="halt-methode">
+  <div class="wrap">
+    <span class="eyebrow">Model 7 van 8 · Zelfcheck</span>
+    <h2>De HALT-methode</h2>
+    <p class="lede">Een razendsnelle zelfcheck uit de verslavingszorg, ook waardevol vóór een lastig gesprek: Hongerig, Angry (boos), Lonely (eenzaam), Tired (moe). Elk van de vier vergroot de kans dat jij, of de ander, feller reageert dan nodig. Klik aan wat op dit moment speelt.</p>
+
+    <div class="halt-grid" id="halt-grid"></div>
+    <div class="halt-feedback" id="halt-feedback"></div>
+    <p class="chart-note" style="margin-top:24px; border-top:1px solid var(--line); padding-top:14px; font-size:12.5px; color:var(--text-muted); max-width:none;">Bron: HALT-model uit de verslavingszorg (Anonieme Alcoholisten), breed toegepast als kortdurende zelfregulatiecheck.</p>
+  </div>
+</section>
+
+<section class="section section--soft" id="conflictstijlen">
+  <div class="wrap">
+    <span class="eyebrow">Model 8 van 8 · Zelfinzicht</span>
+    <h2>Conflicthanteringsstijlen (Thomas-Kilmann)</h2>
+    <p class="lede">Vijf stijlen, bepaald door twee dimensies: hoe assertief je bent (opkomen voor je eigen belang) en hoe coöperatief (rekening houden met de ander). Beantwoord acht korte situaties met wat het meest bij je past. Aan het eind zie je jouw dominante stijl.</p>
+
+    <div class="quiz-wrap" style="max-width:680px; margin-top:30px;">
+      <div class="quiz-box" id="tk-box"></div>
+    </div>
+    <p class="chart-note" style="margin-top:24px; border-top:1px solid var(--line); padding-top:14px; font-size:12.5px; color:var(--text-muted); max-width:680px;">Bron: K. Thomas & R. Kilmann, Thomas-Kilmann Conflict Mode Instrument (1974), zie o.a. <a href="https://www.feedbackconsulting.nl/nl/conflicthanteringsstijlen-thomas-kilmann-60" target="_blank" rel="noopener" style="text-decoration:underline;">Feedback Consulting</a>.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h2>Deze modellen in de praktijk oefenen?</h2>
+        <p>Act in Move Training & Coaching traint deze en andere methodieken in realistische scenario's, toegespitst op jouw sector.</p>
+      </div>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="footer-accent"></div>
+  <svg class="footer-watermark" viewBox="0 0 200 200" aria-hidden="true">
+    <rect width="200" height="200" rx="44" fill="#ffffff"/>
+    <rect x="58" y="64.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(35 100 72.6)"/>
+    <rect x="58" y="117.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(-35 100 125.6)"/>
+  </svg>
+  <div class="wrap">
+    <div class="footer-top">
+      <a class="footer-brand-block" href="index.html">
+        <span class="brand-mark"></span>
+        <div>
+          <span class="footer-brand-name">AgressieVisie</span>
+          <p class="footer-brand-tag">Kennisplatform over agressie</p>
+        </div>
+      </a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p>Signalen, trends en onderzoek over agressie. Een initiatief van Act in Move Training & Coaching.</p>
+        <a class="footer-aim-logo" href="https://actinmove.nl/" target="_blank" rel="noopener" aria-label="Act in Move Training & Coaching"><span class="aim-logo-mark"></span></a>
+      </div>
+            <div>
+        <h4>Kennisbank</h4>
+        <ul>
+          <li><a href="artikelen.html">Artikelen</a></li>
+          <li><a href="methodieken.html">Methodieken</a></li>
+          <li><a href="lexicon.html">Begrippenlijst</a></li>
+          <li><a href="beleid-en-wetgeving.html">Beleid & wetgeving</a></li>
+          <li><a href="bronnen.html">Bronnenbank</a></li>
+          <li><a href="trendrapport.html">Trendrapport</a></li>
+          <li><a href="faq.html">Veelgestelde vragen</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Interactieve tools</h4>
+        <ul>
+          <li><a href="oefengesprek.html">Oefengesprek</a></li>
+          <li><a href="protocol-generator.html">Protocol-generator</a></li>
+          <li><a href="risico-check.html">Risico-check</a></li>
+          <li><a href="zelftest.html">Zelftest</a></li>
+          <li><a href="gratis-gids.html">Gratis checklist</a></li>
+          <li><a href="ebook.html">Gratis e-book</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="cijfers.html">Cijfers & trends</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="bijdragen.html">Draag bij</a></li>
+          <li><a href="over.html">Over dit platform</a></li>
+          <li><a href="privacy.html">Privacy & cookies</a></li>
+          <li><a href="overzicht.html">Sitemap</a></li>
+          <li><a href="https://actinmove.nl/" target="_blank" rel="noopener">Act in Move ↗</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-bottom-mark"><span class="brand-mark"></span>© <span data-year></span> AgressieVisie, onderdeel van Act in Move Training & Coaching</span>
+      <span><a href="https://actinmove.nl/" target="_blank" rel="noopener">actinmove.nl</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+const LADDER_STEPS = [
+  { nr: 1, fase: 1, naam: 'Verharding', beschrijving: 'Standpunten lopen vast, maar er wordt nog met elkaar gepraat. Partijen communiceren nog, maar bereiken geen consensus.', voorbeeld: 'Interventietip: erken het meningsverschil expliciet en stel een open vraag om het gesprek soepel te houden.' },
+  { nr: 2, fase: 1, naam: 'Debat en polemiek', beschrijving: 'Het gesprek wordt een wedstrijd om wie er gelijk heeft. De discussie verandert in een competitie in plaats van samenwerking.', voorbeeld: 'Interventietip: stap uit de discussie-modus, benoem het patroon hardop en vraag naar het onderliggende belang.' },
+  { nr: 3, fase: 1, naam: 'Daden in plaats van woorden', beschrijving: 'Praten heeft ogenschijnlijk geen zin meer; partijen confronteren elkaar met voldongen feiten in plaats van dialoog.', voorbeeld: 'Interventietip: herstel eerst het contact voordat je verder praat over de inhoud, anders landt niets.' },
+  { nr: 4, fase: 2, naam: 'Imago en coalities', beschrijving: 'Partijen zoeken bondgenoten; er ontstaan kampen. Mensen kiezen een kant in plaats van naar de kern van het probleem te kijken.', voorbeeld: 'Interventietip: vermijd het bevestigen van "wij tegen zij"-taal, spreek mensen individueel aan.' },
+  { nr: 5, fase: 2, naam: 'Gezichtsverlies', beschrijving: 'De ander wordt openlijk beschadigd; het gaat nu om eer en imago, niet meer om de inhoud van het conflict.', voorbeeld: 'Interventietip: geef de ander een uitweg zonder gezichtsverlies, dat is vaak de enige opening voor de-escalatie.' },
+  { nr: 6, fase: 2, naam: 'Dreigstrategieën', beschrijving: 'Er komen openlijke dreigementen en ultimatums. Expliciete waarschuwingen worden ingezet om gedrag af te dwingen.', voorbeeld: 'Interventietip: neem dreigementen serieus, blijf zelf kalm en rustig in toon, en schakel zo nodig hulp in.' },
+  { nr: 7, fase: 3, naam: 'Beperkte vernietiging', beschrijving: 'Schade toebrengen aan de ander weegt zwaarder dan het eigen verlies. Persoonlijke kosten worden geaccepteerd om te schaden.', voorbeeld: 'Dit is het punt waarop veiligheid vóór alles gaat: schep afstand en schakel professionele hulp of beveiliging in.' },
+  { nr: 8, fase: 3, naam: 'Versplintering', beschrijving: 'Het doel is het systeem van de ander te ontwrichten. Sabotage richt zich op volledige destructie van de tegenpartij.', voorbeeld: 'Op dit niveau is de-escalatie door een individuele professional zelden nog haalbaar zonder externe interventie.' },
+  { nr: 9, fase: 3, naam: 'Samen de afgrond in', beschrijving: 'Beide partijen gaan ten onder, ook ten koste van zichzelf. Wederzijdse vernietiging weegt zwaarder dan zelfbehoud.', voorbeeld: 'Dit uiterste niveau onderstreept waarom vroege-signaalherkenning zo veel waard is: voorkomen is hier de enige remedie.' },
+];
+
+function renderLadder() {
+  const ladder = document.getElementById('ladder');
+  ladder.innerHTML = LADDER_STEPS.map(s => `
+    <button class="rung" data-fase="${s.fase}" data-nr="${s.nr}">
+      <span class="rung-num">${s.nr}</span>
+      <span class="rung-label">${s.naam}</span>
+    </button>
+  `).join('');
+
+  ladder.addEventListener('click', (e) => {
+    const btn = e.target.closest('.rung');
+    if (!btn) return;
+    selectStep(Number(btn.dataset.nr));
+  });
+
+  selectStep(1);
+}
+
+function selectStep(nr) {
+  const step = LADDER_STEPS.find(s => s.nr === nr);
+  document.querySelectorAll('.rung').forEach(r => r.classList.toggle('active', Number(r.dataset.nr) === nr));
+  document.getElementById('ladder-detail').innerHTML = `
+    <span class="phase-tag fase-${step.fase}">Trede ${step.nr} · Fase ${step.fase}</span>
+    <h3>${step.naam}</h3>
+    <p>${step.beschrijving}</p>
+    <div class="quote">${step.voorbeeld}</div>
+  `;
+}
+
+const LEARY_SEGMENTEN = [
+  { naam: 'Leidend', as: 'Boven-samen', start: 0, eind: 45, kleur: '#2f8f5c', quote: '"Luister naar mij"', beschrijving: 'Sturend, initiatiefnemend gedrag: duidelijke instructies geven, de leiding nemen, structuur bieden.', roeptOp: 'Volgend en afhankelijk gedrag bij de ander: mensen laten zich sturen en voelen zich geholpen door de duidelijkheid.' },
+  { naam: 'Helpend', as: 'Samen-boven', start: 45, eind: 90, kleur: '#3fae72', quote: '"We mogen elkaar"', beschrijving: 'Zorgzaam, adviserend gedrag: aandacht geven, meedenken, ondersteunen zonder de regie volledig over te nemen.', roeptOp: 'Meewerkend en afhankelijk gedrag: de ander voelt zich gezien en werkt makkelijker mee.' },
+  { naam: 'Meewerkend', as: 'Samen-onder', start: 90, eind: 135, kleur: '#6bc48f', quote: '"Ik doe wat jij wilt"', beschrijving: 'Coöperatief, aanpassend gedrag: meebewegen met de ander, actief instemmen, weinig eigen stempel drukken.', roeptOp: 'Helpend en leidend gedrag bij de ander: jouw meewerkende houding nodigt de ander uit om de regie te nemen.' },
+  { naam: 'Afhankelijk', as: 'Onder-samen', start: 135, eind: 180, kleur: '#9ccfa0', quote: '"Help me"', beschrijving: 'Onzeker, volgend gedrag: om hulp of bevestiging vragen, zelf weinig initiatief tonen.', roeptOp: 'Leidend en helpend gedrag bij de ander: afhankelijkheid roept vanzelf zorgzaamheid en sturing op.' },
+  { naam: 'Teruggetrokken', as: 'Onder-tegen', start: 180, eind: 225, kleur: '#e8c07a', quote: '"Laat me maar met rust"', beschrijving: 'Afstandelijk, ontwijkend gedrag: contact vermijden, zich terugtrekken, weinig laten zien van wat er speelt.', roeptOp: 'Let op: dit roept vaak juist aanvallend of concurrerend gedrag op bij de ander, die de afstand als afwijzing kan ervaren. Een risico voor verdere escalatie.' },
+  { naam: 'Opstandig', as: 'Tegen-onder', start: 225, eind: 270, kleur: '#e0701f', quote: '"Minacht mij maar"', beschrijving: 'Weerstand biedend gedrag: tegenwerken, kritiek uiten, afspraken ter discussie stellen.', roeptOp: 'Offensief en aanvallend gedrag bij de ander: weerstand lokt vaak een felle, dwingende reactie uit. Escalatiegevoelig.' },
+  { naam: 'Offensief', as: 'Tegen-boven', start: 270, eind: 315, kleur: '#b8300f', quote: '"Wees bang voor mij"', beschrijving: 'Dominant, confronterend gedrag: aanvallen, dreigen, de ander onder druk zetten.', roeptOp: 'De kern van agressie-escalatie: dit roept teruggetrokken óf opstandig gedrag op, de ander vlucht of vecht terug. Beide voeden de spiraal verder.' },
+  { naam: 'Concurrerend', as: 'Boven-tegen', start: 315, eind: 360, kleur: '#d94f24', quote: '"Kijk eens hoe goed ik ben"', beschrijving: 'Zelfverzekerd, assertief gedrag: eigen standpunt sterk naar voren brengen, de ander uitdagen.', roeptOp: 'Opstandig gedrag bij de ander: concurrentie nodigt uit tot tegenspel.' },
+];
+
+function polarNaarCartesiaans(cx, cy, r, hoekGraden) {
+  const rad = (hoekGraden - 90) * Math.PI / 180;
+  return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+}
+
+function taartpunt(cx, cy, r, startHoek, eindHoek) {
+  const start = polarNaarCartesiaans(cx, cy, r, eindHoek);
+  const eind = polarNaarCartesiaans(cx, cy, r, startHoek);
+  const grootBoog = eindHoek - startHoek <= 180 ? 0 : 1;
+  return `M ${cx} ${cy} L ${start.x} ${start.y} A ${r} ${r} 0 ${grootBoog} 0 ${eind.x} ${eind.y} Z`;
+}
+
+function renderLeary() {
+  const svg = document.getElementById('leary-wheel');
+  const cx = 160, cy = 160, r = 150;
+  svg.innerHTML = LEARY_SEGMENTEN.map((s, i) => {
+    const mid = (s.start + s.eind) / 2;
+    const labelPos = polarNaarCartesiaans(cx, cy, r * 0.74, mid);
+    return `
+      <path class="leary-segment" data-i="${i}" d="${taartpunt(cx, cy, r, s.start, s.eind)}" fill="${s.kleur}"></path>
+      <text x="${labelPos.x}" y="${labelPos.y}">${s.naam}</text>
+    `;
+  }).join('');
+
+  svg.querySelectorAll('.leary-segment').forEach(path => {
+    path.addEventListener('click', () => selectLearySegment(Number(path.dataset.i)));
+  });
+
+  selectLearySegment(0);
+}
+
+function selectLearySegment(i) {
+  const s = LEARY_SEGMENTEN[i];
+  document.querySelectorAll('.leary-segment').forEach((p, idx) => p.classList.toggle('active', idx === i));
+  document.getElementById('leary-detail').innerHTML = `
+    <span class="phase-tag" style="background:${s.kleur};">${s.as}</span>
+    <h3>${s.naam} <span style="font-weight:600; color:var(--text-muted); font-size:16px;">${s.quote}</span></h3>
+    <p>${s.beschrijving}</p>
+    <div class="quote"><strong>Roept op bij de ander:</strong> ${s.roeptOp}</div>
+  `;
+}
+
+const LSD_STEPS = [
+  { letter: 'L', naam: 'Luisteren', kort: 'Geef volledige aandacht, zonder oordeel of eigen agenda.', voorbeeld: '"Ik zie dat je hier duidelijk niet blij mee bent. Vertel me wat er precies gebeurd is."' },
+  { letter: 'S', naam: 'Samenvatten', kort: 'Herhaal in eigen woorden wat je hebt gehoord, om te toetsen of je het goed begrepen hebt.', voorbeeld: '"Even checken: je bent vooral gefrustreerd omdat je twee keer bent doorverbonden zonder antwoord?"' },
+  { letter: 'D', naam: 'Doorvragen', kort: 'Stel verdiepende vragen om de vraag achter de vraag te achterhalen.', voorbeeld: '"Wat zou voor jou op dit moment het meest helpen om dit op te lossen?"' },
+];
+
+function renderLSD() {
+  const grid = document.getElementById('lsd-grid');
+  grid.innerHTML = LSD_STEPS.map((s, i) => `
+    <div class="lsd-card" data-i="${i}">
+      <div class="lsd-letter">${s.letter}</div>
+      <h3>${s.naam}</h3>
+      <p class="short">${s.kort}</p>
+      <div class="lsd-example">${s.voorbeeld}</div>
+      <p class="toggle-hint">Klik voor voorbeeldzin →</p>
+    </div>
+  `).join('');
+
+  grid.addEventListener('click', (e) => {
+    const card = e.target.closest('.lsd-card');
+    if (!card) return;
+    card.classList.toggle('open');
+  });
+}
+
+function escapeHtml(tekst) {
+  const div = document.createElement('div');
+  div.textContent = tekst;
+  return div.innerHTML;
+}
+
+function renderNVCPreview() {
+  const veld = (naam) => {
+    const el = document.querySelector(`[data-nvc="${naam}"]`);
+    const waarde = el ? el.value.trim() : '';
+    return waarde ? `<em class="ingevuld">${escapeHtml(waarde)}</em>` : '<em class="leeg">…</em>';
+  };
+  document.getElementById('nvc-preview-text').innerHTML =
+    `Als ik zie dat ${veld('waarneming')}, voel ik me ${veld('gevoel')}, omdat ik behoefte heb aan ${veld('behoefte')}. Zou je ${veld('verzoek')}?`;
+}
+
+function initNVCBuilder() {
+  document.querySelectorAll('[data-nvc]').forEach(el => {
+    el.addEventListener('input', renderNVCPreview);
+  });
+}
+
+const HALT_ITEMS = [
+  { letter: 'H', naam: 'Hongerig', kort: 'Heb je al een tijd niet gegeten?', tip: 'Eet iets kleins, ook een handvol noten helpt al. Een lage bloedsuikerspiegel verlaagt aantoonbaar je frustratietolerantie.' },
+  { letter: 'A', naam: 'Boos', kort: 'Voel je nu al irritatie of frustratie?', tip: 'Neem eerst zelf drie diepe ademhalingen voordat je het gesprek aangaat. Praten vanuit irritatie werkt vaak juist escalerend.' },
+  { letter: 'L', naam: 'Eenzaam', kort: 'Mis je op dit moment steun of contact?', tip: 'Zoek eerst kort contact met een collega, ook al is het maar een korte uitwisseling. Er alleen voor staan vergroot het risico dat je feller of juist te toegeeflijk reageert.' },
+  { letter: 'T', naam: 'Moe', kort: 'Te weinig rust of slaap gehad?', tip: 'Neem als het kan vijf minuten pauze, of vraag een collega het gesprek over te nemen. Vermoeidheid vermindert je vermogen om kalm te blijven en goed te formuleren.' },
+];
+
+function renderHalt() {
+  const grid = document.getElementById('halt-grid');
+  grid.innerHTML = HALT_ITEMS.map((h, i) => `
+    <button class="halt-card" data-i="${i}" type="button" aria-pressed="false">
+      <div class="halt-letter">${h.letter}</div>
+      <h3>${h.naam}</h3>
+      <p>${h.kort}</p>
+    </button>
+  `).join('');
+
+  grid.addEventListener('click', (e) => {
+    const card = e.target.closest('.halt-card');
+    if (!card) return;
+    const actief = card.classList.toggle('active');
+    card.setAttribute('aria-pressed', actief ? 'true' : 'false');
+    updateHaltFeedback();
+  });
+
+  updateHaltFeedback();
+}
+
+function updateHaltFeedback() {
+  const actieveIndices = [...document.querySelectorAll('.halt-card.active')].map(c => Number(c.dataset.i));
+  const aantal = actieveIndices.length;
+  const el = document.getElementById('halt-feedback');
+
+  if (aantal === 0) {
+    el.innerHTML = '<strong>Stabiele basis.</strong> Niets van de vier speelt nu mee: een prima moment voor een lastig gesprek.';
+    return;
+  }
+
+  let samenvatting;
+  if (aantal <= 2) {
+    samenvatting = `<strong>${aantal} van de 4 spelen mee.</strong> Dit vergroot de kans dat jij, of de ander, feller reageert dan de situatie rechtvaardigt. Concreet voor jou nu:`;
+  } else {
+    samenvatting = `<strong>${aantal} van de 4 spelen mee.</strong> Dit is geen goed moment voor een spannend gesprek. Overweeg het uit te stellen of over te dragen. Werk in elk geval dit af:`;
+  }
+
+  const tips = actieveIndices.map(i => {
+    const h = HALT_ITEMS[i];
+    return `<li><span class="halt-tip-letter">${h.letter}</span><span>${h.tip}</span></li>`;
+  }).join('');
+
+  el.innerHTML = `${samenvatting}<ul class="halt-tip-list">${tips}</ul>`;
+}
+
+const TK_STIJLEN = {
+  D: { naam: 'Doordrukken', omschrijving: 'Je bent sterk gericht op je eigen doel en minder op de wensen van de ander. Effectief bij urgente of principiële kwesties (bijvoorbeeld directe veiligheid), maar kan op termijn weerstand oproepen als het je enige stijl is.' },
+  S: { naam: 'Samenwerken', omschrijving: 'Je zoekt naar oplossingen waar beide partijen echt achter kunnen staan. Kost meer tijd en overleg, maar levert vaak de duurzaamste uitkomst op. Sterk bij complexe of terugkerende conflicten.' },
+  C: { naam: 'Compromis sluiten', omschrijving: 'Je zoekt een snelle middenweg waarin beide partijen een stap zetten. Praktisch en tijdbesparend, maar niemand krijgt precies wat hij wilde. Minder geschikt bij principiële kwesties.' },
+  V: { naam: 'Vermijden', omschrijving: 'Je stelt de confrontatie liever uit of gaat hem uit de weg. Waardevol als emoties eerst moeten bedaren of het onderwerp weinig gewicht heeft, maar niet houdbaar als vaste reactie op elk conflict.' },
+  T: { naam: 'Toegeven', omschrijving: 'Je laat je eigen belang los om de relatie of de rust te bewaren. Goed voor de sfeer op korte termijn, maar als het je enige stijl is, loop je het risico jezelf structureel weg te cijferen.' },
+};
+
+const TK_VRAGEN = [
+  { situatie: 'Een collega negeert herhaaldelijk een belangrijke veiligheidsafspraak.', a: { tekst: 'Ik spreek hem er direct en stellig op aan, ook al vindt hij dat vervelend.', stijl: 'D' }, b: { tekst: 'Ik laat het voor nu even zo, misschien komt het later nog ter sprake.', stijl: 'V' } },
+  { situatie: 'Jij en een collega hebben een tegengestelde kijk op hoe een cliënt het beste benaderd kan worden.', a: { tekst: 'Ik stel voor dat we samen uitzoeken wat voor de cliënt het beste werkt, ook al kost dat extra overleg.', stijl: 'S' }, b: { tekst: 'Ik laat mijn eigen aanpak varen en volg die van mijn collega, om de samenwerking soepel te houden.', stijl: 'T' } },
+  { situatie: 'Bij het plannen van een lastig gesprek verschillen jij en je leidinggevende van mening over het tijdstip.', a: { tekst: 'Ik stel een tussenoplossing voor: niet mijn tijdstip, niet dat van hem, maar iets ertussenin.', stijl: 'C' }, b: { tekst: 'Ik houd vast aan mijn eigen voorstel, omdat ik denk dat het echt de beste optie is.', stijl: 'D' } },
+  { situatie: 'Een discussie over een nieuw protocol loopt vast en de sfeer wordt gespannen.', a: { tekst: 'Ik stel voor de discussie een andere keer voort te zetten, als de gemoederen bedaard zijn.', stijl: 'V' }, b: { tekst: 'Ik zoek meteen naar een middenweg waar beide partijen een stap in kunnen zetten.', stijl: 'C' } },
+  { situatie: 'Een cliënt eist iets dat tegen het protocol ingaat, en wordt daar dwingender in.', a: { tekst: 'Ik geef op dit specifieke punt toe, om de situatie niet verder te laten escaleren.', stijl: 'T' }, b: { tekst: 'Ik blijf duidelijk bij het protocol, ook al zorgt dat voor meer weerstand op dit moment.', stijl: 'D' } },
+  { situatie: 'Twee teamleden hebben al weken onenigheid die het werk begint te beïnvloeden.', a: { tekst: 'Ik breng ze bij elkaar en help actief zoeken naar een oplossing die voor beiden werkt.', stijl: 'S' }, b: { tekst: 'Ik bemoei me er liever niet mee, dat lossen ze onderling wel op.', stijl: 'V' } },
+  { situatie: 'Bij het verdelen van diensten wil een collega structureel de rustigere momenten.', a: { tekst: 'Ik stel voor dat we de rustige én de drukke momenten eerlijk verdelen, om en om.', stijl: 'C' }, b: { tekst: 'Ik laat het gaan zoals hij het wil, het is voor mij niet zo belangrijk.', stijl: 'T' } },
+  { situatie: 'Je hebt een duidelijk beeld van hoe een de-escalatiegesprek aangepakt moet worden; een collega denkt er heel anders over.', a: { tekst: 'Ik ga met mijn collega in gesprek om onze inzichten te combineren tot een gezamenlijke aanpak.', stijl: 'S' }, b: { tekst: 'Ik neem de leiding en voer het gesprek op mijn manier, omdat ik denk dat dat het beste werkt.', stijl: 'D' } },
+];
+
+let tkIndex = 0;
+let tkScores = { D: 0, S: 0, C: 0, V: 0, T: 0 };
+
+function renderTKVraag() {
+  const q = TK_VRAGEN[tkIndex];
+  document.getElementById('tk-box').innerHTML = `
+    <div class="quiz-progress-text">Situatie ${tkIndex + 1} van ${TK_VRAGEN.length}</div>
+    <div class="quiz-progress">${TK_VRAGEN.map((_, i) => `<span class="${i < tkIndex ? 'done' : ''}"></span>`).join('')}</div>
+    <p class="quiz-q">${q.situatie}</p>
+    <div class="quiz-options">
+      <button class="quiz-option" data-stijl="${q.a.stijl}">${q.a.tekst}</button>
+      <button class="quiz-option" data-stijl="${q.b.stijl}">${q.b.tekst}</button>
+    </div>
+    <button class="btn btn-primary quiz-next" id="tk-next">${tkIndex < TK_VRAGEN.length - 1 ? 'Volgende situatie' : 'Bekijk resultaat'}</button>
+  `;
+
+  document.querySelectorAll('#tk-box .quiz-option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#tk-box .quiz-option').forEach(b => { b.disabled = true; });
+      btn.classList.add('gekozen');
+      tkScores[btn.dataset.stijl]++;
+      document.getElementById('tk-next').classList.add('show');
+    });
+  });
+
+  document.getElementById('tk-next').addEventListener('click', () => {
+    tkIndex++;
+    if (tkIndex < TK_VRAGEN.length) renderTKVraag();
+    else renderTKResultaat();
+  });
+}
+
+function renderTKResultaat() {
+  const topCode = Object.keys(tkScores).reduce((a, b) => tkScores[a] >= tkScores[b] ? a : b);
+  const stijl = TK_STIJLEN[topCode];
+  document.getElementById('tk-box').innerHTML = `
+    <div class="quiz-progress-text">Resultaat</div>
+    <div class="quiz-progress">${TK_VRAGEN.map(() => `<span class="done"></span>`).join('')}</div>
+    <div class="quiz-result">
+      <div class="tk-style-naam">${stijl.naam}</div>
+      <h3>Jouw dominante conflicthanteringsstijl</h3>
+      <p>${stijl.omschrijving}</p>
+      <button class="btn btn-outline" id="tk-restart">Test opnieuw doen</button>
+    </div>
+  `;
+  document.getElementById('tk-restart').addEventListener('click', () => {
+    tkIndex = 0;
+    tkScores = { D: 0, S: 0, C: 0, V: 0, T: 0 };
+    renderTKVraag();
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderLadder();
+  renderLeary();
+  renderLSD();
+  initNVCBuilder();
+  renderHalt();
+  renderTKVraag();
+});
+</script>
+<link rel="stylesheet" href="css/voorlees.css" />
+<script src="js/voorlees.js" defer data-vl-kleur="#e0401f" data-vl-knoptekst="Lees voor"></script>
+</body>
+</html>

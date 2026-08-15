@@ -1,0 +1,634 @@
+﻿<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Protocol-generator: stel je eigen agressiebeleid samen | AgressieVisie</title>
+<meta name="description" content="Genereer direct een uitgebreid protocol agressiebeleid op maat van jouw sector: met sectorcijfers, wettelijk kader, herkenbare situaties en concrete aanpak. Gratis en direct te printen." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="canonical" href="https://agressievisie.nl/protocol-generator.html" />
+<meta property="og:url" content="https://agressievisie.nl/protocol-generator.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="AgressieVisie" />
+<meta property="og:title" content="Protocol-generator: stel je eigen agressiebeleid samen | AgressieVisie" />
+<meta property="og:description" content="Genereer direct een basisprotocol agressiebeleid op maat van jouw sector en organisatie." />
+<meta property="og:image" content="https://agressievisie.nl/img/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://agressievisie.nl/img/og-image.png" />
+<link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .gen-layout { display:grid; grid-template-columns: 380px 1fr; gap:32px; align-items:start; }
+  @media (max-width:900px) { .gen-layout { grid-template-columns:1fr; } }
+
+  .gen-form { background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:22px; position:sticky; top:84px; }
+  @media (max-width:900px) { .gen-form { position:static; } }
+  .gen-field { margin-bottom:14px; }
+  .gen-field label { display:block; font-weight:700; font-size:14px; margin-bottom:8px; }
+  .gen-field select, .gen-field input[type=text] {
+    width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-family:inherit; font-size:14.5px;
+  }
+  .gen-field select:focus, .gen-field input:focus { outline:2px solid var(--red); outline-offset:1px; }
+  .gen-checks { display:flex; flex-direction:column; gap:6px; }
+  .gen-check { display:flex; align-items:center; gap:8px; font-size:14px; }
+  .gen-check input { width:16px; height:16px; accent-color: var(--red); }
+
+  .protocol-sheet {
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:40px; box-shadow:var(--shadow-sm);
+  }
+  .protocol-sheet h2 { font-size:22px; margin-bottom:4px; }
+  .protocol-sheet .sub { color:var(--text-muted); font-size:14px; margin-bottom:28px; }
+  .protocol-section { margin-bottom:26px; }
+  .protocol-section h3 { font-size:16px; color:var(--red-dark); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .protocol-section h3 .num { width:24px; height:24px; border-radius:50%; background:var(--grad-alert); color:#fff; font-size:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .protocol-section ul { padding-left:20px; }
+  .protocol-section li { margin-bottom:6px; font-size:14.5px; color:var(--text); }
+  .protocol-section p { font-size:14.5px; color:var(--text); }
+  .protocol-footer { margin-top:30px; padding-top:20px; border-top:1px solid var(--line); font-size:12.5px; color:var(--text-muted); }
+  @media print {
+    header.site, footer.site, #cookie-banner, .gen-form, .no-print { display:none !important; }
+    .gen-layout { grid-template-columns:1fr; }
+  }
+
+  .download-gate {
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:32px; margin-top:24px;
+    display:flex; align-items:center; gap:24px; flex-wrap:wrap;
+  }
+  .download-gate .dg-icon { width:48px; height:48px; border-radius:14px; background:var(--grad-alert); flex-shrink:0; }
+  .download-gate h3 { font-size:17px; margin-bottom:4px; }
+  .download-gate p { font-size:14px; color:var(--text-muted); }
+  .download-gate-form { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+  .download-gate-form input[type=email] {
+    flex:1; min-width:220px; padding:11px 16px; border-radius:999px; border:1px solid var(--line); font-family:inherit; font-size:14.5px;
+  }
+  .download-gate-form input[type=email]:focus { outline:2px solid var(--red); outline-offset:1px; }
+  .download-success { display:none; align-items:center; gap:10px; margin-top:14px; font-size:14px; color:#2f9e5c; font-weight:700; }
+  .download-success.show { display:flex; }
+  .download-success .brand-mark { width:24px; height:24px; border-radius:7px; }
+  .download-success .brand-mark::before { width:9px; height:2px; top:8px; left:7px; }
+  .download-success .brand-mark::after { width:9px; height:2px; top:13px; left:7px; }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agressievisie.nl/"},{"@type":"ListItem","position":2,"name":"Protocol-generator","item":"https://agressievisie.nl/protocol-generator.html"}]}
+</script>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a class="brand" href="index.html"><span class="brand-mark"></span>AgressieVisie</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="artikelen.html">Artikelen</a>
+      <a href="methodieken.html">Methodieken</a>
+      <a href="cijfers.html">Cijfers & trends</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button">Meer <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-dropdown-menu nav-mega">
+        <div class="nav-mega-col">
+          <h4>Kennisbank</h4>
+          <a href="lexicon.html">Begrippenlijst</a>
+          <a href="beleid-en-wetgeving.html">Beleid & wetgeving</a>
+          <a href="bronnen.html">Bronnenbank</a>
+          <a href="trendrapport.html">Trendrapport</a>
+          <a href="faq.html">Veelgestelde vragen</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Interactieve tools</h4>
+          <a href="oefengesprek.html">Oefengesprek<span class="nav-badge">Populair</span></a>
+          <a href="protocol-generator.html" class="current">Protocol-generator<span class="nav-badge">Populair</span></a>
+          <a href="risico-check.html">Risico-check</a>
+          <a href="zelftest.html">Zelftest</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Downloads</h4>
+          <a href="gratis-gids.html">Gratis checklist</a>
+          <a href="ebook.html">Gratis e-book</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Platform</h4>
+          <a href="contact.html">Contact</a>
+          <a href="bijdragen.html">Draag bij</a>
+          <a href="over.html">Over dit platform</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="overzicht.html">Sitemap</a>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="nav-cta">
+      <a class="nav-search" href="zoeken.html" aria-label="Zoeken"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+  </nav>
+</header>
+
+<section class="page-header" style="padding:26px 0 20px;">
+  <div class="wrap">
+    <nav class="breadcrumbs"><a href="index.html">Home</a><span class="sep">/</span><span class="current">Protocol-generator</span></nav>
+    <span class="eyebrow">Interactieve tool</span>
+    <h1>Stel je eigen agressieprotocol samen</h1>
+    <p class="lede">Vul je sector in en krijg direct een uitgebreid protocol: met actuele sectorcijfers, het wettelijk kader, herkenbare situaties uit jouw sector mét concrete aanpak, en een sectorspecifiek escalatieprotocol.</p>
+  </div>
+</section>
+
+<section class="section--tight">
+  <div class="wrap gen-layout">
+    <div class="gen-form no-print">
+      <div class="gen-field">
+        <label for="gen-org">Organisatienaam (optioneel)</label>
+        <input type="text" id="gen-org" placeholder="Bijv. Zorgcentrum De Linde" />
+      </div>
+      <div class="gen-field">
+        <label for="gen-sector">Sector</label>
+        <select id="gen-sector">
+          <option value="zorg">Zorg & welzijn</option>
+          <option value="onderwijs">Onderwijs</option>
+          <option value="beveiliging">Beveiliging & OV</option>
+          <option value="retail">Klantcontact & retail</option>
+          <option value="horeca">Horeca & uitgaan</option>
+          <option value="overheid">Gemeenten & overheid</option>
+        </select>
+      </div>
+      <div class="gen-field">
+        <label for="gen-grootte">Teamgrootte</label>
+        <select id="gen-grootte">
+          <option value="klein">Klein team (tot 10 medewerkers)</option>
+          <option value="middel" selected>Middelgroot (10-50 medewerkers)</option>
+          <option value="groot">Groot (50+ medewerkers)</option>
+        </select>
+      </div>
+      <div class="gen-field">
+        <label>Belangrijkste risico's (kies wat van toepassing is)</label>
+        <div class="gen-checks">
+          <label class="gen-check"><input type="checkbox" value="verbaal" checked /> Verbale agressie</label>
+          <label class="gen-check"><input type="checkbox" value="fysiek" /> Fysieke agressie</label>
+          <label class="gen-check"><input type="checkbox" value="telefonisch" /> Bedreiging via telefoon/e-mail</label>
+          <label class="gen-check"><input type="checkbox" value="collegas" /> Agressie tussen collega's</label>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="gen-generate" style="width:100%; justify-content:center;">Genereer protocol</button>
+      <button class="btn btn-outline" id="gen-print" style="width:100%; justify-content:center; margin-top:10px;">Print / bewaar als PDF</button>
+    </div>
+
+    <div>
+      <div class="protocol-sheet" id="protocol-output"></div>
+
+      <div class="download-gate no-print">
+        <span class="dg-icon"></span>
+        <div style="flex:1; min-width:220px;">
+          <h3>Ontvang dit protocol als bestand</h3>
+          <p>Vul je e-mailadres in om het protocol te downloaden als overzichtelijk document, mét het AgressieVisie-logo.</p>
+          <form class="download-gate-form" id="download-form">
+            <input type="email" id="download-email" placeholder="jouw@email.nl" required />
+            <button class="btn btn-primary" type="submit">Download protocol</button>
+          </form>
+          <div class="form-status" id="download-error"></div>
+          <div class="download-success" id="download-success">
+            <span class="brand-mark"></span>
+            <span>Bedankt! Je download is gestart. <a href="#" id="download-again" style="text-decoration:underline; color:inherit;">Nogmaals downloaden</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft no-print">
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h2>Dit protocol écht laten landen in je team?</h2>
+        <p>Act in Move Training & Coaching helpt bij het implementeren én trainen van agressiebeleid, toegespitst op jouw organisatie.</p>
+      </div>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site no-print">
+  <div class="footer-accent"></div>
+  <svg class="footer-watermark" viewBox="0 0 200 200" aria-hidden="true">
+    <rect width="200" height="200" rx="44" fill="#ffffff"/>
+    <rect x="58" y="64.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(35 100 72.6)"/>
+    <rect x="58" y="117.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(-35 100 125.6)"/>
+  </svg>
+  <div class="wrap">
+    <div class="footer-top">
+      <a class="footer-brand-block" href="index.html">
+        <span class="brand-mark"></span>
+        <div>
+          <span class="footer-brand-name">AgressieVisie</span>
+          <p class="footer-brand-tag">Kennisplatform over agressie</p>
+        </div>
+      </a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p>Signalen, trends en onderzoek over agressie. Een initiatief van Act in Move Training & Coaching.</p>
+        <a class="footer-aim-logo" href="https://actinmove.nl/" target="_blank" rel="noopener" aria-label="Act in Move Training & Coaching"><span class="aim-logo-mark"></span></a>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="artikelen.html">Artikelen</a></li>
+          <li><a href="methodieken.html">Methodieken</a></li>
+          <li><a href="protocol-generator.html">Protocol-generator</a></li>
+          <li><a href="ebook.html">Gratis e-book</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Meer</h4>
+        <ul>
+          <li><a href="cijfers.html">Cijfers & trends</a></li>
+          <li><a href="trendrapport.html">Trendrapport</a></li>
+          <li><a href="risico-check.html">Risico-check</a></li>
+          <li><a href="oefengesprek.html">Oefengesprek</a></li>
+          <li><a href="zelftest.html">Zelftest</a></li>
+          <li><a href="lexicon.html">Begrippenlijst</a></li>
+          <li><a href="bronnen.html">Bronnenbank</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Juridisch</h4>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="overzicht.html">Sitemap</a></li>
+          <li><a href="privacy.html">Privacy & cookies</a></li>
+          <li><a href="https://actinmove.nl/" target="_blank" rel="noopener">Act in Move ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-mark"><span class="brand-mark"></span>© <span data-year></span> AgressieVisie, onderdeel van Act in Move Training & Coaching</span>
+      <span><a href="https://actinmove.nl/" target="_blank" rel="noopener">actinmove.nl</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+const SECTOR_INFO = {
+  zorg: {
+    naam: 'zorg en welzijn',
+    voorbeeld: 'patiënten, cliënten of hun familie',
+    context: 'Op de werkvloer in de zorg lopen spanningen vaak op door wachttijden, onzekerheid over een diagnose of gevoelens van machteloosheid bij patiënten en naasten.',
+    stat: '57% van de zorgmedewerkers had in 2024 te maken met agressie door patiënten of naasten, blijkt uit de CBS AZW-werknemersenquête.',
+    wetAddendum: 'In de zorg leggen cao\'s zoals de Cao Ziekenhuizen tegenwoordig zelfs een aangifteplicht op na fysieke agressie-incidenten.',
+    signalen: [
+      'Onrust of toenemende verwardheid bij cliënten met cognitieve achteruitgang, vaak een voorloper van fysiek gedrag.',
+      'Naasten die hun stem verheffen aan de balie of herhaaldelijk dezelfde vraag stellen: wijst op oplopende frustratie over wachttijd of onduidelijkheid.',
+      'Spanning tussen collega\'s die zich uit in korte, geïrriteerde reacties tijdens een drukke dienst.',
+    ],
+    dreiging: [
+      'Schakel bij fysieke dreiging direct een collega of de BHV in en volg het lokale alarmeringsprotocol (bijv. een stille alarmknop).',
+      'Bij herhaald grensoverschrijdend gedrag door een cliënt met verminderde wilsbekwaamheid (bijv. dementie): overleg met de zorgcoördinator over afspraken in het zorgplan, in plaats van dit als op zichzelf staand incident te behandelen.',
+      'Waarschuw bij fysiek geweld door bezoekers of naasten altijd de politie; dit is een strafbaar feit, ongeacht de context.',
+    ],
+    situaties: [
+      { titel: 'Onbegrepen gedrag bij dementie', beschrijving: 'Een cliënt met dementie wordt plots fysiek tijdens de ochtendzorg. Niet uit kwaadwilligheid, maar uit angst of verwarring.', tip: 'Gebruik de LSD-methode (luisteren, samenvatten, doorvragen) om te achterhalen wat de onderliggende angst of verwarring triggert, in plaats van het gedrag als \'lastig\' te bestempelen.' },
+      { titel: 'Familie na lange wachttijd', beschrijving: 'Naasten van een patiënt op de SEH wachten al uren en worden steeds directer, dan verbaal agressief naar de balie.', tip: 'Erken de frustratie expliciet ("ik snap dat dit lang duurt") vóórdat je uitleg geeft. Te snel een verklaring aandragen werkt averechts zolang de emotie nog niet erkend is.' },
+      { titel: 'Spanning tussen collega\'s', beschrijving: 'Onder hoge werkdruk loopt de toon tussen collega\'s onderling soms net zo snel op als richting cliënten.', tip: 'Gebruik geweldloze communicatie: benoem wat je waarneemt en voelt, en welke behoefte erachter zit, in plaats van de ander te veroordelen.' },
+    ],
+  },
+  onderwijs: {
+    naam: 'het onderwijs',
+    voorbeeld: 'leerlingen of ouders',
+    context: 'In het onderwijs ontstaat spanning vaak rond beoordelingen, gedragsincidenten of meningsverschillen met ouders over de aanpak van hun kind.',
+    stat: '85% van de onderwijsmedewerkers kreeg te maken met verbaal geweld of dreigementen, en 43% met fysiek geweld op school, blijkt uit onderzoek van CNV en EenVandaag.',
+    wetAddendum: '',
+    signalen: [
+      'Een leerling die zich fysiek terugtrekt of juist onrustig wordt na een correctie of beoordeling.',
+      'Een ouder die het gesprek na schooltijd zoekt met een verhoogde, dringende toon.',
+      'Herhaalde negatieve berichten in klassengroepen die zich buiten schooltijd afspelen, maar doorlopen tot in de klas.',
+    ],
+    dreiging: [
+      'Breng bij fysieke escalatie direct de groep in veiligheid en waarschuw de schoolleiding of het aanwezige BHV-team.',
+      'Volg bij herhaalde incidenten het schoolveiligheidsplan en betrek de vertrouwenspersoon.',
+      'Leg bedreiging van personeel door ouders altijd vast en bespreek met de directie of een formele waarschuwing of aangifte nodig is.',
+    ],
+    situaties: [
+      { titel: 'Ouder bij een onvoldoende', beschrijving: 'Een ouder is het niet eens met een beoordeling en confronteert een docent na schooltijd, steeds directer en luider.', tip: 'Vat eerst samen wat de ouder ervaart ("u vindt dat de beoordeling niet klopt") voordat je het beoordelingsproces toelicht. Erkenning vóór uitleg voorkomt dat de ouder zich niet gehoord voelt.' },
+      { titel: 'Escalatie in de klas', beschrijving: 'Een leerling voelt zich in het nauw gedreven na een correctie en reageert fysiek.', tip: 'Herken de fase op de escalatieladder en grijp al in fase 1 in, niet pas bij fysiek gedrag.' },
+      { titel: 'Online dreigementen', beschrijving: 'Dreigementen en scheldpartijen via app-groepen of social media lopen door tot in de klas.', tip: 'Leg online signalen net zo serieus vast als fysieke incidenten in een signaleringsplan, en escaleer op tijd naar een vertrouwenspersoon of coördinator.' },
+    ],
+  },
+  beveiliging: {
+    naam: 'beveiliging en openbaar vervoer',
+    voorbeeld: 'reizigers of bezoekers',
+    context: 'In deze sector ontstaat agressie vaak plotseling, bij controles, boetes of het handhaven van regels in de publieke ruimte.',
+    stat: '2 op de 3 beveiligers (67%) in Nederland is inmiddels slachtoffer geweest van geweld of agressie, blijkt uit onderzoek van de Veiligheidsbranche.',
+    wetAddendum: '',
+    signalen: [
+      'Een reiziger of bezoeker die dichterbij komt dan gebruikelijk, of zich tussen jou en de uitgang positioneert.',
+      'Oplopende irritatie bij een groep, zichtbaar aan luidere stemmen en samenscholen.',
+      'Fysieke tekenen van dreiging: gebalde vuisten, indringend oogcontact, snellere ademhaling.',
+    ],
+    dreiging: [
+      'Vraag bij oplopende dreiging direct back-up via portofoon of meldkamer; werk nooit alleen door bij een fysieke confrontatie.',
+      'Bij een dreigende groep: creëer afstand en wacht op versterking in plaats van de confrontatie alleen aan te gaan.',
+      'Doe bij fysiek geweld altijd aangifte en leg het incident vast conform het interne meldprotocol.',
+    ],
+    situaties: [
+      { titel: 'Zwartrijder wordt aangesproken', beschrijving: 'Een conducteur spreekt een reiziger aan zonder geldig vervoerbewijs. Wat begint als discussie, escaleert binnen seconden tot dreigende taal in een volle coupé.', tip: 'Houd volgens de Roos van Leary een kalme, gezaghebbende houding aan in plaats van tegendruk te geven. Tegendruk lokt bij een aanvallende reiziger vaak juist meer aanval uit.' },
+      { titel: 'Groep bij evenementbeveiliging', beschrijving: 'Bij de uitgang van een groot evenement ontstaat opstopping. Een groep bezoekers wordt ongeduldig en één persoon duwt tegen een beveiliger aan.', tip: 'Pak volgens het ABC-model de aanleiding (de opstopping) aan in plaats van alleen op het duwen te reageren: verbeter de doorstroming en de spanning bij de hele groep zakt vanzelf.' },
+      { titel: 'Alleen dienst bij een incident', beschrijving: 'Een beveiliger draait een avonddienst alleen op een station. Bij een opstootje moet die in z\'n eentje de-escaleren.', tip: 'Check bij jezelf eerst kort de HALT-factoren (Honger, Angst, Eenzaamheid, Moeheid) voordat je alleen ingrijpt, en vraag zo vroeg mogelijk back-up aan.' },
+    ],
+  },
+  retail: {
+    naam: 'klantcontact en retail',
+    voorbeeld: 'klanten',
+    context: 'Frustratie bij klanten ontstaat vaak rond beleid (retourtermijnen, prijzen, procedures) waar de medewerker zelf part noch deel aan heeft.',
+    stat: '11% van de medewerkers in klantcontact rapporteert ongewenst gedrag door klanten, oplopend tot 17% bij medewerkers van 15-24 jaar (bron: NEA 2025).',
+    wetAddendum: '',
+    signalen: [
+      'Een klant die dezelfde eis herhaalt zonder ruimte te laten voor uitleg: vaak een teken van oplopende frustratie.',
+      'Toenemende irritatie in de wachtrij, zichtbaar aan zuchten, klokkijken en luidere opmerkingen.',
+      'Persoonlijke opmerkingen richting de medewerker in plaats van richting het beleid zelf.',
+    ],
+    dreiging: [
+      'Waarschuw bij escalatie direct een leidinggevende, of gebruik het alarmsysteem (paniekknop) indien aanwezig.',
+      'Verlaat als medewerker de directe situatie bij een dreigende klant en laat een collega of leidinggevende het overnemen.',
+      'Doe bij bedreiging of geweld aangifte en registreer het incident intern, ook als het \'meeviel\'.',
+    ],
+    situaties: [
+      { titel: 'Klacht over een levering', beschrijving: 'Een klant belt boos over een te late of foute levering. De toon escaleert snel als de medewerker de klacht niet meteen kan oplossen.', tip: 'Gebruik de LSD-methode: luister en vat eerst samen wat er misging voordat je een oplossing aandraagt. Te snel een oplossing noemen zonder erkenning werkt vaak averechts.' },
+      { titel: 'Geweigerde aankoop', beschrijving: 'Een jonge medewerker moet een klant weigeren bij een leeftijdscontrole (alcohol, tabak). De klant reageert geïrriteerd en persoonlijk.', tip: 'Blijf assertief: herhaal de regel rustig en zonder je te verontschuldigen, zonder in discussie te gaan.' },
+      { titel: 'Drukte bij de kassa', beschrijving: 'Bij een storing lopen de wachtrijen op. Ongeduld slaat om in verbale agressie richting de medewerker die er part noch deel aan heeft.', tip: 'Herken ongeduld als vroeg signaal op de escalatieladder en erken het hardop ("ik snap dat dit lang duurt") voordat het omslaat in verbale agressie.' },
+    ],
+  },
+  horeca: {
+    naam: 'horeca en uitgaan',
+    voorbeeld: 'gasten',
+    context: 'Alcohol, drukte en late uren maken deze sector extra kwetsbaar voor snel oplopende, soms plotselinge escalatie.',
+    stat: '1 op de 4 horecamedewerkers krijgt te maken met agressie of geweld van gasten; de NEA 2025 laat zien dat de horeca structureel boven het landelijk gemiddelde scoort.',
+    wetAddendum: '',
+    signalen: [
+      'Onvaste motoriek of vertraagde reactie in combinatie met een dwingende toon: kenmerkend voor alcoholgerelateerde spanning.',
+      'Een groep die dichterbij een geweigerde bezoeker gaat staan, wat de dynamiek van individueel naar groepsgedrag verschuift.',
+      'Herhaaldelijk aandringen ondanks een duidelijk \'nee\', vaak vlak vóór escalatie.',
+    ],
+    dreiging: [
+      'Schakel bij escalatie direct beveiliging of een collega-portier in; ga nooit alleen de confrontatie met een groep aan.',
+      'Bij zichtbare alcohol- of drugsinvloed: de-escaleer kort en duidelijk, en verwijder de bezoeker met assistentie in plaats van in discussie te blijven.',
+      'Waarschuw bij fysiek geweld direct de politie en leg het incident vast voor eventuele aangifte.',
+    ],
+    situaties: [
+      { titel: 'Weigering aan de deur', beschrijving: 'Een portier weigert een dronken bezoeker de toegang. De situatie escaleert snel, zeker als er een groep vrienden bij betrokken raakt.', tip: 'Check eerst kort de HALT-factoren bij jezelf en spreek vooral de bezoeker zelf aan, niet de hele vriendengroep: dat voorkomt dat het een groepsdynamiek wordt.' },
+      { titel: 'Laatste ronde', beschrijving: 'Tegen sluitingstijd weigert een medewerker nog een drankje te schenken. Wat een routinemoment zou moeten zijn, loopt uit op verbale agressie.', tip: 'Formuleer volgens geweldloze communicatie een boodschap over de situatie ("de bar is nu gesloten"), niet over de persoon ("jij hebt genoeg gehad").' },
+      { titel: 'Alleen achter de bar', beschrijving: 'Op een rustige doordeweekse avond staat één medewerker alleen. Bij een opstootje is er geen collega in de buurt om bij te springen.', tip: 'Spreek vooraf in een signaleringsplan af wanneer je precies collega\'s of beveiliging inschakelt, in plaats van dat op het moment zelf te moeten bedenken.' },
+    ],
+  },
+  overheid: {
+    naam: 'gemeenten en overheid',
+    voorbeeld: 'bezoekers of aanvragers',
+    context: 'Bij publieksbalies en loketten ontstaat spanning vaak rond afgewezen aanvragen, lange wachttijden of onduidelijke procedures.',
+    stat: '29% van de ambtenaren met publiekscontact kreeg het afgelopen jaar te maken met agressie of intimidatie, oplopend tot 45% bij lokale bestuurders (bron: Monitor Integriteit en Veiligheid 2024).',
+    wetAddendum: '',
+    signalen: [
+      'Verhoogde stemtoon en herhaling van dezelfde klacht aan de balie, ondanks eerdere uitleg.',
+      'Toenemende frustratie bij een handhavingsmoment, al zichtbaar vóórdat er iets formeels (zoals een bekeuring) is gecommuniceerd.',
+      'Dreigende of persoonlijke toon in online reacties na een bestuurlijk besluit.',
+    ],
+    dreiging: [
+      'Waarschuw bij dreiging aan de balie een collega of beveiliging; veel gemeenten hebben hiervoor een stille alarmknop.',
+      'Registreer online dreigementen en escaleer op tijd naar de veiligheidscoördinator; wacht niet tot het overslaat naar de fysieke situatie.',
+      'Doe bij bedreiging van bestuurders of medewerkers altijd aangifte; sommige gemeenten doen dit ook namens de medewerker via een werkgeversmeldpunt.',
+    ],
+    situaties: [
+      { titel: 'Afwijzing aan de balie', beschrijving: 'Een aanvraag voor een uitkering of vergunning wordt afgewezen. De baliemedewerker krijgt de frustratie over een besluit dat hij zelf niet heeft genomen, rechtstreeks te verduren.', tip: 'Gebruik geweldloze communicatie om het besluit los te koppelen van jezelf ("ik snap de impact, het besluit ligt niet bij mij persoonlijk").' },
+      { titel: 'Handhaver bij een controle', beschrijving: 'Een boa constateert een overtreding in de openbare ruimte. De aangesprokene reageert direct verbaal agressief, nog voor er een bekeuring is uitgeschreven.', tip: 'Houd volgens de escalatieladder vanaf het begin een rustige, feitelijke toon aan. Een autoritaire opstelling roept vaak juist meer tegendruk op.' },
+      { titel: 'Bestuurder online bedreigd', beschrijving: 'Een wethouder of raadslid krijgt na een lokaal besluit een golf aan dreigende reacties online, die soms doorlopen tot in de privésfeer.', tip: 'Registreer online dreigementen net zo serieus als fysieke incidenten in een signaleringsplan, en escaleer op tijd naar de veiligheidscoördinator.' },
+    ],
+  },
+};
+
+function getFormState() {
+  const org = document.getElementById('gen-org').value.trim() || 'jouw organisatie';
+  const sectorKey = document.getElementById('gen-sector').value;
+  const grootte = document.getElementById('gen-grootte').value;
+  const risicos = [...document.querySelectorAll('.gen-check input:checked')].map(c => c.value);
+  return { org, sectorKey, grootte, risicos, sector: SECTOR_INFO[sectorKey] };
+}
+
+const GROOTTE_TEXT = {
+  klein: 'In een klein team is het extra belangrijk dat iedereen dezelfde basisafspraken kent, omdat er minder collega\'s beschikbaar zijn om bij te springen.',
+  middel: 'Bij een middelgroot team is het aan te raden een vast aanspreekpunt agressiebeleid aan te wijzen, die overzicht houdt over meldingen en trends.',
+  groot: 'Bij een grote organisatie is het raadzaam agressiebeleid per afdeling of locatie te borgen, met een centraal meldpunt voor overkoepelend overzicht.',
+};
+
+const RISICO_LABELS = {
+  verbaal: 'Verbale agressie (schelden, dreigen, intimideren)',
+  fysiek: 'Fysieke agressie (slaan, duwen, vernieling)',
+  telefonisch: 'Bedreiging via telefoon of e-mail',
+  collegas: 'Agressie of ongewenst gedrag tussen collega\'s onderling',
+};
+
+function buildProtocolSections(state) {
+  const { org, sector, grootte, risicos } = state;
+  const grootteText = GROOTTE_TEXT[grootte];
+  const datum = new Date().toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  const wetBasis = 'De Arbowet verplicht werkgevers om agressie en geweld op te nemen in de risico-inventarisatie en -evaluatie (RI&E) en hier concreet beleid op te voeren (Arbobesluit art. 2.15). Artikel 7:658 van het Burgerlijk Wetboek legt daarnaast een algemene zorgplicht op voor een veilige werkomgeving. Fysiek geweld is bovendien altijd een strafbaar feit onder het Wetboek van Strafrecht, los van of er aangifte wordt gedaan.';
+
+  return {
+    titel: 'Uitgebreid protocol agressiebeleid',
+    sub: `${org} · Sector: ${sector.naam.charAt(0).toUpperCase() + sector.naam.slice(1)} · Gegenereerd op ${datum}`,
+    secties: [
+      {
+        kop: 'Doel en context',
+        inhoud: `<p>Dit protocol beschrijft hoe medewerkers van ${org} omgaan met agressie en grensoverschrijdend gedrag door ${sector.voorbeeld}, van vroege signalen tot nazorg. ${sector.context}</p>
+        <p style="margin-top:10px;"><strong>De cijfers achter dit protocol:</strong> ${sector.stat}</p>`,
+      },
+      {
+        kop: 'Wettelijk kader',
+        inhoud: `<p>${wetBasis}</p>${sector.wetAddendum ? `<p style="margin-top:10px;">${sector.wetAddendum}</p>` : ''}`,
+      },
+      {
+        kop: 'Belangrijkste aandachtspunten',
+        inhoud: `<ul>${risicos.length ? risicos.map(r => `<li>${RISICO_LABELS[r]}</li>`).join('') : '<li>Nog geen specifieke risico\'s geselecteerd.</li>'}</ul>`,
+      },
+      {
+        kop: `Herkenbare situaties in ${sector.naam}`,
+        inhoud: sector.situaties.map(s => `
+          <p style="margin-bottom:4px;"><strong>${s.titel}.</strong> ${s.beschrijving}</p>
+          <p style="margin:0 0 14px; color:var(--text-muted); font-size:13.5px;"><em>Wat helpt:</em> ${s.tip}</p>
+        `).join(''),
+      },
+      {
+        kop: 'Preventie: signalen herkennen',
+        inhoud: `<ul>${sector.signalen.map(s => `<li>${s}</li>`).join('')}<li>Bespreek deze signalen structureel in werkoverleg, niet alleen na een incident.</li></ul>`,
+      },
+      {
+        kop: 'Communicatie tijdens een incident',
+        inhoud: `<ul>
+          <li>Erken eerst de emotie van de ander, voordat je een oplossing aandraagt (LSD-methode: luisteren, samenvatten, doorvragen).</li>
+          <li>Blijf zelf rustig in toon en tempo, ook als de ander dat niet is.</li>
+          <li>Houd de escalatieladder van Glasl in gedachten: hoe eerder je erkent in plaats van betoogt, hoe makkelijker terugkeer naar een rustiger fase blijft.</li>
+        </ul>`,
+      },
+      {
+        kop: 'Bij fysieke dreiging',
+        inhoud: `<ul>${sector.dreiging.map(d => `<li>${d}</li>`).join('')}<li>Onthoud dat de-escalatie door communicatie niet altijd haalbaar is; veiligheid gaat vóór alles.</li></ul>`,
+      },
+      {
+        kop: 'Na een incident: melding en nazorg',
+        inhoud: `<ul>
+          <li>Meld elk incident, ook 'kleine', bij de leidinggevende of het aanspreekpunt agressiebeleid.</li>
+          <li>Bied binnen 24 uur een kort nagesprek aan, ongeacht hoe zwaar het incident leek.</li>
+          <li>Verwijs bij aanhoudende klachten naar professionele ondersteuning (bedrijfsarts, vertrouwenspersoon); onderzoek laat zien dat nazorg vaak tekortschiet terwijl tijdige opvolging het risico op langdurige klachten aantoonbaar verkleint.</li>
+        </ul>`,
+      },
+      {
+        kop: 'Rollen en organisatie',
+        inhoud: `<p>${grootteText}</p>`,
+      },
+      {
+        kop: 'Borging en evaluatie',
+        inhoud: `<ul>
+          <li>Evalueer periodiek gemelde incidenten om patronen en herhaling te herkennen.</li>
+          <li>Neem agressiebeleid op als vast onderdeel van introductie voor nieuwe medewerkers.</li>
+          <li>Herhaal training in korte, frequente sessies in plaats van één jaarlijkse bijeenkomst; dat verbetert aantoonbaar het vaardigheidsbehoud.</li>
+        </ul>`,
+      },
+    ],
+    footer: 'Dit protocol is gegenereerd door AgressieVisie op basis van actuele sectorcijfers en beproefde methodieken, en bedoeld als een uitgebreid startpunt. Voor een protocol dat volledig is afgestemd op jouw organisatie en dat structureel wordt getraind met je team, kun je terecht bij Act in Move Training & Coaching (actinmove.nl).',
+  };
+}
+
+function renderProtocolPreview(data) {
+  const html = `
+    <h2>${data.titel}</h2>
+    <p class="sub">${data.sub}</p>
+    ${data.secties.map((s, i) => `
+      <div class="protocol-section">
+        <h3><span class="num">${i + 1}</span> ${s.kop}</h3>
+        ${s.inhoud}
+      </div>
+    `).join('')}
+    <div class="protocol-footer">${data.footer}</div>
+  `;
+  document.getElementById('protocol-output').innerHTML = html;
+}
+
+function generateProtocol() {
+  const state = getFormState();
+  const data = buildProtocolSections(state);
+  renderProtocolPreview(data);
+}
+
+const LOGO_SVG = `<svg width="44" height="44" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e0401f"/><stop offset="100%" stop-color="#f5a524"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="#17171a"/><rect x="10" y="10" width="44" height="44" rx="12" fill="url(#g)"/><rect x="23" y="24" width="18" height="4" rx="2" fill="#ffffff" transform="rotate(35 32 26)"/><rect x="23" y="36" width="18" height="4" rx="2" fill="#ffffff" transform="rotate(-35 32 38)"/></svg>`;
+
+function buildDownloadDocument(data) {
+  return `<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<title>${data.titel} | AgressieVisie</title>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; color: #1c1c1f; max-width: 720px; margin: 40px auto; padding: 0 24px; line-height: 1.6; }
+  .doc-header { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 2px solid #e4e4e8; }
+  .doc-header .name { font-size: 20px; font-weight: 800; }
+  .doc-header .tag { font-size: 13px; color: #6c6c75; }
+  h1 { font-size: 24px; margin-bottom: 4px; }
+  .sub { color: #6c6c75; font-size: 14px; margin-bottom: 28px; }
+  h2 { font-size: 16px; color: #b8300f; margin: 24px 0 8px; }
+  ul { padding-left: 20px; margin: 0; }
+  li { margin-bottom: 6px; font-size: 14.5px; }
+  p { font-size: 14.5px; }
+  .doc-footer { margin-top: 36px; padding-top: 18px; border-top: 1px solid #e4e4e8; font-size: 12.5px; color: #6c6c75; }
+</style>
+</head>
+<body>
+  <div class="doc-header">
+    ${LOGO_SVG}
+    <div>
+      <div class="name">AgressieVisie</div>
+      <div class="tag">Kennisplatform over agressie | agressievisie.nl</div>
+    </div>
+  </div>
+  <h1>${data.titel}</h1>
+  <p class="sub">${data.sub}</p>
+  ${data.secties.map((s, i) => `<h2>${i + 1}. ${s.kop}</h2>${s.inhoud}`).join('')}
+  <div class="doc-footer">${data.footer}</div>
+</body>
+</html>`;
+}
+
+function triggerDownload(filename, content) {
+  const blob = new Blob([content], { type: 'text/html;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+let leadCaptured = false;
+
+document.addEventListener('DOMContentLoaded', () => {
+  generateProtocol();
+  document.getElementById('gen-generate').addEventListener('click', generateProtocol);
+  document.getElementById('gen-print').addEventListener('click', () => window.print());
+
+  const form = document.getElementById('download-form');
+  const errorEl = document.getElementById('download-error');
+  const successEl = document.getElementById('download-success');
+
+  async function doDownload() {
+    const state = getFormState();
+    const data = buildProtocolSections(state);
+    const filename = `agressievisie-basisprotocol-${state.sectorKey}.html`;
+    triggerDownload(filename, buildDownloadDocument(data));
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('download-email').value;
+    const submitBtn = form.querySelector('button[type=submit]');
+    submitBtn.disabled = true;
+    errorEl.classList.remove('show');
+
+    try {
+      const res = await fetch('/api/nieuwsbrief', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      const resData = await res.json();
+      if (res.ok) {
+        leadCaptured = true;
+        form.style.display = 'none';
+        successEl.classList.add('show');
+        await doDownload();
+      } else {
+        errorEl.textContent = resData.error || 'Er ging iets mis. Probeer het later opnieuw.';
+        errorEl.classList.add('show', 'err');
+      }
+    } catch {
+      errorEl.textContent = 'Er ging iets mis. Probeer het later opnieuw.';
+      errorEl.classList.add('show', 'err');
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+
+  document.getElementById('download-again').addEventListener('click', (e) => {
+    e.preventDefault();
+    doDownload();
+  });
+});
+</script>
+<link rel="stylesheet" href="css/voorlees.css" />
+<script src="js/voorlees.js" defer data-vl-kleur="#e0401f" data-vl-knoptekst="Lees voor"></script>
+</body>
+</html>

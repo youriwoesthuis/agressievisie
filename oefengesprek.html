@@ -1,0 +1,604 @@
+﻿<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Oefengesprek: oefen een de-escalatiegesprek | AgressieVisie</title>
+<meta name="description" content="Interactief oefengesprek met sectorkeuze en live spanningsmeter: maak keuzes in een realistisch gesprek en zie direct het effect." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="canonical" href="https://agressievisie.nl/oefengesprek.html" />
+<meta property="og:url" content="https://agressievisie.nl/oefengesprek.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="AgressieVisie" />
+<meta property="og:title" content="Oefengesprek: oefen een de-escalatiegesprek | AgressieVisie" />
+<meta property="og:description" content="Kies een sector en maak keuzes in een realistisch gesprek, met een live spanningsmeter." />
+<meta property="og:image" content="https://agressievisie.nl/img/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://agressievisie.nl/img/og-image.png" />
+<link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .sim-wrap { max-width: 680px; margin: 0 auto; }
+
+  /* Sector-keuze */
+  .sector-pick { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  @media (max-width:600px) { .sector-pick { grid-template-columns:1fr; } }
+  .sector-pick button {
+    text-align:left; padding:22px; border-radius:var(--radius); border:2px solid var(--line); background:#fff;
+    font-family:inherit; cursor:pointer; transition: border-color .12s ease, transform .12s ease;
+  }
+  .sector-pick button:hover { border-color:var(--red); transform:translateY(-2px); }
+  .sector-pick h3 { font-size:16.5px; margin-bottom:6px; }
+  .sector-pick p { font-size:13.5px; color:var(--text-muted); }
+
+  /* Spanningsmeter */
+  .tension-wrap { margin-bottom:26px; }
+  .tension-label { display:flex; justify-content:space-between; font-size:12.5px; font-weight:700; color:var(--text-muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:.03em; }
+  .tension-track { height:12px; border-radius:999px; background:var(--paper-soft); overflow:hidden; position:relative; }
+  .tension-fill { height:100%; border-radius:999px; transition: width .5s ease, background .5s ease; }
+
+  /* Chat */
+  .chat-box { background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:28px; box-shadow:var(--shadow-sm); min-height:120px; }
+  .chat-log { display:flex; flex-direction:column; gap:12px; margin-bottom:20px; }
+  .bubble { max-width:80%; padding:12px 16px; border-radius:16px; font-size:15px; line-height:1.5; }
+  .bubble.npc { align-self:flex-start; background:var(--paper-soft); border-bottom-left-radius:4px; }
+  .bubble.player { align-self:flex-end; background:var(--grad-alert); color:#fff; border-bottom-right-radius:4px; }
+  .sim-choices { display:flex; flex-direction:column; gap:10px; }
+  .sim-choice {
+    text-align:left; padding:14px 16px; border-radius:10px; border:2px solid var(--line); background:var(--paper-soft);
+    font-family:inherit; font-size:14.5px; font-weight:600; cursor:pointer; transition: border-color .12s ease;
+  }
+  .sim-choice:hover { border-color: var(--red); background:#fff; }
+
+  .sim-outcome-tag { display:inline-flex; padding:6px 16px; border-radius:999px; font-weight:800; font-size:13px; color:#fff; margin-bottom:16px; }
+  .sim-outcome-tag.goed { background:#2f9e5c; }
+  .sim-outcome-tag.matig { background:#f5a524; }
+  .sim-outcome-tag.slecht { background:#b8300f; }
+  .sim-feedback { background:var(--paper-soft); border-left:3px solid var(--red); border-radius:6px; padding:16px 18px; font-size:14.5px; color:var(--text-muted); margin-top:20px; }
+  .sim-restart-row { display:flex; gap:12px; margin-top:24px; flex-wrap:wrap; }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agressievisie.nl/"},{"@type":"ListItem","position":2,"name":"Oefengesprek","item":"https://agressievisie.nl/oefengesprek.html"}]}
+</script>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a class="brand" href="index.html"><span class="brand-mark"></span>AgressieVisie</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="artikelen.html">Artikelen</a>
+      <a href="methodieken.html">Methodieken</a>
+      <a href="cijfers.html">Cijfers & trends</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button">Meer <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-dropdown-menu nav-mega">
+        <div class="nav-mega-col">
+          <h4>Kennisbank</h4>
+          <a href="lexicon.html">Begrippenlijst</a>
+          <a href="beleid-en-wetgeving.html">Beleid & wetgeving</a>
+          <a href="bronnen.html">Bronnenbank</a>
+          <a href="trendrapport.html">Trendrapport</a>
+          <a href="faq.html">Veelgestelde vragen</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Interactieve tools</h4>
+          <a href="oefengesprek.html" class="current">Oefengesprek<span class="nav-badge">Populair</span></a>
+          <a href="protocol-generator.html">Protocol-generator<span class="nav-badge">Populair</span></a>
+          <a href="risico-check.html">Risico-check</a>
+          <a href="zelftest.html">Zelftest</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Downloads</h4>
+          <a href="gratis-gids.html">Gratis checklist</a>
+          <a href="ebook.html">Gratis e-book</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Platform</h4>
+          <a href="contact.html">Contact</a>
+          <a href="bijdragen.html">Draag bij</a>
+          <a href="over.html">Over dit platform</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="overzicht.html">Sitemap</a>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="nav-cta">
+      <a class="nav-search" href="zoeken.html" aria-label="Zoeken"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+  </nav>
+</header>
+
+<section class="page-header">
+  <div class="wrap">
+    <nav class="breadcrumbs"><a href="index.html">Home</a><span class="sep">/</span><span class="current">Oefengesprek</span></nav>
+    <span class="eyebrow">Interactief oefenen</span>
+    <h1>Oefengesprek</h1>
+    <p class="lede">Kies een sector, maak keuzes in een realistisch gesprek, en zie in real time hoe de spanning oploopt of daalt. Er is geen vaste "goede" of "foute" route: elke keuze heeft een effect.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap sim-wrap">
+    <div id="sim-root"></div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h2>Dit soort situaties écht leren hanteren?</h2>
+        <p>Act in Move Training & Coaching oefent realistische scenario's zoals deze, toegespitst op jouw sector.</p>
+      </div>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="footer-accent"></div>
+  <svg class="footer-watermark" viewBox="0 0 200 200" aria-hidden="true">
+    <rect width="200" height="200" rx="44" fill="#ffffff"/>
+    <rect x="58" y="64.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(35 100 72.6)"/>
+    <rect x="58" y="117.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(-35 100 125.6)"/>
+  </svg>
+  <div class="wrap">
+    <div class="footer-top">
+      <a class="footer-brand-block" href="index.html">
+        <span class="brand-mark"></span>
+        <div>
+          <span class="footer-brand-name">AgressieVisie</span>
+          <p class="footer-brand-tag">Kennisplatform over agressie</p>
+        </div>
+      </a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p>Signalen, trends en onderzoek over agressie. Een initiatief van Act in Move Training & Coaching.</p>
+        <a class="footer-aim-logo" href="https://actinmove.nl/" target="_blank" rel="noopener" aria-label="Act in Move Training & Coaching"><span class="aim-logo-mark"></span></a>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="artikelen.html">Artikelen</a></li>
+          <li><a href="methodieken.html">Methodieken</a></li>
+          <li><a href="trendrapport.html">Trendrapport</a></li>
+          <li><a href="risico-check.html">Risico-check</a></li>
+          <li><a href="oefengesprek.html">Oefengesprek</a></li>
+          <li><a href="protocol-generator.html">Protocol-generator</a></li>
+          <li><a href="ebook.html">Gratis e-book</a></li>
+          <li><a href="zelftest.html">Zelftest</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Meer</h4>
+        <ul>
+          <li><a href="cijfers.html">Cijfers & trends</a></li>
+          <li><a href="lexicon.html">Begrippenlijst</a></li>
+          <li><a href="bronnen.html">Bronnenbank</a></li>
+          <li><a href="faq.html">Veelgestelde vragen</a></li>
+          <li><a href="gratis-gids.html">Gratis checklist</a></li>
+          <li><a href="over.html">Over dit platform</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Juridisch</h4>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="overzicht.html">Sitemap</a></li>
+          <li><a href="privacy.html">Privacy & cookies</a></li>
+          <li><a href="https://actinmove.nl/" target="_blank" rel="noopener">Act in Move ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-mark"><span class="brand-mark"></span>© <span data-year></span> AgressieVisie, onderdeel van Act in Move Training & Coaching</span>
+      <span><a href="https://actinmove.nl/" target="_blank" rel="noopener">actinmove.nl</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+const SCENARIOS = {
+  zorg: {
+    naam: 'Zorg: spoedeisende hulp',
+    icon: '🏥',
+    intro: 'Je werkt op de SEH. Een bezoeker staat al twee uur te wachten op nieuws over haar vader.',
+    beurten: [
+      {
+        npc: "Twee uur wachten zonder dat iemand iets zegt! Wat is er met mijn vader aan de hand?!",
+        keuzes: [
+          { tekst: "Ik snap dat het lang duurt. Ik ga nu direct voor u navragen wat de status is.", delta: -15, reactie: "Oké... graag, want dit is echt niet normaal." },
+          { tekst: "Het is nu erg druk, we doen ons best.", delta: 10, reactie: "Druk is altijd het excuus! Mijn vader ligt daar misschien in gevaar!" },
+          { tekst: "Dat moet u aan de arts vragen, dat mag ik niet zeggen.", delta: 20, reactie: "Zo praat je toch niet tegen iemand die in paniek is?!" },
+        ],
+      },
+      {
+        npc: "Ik voel me hier gewoon niet serieus genomen. Niemand vertelt me iets.",
+        keuzes: [
+          { tekst: "Dat begrijp ik. Onzekerheid is het ergste. Ik blijf bij u tot ik antwoord heb.", delta: -15, reactie: "Dank u. Dat helpt echt." },
+          { tekst: "We hebben ook nog andere patiënten hoor.", delta: 15, reactie: "Denkt u dat ik dat niet weet? Mijn vader is ook een patiënt!" },
+          { tekst: "Ik ga het nogmaals navragen, geef me een moment.", delta: -5, reactie: "Oké, ik wacht." },
+        ],
+      },
+      {
+        npc: "Kunt u me nu tenminste vertellen of het ernstig is? Ik moet het weten.",
+        keuzes: [
+          { tekst: "Ik heb nog geen definitief bericht, maar ik verifieer het persoonlijk en kom direct terug.", delta: -10, reactie: "Oké, dat waardeer ik echt." },
+          { tekst: "Ik weet het ook niet, dat moet u echt aan de arts vragen.", delta: 15, reactie: "Dit is toch niet te geloven, niemand weet hier iets!" },
+          { tekst: "Rustig aan, ik doe mijn best.", delta: 5, reactie: "Ik bén rustig, ik wil gewoon antwoorden." },
+        ],
+      },
+      {
+        npc: "Ik snap dat het niet aan u persoonlijk ligt. Het is gewoon zo'n onzekere situatie.",
+        keuzes: [
+          { tekst: "Dat snap ik helemaal. Ik blijf in de buurt zodra er nieuws is.", delta: -10, reactie: "Dank u wel, dat stelt me toch wat gerust." },
+          { tekst: "Precies, dus een beetje geduld graag.", delta: 10, reactie: "Ik probéér geduldig te zijn, hoor." },
+          { tekst: "Zullen we intussen even gaan zitten?", delta: -5, reactie: "Oké, dat is misschien wel goed." },
+        ],
+      },
+    ],
+  },
+  onderwijs: {
+    naam: 'Onderwijs: gesprek met een ouder',
+    icon: '🎓',
+    intro: 'Je bent docent. Een ouder komt na schooltijd boos naar je toe over een onvoldoende van haar zoon.',
+    beurten: [
+      {
+        npc: "Dit cijfer is belachelijk! Hij heeft er zo hard voor geleerd, dit klopt niet!",
+        keuzes: [
+          { tekst: "Ik snap dat dit een teleurstelling is. Laten we samen naar het proefwerk kijken.", delta: -15, reactie: "Oké, dat lijkt me een goed idee." },
+          { tekst: "Het cijfer staat vast, daar verander ik niets aan.", delta: 20, reactie: "Dus u luistert niet eens naar wat ik te zeggen heb?!" },
+          { tekst: "Misschien moet hij gewoon harder leren.", delta: 15, reactie: "Alsof hij niet genoeg zijn best doet, dat is nogal kort door de bocht!" },
+        ],
+      },
+      {
+        npc: "Ik heb het gevoel dat jullie hem gewoon laten zakken zonder er iets aan te doen.",
+        keuzes: [
+          { tekst: "Ik snap die zorg. Laten we een plan maken voor extra ondersteuning.", delta: -15, reactie: "Dat zou fijn zijn, dank u." },
+          { tekst: "Dat is niet eerlijk, wij doen juist heel veel voor hem.", delta: 10, reactie: "Waarom voelt het dan niet zo?" },
+          { tekst: "Ik ga het nakijken en kom er later op terug.", delta: -5, reactie: "Goed, ik hoor het graag snel." },
+        ],
+      },
+      {
+        npc: "Ik wil dat dit cijfer wordt aangepast, anders ga ik naar de directeur.",
+        keuzes: [
+          { tekst: "Ik snap dat u dat overweegt. Laten we eerst samen kijken of er een misverstand is.", delta: -10, reactie: "Oké, dat lijkt me eerlijk." },
+          { tekst: "Dat is uw goed recht, maar het cijfer verandert er niet door.", delta: 15, reactie: "Dan ga ik gewoon naar de directeur, dit is onacceptabel!" },
+          { tekst: "Doet u dat vooral, maar het cijfer blijft hetzelfde.", delta: 20, reactie: "Wat een houding, zeg! Zo praat je niet tegen een ouder!" },
+        ],
+      },
+      {
+        npc: "Ik wil gewoon dat mijn zoon een eerlijke kans krijgt.",
+        keuzes: [
+          { tekst: "Dat wil ik ook. Laten we een afspraak maken om samen naar zijn voortgang te kijken.", delta: -10, reactie: "Dat lijkt me een goed plan, dank u." },
+          { tekst: "Hij krijgt gewoon dezelfde kans als iedereen.", delta: 10, reactie: "Dat is niet wat ik bedoel, en dat weet u best." },
+          { tekst: "Ik zal er nogmaals naar kijken deze week.", delta: -5, reactie: "Oké, ik hoor het graag." },
+        ],
+      },
+    ],
+  },
+  ov: {
+    naam: 'OV: reiziger zonder geldig vervoerbewijs',
+    icon: '🚋',
+    intro: 'Je werkt als conducteur. Een reiziger heeft geen geldig vervoerbewijs en wordt boos als je dit aankaart.',
+    beurten: [
+      {
+        npc: "Ik heb echt wel betaald, dit systeem werkt gewoon niet!",
+        keuzes: [
+          { tekst: "Ik snap dat dit vervelend is. Laten we samen kijken wat er mis ging.", delta: -15, reactie: "Oké, want ik lieg echt niet." },
+          { tekst: "Zonder geldig bewijs krijgt u een boete, punt uit.", delta: 20, reactie: "Dus jullie geloven me gewoon niet?!" },
+          { tekst: "Dat zeggen ze allemaal.", delta: 25, reactie: "Excuseer me? Wat een houding is dat zeg!" },
+        ],
+      },
+      {
+        npc: "Dit is echt niet mijn schuld, ik voel me nu al aangevallen.",
+        keuzes: [
+          { tekst: "Ik begrijp dat het niet fijn voelt. Laten we kijken naar een oplossing die voor ons beiden werkt.", delta: -15, reactie: "Dat waardeer ik." },
+          { tekst: "Regels zijn regels, daar kan ik niets aan doen.", delta: 10, reactie: "Alsof regels belangrijker zijn dan mensen." },
+          { tekst: "Ik zal het even navragen bij de meldkamer.", delta: -5, reactie: "Prima, ik wacht wel." },
+        ],
+      },
+      {
+        npc: "Weet je wat, geef me gewoon die boete dan maar. Maar ik teken wel bezwaar aan.",
+        keuzes: [
+          { tekst: "Dat is uw goed recht. Ik vermeld in mijn rapportage wat u net heeft uitgelegd.", delta: -10, reactie: "Dank u, dat waardeer ik." },
+          { tekst: "Prima, veel succes daarmee.", delta: 10, reactie: "Zeg dat niet zo cynisch, alsjeblieft." },
+          { tekst: "Dat kunt u proberen, maar het verandert niets.", delta: 15, reactie: "Ongelooflijk, zo'n houding." },
+        ],
+      },
+      {
+        npc: "Ik ben gewoon op weg naar een sollicitatiegesprek en nu dit.",
+        keuzes: [
+          { tekst: "Dat is vervelende timing, dat snap ik. Succes er straks mee.", delta: -10, reactie: "Dank u, dat is aardig van u." },
+          { tekst: "Dat is niet mijn probleem.", delta: 15, reactie: "Wat een kille reactie, zeg." },
+          { tekst: "Nou, dan kunt u maar beter opschieten.", delta: 5, reactie: "Dat voelt niet echt begripvol, hoor." },
+        ],
+      },
+    ],
+  },
+  retail: {
+    naam: 'Retail: klant wil laat retourneren',
+    icon: '🛍️',
+    intro: 'Je werkt bij de klantenservice. Een klant wil een product retourneren buiten de garantietermijn en is boos dat dit niet kan.',
+    beurten: [
+      {
+        npc: "Dit is toch belachelijk, twee weken over de datum en dan mag het niet meer?!",
+        keuzes: [
+          { tekst: "Ik snap dat dit frustrerend is. Laat me kijken of er een uitzondering mogelijk is.", delta: -15, reactie: "Dat zou heel fijn zijn, dank u." },
+          { tekst: "Beleid is beleid, daar kan ik niets aan veranderen.", delta: 20, reactie: "Dus jullie beleid is belangrijker dan een tevreden klant?" },
+          { tekst: "U had het eerder moeten inleveren.", delta: 15, reactie: "Alsof ik dat expres heb laten lopen, kom op zeg!" },
+        ],
+      },
+      {
+        npc: "Ik ben al jaren klant hier en dit is hoe ik behandeld word?",
+        keuzes: [
+          { tekst: "Dat waardeer ik enorm, en juist daarom wil ik kijken wat ik voor u kan doen.", delta: -15, reactie: "Dank u, dat scheelt." },
+          { tekst: "Dat heeft hier niets mee te maken.", delta: 15, reactie: "Dus loyaliteit betekent niets voor jullie?" },
+          { tekst: "Ik ga het intern navragen en bel u terug.", delta: -5, reactie: "Oké, ik hoor het graag." },
+        ],
+      },
+      {
+        npc: "Kunt u niet gewoon nu meteen een uitzondering maken? Ik wil dit vandaag nog oplossen.",
+        keuzes: [
+          { tekst: "Ik snap dat u het graag vandaag geregeld wilt hebben. Laat me kijken wat ik zelf kan beslissen.", delta: -10, reactie: "Dat zou fijn zijn, dank u." },
+          { tekst: "Nee, dat gaat niet zomaar, dat duurt gewoon even.", delta: 15, reactie: "Typisch, altijd maar wachten bij jullie." },
+          { tekst: "Ik zal mijn best doen, maar beloven kan ik niks.", delta: -5, reactie: "Oké, ik hoop het wel." },
+        ],
+      },
+      {
+        npc: "Oké, ik snap dat u ook niet alles kunt beslissen. Wanneer hoor ik meer?",
+        keuzes: [
+          { tekst: "Ik bel u vandaag nog terug, uiterlijk voor 17.00 uur.", delta: -10, reactie: "Dank u wel, dat waardeer ik echt." },
+          { tekst: "Zodra ik tijd heb, kan een paar dagen duren.", delta: 10, reactie: "Dat vind ik toch wel teleurstellend." },
+          { tekst: "Ik laat het u via e-mail weten.", delta: -5, reactie: "Oké, dat is prima." },
+        ],
+      },
+    ],
+  },
+  horeca: {
+    naam: 'Horeca: gast die te veel gedronken heeft',
+    icon: '🍺',
+    intro: 'Je werkt achter de bar. Een gast die duidelijk te veel gedronken heeft, wordt boos als je weigert nog een drankje te schenken.',
+    beurten: [
+      {
+        npc: "Waarom krijg ik nou geen biertje meer, ik heb er toch maar een paar op?!",
+        keuzes: [
+          { tekst: "Ik snap dat het vervelend is, maar ik wil dat u en de andere gasten veilig naar huis kunnen. Zullen we water voor u halen?", delta: -15, reactie: "Nou vooruit, water is ook goed." },
+          { tekst: "Regels zijn regels, u krijgt niks meer.", delta: 20, reactie: "Wat een houding, ik kom hier al jaren!" },
+          { tekst: "Het is nu even niet anders.", delta: 8, reactie: "Waarom niet dan, geef me een reden!" },
+        ],
+      },
+      {
+        npc: "Ik ben helemaal niet dronken, ik weet precies wat ik doe.",
+        keuzes: [
+          { tekst: "Dat begrijp ik, maar ik merk het aan uw stem en houding. Ik wil het gewoon veilig houden voor iedereen.", delta: -10, reactie: "Oké prima, maar ik vind het wel overdreven." },
+          { tekst: "Volgens mij liegt u.", delta: 20, reactie: "Zeg dat niet zo, dat is echt onbeleefd!" },
+          { tekst: "Ik zie het toch anders, sorry.", delta: 5, reactie: "Tja, dan zie jij het verkeerd." },
+        ],
+      },
+      {
+        npc: "Al mijn vrienden krijgen wel nog een rondje, waarom ik niet?",
+        keuzes: [
+          { tekst: "Ik kijk naar ieder persoon apart, dit gaat niet om uw vrienden. Zullen we straks samen een taxi regelen?", delta: -10, reactie: "Oké, dat is wel netjes geregeld." },
+          { tekst: "Dat is uw probleem, niet het mijne.", delta: 15, reactie: "Wat een slechte service is dit, zeg!" },
+          { tekst: "Misschien moet ik het ook bij hen intrekken.", delta: 5, reactie: "Nee joh, laat hen er buiten." },
+        ],
+      },
+      {
+        npc: "Oké, ik snap het wel, maar ik vind het nog steeds jammer.",
+        keuzes: [
+          { tekst: "Dat snap ik helemaal. Bedankt dat u er begrip voor heeft, dat waardeer ik echt.", delta: -10, reactie: "Geen probleem, bedankt voor het water." },
+          { tekst: "Ja nou, volgende keer dan beter opletten.", delta: 10, reactie: "Doe niet zo belerend, zeg." },
+          { tekst: "Oké, fijne avond verder.", delta: -5, reactie: "Jij ook, bedankt." },
+        ],
+      },
+    ],
+  },
+  gemeenten: {
+    naam: 'Gemeenten: afgewezen vergunning aan het loket',
+    icon: '🏛️',
+    intro: 'Je werkt aan het gemeenteloket. Een inwoner is boos omdat een aanvraag voor een vergunning is afgewezen.',
+    beurten: [
+      {
+        npc: "Mijn aanvraag is afgewezen en niemand legt me uit waarom! Dit is toch belachelijk?",
+        keuzes: [
+          { tekst: "Ik snap dat dit vervelend is. Laat me samen met u naar de reden kijken.", delta: -15, reactie: "Oké, graag, want ik snap er niks van." },
+          { tekst: "Dat staat gewoon in de brief die u heeft ontvangen.", delta: 15, reactie: "Die brief is totaal onduidelijk, dat is het probleem!" },
+          { tekst: "Daar kan ik nu even niets aan doen.", delta: 15, reactie: "Dus ik moet het zelf maar uitzoeken, of wat?" },
+        ],
+      },
+      {
+        npc: "Ik heb hier weken op gewacht en nu dit. Wie neemt hier nou beslissingen?",
+        keuzes: [
+          { tekst: "Dat snap ik, wachten is vervelend genoeg zonder dan ook nog een afwijzing. Ik zoek het dossier erbij.", delta: -15, reactie: "Dank u, dat waardeer ik." },
+          { tekst: "Dat proces duurt nu eenmaal zo lang, daar kan ik niets aan doen.", delta: 10, reactie: "Alsof dat mijn probleem moet zijn." },
+          { tekst: "Ik zal het navragen bij de behandelend ambtenaar.", delta: -5, reactie: "Oké, ik hoor het graag snel." },
+        ],
+      },
+      {
+        npc: "Kan dit nog wel rechtgezet worden, of ben ik nu gewoon te laat?",
+        keuzes: [
+          { tekst: "Er is vaak een bezwaarprocedure mogelijk. Ik leg u graag uit hoe die werkt.", delta: -10, reactie: "Oké, dat helpt echt, dank u." },
+          { tekst: "Dat weet ik niet, dat is niet mijn afdeling.", delta: 15, reactie: "Iedereen wijst hier naar elkaar, ongelooflijk!" },
+          { tekst: "Waarschijnlijk niet meer, nee.", delta: 10, reactie: "Dat kan toch niet waar zijn?!" },
+        ],
+      },
+      {
+        npc: "Oké, laten we dan maar kijken naar die bezwaarprocedure.",
+        keuzes: [
+          { tekst: "Goed idee. Ik loop de stappen graag met u door, dan weet u precies waar u aan toe bent.", delta: -10, reactie: "Dank u wel, dat stelt me toch wat gerust." },
+          { tekst: "Prima, het formulier ligt daar.", delta: 5, reactie: "Oké... nou, bedankt dan maar." },
+          { tekst: "Dat is de beste optie inderdaad.", delta: -5, reactie: "Goed, laten we dat dan doen." },
+        ],
+      },
+    ],
+  },
+  sport: {
+    naam: 'Sport: ouder langs de lijn',
+    icon: '⚽',
+    intro: 'Je bent coach van een jeugdteam. Een ouder staat langs de lijn en is boos over een beslissing van de scheidsrechter en jouw opstelling.',
+    beurten: [
+      {
+        npc: "Waarom staat mijn zoon nou weer op de bank?! Dat is toch niet eerlijk!",
+        keuzes: [
+          { tekst: "Ik snap dat dit balen is voor hem. Na de wedstrijd leg ik u en hem graag uit hoe ik tot de opstelling kwam.", delta: -15, reactie: "Oké, dat waardeer ik wel, dat u het uitlegt." },
+          { tekst: "Ik bepaal de opstelling, niet u.", delta: 20, reactie: "Zo praat je toch niet tegen een ouder langs de lijn!" },
+          { tekst: "Hij speelt gewoon niet goed genoeg op dit moment.", delta: 15, reactie: "Dat kun je toch niet zomaar zeggen waar iedereen bij staat!" },
+        ],
+      },
+      {
+        npc: "Die scheidsrechter ziet er ook niks van, dit is een schande!",
+        keuzes: [
+          { tekst: "Ik snap de frustratie, het scheelde ook weinig. Laten we ons wel richten op wat wij kunnen doen.", delta: -10, reactie: "Oké, u heeft wel een punt." },
+          { tekst: "Dat is niet aan mij, dat moet u tegen de scheidsrechter zeggen.", delta: 10, reactie: "Doe ik ook nog, reken maar!" },
+          { tekst: "Rustig aan, het is maar een jeugdwedstrijd.", delta: 10, reactie: "Alsof het daarom niet mag tellen voor hem!" },
+        ],
+      },
+      {
+        npc: "Ik betaal hier ook gewoon contributie voor, dan mag ik toch wat verwachten?",
+        keuzes: [
+          { tekst: "Zeker, en juist daarom wil ik dat ieder kind een eerlijke kans krijgt, over de hele competitie gezien.", delta: -10, reactie: "Oké, dat is een redelijk uitgangspunt." },
+          { tekst: "Contributie heeft niks te maken met speeltijd.", delta: 15, reactie: "Wat een kille reactie is dat, zeg." },
+          { tekst: "Dat begrijp ik, maar ik ga er nu niet induiken.", delta: 5, reactie: "Waarom niet? Ik wil het nu bespreken!" },
+        ],
+      },
+      {
+        npc: "Oké, maar ik wil hier volgende week echt even met u over doorpraten.",
+        keuzes: [
+          { tekst: "Prima, laten we een moment plannen zodat we er rustig de tijd voor kunnen nemen.", delta: -10, reactie: "Goed idee, dank u wel." },
+          { tekst: "Als het moet dan...", delta: 5, reactie: "Nou, enthousiast klinkt anders." },
+          { tekst: "Oké, maar dan hou ik het kort.", delta: 5, reactie: "Prima, dat zien we dan wel." },
+        ],
+      },
+    ],
+  },
+};
+
+let state = { sector: null, beurt: 0, tension: 50, log: [] };
+
+function tensionColor(v) {
+  if (v <= 35) return '#2f9e5c';
+  if (v <= 65) return '#f5a524';
+  return '#b8300f';
+}
+
+function renderTensionMeter() {
+  return `
+    <div class="tension-wrap">
+      <div class="tension-label"><span>Spanning</span><span>${state.tension}/100</span></div>
+      <div class="tension-track"><div class="tension-fill" style="width:${state.tension}%; background:${tensionColor(state.tension)};"></div></div>
+    </div>
+  `;
+}
+
+function renderSectorPick() {
+  const root = document.getElementById('sim-root');
+  root.innerHTML = `
+    <div class="sector-pick">
+      ${Object.entries(SCENARIOS).map(([key, s]) => `
+        <button data-sector="${key}">
+          <div style="font-size:26px; margin-bottom:8px;">${s.icon}</div>
+          <h3>${s.naam}</h3>
+          <p>${s.intro}</p>
+        </button>
+      `).join('')}
+    </div>
+  `;
+  root.querySelectorAll('.sector-pick button').forEach(btn => {
+    btn.addEventListener('click', () => startScenario(btn.dataset.sector));
+  });
+}
+
+function startScenario(key) {
+  state = { sector: key, beurt: 0, tension: 50, log: [] };
+  const s = SCENARIOS[key];
+  state.log.push({ type: 'npc', tekst: s.beurten[0].npc });
+  renderChat();
+}
+
+function renderChat() {
+  const s = SCENARIOS[state.sector];
+  const root = document.getElementById('sim-root');
+  const beurtData = s.beurten[state.beurt];
+
+  root.innerHTML = `
+    ${renderTensionMeter()}
+    <div class="chat-box">
+      <div class="chat-log">
+        ${state.log.map(m => `<div class="bubble ${m.type}">${m.tekst}</div>`).join('')}
+      </div>
+      <div class="sim-choices" id="sim-choices">
+        ${beurtData.keuzes.map((k, i) => `<button class="sim-choice" data-i="${i}">${k.tekst}</button>`).join('')}
+      </div>
+    </div>
+  `;
+
+  root.querySelectorAll('.sim-choice').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const i = Number(btn.dataset.i);
+      const keuze = beurtData.keuzes[i];
+      state.tension = Math.max(0, Math.min(100, state.tension + keuze.delta));
+      state.log.push({ type: 'player', tekst: keuze.tekst });
+      state.log.push({ type: 'npc', tekst: keuze.reactie });
+
+      const volgendeBeurt = state.beurt + 1;
+      if (volgendeBeurt < s.beurten.length) {
+        state.beurt = volgendeBeurt;
+        state.log.push({ type: 'npc', tekst: s.beurten[volgendeBeurt].npc });
+        renderChat();
+      } else {
+        renderEinde();
+      }
+    });
+  });
+}
+
+function renderEinde() {
+  const root = document.getElementById('sim-root');
+  const t = state.tension;
+  let tag, tagClass, feedback;
+  if (t <= 35) {
+    tag = 'Goed opgelost'; tagClass = 'goed';
+    feedback = "Door consequent te erkennen vóór je iets anders zei, bleef het gesprek in de rationele fase van de <a href=\"methodieken.html#escalatieladder\">escalatieladder</a>. Dat is exact de opbouw van de <a href=\"methodieken.html#lsd-methode\">LSD-methode</a>: eerst luisteren en erkennen, dan pas een oplossing zoeken.";
+  } else if (t <= 65) {
+    tag = 'Gemiddeld resultaat'; tagClass = 'matig';
+    feedback = "Het gesprek bleef redelijk onder controle, maar een aantal keuzes voelden voor de ander afwijzend of belerend. Kleine dingen als 'regels zijn regels' verhogen spanning meer dan ze bedoeld zijn.";
+  } else {
+    tag = 'Geëscaleerd'; tagClass = 'slecht';
+    feedback = "De spanning liep flink op. Herhaaldelijk werd de inhoud (het beleid, de regels) benadrukt vóórdat de emotie van de ander erkend werd, wat volgens de <a href=\"methodieken.html#escalatieladder\">escalatieladder van Glasl</a> precies de omslag naar fase 2 in gang zet.";
+  }
+
+  root.innerHTML = `
+    ${renderTensionMeter()}
+    <div class="chat-box">
+      <span class="sim-outcome-tag ${tagClass}">${tag}</span>
+      <p style="color:var(--text-muted); font-size:15px;">Eindscore: ${t}/100 spanning.</p>
+      <div class="sim-feedback">${feedback}</div>
+      <div class="sim-restart-row">
+        <button class="btn btn-primary" id="sim-again">Zelfde scenario opnieuw</button>
+        <button class="btn btn-outline" id="sim-other">Andere sector kiezen</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('sim-again').addEventListener('click', () => startScenario(state.sector));
+  document.getElementById('sim-other').addEventListener('click', renderSectorPick);
+}
+
+document.addEventListener('DOMContentLoaded', renderSectorPick);
+</script>
+<link rel="stylesheet" href="css/voorlees.css" />
+<script src="js/voorlees.js" defer data-vl-kleur="#e0401f" data-vl-knoptekst="Lees voor"></script>
+</body>
+</html>

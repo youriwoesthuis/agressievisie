@@ -1,0 +1,441 @@
+﻿<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Zelftest: hoe goed herken jij signalen van agressie? | AgressieVisie</title>
+<meta name="description" content="Doe de zelftest en ontdek hoe goed jij vroege signalen van agressie herkent, met directe feedback per vraag." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="canonical" href="https://agressievisie.nl/zelftest.html" />
+<meta property="og:url" content="https://agressievisie.nl/zelftest.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="AgressieVisie" />
+<meta property="og:title" content="Zelftest: hoe goed herken jij signalen van agressie? | AgressieVisie" />
+<meta property="og:description" content="Doe de zelftest en ontdek hoe goed jij vroege signalen van agressie herkent." />
+<meta property="og:image" content="https://agressievisie.nl/img/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://agressievisie.nl/img/og-image.png" />
+<link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .quiz-wrap { max-width: 680px; margin: 0 auto; }
+  .quiz-box { background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:36px; box-shadow:var(--shadow-sm); }
+  .quiz-progress-text { font-size:13px; font-weight:700; color:var(--text-muted); margin-bottom:6px; }
+  .quiz-progress { display:flex; gap:5px; margin-bottom:26px; }
+  .quiz-progress span { flex:1; height:4px; border-radius:2px; background:var(--line); }
+  .quiz-progress span.done { background: var(--grad-alert); }
+  .quiz-q { font-size:18px; font-weight:700; margin-bottom:22px; line-height:1.5; }
+  .quiz-options { display:flex; flex-direction:column; gap:10px; }
+  .quiz-option {
+    text-align:left; padding:14px 16px; border-radius:10px; border:2px solid var(--line); background:var(--paper-soft);
+    font-family:inherit; font-size:15px; cursor:pointer; transition: border-color .12s ease;
+  }
+  .quiz-option:hover:not(:disabled) { border-color: var(--red); }
+  .quiz-option:disabled { cursor:default; }
+  .quiz-option.correct { border-color:#2f9e5c; background:#eafaf0; }
+  .quiz-option.incorrect { border-color:#b8300f; background:#fdeee9; }
+  .quiz-explain { margin-top:18px; padding:14px 16px; background:var(--paper-soft); border-left:3px solid var(--red); border-radius:6px; font-size:14px; color:var(--text-muted); display:none; }
+  .quiz-explain.show { display:block; }
+  .quiz-next { margin-top:20px; display:none; }
+  .quiz-next.show { display:inline-flex; }
+  .quiz-result { text-align:center; }
+  .quiz-result .score { font-size:52px; font-weight:800; color:var(--red-dark); margin-bottom:8px; }
+  .quiz-result h3 { font-size:22px; margin-bottom:12px; }
+  .quiz-result p { color:var(--text-muted); font-size:15px; }
+
+  .cat-grid { display:flex; flex-direction:column; gap:14px; margin-top:28px; }
+  .cat-card { border:1px solid var(--line); border-radius:var(--radius-sm); padding:20px 22px; border-left-width:4px; }
+  .cat-card--sterk { border-left-color:#2f9e5c; }
+  .cat-card--redelijk { border-left-color:#e0a024; }
+  .cat-card--aandacht { border-left-color:#b8300f; }
+  .cat-card-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+  .cat-card-naam { font-weight:700; font-size:15.5px; }
+  .cat-card-score { font-weight:800; font-size:15px; color:var(--text-muted); }
+  .cat-card-niveau { display:inline-block; font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:.03em; padding:3px 10px; border-radius:999px; margin-bottom:10px; }
+  .cat-card-niveau--sterk { background:#eafaf0; color:#1f7a45; }
+  .cat-card-niveau--redelijk { background:#fdf1dc; color:#a3670c; }
+  .cat-card-niveau--aandacht { background:#fdeee9; color:#b8300f; }
+  .cat-card p { color:var(--text-muted); font-size:14px; margin-bottom:12px; text-align:left; }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agressievisie.nl/"},{"@type":"ListItem","position":2,"name":"Zelftest","item":"https://agressievisie.nl/zelftest.html"}]}
+</script>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a class="brand" href="index.html"><span class="brand-mark"></span>AgressieVisie</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="artikelen.html">Artikelen</a>
+      <a href="methodieken.html">Methodieken</a>
+      <a href="cijfers.html">Cijfers & trends</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button">Meer <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-dropdown-menu nav-mega">
+        <div class="nav-mega-col">
+          <h4>Kennisbank</h4>
+          <a href="lexicon.html">Begrippenlijst</a>
+          <a href="beleid-en-wetgeving.html">Beleid & wetgeving</a>
+          <a href="bronnen.html">Bronnenbank</a>
+          <a href="trendrapport.html">Trendrapport</a>
+          <a href="faq.html">Veelgestelde vragen</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Interactieve tools</h4>
+          <a href="oefengesprek.html">Oefengesprek<span class="nav-badge">Populair</span></a>
+          <a href="protocol-generator.html">Protocol-generator<span class="nav-badge">Populair</span></a>
+          <a href="risico-check.html">Risico-check</a>
+          <a href="zelftest.html" class="current">Zelftest</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Downloads</h4>
+          <a href="gratis-gids.html">Gratis checklist</a>
+          <a href="ebook.html">Gratis e-book</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Platform</h4>
+          <a href="contact.html">Contact</a>
+          <a href="bijdragen.html">Draag bij</a>
+          <a href="over.html">Over dit platform</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="overzicht.html">Sitemap</a>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="nav-cta">
+      <a class="nav-search" href="zoeken.html" aria-label="Zoeken"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+  </nav>
+</header>
+
+<section class="page-header">
+  <div class="wrap">
+    <nav class="breadcrumbs"><a href="index.html">Home</a><span class="sep">/</span><span class="current">Zelftest</span></nav>
+    <span class="eyebrow">Interactieve zelftest</span>
+    <h1>Hoe goed herken jij signalen van agressie?</h1>
+    <p class="lede">Negen korte vragen, directe feedback per antwoord, en aan het einde een uitsplitsing per onderdeel met gericht advies.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap quiz-wrap">
+    <div class="quiz-box">
+      <div class="quiz-progress-text" id="quiz-progress-text"></div>
+      <div class="quiz-progress" id="quiz-progress"></div>
+      <div id="quiz-content"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h2>Wil je deze vaardigheid structureel opbouwen?</h2>
+        <p>Act in Move Training & Coaching traint signaalherkenning in realistische, sectorspecifieke scenario's.</p>
+      </div>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="footer-accent"></div>
+  <svg class="footer-watermark" viewBox="0 0 200 200" aria-hidden="true">
+    <rect width="200" height="200" rx="44" fill="#ffffff"/>
+    <rect x="58" y="64.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(35 100 72.6)"/>
+    <rect x="58" y="117.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(-35 100 125.6)"/>
+  </svg>
+  <div class="wrap">
+    <div class="footer-top">
+      <a class="footer-brand-block" href="index.html">
+        <span class="brand-mark"></span>
+        <div>
+          <span class="footer-brand-name">AgressieVisie</span>
+          <p class="footer-brand-tag">Kennisplatform over agressie</p>
+        </div>
+      </a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p>Signalen, trends en onderzoek over agressie. Een initiatief van Act in Move Training & Coaching.</p>
+        <a class="footer-aim-logo" href="https://actinmove.nl/" target="_blank" rel="noopener" aria-label="Act in Move Training & Coaching"><span class="aim-logo-mark"></span></a>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="artikelen.html">Artikelen</a></li>
+          <li><a href="methodieken.html">Methodieken</a></li>
+          <li><a href="trendrapport.html">Trendrapport</a></li>
+          <li><a href="risico-check.html">Risico-check</a></li>
+          <li><a href="oefengesprek.html">Oefengesprek</a></li>
+          <li><a href="protocol-generator.html">Protocol-generator</a></li>
+          <li><a href="ebook.html">Gratis e-book</a></li>
+          <li><a href="zelftest.html">Zelftest</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Meer</h4>
+        <ul>
+          <li><a href="cijfers.html">Cijfers & trends</a></li>
+          <li><a href="lexicon.html">Begrippenlijst</a></li>
+          <li><a href="bronnen.html">Bronnenbank</a></li>
+          <li><a href="faq.html">Veelgestelde vragen</a></li>
+          <li><a href="gratis-gids.html">Gratis checklist</a></li>
+          <li><a href="over.html">Over dit platform</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Juridisch</h4>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="overzicht.html">Sitemap</a></li>
+          <li><a href="privacy.html">Privacy & cookies</a></li>
+          <li><a href="https://actinmove.nl/" target="_blank" rel="noopener">Act in Move ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-mark"><span class="brand-mark"></span>© <span data-year></span> AgressieVisie, onderdeel van Act in Move Training & Coaching</span>
+      <span><a href="https://actinmove.nl/" target="_blank" rel="noopener">actinmove.nl</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+const CATEGORIEEN = {
+  signalen: { naam: 'Signalen herkennen', advies: 'Print de gratis checklist en oefen actief: aan het eind van elke dienst kort teruggeven welke signalen je hebt gezien, scherpt je blik sneller dan je denkt.', link: 'gratis-gids.html', linkTekst: 'Bekijk de gratis checklist' },
+  reageren: { naam: 'Direct reageren', advies: 'Oefen een realistisch de-escalatiegesprek in de interactieve simulatie: je krijgt direct te zien welk effect jouw keuzes hebben op de spanning.', link: 'oefengesprek.html', linkTekst: 'Start het oefengesprek' },
+  methodieken: { naam: 'Kennis van methodieken', advies: 'De methodiekenpagina legt acht bewezen modellen interactief uit, van de <a href="methodieken.html#escalatieladder">escalatieladder</a> tot de <a href="methodieken.html#roos-van-leary">Roos van Leary</a>, precies de theorie achter deze vragen.', link: 'methodieken.html', linkTekst: 'Bekijk de methodieken' },
+};
+
+const VRAGEN = [
+  {
+    categorie: 'signalen',
+    vraag: "Een collega ijsbeert onrustig door de gang en vermijdt oogcontact met iedereen. Wat doe je het beste?",
+    opties: [
+      "Negeren, het gaat vast vanzelf over.",
+      "Rustig een praatje beginnen en observeren hoe hij reageert.",
+      "Direct op luide toon vragen wat er aan de hand is.",
+    ],
+    correct: 1,
+    uitleg: "Onrustig gedrag en het vermijden van oogcontact zijn vroege signalen van oplopende spanning. Rustig contact maken, zonder te forceren, geeft de beste kans om te achterhalen wat er speelt voordat het escaleert.",
+  },
+  {
+    categorie: 'signalen',
+    vraag: "Tijdens een gesprek verhoogt de ander plotseling zijn stemvolume en spreekt sneller. Dit wijst meestal op:",
+    opties: [
+      "Toegenomen interesse in het gesprek.",
+      "Oplopende spanning.",
+      "Ongeduld dat vanzelf overgaat.",
+    ],
+    correct: 1,
+    uitleg: "Een hoger stemvolume en versneld spreektempo zijn klassieke verbale signalen van oplopende spanning, en verdienen op dat moment je volle aandacht.",
+  },
+  {
+    categorie: 'reageren',
+    vraag: "Wat is de beste eerste reactie als iemand boos tegenover je staat?",
+    opties: [
+      "Direct een oplossing aandragen.",
+      "De emotie erkennen voordat je iets anders doet.",
+      "Uitleggen waarom die persoon ongelijk heeft.",
+    ],
+    correct: 1,
+    uitleg: "Onderzoek naar de-escalatie laat consistent zien dat erkenning van de emotie vóór het aandragen van een oplossing de beste eerste stap is. Mensen met hoge spanning kunnen een oplossing vaak nog niet verwerken.",
+  },
+  {
+    categorie: 'signalen',
+    vraag: "Welk signaal wijst NIET per se op oplopende agressie?",
+    opties: [
+      "Ontspannen schouders en een glimlach.",
+      "Gebalde vuisten.",
+      "Iemand die dichterbij komt dan gebruikelijk.",
+    ],
+    correct: 0,
+    uitleg: "Ontspannen lichaamstaal is juist een teken van kalmte, geen signaal van oplopende spanning. De andere twee zijn klassieke fysieke escalatiesignalen.",
+  },
+  {
+    categorie: 'methodieken',
+    vraag: "Volgens de escalatieladder van Glasl: in welke fase wordt een conflict nog vooral met woorden uitgevochten?",
+    opties: [
+      "Fase 1: rationeel.",
+      "Fase 2: emotioneel.",
+      "Fase 3: destructief.",
+    ],
+    correct: 0,
+    uitleg: "In fase 1 lopen standpunten vast, maar er wordt nog gepraat. Hoe hoger op de ladder, hoe meer woorden plaatsmaken voor daden en escalatie.",
+  },
+  {
+    categorie: 'methodieken',
+    vraag: "Wat is het doel van de 'D' (doorvragen) in de LSD-methode?",
+    opties: [
+      "Discussiëren over het standpunt van de ander.",
+      "Doorvragen naar de vraag achter de vraag.",
+      "Direct een besluit nemen.",
+    ],
+    correct: 1,
+    uitleg: "Doorvragen is bedoeld om context te krijgen en de onderliggende behoefte te begrijpen, niet om te overtuigen of snel af te ronden.",
+  },
+  {
+    categorie: 'reageren',
+    vraag: "Iemand herhaalt precies dezelfde eis, zonder ruimte voor dialoog te laten. Wat is de beste reactie op dit moment?",
+    opties: [
+      "Herhaal zelf ook het beleid, dat maakt het duidelijker.",
+      "Erken de frustratie en vraag door naar wat er écht achter de eis zit.",
+      "Ga verder met het gesprek alsof er niets aan de hand is.",
+    ],
+    correct: 1,
+    uitleg: "Herhaling zonder ruimte voor dialoog wijst op oplopende frustratie. Erkenning en doorvragen (de <a href=\"methodieken.html#lsd-methode\">LSD-methode</a>) geeft de beste kans om de onderliggende behoefte boven tafel te krijgen, in plaats van de herhaling te voeden.",
+  },
+  {
+    categorie: 'reageren',
+    vraag: "Je merkt tijdens een gesprek dat je eigen hartslag omhoog gaat en je de neiging voelt om te overtuigen in plaats van te luisteren. Wat doe je het beste?",
+    opties: [
+      "Gewoon doorpraten, stoppen zou zwak overkomen.",
+      "Kort voor jezelf erkennen wat er gebeurt en bewust een adempauze nemen voordat je verdergaat.",
+      "De ander onderbreken om je punt alsnog te maken.",
+    ],
+    correct: 1,
+    uitleg: "Dit zijn signalen bij jezelf, niet alleen bij de ander. Een korte, bewuste pauze voorkomt dat je eigen oplopende spanning het gesprek verder aanwakkert.",
+  },
+  {
+    categorie: 'methodieken',
+    vraag: "Volgens de Roos van Leary: welke reactie voedt de escalatiespiraal het meest als de ander zich dominant en aanvallend gedraagt?",
+    opties: [
+      "Zelf ook fel en dwingend terugreageren.",
+      "Rustig blijven en de ander de ruimte geven om te kalmeren.",
+      "Een compromis voorstellen.",
+    ],
+    correct: 0,
+    uitleg: "De <a href=\"methodieken.html#roos-van-leary\">Roos van Leary</a> laat zien dat 'tegen'-gedrag vaak weer 'tegen'-gedrag oproept: fel terugreageren op een aanval voedt de spiraal juist, in plaats van hem te doorbreken.",
+  },
+];
+
+let huidigeVraag = 0;
+let score = 0;
+let antwoorden = new Array(VRAGEN.length).fill(null);
+
+function renderProgress() {
+  document.getElementById('quiz-progress-text').textContent = `Vraag ${huidigeVraag + 1} van ${VRAGEN.length}`;
+  document.getElementById('quiz-progress').innerHTML = VRAGEN.map((_, i) =>
+    `<span class="${i < huidigeVraag ? 'done' : ''}"></span>`
+  ).join('');
+}
+
+function renderVraag() {
+  renderProgress();
+  const q = VRAGEN[huidigeVraag];
+  const content = document.getElementById('quiz-content');
+  content.innerHTML = `
+    <p class="quiz-q">${q.vraag}</p>
+    <div class="quiz-options">
+      ${q.opties.map((o, i) => `<button class="quiz-option" data-i="${i}">${o}</button>`).join('')}
+    </div>
+    <div class="quiz-explain" id="quiz-explain">${q.uitleg}</div>
+    <button class="btn btn-primary quiz-next" id="quiz-next">${huidigeVraag < VRAGEN.length - 1 ? 'Volgende vraag' : 'Bekijk resultaat'}</button>
+  `;
+
+  content.querySelectorAll('.quiz-option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const gekozen = Number(btn.dataset.i);
+      content.querySelectorAll('.quiz-option').forEach((b, i) => {
+        b.disabled = true;
+        if (i === q.correct) b.classList.add('correct');
+        else if (i === gekozen) b.classList.add('incorrect');
+      });
+      antwoorden[huidigeVraag] = gekozen;
+      if (gekozen === q.correct) score++;
+      document.getElementById('quiz-explain').classList.add('show');
+      document.getElementById('quiz-next').classList.add('show');
+    });
+  });
+
+  document.getElementById('quiz-next').addEventListener('click', () => {
+    huidigeVraag++;
+    if (huidigeVraag < VRAGEN.length) {
+      renderVraag();
+    } else {
+      renderResultaat();
+    }
+  });
+}
+
+function renderResultaat() {
+  document.getElementById('quiz-progress-text').textContent = 'Resultaat';
+  document.getElementById('quiz-progress').innerHTML = VRAGEN.map(() => `<span class="done"></span>`).join('');
+
+  let titel;
+  if (score <= 3) titel = 'Nog veel te leren';
+  else if (score <= 6) titel = 'Goed op weg';
+  else titel = 'Scherp oog voor signalen';
+
+  // Score per categorie berekenen
+  const catScores = {};
+  Object.keys(CATEGORIEEN).forEach(c => { catScores[c] = { goed: 0, totaal: 0 }; });
+  VRAGEN.forEach((q, i) => {
+    catScores[q.categorie].totaal++;
+    if (antwoorden[i] === q.correct) catScores[q.categorie].goed++;
+  });
+
+  const zwaksteCats = Object.keys(catScores)
+    .filter(c => catScores[c].goed < catScores[c].totaal)
+    .sort((a, b) => (catScores[a].goed / catScores[a].totaal) - (catScores[b].goed / catScores[b].totaal));
+
+  const catKaarten = Object.keys(CATEGORIEEN).map(c => {
+    const s = catScores[c];
+    const info = CATEGORIEEN[c];
+    const niveau = s.goed === s.totaal ? 'sterk' : (s.goed === 0 ? 'aandacht' : 'redelijk');
+    const niveauLabel = niveau === 'sterk' ? 'Sterk' : (niveau === 'aandacht' ? 'Aandachtspunt' : 'Redelijk');
+    return `
+      <div class="cat-card cat-card--${niveau}">
+        <div class="cat-card-top">
+          <span class="cat-card-naam">${info.naam}</span>
+          <span class="cat-card-score">${s.goed}/${s.totaal}</span>
+        </div>
+        <span class="cat-card-niveau cat-card-niveau--${niveau}">${niveauLabel}</span>
+        <p>${info.advies}</p>
+        <a class="btn-ghost" href="${info.link}">${info.linkTekst}</a>
+      </div>
+    `;
+  }).join('');
+
+  const topAdvies = zwaksteCats.length
+    ? `Je grootste kans op verbetering zit bij <strong>${CATEGORIEEN[zwaksteCats[0]].naam.toLowerCase()}</strong>. Begin daar.`
+    : 'Je scoort sterk op alle drie de onderdelen. Een mooie basis om ook anderen hierin te trainen.';
+
+  document.getElementById('quiz-content').innerHTML = `
+    <div class="quiz-result">
+      <div class="score">${score}/${VRAGEN.length}</div>
+      <h3>${titel}</h3>
+      <p>${topAdvies}</p>
+    </div>
+    <div class="cat-grid">${catKaarten}</div>
+    <div class="center" style="margin-top:28px;">
+      <button class="btn btn-outline" id="quiz-restart">Test opnieuw doen</button>
+    </div>
+  `;
+  document.getElementById('quiz-restart').addEventListener('click', () => {
+    huidigeVraag = 0;
+    score = 0;
+    antwoorden = new Array(VRAGEN.length).fill(null);
+    renderVraag();
+  });
+}
+
+document.addEventListener('DOMContentLoaded', renderVraag);
+</script>
+<link rel="stylesheet" href="css/voorlees.css" />
+<script src="js/voorlees.js" defer data-vl-kleur="#e0401f" data-vl-knoptekst="Lees voor"></script>
+</body>
+</html>

@@ -1,0 +1,644 @@
+﻿<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AgressieVisie: inzicht in agressie, signalen, trends & onderzoek</title>
+<meta name="description" content="AgressieVisie is het kennisplatform over agressie: signalen, trends en wetenschappelijk onderzoek, dagelijks bijgewerkt door Act in Move Training & Coaching." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="canonical" href="https://agressievisie.nl/" />
+<meta property="og:url" content="https://agressievisie.nl/" />
+<link rel="alternate" type="application/rss+xml" title="AgressieVisie: Artikelen" href="rss.xml" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="AgressieVisie" />
+<meta property="og:title" content="AgressieVisie: inzicht in agressie, signalen, trends & onderzoek" />
+<meta property="og:description" content="Kennisplatform over agressie: signalen, trends en wetenschappelijk onderzoek, dagelijks bijgewerkt." />
+<meta property="og:image" content="https://agressievisie.nl/img/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://agressievisie.nl/img/og-image.png" />
+<link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="css/style.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "AgressieVisie",
+  "url": "https://agressievisie.nl/",
+  "description": "Kennisplatform over agressie: signalen, trends en wetenschappelijk onderzoek.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Act in Move Training & Coaching",
+    "url": "https://actinmove.nl/"
+  }
+}
+</script>
+<style>
+  /* Eén doorlopend donker openingsblok: hero + statistieken + grote klap-statistiek,
+     zonder harde wit-onderbreking ertussen. Schuine onderrand i.p.v. rechte lijn. */
+  .opening {
+    position: relative; overflow: hidden; background: var(--ink); color: #fff;
+    padding: 88px 0 168px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 84px), 0 100%);
+  }
+  @media (max-width: 760px) { .opening { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), 0 100%); padding-bottom: 110px; } }
+  .opening::before {
+    content: ''; position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 900px 520px at 88% 8%, rgba(224,64,31,.26), transparent 70%);
+    pointer-events: none;
+  }
+  .opening .wrap { position: relative; z-index: 1; }
+  .opening h1 { font-size: clamp(40px, 7vw, 88px); letter-spacing: -0.03em; }
+  .opening h1 .accent { background: var(--grad-alert); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .opening .lede { color: var(--text-inverse-muted); margin-top: 18px; margin-bottom: 34px; }
+  .opening .btn-primary { position: relative; animation: hero-pulse 2.6s ease-in-out infinite; }
+  @keyframes hero-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(224,64,31,.4); }
+    50% { box-shadow: 0 0 0 16px rgba(224,64,31,0); }
+  }
+  @media (prefers-reduced-motion: reduce) { .opening .btn-primary { animation: none; } }
+  /* Secundaire knop: was een amper zichtbare outline op donker — nu een gevulde,
+     duidelijk oranje knop, net als de primaire knop maar met iets minder nadruk. */
+  .opening .btn-outline {
+    background: rgba(224,64,31,.14); border-color: var(--red); color: #fff;
+  }
+  .opening .btn-outline:hover { background: rgba(224,64,31,.26); border-color: var(--amber); color: #fff; }
+
+  .opening .stat-strip { margin: 72px 0 0; position: relative; z-index: 1; }
+  .opening .stat-strip-card {
+    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.14); box-shadow: none; backdrop-filter: blur(6px);
+  }
+  .opening .stat-strip-card:hover { background: rgba(255,255,255,.09); transform: translateY(-3px); }
+  .opening .stat-strip-card span { color: var(--text-inverse-muted); }
+
+  .opening-punch {
+    display: flex; align-items: center; gap: 56px; flex-wrap: wrap;
+    margin-top: 72px; padding-top: 56px; border-top: 1px solid rgba(255,255,255,.12);
+  }
+  .opening-punch .punch-number {
+    font-size: clamp(76px, 11.5vw, 156px); font-weight: 800; line-height: 0.88; letter-spacing: -0.03em;
+    background: var(--grad-alert); -webkit-background-clip: text; background-clip: text; color: transparent; flex-shrink: 0;
+  }
+  .opening-punch .punch-text { max-width: 480px; }
+  .opening-punch .punch-text .eyebrow { color: var(--amber); }
+  .opening-punch .punch-text h2 { font-size: clamp(22px, 2.6vw, 32px); color: #fff; margin: 10px 0 12px; }
+  .opening-punch .punch-text p { color: var(--text-inverse-muted); font-size: 16px; margin-bottom: 18px; }
+
+  /* Sectorkaarten: rustig en consistent, met een fors uitgelicht cijfer als accent */
+  .sector-card { transition: transform .15s ease, box-shadow .15s ease; }
+  .sector-card:hover { transform: translateY(-5px); }
+  .sector-card .sector-badge {
+    position: static; display: block; font-size: 32px; font-weight: 800; letter-spacing: -0.02em;
+    background: var(--grad-alert); -webkit-background-clip: text; background-clip: text; color: transparent;
+    margin-bottom: 10px;
+  }
+  .sector-card--explore { background: var(--paper-soft); border-style: dashed; }
+  .sector-card--explore .sector-badge--arrow {
+    width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; background: var(--grad-alert); -webkit-background-clip: initial; background-clip: initial;
+    color: #fff; font-size: 20px; font-weight: 800; transition: transform .15s ease;
+  }
+  .sector-card--explore:hover .sector-badge--arrow { transform: translateX(4px); }
+
+  /* Sector-geheugen: snelkoppeling terug naar laatst bezochte sector */
+  .resume-banner {
+    display: none; align-items: center; gap: 10px; background: var(--paper-soft); border: 1px solid var(--line);
+    border-radius: 999px; padding: 10px 20px; margin-top: 22px; font-size: 14px; width: fit-content;
+  }
+  .resume-banner.show { display: inline-flex; }
+  .resume-banner span { color: var(--text-muted); }
+  .resume-banner a { color: var(--red-dark); font-weight: 700; text-decoration: underline; }
+
+  /* Triage: "wat speelt er nu bij jou" - 4 directe ingangen i.p.v. een platte toolmenu */
+  .triage-card { display: flex; flex-direction: column; }
+  .triage-card .triage-arrow { margin-top: auto; padding-top: 14px; color: var(--red-dark); font-weight: 700; font-size: 13.5px; }
+  .triage-card .triage-arrow::after { content: '→'; margin-left: 6px; transition: transform .15s ease; display: inline-block; }
+  .triage-card:hover .triage-arrow::after { transform: translateX(3px); }
+
+  /* Vertrouwensstrook: bewegende "wordmark"-rij i.p.v. tekstchips. Geen echte logo's
+     nagemaakt (dat zijn beschermde merken) — wel een stevige, herkenbare merknaam-typografie. */
+  .trust-strip-wrap { overflow: hidden; margin-top: 8px; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .trust-strip { display: flex; align-items: center; gap: 0; width: max-content; animation: trust-scroll 58s linear infinite; }
+  .trust-strip:hover { animation-play-state: paused; }
+  @keyframes trust-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .trust-strip { animation: none; flex-wrap: wrap; width: auto; } }
+  .trust-chip {
+    display: flex; align-items: center; gap: 8px; background: none; border: none; padding: 0 28px;
+    font-size: 19px; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap;
+    background-image: var(--grad-alert); -webkit-background-clip: text; background-clip: text; color: transparent;
+    opacity: .8; transition: opacity .15s ease;
+  }
+  .trust-chip::before {
+    content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--grad-alert); flex-shrink: 0;
+  }
+  .trust-chip:first-child::before { display: none; }
+  .trust-chip:hover { opacity: 1; }
+
+  .init-by {
+    display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;
+    margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--line);
+    font-size: 15px; color: var(--text-muted);
+  }
+  .init-by strong { color: var(--text); }
+  .init-by .brand-mark { width: 30px; height: 30px; border-radius: 9px; }
+  .init-by .btn-ghost { margin-left: 4px; }
+
+  .nieuw-badge {
+    display: inline-flex; align-items: center; gap: 6px; background: rgba(245,165,36,.15); color: var(--amber);
+    font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; padding: 4px 10px;
+    border-radius: 999px; margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a class="brand" href="index.html"><span class="brand-mark"></span>AgressieVisie</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a class="current" href="index.html">Home</a>
+      <a href="artikelen.html">Artikelen</a>
+      <a href="methodieken.html">Methodieken</a>
+      <a href="cijfers.html">Cijfers & trends</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button">Meer <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-dropdown-menu nav-mega">
+        <div class="nav-mega-col">
+          <h4>Kennisbank</h4>
+          <a href="lexicon.html">Begrippenlijst</a>
+          <a href="beleid-en-wetgeving.html">Beleid & wetgeving</a>
+          <a href="bronnen.html">Bronnenbank</a>
+          <a href="trendrapport.html">Trendrapport</a>
+          <a href="faq.html">Veelgestelde vragen</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Interactieve tools</h4>
+          <a href="oefengesprek.html">Oefengesprek<span class="nav-badge">Populair</span></a>
+          <a href="protocol-generator.html">Protocol-generator<span class="nav-badge">Populair</span></a>
+          <a href="risico-check.html">Risico-check</a>
+          <a href="zelftest.html">Zelftest</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Downloads</h4>
+          <a href="gratis-gids.html">Gratis checklist</a>
+          <a href="ebook.html">Gratis e-book</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Platform</h4>
+          <a href="contact.html">Contact</a>
+          <a href="bijdragen.html">Draag bij</a>
+          <a href="over.html">Over dit platform</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="overzicht.html">Sitemap</a>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="nav-cta">
+      <a class="nav-search" href="zoeken.html" aria-label="Zoeken"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+  </nav>
+</header>
+
+<section class="opening">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Kennisplatform over agressie</span>
+      <h1>Begrijp agressie <span class="accent">voordat het escaleert.</span></h1>
+      <p class="lede">AgressieVisie volgt dagelijks wetenschappelijk onderzoek, trends en praktijkcases over agressie, voor iedereen die met mensen werkt en grip wil houden op spanning en escalatie.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="artikelen.html">Lees de laatste artikelen</a>
+        <a class="btn btn-outline" href="#nieuwsbrief">Meld je aan voor updates</a>
+      </div>
+    </div>
+    <div class="hero-graphic" aria-hidden="true">
+      <svg viewBox="0 0 420 360" width="100%" height="100%">
+        <defs>
+          <linearGradient id="gEscalatie" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#e0401f"/>
+            <stop offset="100%" stop-color="#f5a524"/>
+          </linearGradient>
+        </defs>
+        <!-- Oplopende staven: escalatie van rustig naar alert -->
+        <rect x="16"  y="256" width="50" height="84"  rx="12" fill="#3a3a42"/>
+        <rect x="86"  y="216" width="50" height="124" rx="12" fill="#4a4a54"/>
+        <rect x="156" y="168" width="50" height="172" rx="12" fill="#cf6a1f"/>
+        <rect x="226" y="110" width="50" height="230" rx="12" fill="#e0401f"/>
+        <rect x="296" y="42"  width="50" height="298" rx="12" fill="url(#gEscalatie)"/>
+        <circle cx="321" cy="42" r="34" fill="#f5a524" opacity="0.22"/>
+        <circle cx="321" cy="42" r="15" fill="#f5a524"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="stat-strip" id="platform-stats">
+      <a class="stat-strip-card" href="artikelen.html"><b data-count="18">0</b><span>Artikelen</span></a>
+      <a class="stat-strip-card" href="bronnen.html"><b data-count="20">0</b><span>Onafhankelijke bronnen</span></a>
+      <a class="stat-strip-card" href="overzicht.html"><b data-count="7">0</b><span>Sectoren in kaart</span></a>
+      <a class="stat-strip-card" href="lexicon.html"><b data-count="32">0</b><span>Vaktermen uitgelegd</span></a>
+    </div>
+
+    <div class="opening-punch">
+      <div class="punch-number">85%</div>
+      <div class="punch-text">
+        <span class="eyebrow">Niet de uitzondering. De norm.</span>
+        <h2>Van de onderwijsmedewerkers maakte dit jaar verbaal geweld mee</h2>
+        <p>Geen incident hier en daar: in vrijwel elke sector met publiekscontact is agressie inmiddels realiteit. Van de klas tot de zorg tot het loket.</p>
+        <a class="btn-ghost" href="cijfers.html" style="color:#fff;">Bekijk alle cijfers per sector</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="wrap">
+    <span class="eyebrow">Waar wil je beginnen?</span>
+    <h2>Wat speelt er nu bij jou?</h2>
+    <p class="lede">Vier directe ingangen naar wat je nu het meest nodig hebt, zonder eerst door het hele platform te hoeven zoeken.</p>
+    <div class="grid grid-4" style="margin-top:32px;">
+      <a class="card triage-card" href="oefengesprek.html">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e0401f" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg></div>
+        <h3>Ik wil een gesprek oefenen</h3>
+        <p style="color:var(--text-muted); font-size:14.5px;">Interactieve simulatie met live spanningsmeter, voor 7 sectoren.</p>
+        <span class="triage-arrow">Start het oefengesprek</span>
+      </a>
+      <a class="card triage-card" href="risico-check.html">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e0401f" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h3>Ik wil weten hoe kwetsbaar mijn team is</h3>
+        <p style="color:var(--text-muted); font-size:14.5px;">6 vragen, direct een risicoscore met concrete aanbevelingen.</p>
+        <span class="triage-arrow">Doe de risico-check</span>
+      </a>
+      <a class="card triage-card" href="protocol-generator.html">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e0401f" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg></div>
+        <h3>Ik wil een protocol</h3>
+        <p style="color:var(--text-muted); font-size:14.5px;">Genereer direct een uitgebreid, sectorspecifiek agressieprotocol.</p>
+        <span class="triage-arrow">Stel je protocol samen</span>
+      </a>
+      <a class="card triage-card" href="artikelen.html">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e0401f" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></div>
+        <h3>Ik wil me verdiepen</h3>
+        <p style="color:var(--text-muted); font-size:14.5px;">18 artikelen, 8 methodieken en actuele cijfers per sector.</p>
+        <span class="triage-arrow">Bekijk alle artikelen</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <span class="eyebrow">Voor wie</span>
+    <h2>Agressie speelt in vrijwel elke sector met publiekscontact</h2>
+    <p class="lede">Van de balie tot de klas, van de winkelvloer tot het gemeentehuis: overal waar mensen elkaar tegenkomen, kan spanning oplopen. Een greep uit de sectoren die we volgen.</p>
+    <div class="resume-banner" id="resume-banner">
+      <span>Ga verder waar je gebleven was:</span>
+      <a href="#" id="resume-link"></a>
+    </div>
+    <div class="grid grid-4" style="margin-top:40px;">
+      <a class="card sector-card" href="sector-zorg-en-welzijn.html">
+        <span class="sector-badge">57%</span>
+        <div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e0401f" stroke-width="2"><path d="M12 21s-7-4.35-9.5-9C.9 8 3 3 7 3c2.2 0 3.6 1.3 5 3 1.4-1.7 2.8-3 5-3 4 0 6.1 5 4.5 9-2.5 4.65-9.5 9-9.5 9Z"/></svg></div>
+        <h3>Zorg & welzijn</h3>
+        <p style="color:var(--text-muted); font-size:14.5px;">Signalen bij patiënten, cliënten en bezoekers, en de impact van werkdruk.</p>
+      </a>
+      <a class="card sector-card" href="sector-onderwijs.html">
+        <span class="sector-badge">85%</span>
+        <div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e0401f" stroke-width="2"><path d="M12 3 2 8l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <h3>Onderwijs</h3>
+        <p style="color:var(--text-muted); font-size:14.5px;">Grensoverschrijdend gedrag van leerlingen, ouders en de rol van de docent.</p>
+      </a>
+      <a class="card sector-card" href="sector-beveiliging-en-ov.html">
+        <span class="sector-badge">67%</span>
+        <div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e0401f" stroke-width="2"><path d="M12 2 4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6l-8-4Z"/></svg></div>
+        <h3>Beveiliging & OV</h3>
+        <p style="color:var(--text-muted); font-size:14.5px;">Publieksconfrontaties in het openbaar vervoer en de openbare ruimte.</p>
+      </a>
+      <a class="card sector-card" href="sector-klantcontact-en-retail.html">
+        <span class="sector-badge">11%</span>
+        <div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e0401f" stroke-width="2"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-6h6v6"/></svg></div>
+        <h3>Klantcontact & retail</h3>
+        <p style="color:var(--text-muted); font-size:14.5px;">Balies, klantenservice en winkelvloer: de sectoren met het meeste directe publiekscontact.</p>
+      </a>
+      <a class="card sector-card" href="sector-horeca-en-uitgaan.html">
+        <span class="sector-badge">1 op de 4</span>
+        <div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e0401f" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></div>
+        <h3>Horeca & uitgaan</h3>
+        <p style="color:var(--text-muted); font-size:14.5px;">Alcohol, drukte en late uren maken deze sector kwetsbaar voor snel oplopende spanning.</p>
+      </a>
+      <a class="card sector-card" href="sector-gemeenten-en-overheid.html">
+        <span class="sector-badge">29%</span>
+        <div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e0401f" stroke-width="2"><path d="M3 21h18M6 21V10l6-6 6 6v11M10 21v-5h4v5"/></svg></div>
+        <h3>Gemeenten & overheid</h3>
+        <p style="color:var(--text-muted); font-size:14.5px;">Publieksbalies, uitkeringsloketten en handhavers krijgen frustratie vaak als eerste te verwerken.</p>
+      </a>
+      <a class="card sector-card" href="sector-sport-en-verenigingen.html">
+        <span class="sector-badge">+41%</span>
+        <div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e0401f" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg></div>
+        <h3>Sport & verenigingen</h3>
+        <p style="color:var(--text-muted); font-size:14.5px;">Stijging van verenigingen die intensieve begeleiding nodig hadden na incidenten, vs. het seizoen ervoor.</p>
+      </a>
+      <a class="card sector-card sector-card--explore" href="trendrapport.html">
+        <span class="sector-badge sector-badge--arrow" aria-hidden="true">→</span>
+        <h3>En verder</h3>
+        <p style="color:var(--text-muted); font-size:14.5px;">Van thuiszorg tot bezorgdiensten: bekijk het trendrapport voor de bredere cijfers.</p>
+      </a>
+    </div>
+
+    <p class="init-by">
+      <span class="brand-mark"></span>
+      Een initiatief van <strong>Act in Move Training &amp; Coaching</strong>
+      <a class="btn-ghost" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move</a>
+    </p>
+
+    <p style="text-align:center; font-size:13px; color:var(--text-muted); font-weight:700; margin-top:36px;">Op basis van onderzoek van:</p>
+    <div class="trust-strip-wrap">
+      <div class="trust-strip">
+        <a class="trust-chip" href="bronnen.html">CBS</a>
+        <a class="trust-chip" href="bronnen.html">TNO</a>
+        <a class="trust-chip" href="bronnen.html">KNVB</a>
+        <a class="trust-chip" href="bronnen.html">Veiligheidsbranche.nl</a>
+        <a class="trust-chip" href="bronnen.html">Ipsos I&O</a>
+        <a class="trust-chip" href="bronnen.html">Trimbos-instituut</a>
+        <a class="trust-chip" href="bronnen.html">CNV / EenVandaag</a>
+        <a class="trust-chip" href="bronnen.html">Universiteit Leiden</a>
+        <a class="trust-chip" href="bronnen.html">ArboNed</a>
+        <a class="trust-chip" href="bronnen.html">Tilburg University</a>
+        <a class="trust-chip" href="bronnen.html">Koninklijke Horeca Nederland</a>
+        <a class="trust-chip" href="bronnen.html">Politie</a>
+        <a class="trust-chip" href="bronnen.html">V&VN</a>
+        <a class="trust-chip" href="bronnen.html">Crisis Prevention Institute</a>
+        <a class="trust-chip" href="bronnen.html">NS</a>
+        <a class="trust-chip" href="bronnen.html">CCV / NOS</a>
+        <a class="trust-chip" href="bronnen.html" aria-hidden="true" tabindex="-1">CBS</a>
+        <a class="trust-chip" href="bronnen.html" aria-hidden="true" tabindex="-1">TNO</a>
+        <a class="trust-chip" href="bronnen.html" aria-hidden="true" tabindex="-1">KNVB</a>
+        <a class="trust-chip" href="bronnen.html" aria-hidden="true" tabindex="-1">Veiligheidsbranche.nl</a>
+        <a class="trust-chip" href="bronnen.html" aria-hidden="true" tabindex="-1">Ipsos I&O</a>
+        <a class="trust-chip" href="bronnen.html" aria-hidden="true" tabindex="-1">Trimbos-instituut</a>
+        <a class="trust-chip" href="bronnen.html" aria-hidden="true" tabindex="-1">CNV / EenVandaag</a>
+        <a class="trust-chip" href="bronnen.html" aria-hidden="true" tabindex="-1">Universiteit Leiden</a>
+        <a class="trust-chip" href="bronnen.html" aria-hidden="true" tabindex="-1">ArboNed</a>
+        <a class="trust-chip" href="bronnen.html" aria-hidden="true" tabindex="-1">Tilburg University</a>
+        <a class="trust-chip" href="bronnen.html" aria-hidden="true" tabindex="-1">Koninklijke Horeca Nederland</a>
+        <a class="trust-chip" href="bronnen.html" aria-hidden="true" tabindex="-1">Politie</a>
+        <a class="trust-chip" href="bronnen.html" aria-hidden="true" tabindex="-1">V&VN</a>
+        <a class="trust-chip" href="bronnen.html" aria-hidden="true" tabindex="-1">Crisis Prevention Institute</a>
+        <a class="trust-chip" href="bronnen.html" aria-hidden="true" tabindex="-1">NS</a>
+        <a class="trust-chip" href="bronnen.html" aria-hidden="true" tabindex="-1">CCV / NOS</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="wrap two-col">
+    <div>
+      <span class="nieuw-badge">Nieuw: nu 8 modellen</span>
+      <span class="eyebrow">Interactief</span>
+      <h2>Bekende methodieken, stap voor stap</h2>
+      <p class="lede">Klik zelf door de escalatieladder van Glasl heen. Hieronder de eerste stappen; alle 9 treden en zeven andere methodieken, van de Roos van Leary tot een conflictstijlentest, staan op de methodiekenpagina.</p>
+      <div class="mt-40">
+        <a class="btn btn-primary" href="methodieken.html">Bekijk alle methodieken</a>
+      </div>
+    </div>
+    <div class="hero-graphic" aria-hidden="true" style="height:auto; padding:20px;">
+      <div class="mini-ladder" id="mini-ladder"></div>
+      <div class="mini-ladder-detail" id="mini-ladder-detail"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="wrap">
+    <span class="eyebrow">Actueel</span>
+    <h2>Laatste artikelen</h2>
+    <p class="lede">Verse inzichten uit onderzoek, trends en de praktijk, elke dag bijgewerkt.</p>
+    <div class="grid grid-3" id="latest-articles" style="margin-top:36px;"></div>
+    <div class="center" style="margin-top:36px;">
+      <a class="btn-ghost" href="artikelen.html">Bekijk alle artikelen</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="wrap two-col">
+    <div>
+      <span class="eyebrow">Gratis download</span>
+      <h2>Checklist: vroege signalen van agressie herkennen</h2>
+      <p class="lede">Een praktische, uitprintbare checklist met fysieke, verbale en gedragssignalen die aan escalatie voorafgaan, plus drie directe vervolgstappen. Hang 'm op bij de balie of bewaar 'm digitaal.</p>
+      <div class="mt-40">
+        <a class="btn btn-primary" href="gratis-gids.html">Download de gratis checklist</a>
+      </div>
+    </div>
+    <div class="hero-graphic" aria-hidden="true" style="height:220px;">
+      <svg viewBox="0 0 300 220" width="100%" height="100%">
+        <rect x="30" y="20" width="160" height="180" rx="14" fill="#2f2f36"/>
+        <rect x="50" y="44" width="120" height="10" rx="4" fill="#e0401f"/>
+        <rect x="50" y="68" width="90" height="8" rx="4" fill="#5a5a63"/>
+        <rect x="50" y="86" width="100" height="8" rx="4" fill="#5a5a63"/>
+        <rect x="50" y="104" width="70" height="8" rx="4" fill="#5a5a63"/>
+        <circle cx="220" cy="130" r="46" fill="#f5a524" opacity="0.9"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h2>Op zoek naar training of coaching?</h2>
+        <p>AgressieVisie deelt kennis. Voor praktijkgerichte training in agressiehantering en de-escalatie ga je naar <strong>Act in Move Training & Coaching</strong>, dé specialist op dit gebied.</p>
+      </div>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="nieuwsbrief">
+  <div class="wrap">
+    <div class="two-col">
+      <div>
+        <span class="eyebrow">Blijf op de hoogte</span>
+        <h2>Nieuw onderzoek en trends, direct in je inbox</h2>
+        <p class="lede">Elke keer als er relevant nieuws verschijnt over agressie (onderzoek, sectortrends, praktijkcases) sturen we een korte update. Geen spam, wel scherp geselecteerd.</p>
+      </div>
+      <div class="newsletter-box">
+        <h3>Meld je aan voor de nieuwsbrief</h3>
+        <p>Voor professionals die met mensen werken en willen blijven leren over agressie en de-escalatie.</p>
+        <form class="newsletter-form" data-newsletter>
+          <input type="email" name="email" placeholder="jouw@email.nl" required />
+          <button class="btn btn-primary" type="submit">Aanmelden</button>
+        </form>
+        <div class="form-status"></div>
+        <p class="newsletter-note">Door je aan te melden ga je akkoord met ons <a href="privacy.html" style="text-decoration:underline;">privacybeleid</a>. Je kunt je altijd weer afmelden.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="footer-accent"></div>
+  <svg class="footer-watermark" viewBox="0 0 200 200" aria-hidden="true">
+    <rect width="200" height="200" rx="44" fill="#ffffff"/>
+    <rect x="58" y="64.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(35 100 72.6)"/>
+    <rect x="58" y="117.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(-35 100 125.6)"/>
+  </svg>
+  <div class="wrap">
+    <div class="footer-top">
+      <a class="footer-brand-block" href="index.html">
+        <span class="brand-mark"></span>
+        <div>
+          <span class="footer-brand-name">AgressieVisie</span>
+          <p class="footer-brand-tag">Kennisplatform over agressie</p>
+        </div>
+      </a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p>Signalen, trends en onderzoek over agressie. Een initiatief van Act in Move Training & Coaching.</p>
+        <a class="footer-aim-logo" href="https://actinmove.nl/" target="_blank" rel="noopener" aria-label="Act in Move Training & Coaching"><span class="aim-logo-mark"></span></a>
+      </div>
+      <div>
+        <h4>Kennisbank</h4>
+        <ul>
+          <li><a href="artikelen.html">Artikelen</a></li>
+          <li><a href="methodieken.html">Methodieken</a></li>
+          <li><a href="lexicon.html">Begrippenlijst</a></li>
+          <li><a href="beleid-en-wetgeving.html">Beleid & wetgeving</a></li>
+          <li><a href="bronnen.html">Bronnenbank</a></li>
+          <li><a href="trendrapport.html">Trendrapport</a></li>
+          <li><a href="faq.html">Veelgestelde vragen</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Interactieve tools</h4>
+        <ul>
+          <li><a href="oefengesprek.html">Oefengesprek</a></li>
+          <li><a href="protocol-generator.html">Protocol-generator</a></li>
+          <li><a href="risico-check.html">Risico-check</a></li>
+          <li><a href="zelftest.html">Zelftest</a></li>
+          <li><a href="gratis-gids.html">Gratis checklist</a></li>
+          <li><a href="ebook.html">Gratis e-book</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="cijfers.html">Cijfers & trends</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="bijdragen.html">Draag bij</a></li>
+          <li><a href="over.html">Over dit platform</a></li>
+          <li><a href="privacy.html">Privacy & cookies</a></li>
+          <li><a href="overzicht.html">Sitemap</a></li>
+          <li><a href="https://actinmove.nl/" target="_blank" rel="noopener">Act in Move ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-mark"><span class="brand-mark"></span>© <span data-year></span> AgressieVisie, onderdeel van Act in Move Training & Coaching</span>
+      <span><a href="https://actinmove.nl/" target="_blank" rel="noopener">actinmove.nl</a></span>
+    </div>
+  </div>
+</footer>
+
+<div id="cookie-banner" role="region" aria-label="Cookiemelding">
+  <p>Deze website gebruikt functionele cookies om je voorkeuren te onthouden. Lees ons <a href="privacy.html">privacybeleid</a> voor meer informatie.</p>
+  <div class="cookie-actions">
+    <button class="btn btn-primary" data-accept>Accepteren</button>
+    <button class="btn btn-outline" data-decline>Weigeren</button>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script src="js/articles.js"></script>
+<script src="js/newsletter.js"></script>
+<script>renderLatestArticles('#latest-articles', 3);</script>
+<script>
+// Sector-geheugen: toon een snelkoppeling als er een eerder bezochte sector bekend is
+(() => {
+  const raw = localStorage.getItem('agressievisie-laatste-sector');
+  if (!raw) return;
+  try {
+    const data = JSON.parse(raw);
+    const banner = document.getElementById('resume-banner');
+    const link = document.getElementById('resume-link');
+    if (banner && link && data.naam && data.url) {
+      link.textContent = data.naam;
+      link.href = data.url;
+      banner.classList.add('show');
+    }
+  } catch (e) { /* corrupte data, gewoon negeren */ }
+})();
+</script>
+<script>
+// Platform-in-cijfers: tel op zodra zichtbaar
+(() => {
+  const nums = document.querySelectorAll('#platform-stats [data-count]');
+  const animate = (el) => {
+    const target = Number(el.dataset.count);
+    const duration = 900;
+    const start = performance.now();
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased);
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animate(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  nums.forEach(n => observer.observe(n));
+})();
+
+// Mini interactieve escalatieladder (eerste 5 treden)
+const MINI_LADDER = [
+  { nr: 1, fase: 1, naam: 'Verharding', tip: 'Standpunten lopen vast, maar er wordt nog gepraat. Erken het meningsverschil expliciet.' },
+  { nr: 2, fase: 1, naam: 'Debat en polemiek', tip: 'Het gesprek wordt een wedstrijd om gelijk. Stap uit de discussie-modus.' },
+  { nr: 3, fase: 1, naam: 'Daden i.p.v. woorden', tip: 'Praten lijkt geen zin meer te hebben. Herstel eerst het contact.' },
+  { nr: 4, fase: 2, naam: 'Imago en coalities', tip: 'Partijen zoeken bondgenoten. Vermijd het bevestigen van "wij tegen zij".' },
+  { nr: 5, fase: 2, naam: 'Gezichtsverlies', tip: 'De ander wordt openlijk beschadigd. Geef een uitweg zonder gezichtsverlies.' },
+];
+const MINI_KLEUR = { 1: '#f5a524', 2: '#e0701f', 3: '#b8300f' };
+
+function renderMiniLadder() {
+  const wrap = document.getElementById('mini-ladder');
+  if (!wrap) return;
+  wrap.innerHTML = MINI_LADDER.map(s => `
+    <button class="mini-rung" data-nr="${s.nr}">
+      <span class="mini-rung-num" style="background:${MINI_KLEUR[s.fase]};">${s.nr}</span>
+      <span class="mini-rung-label">${s.naam}</span>
+    </button>
+  `).join('');
+  wrap.addEventListener('click', (e) => {
+    const btn = e.target.closest('.mini-rung');
+    if (!btn) return;
+    selectMiniRung(Number(btn.dataset.nr));
+  });
+  selectMiniRung(1);
+}
+
+function selectMiniRung(nr) {
+  const step = MINI_LADDER.find(s => s.nr === nr);
+  document.querySelectorAll('.mini-rung').forEach(r => r.classList.toggle('active', Number(r.dataset.nr) === nr));
+  document.getElementById('mini-ladder-detail').innerHTML = `<strong style="color:#fff;">Trede ${step.nr}: ${step.naam}.</strong> ${step.tip}`;
+}
+
+renderMiniLadder();
+</script>
+<link rel="stylesheet" href="css/voorlees.css" />
+<script src="js/voorlees.js" defer data-vl-kleur="#e0401f" data-vl-knoptekst="Lees voor"></script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+[
+  {
+    "organisatie": "Crisis Prevention Institute (CPI)",
+    "titel": "Onderzoek naar het herkennen van escalatiegedrag",
+    "url": "https://www.crisisprevention.com/blog/general/4-tips-for-recognizing-and-addressing-aggressive-behavior/",
+    "jaar": null,
+    "onderwerp": "Signaalherkenning en escalatiegedrag",
+    "sectoren": ["Algemeen"],
+    "gebruikt_in": [{ "titel": "Vroege signalen van agressie: wat onderzoek laat zien", "url": "artikel.html?slug=signalen-vroegtijdig-herkennen-onderzoek-2026" }]
+  },
+  {
+    "organisatie": "CBS",
+    "titel": "Agressie in zorg en welzijn (AZW-werknemersenquête 2024)",
+    "url": "https://www.cbs.nl/nl-nl/longread/diversen/2026/agressie-in-zorg-en-welzijn?onepage=true",
+    "jaar": 2024,
+    "onderwerp": "Agressie in de zorgsector",
+    "sectoren": ["Zorg & welzijn"],
+    "gebruikt_in": [
+      { "titel": "Agressie in de zorgsector: de cijfers voor 2024-2025", "url": "artikel.html?slug=agressie-in-de-zorg-trends-2026" },
+      { "titel": "Cijfers & trends", "url": "cijfers.html" },
+      { "titel": "Sector: Zorg & welzijn", "url": "sector-zorg-en-welzijn.html" }
+    ]
+  },
+  {
+    "organisatie": "Tilburg University",
+    "titel": "Onderzoeksprogramma DE-ESCALATING",
+    "url": "https://www.tilburguniversity.edu/current/press-releases/research-de-escalating-aggressive-situations-frontline-employees-begins",
+    "jaar": 2025,
+    "onderwerp": "De-escalatieonderzoek met bodycams en sensoren",
+    "sectoren": ["Zorg & welzijn", "Beveiliging & OV", "Klantcontact & retail"],
+    "gebruikt_in": [{ "titel": "De-escalatietechnieken: wat de wetenschap eraan toevoegt", "url": "artikel.html?slug=de-escalatietechnieken-wat-werkt-echt" }]
+  },
+  {
+    "organisatie": "CNV / EenVandaag",
+    "titel": "Onderzoek onder onderwijsmedewerkers",
+    "url": "https://www.cnv.nl/onderwijs/nieuws/wetswijziging-door-onderzoek-agressie-tegen-leraren/",
+    "jaar": 2025,
+    "onderwerp": "Agressie in het onderwijs",
+    "sectoren": ["Onderwijs"],
+    "gebruikt_in": [
+      { "titel": "Agressie in de klas: de cijfers achter een groeiend probleem", "url": "artikel.html?slug=agressie-onderwijs-signalen-leraren" },
+      { "titel": "Cijfers & trends", "url": "cijfers.html" },
+      { "titel": "Sector: Onderwijs", "url": "sector-onderwijs.html" }
+    ]
+  },
+  {
+    "organisatie": "Politie / Mobiliteit.nl",
+    "titel": "Jaarcijfers agressie tegen ov-personeel",
+    "url": "https://www.mobiliteit.nl/ov/2025/05/07/politie-na-jaarcijfers-agressie-tegen-ov-personeel-blijft-reden-tot-zorg/",
+    "jaar": 2025,
+    "onderwerp": "Agressie tegen OV-personeel",
+    "sectoren": ["Beveiliging & OV"],
+    "gebruikt_in": [
+      { "titel": "Agressie tegen OV- en beveiligingspersoneel: de stand van zaken", "url": "artikel.html?slug=agressie-ov-en-beveiliging-nieuwe-aanpak" },
+      { "titel": "Cijfers & trends", "url": "cijfers.html" }
+    ]
+  },
+  {
+    "organisatie": "TNO / CBS",
+    "titel": "Nationale Enquête Arbeidsomstandigheden (NEA) 2025",
+    "url": "https://monitorarbeid.tno.nl/publicaties/nationale-enquete-arbeidsomstandigheden-2025-factsheet/",
+    "jaar": 2025,
+    "onderwerp": "Ongewenst gedrag op de werkvloer, breed onderzoek onder 53.000 werknemers",
+    "sectoren": ["Klantcontact & retail", "Horeca & uitgaan", "Algemeen"],
+    "gebruikt_in": [
+      { "titel": "Grensoverschrijdend gedrag op de werkvloer: wat de NEA 2025 laat zien", "url": "artikel.html?slug=grensoverschrijdend-gedrag-werkvloer-cijfers" },
+      { "titel": "Waarom jonge werknemers vaker met agressie te maken krijgen", "url": "artikel.html?slug=jonge-werknemers-kwetsbaar-voor-agressie" },
+      { "titel": "Agressie in de horeca: een van de risicovolste sectoren volgens de NEA 2025", "url": "artikel.html?slug=agressie-in-de-horeca-nea-cijfers-2025" },
+      { "titel": "Cijfers & trends", "url": "cijfers.html" },
+      { "titel": "Sector: Klantcontact & retail", "url": "sector-klantcontact-en-retail.html" },
+      { "titel": "Sector: Horeca & uitgaan", "url": "sector-horeca-en-uitgaan.html" }
+    ]
+  },
+  {
+    "organisatie": "VirTra / Force Science",
+    "titel": "Onderzoek naar spaced practice en vaardigheidsbehoud",
+    "url": "https://www.virtra.com/the-spacing-effect-in-skills-training-and-deliberate-practice/",
+    "jaar": null,
+    "onderwerp": "Trainingsfrequentie en vaardigheidsbehoud",
+    "sectoren": ["Algemeen"],
+    "gebruikt_in": [{ "titel": "Waarom trainingsfrequentie belangrijker is dan trainingsduur", "url": "artikel.html?slug=trainingsfrequentie-belangrijker-dan-duur" }]
+  },
+  {
+    "organisatie": "Universiteit Leiden / Zembla",
+    "titel": "Onderzoek naar nazorg na agressie in de zorg",
+    "url": "https://www.universiteitleiden.nl/in-de-media/2026/03/zorg-schiet-tekort-in-nazorg-na-agressie-tegen-personeel",
+    "jaar": 2026,
+    "onderwerp": "Nazorg na agressie-incidenten",
+    "sectoren": ["Zorg & welzijn"],
+    "gebruikt_in": [
+      { "titel": "Nazorg na een agressie-incident: waar het vaak misgaat", "url": "artikel.html?slug=nazorg-na-agressie-incident-wat-werkt" },
+      { "titel": "Sector: Zorg & welzijn", "url": "sector-zorg-en-welzijn.html" }
+    ]
+  },
+  {
+    "organisatie": "KNVB",
+    "titel": "Cijfers amateurvoetbal en sportiviteit & respect",
+    "url": "https://www.knvb.nl/nieuws/themas/sportiviteit-respect/71962/meer-wedstrijden-het-amateurvoetbal-percentage-zware",
+    "jaar": 2026,
+    "onderwerp": "Agressie in het amateurvoetbal",
+    "sectoren": ["Sport & verenigingen"],
+    "gebruikt_in": [
+      { "titel": "Agressie in de sport: de cijfers en de aanpak van de KNVB", "url": "artikel.html?slug=agressie-in-de-sport-knvb-aanpak" },
+      { "titel": "Sector: Sport & verenigingen", "url": "sector-sport-en-verenigingen.html" }
+    ]
+  },
+  {
+    "organisatie": "Mobiliteit.nl",
+    "titel": "Toenemend geweld in het openbaar vervoer: zijn bodycams de oplossing?",
+    "url": "https://www.mobiliteit.nl/ov/2025/09/11/toenemend-geweld-in-het-openbaar-vervoer-zijn-bodycams-de-oplossing/",
+    "jaar": 2025,
+    "onderwerp": "Bodycams als de-escalatiemiddel",
+    "sectoren": ["Beveiliging & OV", "Zorg & welzijn"],
+    "gebruikt_in": [{ "titel": "Bodycams tegen agressie: wat werkt en wat niet", "url": "artikel.html?slug=bodycams-tegen-agressie-wat-werkt" }]
+  },
+  {
+    "organisatie": "Trimbos-instituut",
+    "titel": "Driekwart van het geweld tijdens uitgaan is alcoholgerelateerd",
+    "url": "https://pvo-nl.nl/nieuws/driekwart-van-het-geweld-tijdens-uitgaan-is-alcoholgerelateerd/",
+    "jaar": null,
+    "onderwerp": "Alcoholgerelateerd geweld tijdens het uitgaansleven",
+    "sectoren": ["Horeca & uitgaan"],
+    "gebruikt_in": [{ "titel": "Sector: Horeca & uitgaan", "url": "sector-horeca-en-uitgaan.html" }]
+  },
+  {
+    "organisatie": "Koninklijke Horeca Nederland (KHN)",
+    "titel": "Signalen over agressie tegen horecapersoneel",
+    "url": "https://www.khn.nl/",
+    "jaar": null,
+    "onderwerp": "Agressie tegen horecapersoneel",
+    "sectoren": ["Horeca & uitgaan"],
+    "gebruikt_in": [{ "titel": "Sector: Horeca & uitgaan", "url": "sector-horeca-en-uitgaan.html" }]
+  },
+  {
+    "organisatie": "Ipsos I&O / Rijksoverheid",
+    "titel": "Monitor Integriteit en Veiligheid 2024",
+    "url": "https://www.rijksoverheid.nl/actueel/nieuws/2024/12/17/monitor-integriteit-en-veiligheid-agressie-en-intimidatie-richting-politiek-ambtsdragers-blijft-zorgelijk",
+    "jaar": 2024,
+    "onderwerp": "Agressie tegen bestuurders en ambtenaren",
+    "sectoren": ["Gemeenten & overheid"],
+    "gebruikt_in": [
+      { "titel": "Agressie tegen gemeenteambtenaren: de cijfers uit de Monitor Integriteit en Veiligheid", "url": "artikel.html?slug=agressie-tegen-ambtenaren-monitor-integriteit-veiligheid" },
+      { "titel": "Sector: Gemeenten & overheid", "url": "sector-gemeenten-en-overheid.html" }
+    ]
+  },
+  {
+    "organisatie": "Veiligheidsbranche.nl",
+    "titel": "Onderzoek Agressie tegen Beveiligers",
+    "url": "https://www.veiligheidsbranche.nl/wp-content/uploads/2025/02/Onderzoek-Agressie-tegen-Beveiligers.pdf",
+    "jaar": 2025,
+    "onderwerp": "Agressie tegen beveiligers",
+    "sectoren": ["Beveiliging & OV"],
+    "gebruikt_in": [
+      { "titel": "Agressie tegen OV- en beveiligingspersoneel: de stand van zaken", "url": "artikel.html?slug=agressie-ov-en-beveiliging-nieuwe-aanpak" },
+      { "titel": "Cijfers & trends", "url": "cijfers.html" },
+      { "titel": "Sector: Beveiliging & OV", "url": "sector-beveiliging-en-ov.html" }
+    ]
+  },
+  {
+    "organisatie": "Headliner.nl / RTL Nieuws",
+    "titel": "Pakketbezorgers aan de schandpaal genageld in Facebookgroepen",
+    "url": "https://www.headliner.nl/item/pakketbezorgers-aan-de-schandpaal-genageld-in-enorme-facebookgroepen-doe-dit-niet-rtlnieuws-986475",
+    "jaar": null,
+    "onderwerp": "Agressie en online shaming van pakketbezorgers",
+    "sectoren": ["Klantcontact & retail"],
+    "gebruikt_in": [{ "titel": "Agressie tegen pakketbezorgers: hoe sociale media het erger maken", "url": "artikel.html?slug=agressie-tegen-bezorgers-en-zzpers" }]
+  },
+  {
+    "organisatie": "V&VN",
+    "titel": "Cijfer agressie in de zorg",
+    "url": "https://mobielenoodknop.nl/cijfer-agressie-in-de-zorg/",
+    "jaar": null,
+    "onderwerp": "Agressie bij alleen werken en huisbezoek",
+    "sectoren": ["Zorg & welzijn"],
+    "gebruikt_in": [{ "titel": "Alleen op huisbezoek: het verhoogde risico van alleen werken", "url": "artikel.html?slug=alleen-werken-agressie-huisbezoek" }]
+  },
+  {
+    "organisatie": "CBS",
+    "titel": "Online veiligheid en criminaliteit 2022: online bedreiging en intimidatie",
+    "url": "https://www.cbs.nl/nl-nl/longread/rapportages/2023/online-veiligheid-en-criminaliteit-2022/6-online-bedreiging-en-intimidatie",
+    "jaar": 2022,
+    "onderwerp": "Online dreigementen en digitale intimidatie",
+    "sectoren": ["Algemeen"],
+    "gebruikt_in": [{ "titel": "Online dreigementen: de onzichtbare voorloper van fysieke agressie", "url": "artikel.html?slug=online-dreigementen-digitale-intimidatie" }]
+  },
+  {
+    "organisatie": "ArboNed",
+    "titel": "Grensoverschrijdend gedrag: de rol van management en leidinggevenden",
+    "url": "https://www.arboned.nl/nieuws/grensoverschrijdend-gedrag-de-rol-van-management-en-leidinggevenden",
+    "jaar": null,
+    "onderwerp": "Leiderschap en organisatiecultuur als preventiefactor",
+    "sectoren": ["Algemeen"],
+    "gebruikt_in": [{ "titel": "Waarom de leidinggevende de sleutel is tot minder agressie", "url": "artikel.html?slug=leiderschap-organisatiecultuur-preventie-agressie" }]
+  },
+  {
+    "organisatie": "CCV / NOS",
+    "titel": "Kwart van winkelpersoneel weleens bedreigd door klanten",
+    "url": "https://nos.nl/artikel/2060962-kwart-van-winkelpersoneel-weleens-bedreigd-door-klanten",
+    "jaar": 2015,
+    "onderwerp": "Agressie en dreiging tegen winkelpersoneel",
+    "sectoren": ["Klantcontact & retail"],
+    "gebruikt_in": [
+      { "titel": "Agressie in de winkel: van kwart bedreigd tot stijgende criminaliteitscijfers", "url": "artikel.html?slug=agressie-in-de-winkel-detailhandel-cijfers" },
+      { "titel": "Sector: Klantcontact & retail", "url": "sector-klantcontact-en-retail.html" }
+    ]
+  },
+  {
+    "organisatie": "Hart van Nederland / NS",
+    "titel": "NS-personeel vaker slachtoffer van geweld op stations",
+    "url": "https://www.hartvannederland.nl/112/crime/artikelen/ns-personeel-vaker-slachtoffer-van-geweld-op-stations",
+    "jaar": 2025,
+    "onderwerp": "Geweld tegen NS-personeel",
+    "sectoren": ["Beveiliging & OV"],
+    "gebruikt_in": [{ "titel": "Cijfers & trends", "url": "cijfers.html" }]
+  }
+]

@@ -1,0 +1,8 @@
+# Door bezoekers ingevulde data — bevat mogelijk persoonsgegevens, hoort niet in git
+data/abonnees.json
+data/contactberichten.json
+data/aanvullingen.json
+
+# OS/editor cruft
+.DS_Store
+Thumbs.db

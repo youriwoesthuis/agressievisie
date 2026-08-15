@@ -1,0 +1,202 @@
+/* ==========================================================================
+   Voorlees-plugin — stijl
+   Nederlandse voorleesfunctie voor websites
+   ========================================================================== */
+
+:root {
+  --vl-kleur: #154273;
+  --vl-kleur-donker: #0f3357;
+  --vl-tekst: #ffffff;
+  --vl-achtergrond: #ffffff;
+  --vl-rand: #d5dbe3;
+  --vl-schaduw: 0 8px 28px rgba(15, 30, 60, 0.18);
+  --vl-highlight: #fff3c4;
+  --vl-highlight-rand: #f5a524;
+}
+
+.vl-widget {
+  position: fixed;
+  z-index: 2147483000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.vl-widget[data-vl-pos="onder-rechts"] { right: 20px; bottom: 20px; }
+.vl-widget[data-vl-pos="onder-links"] { left: 20px; bottom: 20px; }
+.vl-widget[data-vl-pos="balk-onderaan"] { left: 0; right: 0; bottom: 0; }
+
+/* Hoofdknop */
+.vl-knop {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--vl-kleur);
+  color: var(--vl-tekst);
+  border: none;
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: var(--vl-schaduw);
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+.vl-knop:hover { background: var(--vl-kleur-donker); }
+.vl-knop:active { transform: scale(0.97); }
+.vl-knop:focus-visible { outline: 3px solid #ffb703; outline-offset: 2px; }
+.vl-knop svg { flex-shrink: 0; }
+
+/* Bedieningspaneel: compact, geen overbodige onderdelen standaard zichtbaar */
+.vl-paneel {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--vl-achtergrond);
+  border: 1px solid var(--vl-rand);
+  border-radius: 14px;
+  padding: 10px 12px;
+  box-shadow: var(--vl-schaduw);
+  width: max-content;
+  max-width: min(280px, calc(100vw - 40px));
+}
+.vl-widget.vl-open .vl-paneel { display: flex; }
+.vl-widget[data-vl-pos="balk-onderaan"] .vl-paneel {
+  width: 100%;
+  max-width: none;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+}
+
+.vl-status {
+  font-size: 12px;
+  color: #4a5566;
+  min-height: 16px;
+}
+
+.vl-voortgang-track {
+  height: 4px;
+  border-radius: 999px;
+  background: #e6e9ee;
+  overflow: hidden;
+}
+.vl-voortgang-fill {
+  height: 100%;
+  background: var(--vl-kleur);
+  border-radius: 999px;
+  width: 0%;
+  transition: width 0.2s ease;
+}
+
+.vl-knoppenrij {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.vl-bedien-knop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--vl-rand);
+  background: #f7f8fa;
+  color: #1c2733;
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease;
+  flex-shrink: 0;
+}
+.vl-bedien-knop:hover { background: #eef1f5; border-color: var(--vl-kleur); }
+.vl-bedien-knop:focus-visible { outline: 2px solid var(--vl-kleur); outline-offset: 2px; }
+.vl-bedien-knop:disabled { opacity: 0.4; cursor: not-allowed; }
+.vl-bedien-knop.vl-hoofd {
+  width: 40px;
+  height: 40px;
+  background: var(--vl-kleur);
+  color: #fff;
+  border-color: var(--vl-kleur);
+}
+.vl-bedien-knop.vl-hoofd:hover { background: var(--vl-kleur-donker); }
+.vl-instellingen-knop { color: #8a94a3; border-color: transparent; background: transparent; }
+.vl-instellingen-knop:hover { color: var(--vl-kleur); background: #eef1f5; }
+.vl-instellingen-knop[aria-expanded="true"] { color: var(--vl-kleur); background: #eef1f5; }
+
+/* Instellingen (snelheid/stem): verborgen totdat het tandwiel wordt aangeklikt */
+.vl-instellingen-pop {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  border-top: 1px solid #eef0f3;
+  padding-top: 8px;
+  margin-top: 2px;
+}
+.vl-instellingen-pop.vl-open { display: flex; }
+
+.vl-instellingenrij {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.vl-instelling-label {
+  font-size: 12.5px;
+  color: #4a5566;
+  font-weight: 600;
+}
+.vl-select {
+  font-family: inherit;
+  font-size: 13px;
+  padding: 5px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--vl-rand);
+  background: #fff;
+  color: #1c2733;
+  max-width: 160px;
+}
+.vl-select:focus-visible { outline: 2px solid var(--vl-kleur); }
+
+/* Elke zin is klikbaar: cursor geeft aan dat je erop kunt klikken om daar te starten */
+.vl-zin { cursor: pointer; border-radius: 3px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.vl-zin:hover { background: rgba(21, 66, 115, 0.08); }
+
+.vl-waarschuwing {
+  font-size: 12.5px;
+  color: #8a4b00;
+  background: #fff4e0;
+  border: 1px solid #f3d9a6;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+/* Markering van de zin die op dit moment wordt voorgelezen */
+.vl-actief {
+  background: var(--vl-highlight) !important;
+  padding: 1px 2px;
+  transition: background 0.2s ease;
+  scroll-margin: 120px;
+}
+
+@media (max-width: 480px) {
+  .vl-widget[data-vl-pos="onder-rechts"],
+  .vl-widget[data-vl-pos="onder-links"] {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+  }
+  .vl-widget[data-vl-pos="onder-rechts"] .vl-paneel,
+  .vl-widget[data-vl-pos="onder-links"] .vl-paneel {
+    max-width: none;
+    width: 100%;
+  }
+  .vl-knop { width: 100%; justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vl-actief { transition: none; }
+  .vl-voortgang-fill { transition: none; }
+}

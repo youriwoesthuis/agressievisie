@@ -1,0 +1,301 @@
+﻿<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gratis checklist: vroege signalen van agressie herkennen | AgressieVisie</title>
+<meta name="description" content="Download de gratis checklist van AgressieVisie: herken de vroege signalen van agressie voordat een situatie escaleert." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="canonical" href="https://agressievisie.nl/gratis-gids.html" />
+<meta property="og:url" content="https://agressievisie.nl/gratis-gids.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="AgressieVisie" />
+<meta property="og:title" content="Gratis checklist: vroege signalen van agressie herkennen | AgressieVisie" />
+<meta property="og:description" content="Een praktische, uitprintbare checklist met fysieke, verbale en gedragssignalen die aan escalatie voorafgaan." />
+<meta property="og:image" content="https://agressievisie.nl/img/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://agressievisie.nl/img/og-image.png" />
+<link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .checklist-sheet {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 44px; max-width: 640px; margin: 0 auto; box-shadow: var(--shadow-sm);
+  }
+  .checklist-sheet h2 { color: var(--red-dark); font-size: 20px; margin: 28px 0 14px; }
+  .checklist-sheet h2:first-of-type { margin-top: 8px; }
+  .check-row { display: flex; align-items: flex-start; gap: 12px; padding: 9px 0; font-size: 15px; transition: opacity .15s ease; }
+  .check-box {
+    width: 18px; height: 18px; border: 2px solid var(--red); border-radius: 4px; flex-shrink: 0; margin-top: 2px;
+    appearance: none; -webkit-appearance: none; background: #fff; cursor: pointer; position: relative;
+  }
+  .check-box:checked { background: var(--red); }
+  .check-box:checked::after {
+    content: ''; position: absolute; left: 5px; top: 1px; width: 5px; height: 9px;
+    border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg);
+  }
+  .check-box:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+  .check-row.checked { opacity: .55; }
+  .check-row.checked span:last-child { text-decoration: line-through; }
+
+  .checklist-progress { margin: 20px 0 24px; }
+  .checklist-progress-label { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .checklist-progress-label span { font-size: 13px; font-weight: 700; color: var(--text-muted); }
+  .checklist-reset { background: none; border: none; font-size: 12.5px; font-weight: 700; color: var(--red-dark); cursor: pointer; padding: 2px 4px; text-decoration: underline; }
+  .checklist-progress-track { height: 8px; border-radius: 999px; background: var(--paper-soft); overflow: hidden; }
+  .checklist-progress-fill { height: 100%; border-radius: 999px; background: var(--grad-alert); width: 0%; transition: width .3s ease; }
+  .tip-row { display: flex; gap: 14px; padding: 10px 0; align-items: flex-start; }
+  .tip-num { width: 26px; height: 26px; border-radius: 50%; background: var(--grad-alert); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .gated { position: relative; }
+  .gated.locked .checklist-sheet-inner { filter: blur(4px); pointer-events: none; user-select: none; }
+  .unlock-overlay {
+    position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,.4);
+  }
+  .gated:not(.locked) .unlock-overlay { display: none; }
+  @media print {
+    header.site, footer.site, #cookie-banner, .no-print { display: none !important; }
+    .page-header { background: #fff !important; color: #000 !important; padding: 20px 0; }
+    .page-header .eyebrow, .page-header .lede { color: #444 !important; }
+  }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agressievisie.nl/"},{"@type":"ListItem","position":2,"name":"Gratis checklist","item":"https://agressievisie.nl/gratis-gids.html"}]}
+</script>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a class="brand" href="index.html"><span class="brand-mark"></span>AgressieVisie</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="artikelen.html">Artikelen</a>
+      <a href="methodieken.html">Methodieken</a>
+      <a href="cijfers.html">Cijfers & trends</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button">Meer <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-dropdown-menu nav-mega">
+        <div class="nav-mega-col">
+          <h4>Kennisbank</h4>
+          <a href="lexicon.html">Begrippenlijst</a>
+          <a href="beleid-en-wetgeving.html">Beleid & wetgeving</a>
+          <a href="bronnen.html">Bronnenbank</a>
+          <a href="trendrapport.html">Trendrapport</a>
+          <a href="faq.html">Veelgestelde vragen</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Interactieve tools</h4>
+          <a href="oefengesprek.html">Oefengesprek<span class="nav-badge">Populair</span></a>
+          <a href="protocol-generator.html">Protocol-generator<span class="nav-badge">Populair</span></a>
+          <a href="risico-check.html">Risico-check</a>
+          <a href="zelftest.html">Zelftest</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Downloads</h4>
+          <a href="gratis-gids.html" class="current">Gratis checklist</a>
+          <a href="ebook.html">Gratis e-book</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Platform</h4>
+          <a href="contact.html">Contact</a>
+          <a href="bijdragen.html">Draag bij</a>
+          <a href="over.html">Over dit platform</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="overzicht.html">Sitemap</a>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="nav-cta">
+      <a class="nav-search" href="zoeken.html" aria-label="Zoeken"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+  </nav>
+</header>
+
+<section class="page-header">
+  <div class="wrap">
+    <nav class="breadcrumbs"><a href="index.html">Home</a><span class="sep">/</span><span class="current">Gratis checklist</span></nav>
+    <span class="eyebrow">Gratis download</span>
+    <h1>Checklist: vroege signalen van agressie herkennen</h1>
+    <p class="lede">Een praktische, uitprintbare checklist met fysieke, verbale en gedragssignalen, signalen bij uzelf, risicovolle omgevingsfactoren, en vijf concrete vervolgstappen.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="two-col" style="align-items:flex-start;">
+      <div class="gated locked" id="gated-content">
+        <div class="unlock-overlay no-print">
+          <div class="newsletter-box" style="max-width:340px;">
+            <h3>Ontgrendel de checklist</h3>
+            <p>Vul je e-mailadres in en de checklist wordt direct zichtbaar, en je ontvangt 'm ook als link in je inbox.</p>
+            <form class="newsletter-form" data-newsletter data-unlock="#gated-content">
+              <input type="email" name="email" placeholder="jouw@email.nl" required />
+              <button class="btn btn-primary" type="submit">Ontgrendelen</button>
+            </form>
+            <div class="form-status"></div>
+          </div>
+        </div>
+        <div class="checklist-sheet-inner">
+          <div class="checklist-sheet">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+              <span class="brand-mark"></span>
+              <strong style="font-size:17px;">AgressieVisie</strong>
+            </div>
+            <p style="color:var(--text-muted); font-size:14px; margin-bottom:10px;">Checklist: vroege signalen van agressie herkennen</p>
+            <p style="font-size:14.5px; color:var(--text-muted);">Agressie ontstaat zelden uit het niets. Deze checklist helpt je de signalen te herkennen vóórdat een situatie escaleert.</p>
+
+            <div class="checklist-progress no-print">
+              <div class="checklist-progress-label"><span id="checklist-progress-text">0 van 27 afgevinkt</span><button type="button" id="checklist-reset" class="checklist-reset">Wis vinkjes</button></div>
+              <div class="checklist-progress-track"><div class="checklist-progress-fill" id="checklist-progress-fill"></div></div>
+            </div>
+
+            <h2>Fysieke signalen</h2>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="1" /><span>Verhoogde spierspanning (gebalde vuisten, stijve houding)</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="2" /><span>Onrustig of dreigend ijsberen</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="3" /><span>Opvallend dichterbij komen dan gebruikelijk</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="4" /><span>Verandering in ademhaling (sneller, hoorbaar)</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="5" /><span>Rood aangelopen gezicht of zichtbaar zweten</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="6" /><span>Trillende handen of trillende stem</span></div>
+
+            <h2>Verbale signalen</h2>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="7" /><span>Stemvolume neemt toe, spreektempo versnelt</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="8" /><span>Dreigende of intimiderende taal</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="9" /><span>Herhaaldelijk dezelfde eis herhalen zonder ruimte voor dialoog</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="10" /><span>Sarcasme of kleinerende opmerkingen</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="11" /><span>Ongebruikelijk vloeken of schelden voor die persoon</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="12" /><span>Plotselinge stiltes, afgewisseld met uitbarstingen</span></div>
+
+            <h2>Gedragssignalen</h2>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="13" /><span>Verminderd vermogen om instructies te verwerken</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="14" /><span>Oogcontact vermijden óf juist opvallend fixeren</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="15" /><span>Grenzen van persoonlijke ruimte overschrijden</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="16" /><span>Plotselinge stemmingswisselingen</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="17" /><span>Dingen vastpakken, gooien of hard neerzetten</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="18" /><span>Herhaaldelijk naar de uitgang of naar anderen kijken</span></div>
+
+            <h2>Signalen bij uzelf</h2>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="19" /><span>Je hartslag versnelt of je ademhaling wordt oppervlakkig</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="20" /><span>Je stem wordt harder of sneller</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="21" /><span>Je voelt de neiging om te overtuigen in plaats van te luisteren</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="22" /><span>Je wilt het gesprek zo snel mogelijk beëindigen</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="23" /><span>Je voelt irritatie of de neiging om terug te reageren</span></div>
+
+            <h2>Omgevingsfactoren die het risico verhogen</h2>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="24" /><span>Lange wachttijden of drukte</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="25" /><span>Weinig privacy tijdens een gevoelig gesprek</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="26" /><span>Eerder gegeven onduidelijke of tegenstrijdige informatie</span></div>
+            <div class="check-row"><input type="checkbox" class="check-box" data-id="27" /><span>Beperkte vluchtroute of geen zichtbare collega's in de buurt</span></div>
+
+            <h2>Wat nu?</h2>
+            <div class="tip-row"><span class="tip-num">1</span><span>Blijf zelf rustig in toon en tempo.</span></div>
+            <div class="tip-row"><span class="tip-num">2</span><span>Erken de emotie van de ander voordat je een oplossing aandraagt.</span></div>
+            <div class="tip-row"><span class="tip-num">3</span><span>Gebruik de <a href="methodieken.html#lsd-methode">LSD-methode</a>: luisteren, samenvatten, doorvragen.</span></div>
+            <div class="tip-row"><span class="tip-num">4</span><span>Schep bij twijfel afstand en schakel hulp in.</span></div>
+            <div class="tip-row"><span class="tip-num">5</span><span>Bied na afloop altijd een kort nagesprek aan, ook bij kleinere incidenten.</span></div>
+
+            <p style="margin-top:28px; font-size:12.5px; color:var(--text-muted); border-top:1px solid var(--line); padding-top:16px;">
+              Een uitgave van AgressieVisie, kennisplatform over agressie, onderdeel van Act in Move Training & Coaching · agressievisie.nl · actinmove.nl
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="no-print">
+        <span class="eyebrow">Waarom deze checklist</span>
+        <h2>Handig voor op de werkvloer</h2>
+        <p style="color:var(--text-muted); font-size:16px; margin-bottom:20px;">Print 'm uit en hang 'm op bij de balie, in de personeelsruimte, of bewaar 'm digitaal. Gebaseerd op patronen die in meerdere onderzoeken naar escalatie terugkomen.</p>
+        <button class="btn btn-outline" onclick="window.print()">Print / bewaar als PDF</button>
+        <p style="margin-top:24px; font-size:14px; color:var(--text-muted);">Op zoek naar training in het herkennen én hanteren van deze signalen? Kijk bij <a href="https://actinmove.nl/" target="_blank" rel="noopener" style="text-decoration:underline;">Act in Move Training & Coaching</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-bottom" style="border-top:none; padding-top:0;">
+      <span class="footer-bottom-mark"><span class="brand-mark"></span>© <span data-year></span> AgressieVisie, onderdeel van Act in Move Training & Coaching</span>
+      <span><a href="https://actinmove.nl/" target="_blank" rel="noopener">actinmove.nl</a></span>
+    </div>
+  </div>
+</footer>
+
+<div id="cookie-banner" role="region" aria-label="Cookiemelding">
+  <p>Deze website gebruikt functionele cookies om je voorkeuren te onthouden. Lees ons <a href="privacy.html">privacybeleid</a> voor meer informatie.</p>
+  <div class="cookie-actions">
+    <button class="btn btn-primary" data-accept>Accepteren</button>
+    <button class="btn btn-outline" data-decline>Weigeren</button>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script src="js/newsletter.js"></script>
+<script>
+(function () {
+  var OPSLAG_SLEUTEL = 'agressievisie-checklist-voortgang';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.check-box'));
+  var totaal = boxes.length;
+
+  function ladenAangevinkt() {
+    try {
+      var ruw = localStorage.getItem(OPSLAG_SLEUTEL);
+      return ruw ? JSON.parse(ruw) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function opslaanAangevinkt(ids) {
+    try { localStorage.setItem(OPSLAG_SLEUTEL, JSON.stringify(ids)); } catch (e) { /* localStorage niet beschikbaar: negeren */ }
+  }
+
+  function updateVoortgang() {
+    var aantal = boxes.filter(function (b) { return b.checked; }).length;
+    document.getElementById('checklist-progress-text').textContent = aantal + ' van ' + totaal + ' afgevinkt';
+    document.getElementById('checklist-progress-fill').style.width = (totaal ? (aantal / totaal * 100) : 0) + '%';
+  }
+
+  var aangevinkt = ladenAangevinkt();
+  boxes.forEach(function (box) {
+    if (aangevinkt.indexOf(box.dataset.id) !== -1) {
+      box.checked = true;
+      box.closest('.check-row').classList.add('checked');
+    }
+    box.addEventListener('change', function () {
+      box.closest('.check-row').classList.toggle('checked', box.checked);
+      var huidig = ladenAangevinkt();
+      if (box.checked) {
+        if (huidig.indexOf(box.dataset.id) === -1) huidig.push(box.dataset.id);
+      } else {
+        huidig = huidig.filter(function (id) { return id !== box.dataset.id; });
+      }
+      opslaanAangevinkt(huidig);
+      updateVoortgang();
+    });
+  });
+  updateVoortgang();
+
+  var resetBtn = document.getElementById('checklist-reset');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', function () {
+      boxes.forEach(function (box) {
+        box.checked = false;
+        box.closest('.check-row').classList.remove('checked');
+      });
+      opslaanAangevinkt([]);
+      updateVoortgang();
+    });
+  }
+})();
+</script>
+<link rel="stylesheet" href="css/voorlees.css" />
+<script src="js/voorlees.js" defer data-vl-kleur="#e0401f" data-vl-knoptekst="Lees voor"></script>
+</body>
+</html>
