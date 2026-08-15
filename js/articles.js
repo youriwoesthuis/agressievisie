@@ -9,6 +9,61 @@ function formatDatumNL(iso) {
   return d.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
+// Zet Article- en BreadcrumbList-schema in de pagina zodat zoekmachines en
+// AI-antwoordmachines het artikel als zelfstandig, gedateerd en gecrediteerd stuk herkennen.
+function injectArticleSchema(article, canonicalUrl) {
+  const uitgever = {
+    '@type': 'Organization',
+    name: 'AgressieVisie',
+    url: 'https://agressievisie.nl/',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://agressievisie.nl/img/og-image.jpg',
+    },
+  };
+
+  const schema = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: article.titel,
+      description: article.excerpt,
+      datePublished: article.datum,
+      dateModified: article.datum,
+      articleSection: article.categorie,
+      inLanguage: 'nl-NL',
+      isAccessibleForFree: true,
+      mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
+      image: 'https://agressievisie.nl/img/og-image.jpg',
+      author: {
+        '@type': 'Organization',
+        name: 'Redactie AgressieVisie',
+        url: 'https://agressievisie.nl/over.html',
+      },
+      publisher: uitgever,
+      citation: article.bron_url
+        ? { '@type': 'CreativeWork', name: article.bron_naam, url: article.bron_url }
+        : undefined,
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://agressievisie.nl/' },
+        { '@type': 'ListItem', position: 2, name: 'Artikelen', item: 'https://agressievisie.nl/artikelen.html' },
+        { '@type': 'ListItem', position: 3, name: article.titel, item: canonicalUrl },
+      ],
+    },
+  ];
+
+  document.getElementById('article-schema')?.remove();
+  const el = document.createElement('script');
+  el.type = 'application/ld+json';
+  el.id = 'article-schema';
+  el.textContent = JSON.stringify(schema);
+  document.head.appendChild(el);
+}
+
 function articleCardHTML(a) {
   const badgeClass = CATEGORY_CLASS[a.categorie] || '';
   return `
@@ -106,6 +161,7 @@ async function renderArticleDetail(targetSelector) {
   document.querySelector('meta[property="og:url"]')?.setAttribute('content', canonicalUrl);
   document.querySelector('meta[property="og:title"]')?.setAttribute('content', `${article.titel} | AgressieVisie`);
   document.querySelector('meta[property="og:description"]')?.setAttribute('content', article.excerpt);
+  injectArticleSchema(article, canonicalUrl);
   const badgeClass = CATEGORY_CLASS[article.categorie] || '';
 
   const breadcrumbs = document.querySelector('#breadcrumbs');
