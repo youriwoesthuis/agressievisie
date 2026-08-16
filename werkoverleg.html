@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Werkoverlegkaarten: agressie bespreekbaar in 10 minuten</title>
+<meta name="description" content="Twaalf kant-en-klare teamsessies van tien minuten over agressie: een casus, drie gespreksvragen en een afspraak. Te bekijken op het scherm en te printen als kaartjes." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="canonical" href="https://agressievisie.nl/werkoverleg.html" />
+<meta property="og:url" content="https://agressievisie.nl/werkoverleg.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="AgressieVisie" />
+<meta property="og:title" content="Werkoverlegkaarten: agressie bespreekbaar in 10 minuten" />
+<meta property="og:description" content="Twaalf kant-en-klare teamsessies van tien minuten over agressie: een casus, drie gespreksvragen en een afspraak." />
+<meta property="og:image" content="https://agressievisie.nl/img/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://agressievisie.nl/img/og-image.jpg" />
+<link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .wo-wrap { max-width: 860px; margin: 0 auto; }
+  .wo-balk { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+  .wo-teller { font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); }
+  .wo-teller b { color: var(--ink); font-size: 15px; letter-spacing: 0; }
+  .wo-nav { display: flex; gap: 8px; }
+  .wo-nav button { width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid var(--line); background: #fff; cursor: pointer; font-size: 17px; color: var(--text); }
+  .wo-nav button:hover:not(:disabled) { border-color: var(--red); color: var(--red-dark); }
+  .wo-nav button:disabled { opacity: .35; cursor: default; }
+  .wo-nav button:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+  .wo-kaart { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-sm); overflow: hidden; }
+  .wo-kop { background: var(--ink); color: var(--text-inverse); padding: 24px 28px; position: relative; overflow: hidden; }
+  .wo-kop::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 420px 260px at 92% 0%, rgba(224,64,31,.32), transparent 70%); }
+  .wo-kop > * { position: relative; z-index: 1; }
+  .wo-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; font-size: 11.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); }
+  .wo-nr { width: 30px; height: 30px; border-radius: 9px; background: var(--grad-alert); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; letter-spacing: 0; }
+  .wo-kop h2 { color: #fff; font-size: clamp(20px, 3vw, 27px); margin: 0; letter-spacing: -.02em; line-height: 1.2; text-wrap: balance; }
+
+  .wo-body { padding: 26px 28px 28px; }
+  .wo-blokkop { font-size: 11.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--red-dark); margin-bottom: 8px; }
+  .wo-casus { font-size: 16.5px; line-height: 1.6; margin: 0 0 22px; padding: 16px 18px; background: var(--paper-soft); border-left: 3px solid var(--red); border-radius: var(--radius-sm); }
+  .wo-vragen { margin: 0 0 22px; padding: 0; list-style: none; counter-reset: v; }
+  .wo-vragen li { counter-increment: v; position: relative; padding-left: 34px; margin-bottom: 12px; font-size: 16px; line-height: 1.55; }
+  .wo-vragen li::before { content: counter(v); position: absolute; left: 0; top: 1px; width: 23px; height: 23px; border-radius: 50%; border: 1.5px solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; color: var(--text-muted); }
+  .wo-afspraak { border: 1px dashed var(--line-strong, var(--line)); border-left: 3px solid var(--amber); border-radius: var(--radius-sm); padding: 15px 18px; background: #fffdf8; }
+  .wo-afspraak .wo-blokkop { color: var(--amber-dark); }
+  .wo-afspraak p { margin: 0; font-size: 15.5px; line-height: 1.55; }
+  .wo-leider { margin-top: 18px; font-size: 13.5px; color: var(--text-muted); line-height: 1.55; }
+  .wo-leider b { color: var(--text); }
+
+  .wo-strip { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 22px; }
+  .wo-strip button { width: 32px; height: 32px; border-radius: 8px; border: 1.5px solid var(--line); background: #fff; cursor: pointer; font-size: 13px; font-weight: 800; color: var(--text-muted); }
+  .wo-strip button:hover { border-color: var(--red); color: var(--red-dark); }
+  .wo-strip button.actief { background: var(--grad-alert); border-color: transparent; color: #fff; }
+  .wo-strip button:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+  .wo-acties { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+  .wo-uitleg { background: var(--paper-soft); border-radius: var(--radius); padding: 22px 24px; margin-bottom: 30px; }
+  .wo-uitleg h3 { font-size: 16.5px; margin: 0 0 8px; }
+  .wo-uitleg p { font-size: 15px; color: var(--text-muted); margin: 0 0 8px; line-height: 1.6; }
+  .wo-uitleg p:last-child { margin-bottom: 0; }
+
+  /* Printen: alle twaalf als losse kaarten, twee per A4-pagina. */
+  .wo-print { display: none; }
+  @media print {
+    header.site, footer.site, #cookie-banner, .page-header, .breadcrumbs, .crisis-quickaccess,
+    .scroll-progress, .wo-balk, .wo-strip, .wo-acties, .wo-uitleg, .wo-kaart, .no-print { display: none !important; }
+    .wo-print { display: block !important; }
+    .wo-pk { break-inside: avoid; page-break-inside: avoid; border: 1.5px solid #cfcfd6; border-radius: 8px; padding: 16px 18px; margin-bottom: 12px; }
+    .wo-pk-kop { display: flex; align-items: baseline; gap: 10px; border-bottom: 1.5px solid #17171a; padding-bottom: 7px; margin-bottom: 10px; }
+    .wo-pk-nr { font-size: 13px; font-weight: 800; color: #b8300f; }
+    .wo-pk-kop h3 { font-size: 15px; margin: 0; }
+    .wo-pk .lbl { font-size: 9.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #6c6c75; margin: 9px 0 3px; }
+    .wo-pk p, .wo-pk li { font-size: 11.5px; line-height: 1.45; margin: 0; }
+    .wo-pk ol { padding-left: 16px; margin: 0; }
+    .wo-pk li { margin-bottom: 3px; }
+    .wo-pk .afspr { border-top: 1px dashed #cfcfd6; margin-top: 9px; padding-top: 7px; }
+    .wrap { max-width: none !important; padding: 0 !important; }
+    .section, .section--tight { padding: 0 !important; }
+  }
+  @media (max-width: 620px) { .wo-kop, .wo-body { padding-left: 20px; padding-right: 20px; } }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agressievisie.nl/"},{"@type":"ListItem","position":2,"name":"Werkoverlegkaarten","item":"https://agressievisie.nl/werkoverleg.html"}]}
+</script>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a class="brand" href="index.html"><span class="brand-mark"></span>AgressieVisie</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="artikelen.html">Artikelen</a>
+      <a href="methodieken.html">Methodieken</a>
+      <a href="cijfers.html">Cijfers & trends</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button">Meer <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-dropdown-menu nav-mega">
+        <div class="nav-mega-col">
+          <h4>Kennisbank</h4>
+          <a href="lexicon.html">Begrippenlijst</a>
+          <a href="beleid-en-wetgeving.html">Beleid & wetgeving</a>
+          <a href="bronnen.html">Bronnenbank</a>
+          <a href="trendrapport.html">Trendrapport</a>
+          <a href="faq.html">Veelgestelde vragen</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Interactieve tools</h4>
+          <a href="wat-nu.html">Wat nu? Na een incident<span class="nav-badge">Nieuw</span></a>
+          <a href="oefengesprek.html">Oefengesprek<span class="nav-badge">Populair</span></a>
+          <a href="protocol-generator.html">Protocol-generator<span class="nav-badge">Populair</span></a>
+          <a href="risico-check.html">Risico-check</a>
+          <a href="kosten.html">Kostenberekening<span class="nav-badge">Nieuw</span></a>
+          <a href="werkoverleg.html" class="current">Werkoverlegkaarten<span class="nav-badge">Nieuw</span></a>
+          <a href="zelftest.html">Zelftest</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Downloads</h4>
+          <a href="gratis-gids.html">Gratis checklist</a>
+          <a href="ebook.html">Gratis e-book</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Platform</h4>
+          <a href="contact.html">Contact</a>
+          <a href="bijdragen.html">Draag bij</a>
+          <a href="over.html">Over dit platform</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="overzicht.html">Sitemap</a>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="nav-cta">
+      <a class="nav-search" href="zoeken.html" aria-label="Zoeken"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+  </nav>
+</header>
+
+<section class="page-header">
+  <div class="wrap">
+    <nav class="breadcrumbs"><a href="index.html">Home</a><span class="sep">/</span><span class="current">Werkoverlegkaarten</span></nav>
+    <span class="eyebrow">Voor teams</span>
+    <h1>Twaalf gesprekken van tien minuten</h1>
+    <p class="lede">Elk protocol zegt dat je agressie structureel moet bespreken. Zelden staat erbij wát je dan bespreekt. Deze twaalf kaarten vullen dat gat: een korte casus, drie vragen, en een afspraak om mee te eindigen.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap wo-wrap">
+
+    <div class="wo-uitleg no-print">
+      <h3>Hoe je deze kaarten gebruikt</h3>
+      <p>Neem één kaart per werkoverleg. Tien minuten is genoeg, en juist die beperking maakt dat het ook echt gebeurt. Onderzoek naar vaardigheidsbehoud laat consistent zien dat korte, herhaalde momenten meer opleveren dan één lange jaarlijkse sessie.</p>
+      <p>De volgorde is niet dwingend, maar kaart 1 en 2 leggen wel de basis: zonder gedeelde taal over signalen en grenzen blijven de andere gesprekken vaag. Eindig altijd met de afspraak onderaan de kaart, anders blijft het bij een goed gesprek.</p>
+    </div>
+
+    <div class="wo-balk no-print">
+      <span class="wo-teller">Kaart <b id="wo-nu">1</b> van <b>12</b></span>
+      <div class="wo-nav">
+        <button id="wo-vorig" aria-label="Vorige kaart">&#8592;</button>
+        <button id="wo-volgend" aria-label="Volgende kaart">&#8594;</button>
+      </div>
+    </div>
+
+    <div class="wo-kaart" id="wo-kaart"></div>
+    <div class="wo-strip no-print" id="wo-strip"></div>
+
+    <div class="wo-acties no-print">
+      <button class="btn btn-primary" id="wo-print">Print alle twaalf kaarten</button>
+      <a class="btn btn-outline" href="protocol-generator.html">Maak een protocol</a>
+    </div>
+
+    <div class="wo-print" id="wo-print-blok"></div>
+
+  </div>
+</section>
+<footer class="site">
+  <div class="footer-accent"></div>
+  <svg class="footer-watermark" viewBox="0 0 200 200" aria-hidden="true">
+    <rect width="200" height="200" rx="44" fill="#ffffff"/>
+    <rect x="58" y="64.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(35 100 72.6)"/>
+    <rect x="58" y="117.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(-35 100 125.6)"/>
+  </svg>
+  <div class="wrap">
+    <div class="footer-top">
+      <a class="footer-brand-block" href="index.html">
+        <span class="brand-mark"></span>
+        <div>
+          <span class="footer-brand-name">AgressieVisie</span>
+          <p class="footer-brand-tag">Kennisplatform over agressie</p>
+        </div>
+      </a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p>Signalen, trends en onderzoek over agressie. Een initiatief van Act in Move Training & Coaching.</p>
+        <a class="footer-aim-logo" href="https://actinmove.nl/" target="_blank" rel="noopener" aria-label="Act in Move Training & Coaching"><span class="aim-logo-mark"></span></a>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="artikelen.html">Artikelen</a></li>
+          <li><a href="methodieken.html">Methodieken</a></li>
+          <li><a href="trendrapport.html">Trendrapport</a></li>
+          <li><a href="risico-check.html">Risico-check</a></li>
+          <li><a href="kosten.html">Kostenberekening</a></li>
+          <li><a href="werkoverleg.html">Werkoverlegkaarten</a></li>
+          <li><a href="oefengesprek.html">Oefengesprek</a></li>
+          <li><a href="protocol-generator.html">Protocol-generator</a></li>
+          <li><a href="ebook.html">Gratis e-book</a></li>
+          <li><a href="zelftest.html">Zelftest</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Meer</h4>
+        <ul>
+          <li><a href="cijfers.html">Cijfers & trends</a></li>
+          <li><a href="lexicon.html">Begrippenlijst</a></li>
+          <li><a href="bronnen.html">Bronnenbank</a></li>
+          <li><a href="faq.html">Veelgestelde vragen</a></li>
+          <li><a href="gratis-gids.html">Gratis checklist</a></li>
+          <li><a href="over.html">Over dit platform</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Juridisch</h4>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="overzicht.html">Sitemap</a></li>
+          <li><a href="privacy.html">Privacy & cookies</a></li>
+          <li><a href="https://actinmove.nl/" target="_blank" rel="noopener">Act in Move ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-mark"><span class="brand-mark"></span>© <span data-year></span> AgressieVisie, onderdeel van Act in Move Training & Coaching</span>
+      <span><a href="https://actinmove.nl/" target="_blank" rel="noopener">actinmove.nl</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+const KAARTEN = [
+  { t: 'Welk signaal zie jij als eerste?', th: 'Signalen',
+    c: 'Twee collega\'s beschrijven dezelfde bezoeker. De één zag iemand die "gewoon een beetje kortaf" was. De ander wist na tien seconden dat het mis zou gaan.',
+    v: ['Waar let jij als eerste op bij iemand die binnenkomt?', 'Wanneer heb je voor het laatst een signaal gezien dat achteraf klopte?', 'Wat maakt dat de één iets ziet en de ander niet?'],
+    a: 'Spreek af dat iedereen deze week één signaal noteert dat hij opving, en neem die volgende keer door.',
+    l: 'Laat mensen niet in theorie praten. Vraag door tot er een concrete situatie op tafel ligt.' },
+
+  { t: 'Waar ligt onze grens precies?', th: 'De norm',
+    c: 'Een klant scheldt een medewerker uit. De ene collega zegt: "Dat hoort er nu eenmaal bij." De andere vindt dat er een gesprek moet komen. Beiden werken hier al jaren.',
+    v: ['Wat accepteren wij wel en wat niet?', 'Waarin verschillen we van elkaar, en hoe kan dat?', 'Wat zou een nieuwe collega hierover moeten weten op dag één?'],
+    a: 'Formuleer samen één zin die onze grens beschrijft, en hang die op waar bezoekers hem zien.',
+    l: 'Verschil van mening is hier het doel, niet het probleem. Een norm die niet is uitgesproken bestaat niet.' },
+
+  { t: 'De eerste zin die je zegt', th: 'Reageren',
+    c: 'Iemand komt boos binnen en begint direct te schreeuwen, nog voordat je weet waar het over gaat.',
+    v: ['Wat zeg jij dan als eerste?', 'Wat werkt volgens jou nooit?', 'Wat is het verschil tussen erkennen en gelijk geven?'],
+    a: 'Kies samen één openingszin die iedereen kan gebruiken, en oefen hem hardop.',
+    l: 'Laat het echt uitspreken. Een zin die je alleen bedenkt, komt er onder druk niet uit.' },
+
+  { t: 'Wachten zonder te weten hoe lang', th: 'Preventie',
+    c: 'De wachttijd loopt op. Niemand zegt er iets over. Na veertig minuten staat de eerste bezoeker aan de balie, en die is niet de laatste.',
+    v: ['Hoe merken wij dat het wachten begint te knellen?', 'Wie zegt er dan iets, en wat zegt die?', 'Wat zouden we kunnen doen voordat iemand het komt vragen?'],
+    a: 'Spreek af wie bij oplopende wachttijd actief communiceert, en vanaf welk moment.',
+    l: 'Onduidelijkheid over de wachttijd is een van de meest voorkomende aanleidingen. Dit is vaak de goedkoopste winst.' },
+
+  { t: 'Als je het alleen moet doen', th: 'Alleen werken',
+    c: 'Een collega staat er alleen voor: geen collega in de buurt, geen tweede paar ogen, en de situatie loopt langzaam op.',
+    v: ['Wanneer sta jij er hier alleen voor?', 'Wat zou je op dat moment nodig hebben?', 'Weet iedereen hoe hij hulp inroept, en werkt dat ook echt?'],
+    a: 'Test deze week het alarmmiddel. Werkt het niet of weet niet iedereen hoe het werkt, dan is dat de actie.',
+    l: 'Een alarmknop die nooit is uitgeprobeerd, is geen voorziening maar een aanname.' },
+
+  { t: 'Wat houdt ons tegen om te melden?', th: 'Melden',
+    c: 'Uit de registratie blijkt dat er vorig jaar zeven incidenten waren. In het werkoverleg vertellen mensen er binnen tien minuten al vier die er niet bij staan.',
+    v: ['Wanneer meld jij iets wel, en wanneer niet?', 'Wat maakt melden moeilijk of onaantrekkelijk?', 'Wat gebeurt er eigenlijk met een melding?'],
+    a: 'Haal één drempel weg die vandaag genoemd is, en vertel volgende keer wat er met de meldingen is gebeurd.',
+    l: 'Als er niets zichtbaar met meldingen gebeurt, stopt men met melden. Dat is de kern van dit gesprek.' },
+
+  { t: 'Elkaar op tijd overnemen', th: 'Samenwerken',
+    c: 'Een collega zit klem in een gesprek dat niet meer de goede kant op gaat. Jij ziet het gebeuren vanaf de andere kant van de ruimte.',
+    v: ['Wanneer neem jij over van een collega?', 'Hoe geef je aan dat je overgenomen wilt worden?', 'Wat houdt ons tegen om in te grijpen?'],
+    a: 'Spreek een signaal af waarmee je zonder woorden om overname vraagt.',
+    l: 'Veel mensen vragen niet om hulp omdat ze denken dat het als falen wordt gezien. Benoem dat.' },
+
+  { t: 'Wat heb jij nodig na een incident?', th: 'Nazorg',
+    c: 'Na een incident vraagt de leidinggevende: "Gaat het weer?" De medewerker zegt ja, werkt door, en meldt zich twee weken later ziek.',
+    v: ['Wat heb jij nodig direct na zoiets?', 'Wat helpt juist niet?', 'Hoe merken wij het als het met iemand niet goed gaat?'],
+    a: 'Spreek af dat er altijd een nagesprek komt, ook als iemand zegt dat het niet nodig is.',
+    l: 'Dit is een kwetsbaar gesprek. Ga zelf als eerste, en geef een eerlijk antwoord.' },
+
+  { t: 'Steeds dezelfde persoon', th: 'Herhaling',
+    c: 'Dezelfde bezoeker zorgt al maanden voor spanning. Iedereen weet het, niemand heeft het opgeschreven, en er is nooit een besluit genomen.',
+    v: ['Wie kennen wij allemaal, zonder dat het ergens staat?', 'Waarom is er nooit iets vastgelegd?', 'Wat zou een passende stap zijn?'],
+    a: 'Kies één terugkerende situatie en leg deze week vast wat er speelt en wat de afspraak wordt.',
+    l: 'Herhaling maakt een zwaardere maatregel proportioneel, maar alleen als het is vastgelegd.' },
+
+  { t: 'Gedrag dat niet kwaad bedoeld is', th: 'Onbegrepen gedrag',
+    c: 'Een cliënt met dementie slaat tijdens de ochtendzorg. Niet uit boosheid, maar uit angst en verwarring.',
+    v: ['Verandert de oorzaak wat wij moeten doen?', 'Verandert het wat de medewerker nodig heeft?', 'Waar zit voor ons het verschil tussen begrip en accepteren?'],
+    a: 'Spreek af dat ook dit soort incidenten wordt gemeld, juist omdat de impact hetzelfde is.',
+    l: 'Onbegrepen gedrag wordt vaak niet gemeld omdat het "erbij hoort". Daardoor blijft de belasting onzichtbaar.' },
+
+  { t: 'Als het van binnen de club komt', th: 'Onder elkaar',
+    c: 'Onder werkdruk wordt de toon tussen collega\'s korter en scherper. Niemand noemt het agressie, maar iedereen voelt het.',
+    v: ['Hoe praten wij met elkaar als het druk is?', 'Wat laten we passeren dat we bij een bezoeker niet zouden accepteren?', 'Bij wie kun je terecht als het over een collega gaat?'],
+    a: 'Zoek uit wie onze vertrouwenspersoon is en zorg dat iedereen dat weet.',
+    l: 'Dit gesprek kan ongemakkelijk worden. Dat is precies waarom het nodig is.' },
+
+  { t: 'Wanneer stop je ermee?', th: 'Grenzen',
+    c: 'Het gesprek escaleert. De medewerker blijft praten, blijft uitleggen, blijft proberen. Achteraf zegt iedereen: je had veel eerder weg moeten lopen.',
+    v: ['Wanneer is de-escaleren geen optie meer?', 'Mag je hier weglopen uit een situatie?', 'Wat gebeurt er daarna, en wie vangt het op?'],
+    a: 'Spreek expliciet uit dat weglopen is toegestaan, en leg vast wie het dan overneemt.',
+    l: 'Zonder uitgesproken toestemming blijven mensen doorgaan tot het te laat is. Dit is de belangrijkste kaart.' },
+];
+
+const $ = id => document.getElementById(id);
+let idx = 0;
+
+function toon(n) {
+  idx = Math.max(0, Math.min(KAARTEN.length - 1, n));
+  const k = KAARTEN[idx];
+  $('wo-nu').textContent = idx + 1;
+  $('wo-kaart').innerHTML = `
+    <div class="wo-kop">
+      <div class="wo-meta"><span class="wo-nr">${idx + 1}</span><span>${k.th}</span><span>· 10 minuten</span></div>
+      <h2>${k.t}</h2>
+    </div>
+    <div class="wo-body">
+      <div class="wo-blokkop">De situatie</div>
+      <p class="wo-casus">${k.c}</p>
+      <div class="wo-blokkop">Bespreek samen</div>
+      <ol class="wo-vragen">${k.v.map(v => `<li>${v}</li>`).join('')}</ol>
+      <div class="wo-afspraak">
+        <div class="wo-blokkop">Eindig hiermee</div>
+        <p>${k.a}</p>
+      </div>
+      <p class="wo-leider"><b>Voor wie het gesprek leidt:</b> ${k.l}</p>
+    </div>`;
+  $('wo-vorig').disabled = idx === 0;
+  $('wo-volgend').disabled = idx === KAARTEN.length - 1;
+  [...$('wo-strip').children].forEach((b, i) => b.classList.toggle('actief', i === idx));
+}
+
+$('wo-strip').innerHTML = KAARTEN.map((_, i) => `<button aria-label="Kaart ${i + 1}">${i + 1}</button>`).join('');
+[...$('wo-strip').children].forEach((b, i) => b.addEventListener('click', () => toon(i)));
+$('wo-vorig').addEventListener('click', () => toon(idx - 1));
+$('wo-volgend').addEventListener('click', () => toon(idx + 1));
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft') toon(idx - 1);
+  if (e.key === 'ArrowRight') toon(idx + 1);
+});
+
+// Alle twaalf kaarten staan altijd in de printversie, ongeacht welke op het scherm staat.
+$('wo-print-blok').innerHTML = KAARTEN.map((k, i) => `
+  <div class="wo-pk">
+    <div class="wo-pk-kop"><span class="wo-pk-nr">${i + 1}</span><h3>${k.t}</h3></div>
+    <div class="lbl">De situatie</div><p>${k.c}</p>
+    <div class="lbl">Bespreek samen</div><ol>${k.v.map(v => `<li>${v}</li>`).join('')}</ol>
+    <div class="afspr"><div class="lbl">Eindig hiermee</div><p>${k.a}</p></div>
+  </div>`).join('');
+
+$('wo-print').addEventListener('click', () => window.print());
+toon(0);
+</script>
+</body>
+</html>
