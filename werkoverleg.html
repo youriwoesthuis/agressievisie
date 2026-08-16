@@ -31,25 +31,60 @@
   .wo-nav button:disabled { opacity: .35; cursor: default; }
   .wo-nav button:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
 
-  .wo-kaart { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-sm); overflow: hidden; }
-  .wo-kop { background: var(--ink); color: var(--text-inverse); padding: 24px 28px; position: relative; overflow: hidden; }
-  .wo-kop::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 420px 260px at 92% 0%, rgba(224,64,31,.32), transparent 70%); }
-  .wo-kop > * { position: relative; z-index: 1; }
-  .wo-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; font-size: 11.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); }
-  .wo-nr { width: 30px; height: 30px; border-radius: 9px; background: var(--grad-alert); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; letter-spacing: 0; }
-  .wo-kop h2 { color: #fff; font-size: clamp(20px, 3vw, 27px); margin: 0; letter-spacing: -.02em; line-height: 1.2; text-wrap: balance; }
+  /* Echte kaarten: klik of toets om te draaien. Voorkant de situatie,
+     achterkant de vragen. Zelfde donkere vormtaal als de hero. */
+  .wo-flip { perspective: 1600px; }
+  .wo-binnen {
+    position: relative; transform-style: preserve-3d; transition: transform .6s cubic-bezier(.4,0,.2,1);
+  }
+  .wo-flip.om .wo-binnen { transform: rotateY(180deg); }
+  .wo-zijde {
+    position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column;
+    background: var(--ink); color: var(--text-inverse); box-shadow: var(--shadow-md);
+    cursor: pointer; text-align: left; border: none; font-family: inherit; width: 100%;
+  }
+  .wo-zijde::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 560px 340px at 88% 0%, rgba(224,64,31,.30), transparent 70%);
+  }
+  .wo-zijde > * { position: relative; z-index: 1; }
+  .wo-zijde:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+  .wo-achter { transform: rotateY(180deg); }
+  .wo-achter::before { background: radial-gradient(ellipse 560px 340px at 12% 100%, rgba(245,165,36,.26), transparent 70%); }
 
-  .wo-body { padding: 26px 28px 28px; }
-  .wo-blokkop { font-size: 11.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--red-dark); margin-bottom: 8px; }
-  .wo-casus { font-size: 16.5px; line-height: 1.6; margin: 0 0 22px; padding: 16px 18px; background: var(--paper-soft); border-left: 3px solid var(--red); border-radius: var(--radius-sm); }
-  .wo-vragen { margin: 0 0 22px; padding: 0; list-style: none; counter-reset: v; }
-  .wo-vragen li { counter-increment: v; position: relative; padding-left: 34px; margin-bottom: 12px; font-size: 16px; line-height: 1.55; }
-  .wo-vragen li::before { content: counter(v); position: absolute; left: 0; top: 1px; width: 23px; height: 23px; border-radius: 50%; border: 1.5px solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; color: var(--text-muted); }
-  .wo-afspraak { border: 1px dashed var(--line-strong, var(--line)); border-left: 3px solid var(--amber); border-radius: var(--radius-sm); padding: 15px 18px; background: #fffdf8; }
-  .wo-afspraak .wo-blokkop { color: var(--amber-dark); }
-  .wo-afspraak p { margin: 0; font-size: 15.5px; line-height: 1.55; }
-  .wo-leider { margin-top: 18px; font-size: 13.5px; color: var(--text-muted); line-height: 1.55; }
-  .wo-leider b { color: var(--text); }
+  .wo-vlak { padding: 28px 30px; display: flex; flex-direction: column; height: 100%; }
+  .wo-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font-size: 11.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); }
+  .wo-nr { width: 32px; height: 32px; border-radius: 9px; background: var(--grad-alert); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; letter-spacing: 0; flex-shrink: 0; }
+  .wo-zijde h2 { color: #fff; font-size: clamp(21px, 3vw, 28px); margin: 0 0 18px; letter-spacing: -.02em; line-height: 1.2; text-wrap: balance; }
+
+  .wo-blokkop { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); margin-bottom: 8px; }
+  .wo-casus { font-size: 17px; line-height: 1.6; margin: 0; color: var(--text-inverse); }
+
+  .wo-vragen { margin: 0 0 20px; padding: 0; list-style: none; counter-reset: v; }
+  .wo-vragen li { counter-increment: v; position: relative; padding-left: 34px; margin-bottom: 11px; font-size: 15.5px; line-height: 1.5; color: var(--text-inverse); }
+  .wo-vragen li::before {
+    content: counter(v); position: absolute; left: 0; top: 0; width: 23px; height: 23px; border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,.28); display: flex; align-items: center; justify-content: center;
+    font-size: 12.5px; font-weight: 800; color: #fff;
+  }
+  .wo-afspraak { border-left: 3px solid var(--amber); background: rgba(255,255,255,.07); border-radius: var(--radius-sm); padding: 14px 16px; }
+  .wo-afspraak p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--text-inverse); }
+  .wo-leider { margin-top: 14px; font-size: 13px; color: var(--text-inverse-muted); line-height: 1.5; }
+  .wo-leider b { color: #fff; }
+
+  .wo-draai {
+    margin-top: auto; padding-top: 18px; display: flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--amber);
+  }
+  .wo-draai svg { transition: transform .3s ease; }
+  .wo-zijde:hover .wo-draai svg { transform: rotate(180deg); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wo-binnen { transition: none; }
+    .wo-draai svg { transition: none; }
+  }
+  @media (max-width: 620px) { .wo-vlak { padding: 22px 20px; } }
 
   .wo-strip { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 22px; }
   .wo-strip button { width: 32px; height: 32px; border-radius: 8px; border: 1.5px solid var(--line); background: #fff; cursor: pointer; font-size: 13px; font-weight: 800; color: var(--text-muted); }
@@ -160,6 +195,7 @@
     <div class="wo-uitleg no-print">
       <h3>Hoe je deze kaarten gebruikt</h3>
       <p>Neem één kaart per werkoverleg. Tien minuten is genoeg, en juist die beperking maakt dat het ook echt gebeurt. Onderzoek naar vaardigheidsbehoud laat consistent zien dat korte, herhaalde momenten meer opleveren dan één lange jaarlijkse sessie.</p>
+      <p>Klik op een kaart om hem om te draaien: de voorkant toont de situatie, de achterkant de vragen en de afspraak. Zo kun je de situatie eerst voorlezen zonder dat het antwoord al meekijkt.</p>
       <p>De volgorde is niet dwingend, maar kaart 1 en 2 leggen wel de basis: zonder gedeelde taal over signalen en grenzen blijven de andere gesprekken vaag. Eindig altijd met de afspraak onderaan de kaart, anders blijft het bij een goed gesprek.</p>
     </div>
 
@@ -329,30 +365,61 @@ const KAARTEN = [
 const $ = id => document.getElementById(id);
 let idx = 0;
 
+const PIJL = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>';
+
 function toon(n) {
   idx = Math.max(0, Math.min(KAARTEN.length - 1, n));
   const k = KAARTEN[idx];
   $('wo-nu').textContent = idx + 1;
+  $('wo-kaart').className = 'wo-flip';
   $('wo-kaart').innerHTML = `
-    <div class="wo-kop">
-      <div class="wo-meta"><span class="wo-nr">${idx + 1}</span><span>${k.th}</span><span>· 10 minuten</span></div>
-      <h2>${k.t}</h2>
-    </div>
-    <div class="wo-body">
-      <div class="wo-blokkop">De situatie</div>
-      <p class="wo-casus">${k.c}</p>
-      <div class="wo-blokkop">Bespreek samen</div>
-      <ol class="wo-vragen">${k.v.map(v => `<li>${v}</li>`).join('')}</ol>
-      <div class="wo-afspraak">
-        <div class="wo-blokkop">Eindig hiermee</div>
-        <p>${k.a}</p>
-      </div>
-      <p class="wo-leider"><b>Voor wie het gesprek leidt:</b> ${k.l}</p>
+    <div class="wo-binnen">
+      <button class="wo-zijde wo-voor" type="button" aria-label="Kaart omdraaien om de vragen te zien">
+        <div class="wo-vlak">
+          <div class="wo-meta"><span class="wo-nr">${idx + 1}</span><span>${k.th}</span><span>· 10 minuten</span></div>
+          <h2>${k.t}</h2>
+          <div class="wo-blokkop">De situatie</div>
+          <p class="wo-casus">${k.c}</p>
+          <div class="wo-draai">${PIJL}<span>Draai om voor de vragen</span></div>
+        </div>
+      </button>
+      <button class="wo-zijde wo-achter" type="button" aria-label="Kaart terugdraaien">
+        <div class="wo-vlak">
+          <div class="wo-blokkop">Bespreek samen</div>
+          <ol class="wo-vragen">${k.v.map(v => `<li>${v}</li>`).join('')}</ol>
+          <div class="wo-afspraak">
+            <div class="wo-blokkop">Eindig hiermee</div>
+            <p>${k.a}</p>
+          </div>
+          <p class="wo-leider"><b>Voor wie het gesprek leidt:</b> ${k.l}</p>
+          <div class="wo-draai">${PIJL}<span>Terug naar de situatie</span></div>
+        </div>
+      </button>
     </div>`;
+
+  // Beide zijden staan op elkaar, dus de container moet zo hoog zijn als de langste.
+  // Direct meten, niet via requestAnimationFrame: die vuurt niet als de pagina
+  // even niet rendert, en dan houdt de kaart hoogte 0 en is hij onzichtbaar.
+  const binnen = $('wo-kaart').querySelector('.wo-binnen');
+  const zijden = [...$('wo-kaart').querySelectorAll('.wo-zijde')];
+  binnen.style.height = Math.max(...zijden.map(z => z.scrollHeight)) + 'px';
+  zijden.forEach(z => z.addEventListener('click', () => $('wo-kaart').classList.toggle('om')));
+
   $('wo-vorig').disabled = idx === 0;
   $('wo-volgend').disabled = idx === KAARTEN.length - 1;
   [...$('wo-strip').children].forEach((b, i) => b.classList.toggle('actief', i === idx));
 }
+
+// Bij verandering van vensterbreedte de kaarthoogte opnieuw bepalen.
+let hertekenTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(hertekenTimer);
+  hertekenTimer = setTimeout(() => {
+    const binnen = $('wo-kaart').querySelector('.wo-binnen');
+    if (!binnen) return;
+    binnen.style.height = Math.max(...[...$('wo-kaart').querySelectorAll('.wo-zijde')].map(z => z.scrollHeight)) + 'px';
+  }, 150);
+});
 
 $('wo-strip').innerHTML = KAARTEN.map((_, i) => `<button aria-label="Kaart ${i + 1}">${i + 1}</button>`).join('');
 [...$('wo-strip').children].forEach((b, i) => b.addEventListener('click', () => toon(i)));
