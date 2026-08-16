@@ -348,7 +348,16 @@ const SECTOR_PCT = {
 };
 
 const euro = n => '€ ' + Math.round(n).toLocaleString('nl-NL');
-const getal = id => Math.max(0, Number(document.getElementById(id).value) || 0);
+
+// Het max-attribuut op een number-veld remt alleen de pijltjes; wie een getal
+// intikt komt er zo langs. Zonder deze begrenzing rekende de tool gewoon door
+// met 150% en meldde hij 75 geraakte medewerkers op 50 in dienst. Voor een
+// bedrag dat je in een gesprek moet kunnen verdedigen is dat fataal.
+const getal = id => {
+  const el = document.getElementById(id);
+  const max = el.max !== '' ? Number(el.max) : Infinity;
+  return Math.min(max, Math.max(0, Number(el.value) || 0));
+};
 
 function bereken() {
   const mw = getal('k-mw');
@@ -356,7 +365,9 @@ function bereken() {
   const verzuimpct = getal('k-verzuimpct');
   const dagen = getal('k-dagen');
   const dagkosten = getal('k-dagkosten');
-  const vertrek = getal('k-vertrek');
+  // Er kunnen niet meer mensen vertrekken dan er in dienst zijn. Zonder deze
+  // grens stond er bij 0 medewerkers toch een vervangingspost in het totaal.
+  const vertrek = Math.min(getal('k-vertrek'), mw);
   const vervanging = getal('k-vervanging');
 
   const geraakt = mw * (pct / 100);
@@ -504,7 +515,19 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('k-sector').addEventListener('change', vulSectorIn);
   // Alles rekent direct door: wie een getal aanpast wil het effect meteen zien.
   ['k-mw','k-pct','k-verzuimpct','k-dagen','k-dagkosten','k-nadagen','k-naverlies','k-uren','k-uurtarief','k-vertrek','k-vervanging']
-    .forEach(id => document.getElementById(id).addEventListener('input', bereken));
+    .forEach(id => {
+      const el = document.getElementById(id);
+      el.addEventListener('input', bereken);
+      // Bij het verlaten van het veld de begrensde waarde ook echt tonen, anders
+      // staat er 150 in beeld terwijl de som met 100 rekent.
+      el.addEventListener('change', () => {
+        const waarde = getal(id);
+        if (Number(el.value) !== waarde) {
+          el.value = waarde;
+          bereken();
+        }
+      });
+    });
   document.getElementById('k-print').addEventListener('click', () => window.print());
   vulSectorIn();
 });

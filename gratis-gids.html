@@ -28,7 +28,10 @@
   }
   .checklist-sheet h2 { color: var(--red-dark); font-size: 20px; margin: 28px 0 14px; }
   .checklist-sheet h2:first-of-type { margin-top: 8px; }
-  .check-row { display: flex; align-items: flex-start; gap: 12px; padding: 9px 0; font-size: 15px; transition: opacity .15s ease; }
+  /* Elke regel is een <label> om het vinkje heen: zo leest een schermlezer de
+     tekst bij het selectievakje voor, en kun je op de hele regel tikken in
+     plaats van precies op het vakje van 18 bij 18 pixels. */
+  .check-row { display: flex; align-items: flex-start; gap: 12px; padding: 9px 0; font-size: 15px; transition: opacity .15s ease; cursor: pointer; }
   .check-box {
     width: 18px; height: 18px; border: 2px solid var(--red); border-radius: 4px; flex-shrink: 0; margin-top: 2px;
     appearance: none; -webkit-appearance: none; background: #fff; cursor: pointer; position: relative;
@@ -169,41 +172,41 @@
             </div>
 
             <h2>Fysieke signalen</h2>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="1" /><span>Verhoogde spierspanning (gebalde vuisten, stijve houding)</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="2" /><span>Onrustig of dreigend ijsberen</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="3" /><span>Opvallend dichterbij komen dan gebruikelijk</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="4" /><span>Verandering in ademhaling (sneller, hoorbaar)</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="5" /><span>Rood aangelopen gezicht of zichtbaar zweten</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="6" /><span>Trillende handen of trillende stem</span></div>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="1" /><span>Verhoogde spierspanning (gebalde vuisten, stijve houding)</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="2" /><span>Onrustig of dreigend ijsberen</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="3" /><span>Opvallend dichterbij komen dan gebruikelijk</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="4" /><span>Verandering in ademhaling (sneller, hoorbaar)</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="5" /><span>Rood aangelopen gezicht of zichtbaar zweten</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="6" /><span>Trillende handen of trillende stem</span></label>
 
             <h2>Verbale signalen</h2>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="7" /><span>Stemvolume neemt toe, spreektempo versnelt</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="8" /><span>Dreigende of intimiderende taal</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="9" /><span>Herhaaldelijk dezelfde eis herhalen zonder ruimte voor dialoog</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="10" /><span>Sarcasme of kleinerende opmerkingen</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="11" /><span>Ongebruikelijk vloeken of schelden voor die persoon</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="12" /><span>Plotselinge stiltes, afgewisseld met uitbarstingen</span></div>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="7" /><span>Stemvolume neemt toe, spreektempo versnelt</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="8" /><span>Dreigende of intimiderende taal</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="9" /><span>Herhaaldelijk dezelfde eis herhalen zonder ruimte voor dialoog</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="10" /><span>Sarcasme of kleinerende opmerkingen</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="11" /><span>Ongebruikelijk vloeken of schelden voor die persoon</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="12" /><span>Plotselinge stiltes, afgewisseld met uitbarstingen</span></label>
 
             <h2>Gedragssignalen</h2>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="13" /><span>Verminderd vermogen om instructies te verwerken</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="14" /><span>Oogcontact vermijden óf juist opvallend fixeren</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="15" /><span>Grenzen van persoonlijke ruimte overschrijden</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="16" /><span>Plotselinge stemmingswisselingen</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="17" /><span>Dingen vastpakken, gooien of hard neerzetten</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="18" /><span>Herhaaldelijk naar de uitgang of naar anderen kijken</span></div>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="13" /><span>Verminderd vermogen om instructies te verwerken</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="14" /><span>Oogcontact vermijden óf juist opvallend fixeren</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="15" /><span>Grenzen van persoonlijke ruimte overschrijden</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="16" /><span>Plotselinge stemmingswisselingen</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="17" /><span>Dingen vastpakken, gooien of hard neerzetten</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="18" /><span>Herhaaldelijk naar de uitgang of naar anderen kijken</span></label>
 
             <h2>Signalen bij uzelf</h2>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="19" /><span>Je hartslag versnelt of je ademhaling wordt oppervlakkig</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="20" /><span>Je stem wordt harder of sneller</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="21" /><span>Je voelt de neiging om te overtuigen in plaats van te luisteren</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="22" /><span>Je wilt het gesprek zo snel mogelijk beëindigen</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="23" /><span>Je voelt irritatie of de neiging om terug te reageren</span></div>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="19" /><span>Je hartslag versnelt of je ademhaling wordt oppervlakkig</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="20" /><span>Je stem wordt harder of sneller</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="21" /><span>Je voelt de neiging om te overtuigen in plaats van te luisteren</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="22" /><span>Je wilt het gesprek zo snel mogelijk beëindigen</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="23" /><span>Je voelt irritatie of de neiging om terug te reageren</span></label>
 
             <h2>Omgevingsfactoren die het risico verhogen</h2>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="24" /><span>Lange wachttijden of drukte</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="25" /><span>Weinig privacy tijdens een gevoelig gesprek</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="26" /><span>Eerder gegeven onduidelijke of tegenstrijdige informatie</span></div>
-            <div class="check-row"><input type="checkbox" class="check-box" data-id="27" /><span>Beperkte vluchtroute of geen zichtbare collega's in de buurt</span></div>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="24" /><span>Lange wachttijden of drukte</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="25" /><span>Weinig privacy tijdens een gevoelig gesprek</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="26" /><span>Eerder gegeven onduidelijke of tegenstrijdige informatie</span></label>
+            <label class="check-row"><input type="checkbox" class="check-box" data-id="27" /><span>Beperkte vluchtroute of geen zichtbare collega's in de buurt</span></label>
 
             <h2>Wat nu?</h2>
             <div class="tip-row"><span class="tip-num">1</span><span>Blijf zelf rustig in toon en tempo.</span></div>
