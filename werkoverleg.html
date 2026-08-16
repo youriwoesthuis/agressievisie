@@ -4,14 +4,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Werkoverlegkaarten: agressie bespreekbaar in 10 minuten</title>
-<meta name="description" content="Twaalf kant-en-klare teamsessies van tien minuten over agressie: een casus, drie gespreksvragen en een afspraak. Te bekijken op het scherm en te printen als kaartjes." />
+<meta name="description" content="Twaalf teamsessies van tien minuten over agressie, met per sector een eigen situatie. Kies je sector, draai de kaart om voor de vragen, en print de set voor in de vergaderruimte." />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <link rel="canonical" href="https://agressievisie.nl/werkoverleg.html" />
 <meta property="og:url" content="https://agressievisie.nl/werkoverleg.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AgressieVisie" />
 <meta property="og:title" content="Werkoverlegkaarten: agressie bespreekbaar in 10 minuten" />
-<meta property="og:description" content="Twaalf kant-en-klare teamsessies van tien minuten over agressie: een casus, drie gespreksvragen en een afspraak." />
+<meta property="og:description" content="Twaalf teamsessies van tien minuten over agressie, met per sector een eigen situatie." />
 <meta property="og:image" content="https://agressievisie.nl/img/og-image.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -86,6 +86,11 @@
   }
   @media (max-width: 620px) { .wo-vlak { padding: 22px 20px; } }
 
+  .wo-sector { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; padding: 16px 18px; background: var(--paper-soft); border-radius: var(--radius); }
+  .wo-sector label { font-size: 14px; font-weight: 800; }
+  .wo-sector select { padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; font-family: inherit; font-size: 15px; font-weight: 600; background: #fff; }
+  .wo-sector select:focus { outline: 2px solid var(--red); outline-offset: 1px; }
+  .wo-sector-hint { font-size: 13px; color: var(--text-muted); flex: 1; min-width: 220px; line-height: 1.45; }
   .wo-strip { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 22px; }
   .wo-strip button { width: 32px; height: 32px; border-radius: 8px; border: 1.5px solid var(--line); background: #fff; cursor: pointer; font-size: 13px; font-weight: 800; color: var(--text-muted); }
   .wo-strip button:hover { border-color: var(--red); color: var(--red-dark); }
@@ -199,6 +204,20 @@
       <p>De volgorde is niet dwingend, maar kaart 1 en 2 leggen wel de basis: zonder gedeelde taal over signalen en grenzen blijven de andere gesprekken vaag. Eindig altijd met de afspraak onderaan de kaart, anders blijft het bij een goed gesprek.</p>
     </div>
 
+    <div class="wo-sector no-print">
+      <label for="wo-sectorkeuze">Kies je sector</label>
+      <select id="wo-sectorkeuze">
+        <option value="zorg">Zorg &amp; welzijn</option>
+        <option value="onderwijs">Onderwijs</option>
+        <option value="beveiliging">Beveiliging &amp; OV</option>
+        <option value="retail" selected>Klantcontact &amp; retail</option>
+        <option value="horeca">Horeca &amp; uitgaan</option>
+        <option value="overheid">Gemeenten &amp; overheid</option>
+        <option value="sport">Sport &amp; verenigingen</option>
+      </select>
+      <span class="wo-sector-hint">De twaalf onderwerpen zijn hetzelfde; de situatie op elke kaart past zich aan je sector aan.</span>
+    </div>
+
     <div class="wo-balk no-print">
       <span class="wo-teller">Kaart <b id="wo-nu">1</b> van <b>12</b></span>
       <div class="wo-nav">
@@ -288,6 +307,115 @@
 
 <script src="js/main.js"></script>
 <script>
+// Per sector een eigen situatie bij elk van de twaalf thema's. De vragen en de
+// afspraak zijn universeel; wat verschilt is de situatie die je herkent.
+const SECTOR_CASUS = {
+  zorg: [
+    'Twee collega\'s beschrijven dezelfde bezoeker op de afdeling. De één zag iemand die "gewoon bezorgd" was. De ander wist na tien seconden dat het mis zou gaan.',
+    'Een familielid scheldt een verpleegkundige uit over de zorg voor zijn moeder. De ene collega zegt: "Die man heeft het zwaar." De andere vindt dat er een gesprek moet komen.',
+    'Een zoon komt de afdeling op en begint direct te schreeuwen over de behandeling, nog voordat je weet wie hij is.',
+    'De wachttijd op de SEH loopt op tot ruim twee uur. Niemand komt langs de wachtruimte. Dan staat de eerste naaste bij de balie.',
+    'Een collega doet de avondronde alleen. Bij één kamer weet ze dat er spanning kan ontstaan, en er is niemand in de buurt.',
+    'Uit de registratie blijkt dat er vorig jaar zeven incidenten waren. In het werkoverleg vertellen collega\'s er binnen tien minuten al vier die er niet bij staan.',
+    'Een collega zit klem in een gesprek met een familielid dat niet meer de goede kant op gaat. Jij ziet het gebeuren vanaf de andere kant van de gang.',
+    'Na een incident vraagt de leidinggevende: "Gaat het weer?" De verpleegkundige zegt ja, maakt haar dienst af, en meldt zich twee weken later ziek.',
+    'Dezelfde bezoeker zorgt al maanden voor spanning bij het bezoekuur. Iedereen weet het, niemand heeft het opgeschreven.',
+    'Een cliënt met dementie slaat tijdens de ochtendzorg. Niet uit boosheid, maar uit angst en verwarring.',
+    'Onder hoge werkdruk wordt de toon tussen collega\'s korter en scherper. Niemand noemt het agressie, maar iedereen voelt het.',
+    'Het gesprek met een familielid escaleert. De verpleegkundige blijft uitleggen, blijft proberen. Achteraf zegt iedereen: je had eerder weg moeten lopen.',
+  ],
+  onderwijs: [
+    'Twee docenten beschrijven dezelfde leerling. De één zag iemand die "gewoon een slechte dag" had. De ander wist bij binnenkomst dat het mis zou gaan.',
+    'Een ouder scheldt een docent uit over een beoordeling. De ene collega zegt: "Die is gewoon boos om het cijfer." De andere vindt dat de directie erbij moet.',
+    'Een ouder staat na schooltijd bij je lokaal en begint direct verhaal te halen, nog voordat je je tas hebt gepakt.',
+    'Ouders wachten al drie weken op een reactie over de aanpak van hun kind. Er is niets teruggekoppeld. Dan staat er iemand bij de conciërge.',
+    'Een docent surveilleert alleen tijdens de pauze op een deel van het plein waar geen collega in de buurt is.',
+    'Uit de incidentenregistratie blijkt dat er vorig jaar zeven incidenten waren. In de teamvergadering noemen collega\'s er binnen tien minuten al vier die er niet bij staan.',
+    'Een collega zit klem in een oudergesprek dat niet meer de goede kant op gaat. Jij hoort het door de open deur.',
+    'Na een incident vraagt de teamleider: "Gaat het weer?" De docent zegt ja, geeft de rest van de dag les, en meldt zich twee weken later ziek.',
+    'Dezelfde ouder zorgt al maanden voor spanning bij elk contactmoment. Iedereen weet het, niemand heeft het vastgelegd.',
+    'Een leerling met een gedragsstoornis wordt fysiek tijdens een overgangsmoment. Niet uit onwil, maar uit overprikkeling.',
+    'Onder werkdruk wordt de toon in de teamkamer korter en scherper. Niemand noemt het agressie, maar iedereen voelt het.',
+    'Het oudergesprek escaleert. De docent blijft uitleggen, blijft proberen. Achteraf zegt iedereen: je had het gesprek eerder moeten beëindigen.',
+  ],
+  beveiliging: [
+    'Twee collega\'s beschrijven dezelfde reiziger. De één zag iemand die "gewoon gehaast" was. De ander wist na tien seconden dat het mis zou gaan.',
+    'Een reiziger zonder geldig vervoersbewijs scheldt een controleur uit. De ene collega zegt: "Dat hoort bij het werk." De andere wil er iets mee doen.',
+    'Iemand wordt aangesproken op zijn gedrag en begint direct te schreeuwen, nog voordat je hebt uitgelegd waarom.',
+    'De trein staat al twintig minuten stil zonder omroepbericht. Op het perron loopt het op. Dan komt de eerste reiziger op je af.',
+    'Een collega loopt de late ronde alleen over een station waar op dat uur nauwelijks mensen zijn.',
+    'Uit de registratie blijkt dat er vorig jaar zeven incidenten waren. In de briefing noemen collega\'s er binnen tien minuten al vier die er niet bij staan.',
+    'Een collega zit klem in een discussie met een reiziger die niet meer de goede kant op gaat. Jij ziet het gebeuren vanaf het andere eind van het perron.',
+    'Na een incident vraagt de teamleider: "Gaat het weer?" De collega zegt ja, maakt zijn dienst af, en meldt zich twee weken later ziek.',
+    'Dezelfde persoon zorgt al maanden voor problemen op hetzelfde traject. Iedereen kent hem, niemand heeft het vastgelegd.',
+    'Iemand met verward gedrag reageert fysiek tijdens een aanspreekmoment. Niet uit kwaadwilligheid, maar uit paniek.',
+    'Onder werkdruk wordt de toon tussen collega\'s korter en scherper. Niemand noemt het agressie, maar iedereen voelt het.',
+    'De discussie escaleert. De collega blijft praten, blijft uitleggen. Achteraf zegt iedereen: je had eerder afstand moeten nemen.',
+  ],
+  retail: [
+    'Twee medewerkers beschrijven dezelfde klant. De één zag iemand die "gewoon chagrijnig" was. De ander wist na tien seconden dat het mis zou gaan.',
+    'Een klant scheldt een caissière uit over het retourbeleid. De ene collega zegt: "Dat hoort er nu eenmaal bij." De andere vindt dat er iets moet gebeuren.',
+    'Een klant komt binnen met een klacht en begint direct te schreeuwen, nog voordat je weet waar het over gaat.',
+    'Het is zaterdagmiddag en er is één kassa open. De rij groeit, niemand zegt er iets over. Dan begint de eerste klant.',
+    'Een medewerker doet in haar eentje de sluiting, met de kassa-afhandeling en de deur die nog open is.',
+    'Uit de registratie blijkt dat er vorig jaar zeven incidenten waren. In het werkoverleg noemen collega\'s er binnen tien minuten al vier die er niet bij staan.',
+    'Een collega zit klem in een discussie met een klant die niet meer de goede kant op gaat. Jij ziet het gebeuren vanaf de andere kassa.',
+    'Na een incident vraagt de filiaalmanager: "Gaat het weer?" De medewerker zegt ja, werkt haar dienst uit, en meldt zich twee weken later ziek.',
+    'Dezelfde klant zorgt al maanden voor spanning in de winkel. Iedereen kent hem, niemand heeft het opgeschreven.',
+    'Iemand met verward gedrag reageert fysiek als hij wordt aangesproken. Niet uit kwaadwilligheid, maar uit onbegrip van de situatie.',
+    'Onder drukte wordt de toon tussen collega\'s korter en scherper. Niemand noemt het agressie, maar iedereen voelt het.',
+    'De discussie bij de kassa escaleert. De medewerker blijft uitleggen, blijft proberen. Achteraf zegt iedereen: je had de manager eerder moeten halen.',
+  ],
+  horeca: [
+    'Twee medewerkers beschrijven dezelfde gast. De één zag iemand die "gewoon gezellig" was. De ander wist na tien seconden dat het mis zou gaan.',
+    'Een gast scheldt een medewerker uit omdat hij niets meer krijgt. De ene collega zegt: "Die heeft gewoon te veel op." De andere vindt dat hij eruit moet.',
+    'Een gast wordt geweigerd en begint direct te schreeuwen, nog voordat je hebt uitgelegd waarom.',
+    'Het is druk, het eten duurt lang en niemand komt langs de tafel om iets te zeggen. Dan staat de eerste gast bij de bar.',
+    'Een medewerker sluit alleen af, met de kassa en de laatste gasten die nog buiten staan.',
+    'Uit de registratie blijkt dat er vorig jaar zeven incidenten waren. In het werkoverleg noemen collega\'s er binnen tien minuten al vier die er niet bij staan.',
+    'Een collega zit klem in een discussie met een gast die niet meer de goede kant op gaat. Jij ziet het gebeuren vanaf de andere kant van de zaak.',
+    'Na een incident vraagt de bedrijfsleider: "Gaat het weer?" De medewerker zegt ja, maakt zijn dienst af, en meldt zich twee weken later ziek.',
+    'Dezelfde gast zorgt al maanden voor problemen op vrijdagavond. Iedereen kent hem, niemand heeft het vastgelegd.',
+    'Een gast onder invloed reageert fysiek bij het weigeren. Niet uit kwaadwilligheid, maar omdat hij niet meer helder is.',
+    'Tijdens een drukke dienst wordt de toon in de keuken en achter de bar korter en scherper. Niemand noemt het agressie, maar iedereen voelt het.',
+    'De discussie bij de deur escaleert. De medewerker blijft praten, blijft proberen. Achteraf zegt iedereen: je had de portier eerder moeten halen.',
+  ],
+  overheid: [
+    'Twee baliemedewerkers beschrijven dezelfde bezoeker. De één zag iemand die "gewoon ontevreden" was. De ander wist na tien seconden dat het mis zou gaan.',
+    'Een inwoner scheldt een medewerker uit na een afwijzing. De ene collega zegt: "Die is gewoon gefrustreerd." De andere vindt dat er een brief moet.',
+    'Iemand hoort dat zijn aanvraag is afgewezen en begint direct te schreeuwen, nog voordat je de reden hebt kunnen uitleggen.',
+    'De wachttijd aan de balie loopt op tot een uur. Niemand komt langs de wachtruimte. Dan staat de eerste bezoeker bij het loket.',
+    'Een handhaver doet een controle alleen, op een locatie waar geen collega binnen bereik is.',
+    'Uit de registratie blijkt dat er vorig jaar zeven incidenten waren. In het werkoverleg noemen collega\'s er binnen tien minuten al vier die er niet bij staan.',
+    'Een collega zit klem in een baliegesprek dat niet meer de goede kant op gaat. Jij ziet het gebeuren vanaf het loket ernaast.',
+    'Na een incident vraagt de teamleider: "Gaat het weer?" De medewerker zegt ja, werkt de dag af, en meldt zich twee weken later ziek.',
+    'Dezelfde inwoner zorgt al maanden voor spanning bij elk contact. Iedereen kent hem, niemand heeft het vastgelegd.',
+    'Iemand met verward gedrag reageert fysiek aan de balie. Niet uit kwaadwilligheid, maar uit onmacht over een besluit dat hij niet begrijpt.',
+    'Onder werkdruk wordt de toon tussen collega\'s korter en scherper. Niemand noemt het agressie, maar iedereen voelt het.',
+    'Het baliegesprek escaleert. De medewerker blijft uitleggen, blijft proberen. Achteraf zegt iedereen: je had het loket eerder moeten sluiten.',
+  ],
+  sport: [
+    'Twee vrijwilligers beschrijven dezelfde ouder langs de lijn. De één zag iemand die "gewoon fanatiek" was. De ander wist na tien seconden dat het mis zou gaan.',
+    'Een ouder scheldt de scheidsrechter uit vanaf de kant. De ene bestuurder zegt: "Dat hoort bij voetbal." De andere wil hem aanspreken.',
+    'Een speler is het oneens met een beslissing en komt schreeuwend op je af, nog voordat je iets hebt kunnen zeggen.',
+    'De wedstrijd begint een half uur later door een tekort aan scheidsrechters. Niemand legt het uit. Dan komt de eerste ouder verhaal halen.',
+    'Een vrijwilliger staat alleen achter de bar tijdens een drukke competitiedag, zonder bestuurslid in de buurt.',
+    'Uit de meldingen blijkt dat er vorig seizoen zeven incidenten waren. In de bestuursvergadering noemen mensen er binnen tien minuten al vier die er niet bij staan.',
+    'Een vrijwilliger zit klem in een discussie met een ouder die niet meer de goede kant op gaat. Jij ziet het gebeuren vanaf het veld.',
+    'Na een incident vraagt de voorzitter: "Gaat het weer?" De scheidsrechter zegt ja, fluit de wedstrijd uit, en meldt zich daarna nooit meer aan.',
+    'Dezelfde supporter zorgt al seizoenen voor problemen bij thuiswedstrijden. Iedereen kent hem, niemand heeft het vastgelegd.',
+    'Een jeugdspeler reageert fysiek na een tegenslag. Niet uit kwaadwilligheid, maar uit frustratie die hij nog niet kan reguleren.',
+    'In het bestuur en tussen vrijwilligers wordt de toon rond drukke periodes korter en scherper. Niemand noemt het agressie, maar iedereen voelt het.',
+    'De discussie langs de lijn escaleert. De scheidsrechter blijft praten, blijft proberen. Achteraf zegt iedereen: je had de wedstrijd eerder moeten staken.',
+  ],
+};
+
+const SECTOR_NAAM = {
+  zorg: 'Zorg & welzijn', onderwijs: 'Onderwijs', beveiliging: 'Beveiliging & OV',
+  retail: 'Klantcontact & retail', horeca: 'Horeca & uitgaan', overheid: 'Gemeenten & overheid',
+  sport: 'Sport & verenigingen',
+};
+
 const KAARTEN = [
   { t: 'Welk signaal zie jij als eerste?', th: 'Signalen',
     c: 'Twee collega\'s beschrijven dezelfde bezoeker. De één zag iemand die "gewoon een beetje kortaf" was. De ander wist na tien seconden dat het mis zou gaan.',
@@ -365,6 +493,10 @@ const KAARTEN = [
 const $ = id => document.getElementById(id);
 let idx = 0;
 
+// De twaalf onderwerpen zijn universeel; alleen de situatie verschilt per sector.
+const sector = () => $('wo-sectorkeuze').value;
+const casus = i => SECTOR_CASUS[sector()][i];
+
 const PIJL = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>';
 
 function toon(n) {
@@ -379,7 +511,7 @@ function toon(n) {
           <div class="wo-meta"><span class="wo-nr">${idx + 1}</span><span>${k.th}</span><span>· 10 minuten</span></div>
           <h2>${k.t}</h2>
           <div class="wo-blokkop">De situatie</div>
-          <p class="wo-casus">${k.c}</p>
+          <p class="wo-casus">${casus(idx)}</p>
           <div class="wo-draai">${PIJL}<span>Draai om voor de vragen</span></div>
         </div>
       </button>
@@ -431,16 +563,34 @@ document.addEventListener('keydown', e => {
 });
 
 // Alle twaalf kaarten staan altijd in de printversie, ongeacht welke op het scherm staat.
-$('wo-print-blok').innerHTML = KAARTEN.map((k, i) => `
-  <div class="wo-pk">
-    <div class="wo-pk-kop"><span class="wo-pk-nr">${i + 1}</span><h3>${k.t}</h3></div>
-    <div class="lbl">De situatie</div><p>${k.c}</p>
-    <div class="lbl">Bespreek samen</div><ol>${k.v.map(v => `<li>${v}</li>`).join('')}</ol>
-    <div class="afspr"><div class="lbl">Eindig hiermee</div><p>${k.a}</p></div>
-  </div>`).join('');
+// De printversie bevat altijd alle twaalf kaarten van de gekozen sector.
+function bouwPrint() {
+  $('wo-print-blok').innerHTML = `
+    <p style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;">
+      Werkoverlegkaarten · ${SECTOR_NAAM[sector()]} · agressievisie.nl
+    </p>` + KAARTEN.map((k, i) => `
+    <div class="wo-pk">
+      <div class="wo-pk-kop"><span class="wo-pk-nr">${i + 1}</span><h3>${k.t}</h3></div>
+      <div class="lbl">De situatie</div><p>${casus(i)}</p>
+      <div class="lbl">Bespreek samen</div><ol>${k.v.map(v => `<li>${v}</li>`).join('')}</ol>
+      <div class="afspr"><div class="lbl">Eindig hiermee</div><p>${k.a}</p></div>
+    </div>`).join('');
+}
+
+// Sector onthouden, zodat je bij een volgend bezoek niet opnieuw hoeft te kiezen.
+const SECTOR_SLEUTEL = 'agressievisie-werkoverleg-sector';
+const bewaard = localStorage.getItem(SECTOR_SLEUTEL);
+if (bewaard && SECTOR_CASUS[bewaard]) $('wo-sectorkeuze').value = bewaard;
+
+$('wo-sectorkeuze').addEventListener('change', () => {
+  localStorage.setItem(SECTOR_SLEUTEL, sector());
+  toon(idx);
+  bouwPrint();
+});
 
 $('wo-print').addEventListener('click', () => window.print());
 toon(0);
+bouwPrint();
 </script>
 </body>
 </html>
