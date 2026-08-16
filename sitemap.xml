@@ -43,6 +43,8 @@
   <url><loc>https://agressievisie.nl/bronnen.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://agressievisie.nl/bijdragen.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://agressievisie.nl/beleid-en-wetgeving.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://agressievisie.nl/doxing.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://agressievisie.nl/na-een-incident.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://agressievisie.nl/artikel.html?slug=agressie-tegen-bezorgers-en-zzpers</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://agressievisie.nl/artikel.html?slug=alleen-werken-agressie-huisbezoek</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://agressievisie.nl/artikel.html?slug=online-dreigementen-digitale-intimidatie</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
