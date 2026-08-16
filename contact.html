@@ -226,14 +226,23 @@ document.getElementById('contact-form-el').addEventListener('submit', async (e) 
       statusEl.classList.add('ok', 'show');
       e.target.reset();
     } else {
-      statusEl.textContent = data.error || 'Er ging iets mis. Probeer het later opnieuw.';
-      statusEl.classList.add('show', 'err');
+      toonNietGekoppeld();
     }
   } catch {
-    statusEl.textContent = 'Er ging iets mis. Probeer het later opnieuw.';
-    statusEl.classList.add('show', 'err');
+    // Het contact-endpoint bestaat alleen op de lokale dev-server. Zeg eerlijk
+    // dat het bericht niet is aangekomen en geef een werkend alternatief; een
+    // vage storingsmelding laat mensen wachten op een antwoord dat nooit komt.
+    toonNietGekoppeld();
   } finally {
     submitBtn.disabled = false;
+  }
+
+  function toonNietGekoppeld() {
+    statusEl.innerHTML = 'Het contactformulier is nog niet gekoppeld, je bericht is daarom <strong>niet verstuurd</strong>. ' +
+      'Mail ons direct via <a href="mailto:support@actinmove.nl">support@actinmove.nl</a> of gebruik het formulier op ' +
+      '<a href="https://actinmove.nl/contact" target="_blank" rel="noopener">actinmove.nl/contact</a>.';
+    statusEl.classList.remove('ok');
+    statusEl.classList.add('show', 'err');
   }
 });
 </script>

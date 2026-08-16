@@ -147,11 +147,12 @@
     <div class="ebook-gate" style="max-width:600px; margin:0 auto;">
       <span class="eyebrow">Download</span>
       <h3 style="font-size:19px; margin-bottom:6px;">Ontvang het gratis e-book</h3>
-      <p style="color:var(--text-muted); font-size:14.5px;">Vul je e-mailadres in en het e-book wordt direct gedownload als overzichtelijk document.</p>
+      <p style="color:var(--text-muted); font-size:14.5px;">Het e-book is vrij te downloaden. Laat je e-mailadres achter als je ook nieuwe uitgaven wilt ontvangen, of download het direct zonder aanmelding.</p>
       <form class="ebook-gate-form" id="ebook-form">
         <input type="email" id="ebook-email" placeholder="jouw@email.nl" required />
         <button class="btn btn-primary" type="submit">Download het e-book</button>
       </form>
+      <p style="margin-top:12px; font-size:14px;"><a href="#" id="ebook-direct" style="text-decoration:underline;">Direct downloaden zonder e-mailadres</a></p>
       <div class="form-status" id="ebook-error"></div>
       <div class="ebook-success" id="ebook-success">
         <span class="brand-mark" aria-hidden="true"></span>
@@ -280,20 +281,33 @@ document.addEventListener('DOMContentLoaded', () => {
       if (res.ok) {
         form.style.display = 'none';
         successEl.classList.add('show');
-        doDownload();
       } else {
-        errorEl.textContent = data.error || 'Er ging iets mis. Probeer het later opnieuw.';
-        errorEl.classList.add('show', 'err');
+        toonNietGekoppeld();
       }
     } catch {
-      errorEl.textContent = 'Er ging iets mis. Probeer het later opnieuw.';
-      errorEl.classList.add('show', 'err');
+      // De nieuwsbrief-endpoint bestaat alleen op de lokale dev-server. Zolang
+      // de koppeling met actinmove.nl er niet is, mag dat de download niet
+      // tegenhouden: het e-book is gratis, het adres is een extraatje.
+      toonNietGekoppeld();
     } finally {
       submitBtn.disabled = false;
+      doDownload();
     }
   });
 
+  function toonNietGekoppeld() {
+    errorEl.innerHTML = 'Je download is gestart. De aanmelding voor de nieuwsbrief is nog niet gekoppeld en dus niet opgeslagen. ' +
+      'Wil je nieuwe uitgaven ontvangen, mail dan naar <a href="mailto:support@actinmove.nl">support@actinmove.nl</a> of via ' +
+      '<a href="https://actinmove.nl/contact" target="_blank" rel="noopener">actinmove.nl/contact</a>.';
+    errorEl.classList.add('show', 'err');
+  }
+
   document.getElementById('ebook-again').addEventListener('click', (e) => {
+    e.preventDefault();
+    doDownload();
+  });
+
+  document.getElementById('ebook-direct').addEventListener('click', (e) => {
     e.preventDefault();
     doDownload();
   });

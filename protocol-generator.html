@@ -223,11 +223,12 @@
         <span class="dg-icon"></span>
         <div style="flex:1; min-width:220px;">
           <h3>Ontvang dit protocol als bestand</h3>
-          <p>Vul je e-mailadres in om het protocol te downloaden als overzichtelijk document, mét het AgressieVisie-logo.</p>
+          <p>Download het protocol als overzichtelijk document, mét het AgressieVisie-logo. Laat je e-mailadres achter als je ook updates wilt ontvangen, of download het direct zonder aanmelding.</p>
           <form class="download-gate-form" id="download-form">
             <input type="email" id="download-email" placeholder="jouw@email.nl" required />
             <button class="btn btn-primary" type="submit">Download protocol</button>
           </form>
+          <p style="margin-top:12px; font-size:14px;"><a href="#" id="download-direct" style="text-decoration:underline;">Direct downloaden zonder e-mailadres</a></p>
           <div class="form-status" id="download-error"></div>
           <div class="download-success" id="download-success">
             <span class="brand-mark" aria-hidden="true"></span>
@@ -853,20 +854,33 @@ document.addEventListener('DOMContentLoaded', () => {
         leadCaptured = true;
         form.style.display = 'none';
         successEl.classList.add('show');
-        await doDownload();
       } else {
-        errorEl.textContent = resData.error || 'Er ging iets mis. Probeer het later opnieuw.';
-        errorEl.classList.add('show', 'err');
+        toonNietGekoppeld();
       }
     } catch {
-      errorEl.textContent = 'Er ging iets mis. Probeer het later opnieuw.';
-      errorEl.classList.add('show', 'err');
+      // De nieuwsbrief-endpoint bestaat alleen op de lokale dev-server. Het
+      // protocol dat iemand net zelf heeft samengesteld mag daar niet aan
+      // vastzitten, dus de download gaat hoe dan ook door.
+      toonNietGekoppeld();
     } finally {
       submitBtn.disabled = false;
+      await doDownload();
     }
   });
 
+  function toonNietGekoppeld() {
+    errorEl.innerHTML = 'Je download is gestart. De aanmelding voor de nieuwsbrief is nog niet gekoppeld en dus niet opgeslagen. ' +
+      'Wil je updates ontvangen, mail dan naar <a href="mailto:support@actinmove.nl">support@actinmove.nl</a> of via ' +
+      '<a href="https://actinmove.nl/contact" target="_blank" rel="noopener">actinmove.nl/contact</a>.';
+    errorEl.classList.add('show', 'err');
+  }
+
   document.getElementById('download-again').addEventListener('click', (e) => {
+    e.preventDefault();
+    doDownload();
+  });
+
+  document.getElementById('download-direct').addEventListener('click', (e) => {
     e.preventDefault();
     doDownload();
   });

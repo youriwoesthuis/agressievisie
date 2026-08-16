@@ -257,14 +257,23 @@ document.getElementById('bijdrage-form-el').addEventListener('submit', async (e)
       statusEl.classList.add('ok', 'show');
       e.target.reset();
     } else {
-      statusEl.textContent = data.error || 'Er ging iets mis. Probeer het later opnieuw.';
-      statusEl.classList.add('show', 'err');
+      toonNietGekoppeld();
     }
   } catch {
-    statusEl.textContent = 'Er ging iets mis. Probeer het later opnieuw.';
-    statusEl.classList.add('show', 'err');
+    // Het aanvullingen-endpoint bestaat alleen op de lokale dev-server. Wie de
+    // moeite neemt een bron aan te dragen verdient te horen dat die niet is
+    // aangekomen, plus een adres waar hij wel terechtkan.
+    toonNietGekoppeld();
   } finally {
     submitBtn.disabled = false;
+  }
+
+  function toonNietGekoppeld() {
+    statusEl.innerHTML = 'Het formulier is nog niet gekoppeld, je aanvulling is daarom <strong>niet verstuurd</strong>. ' +
+      'Stuur hem via <a href="mailto:support@actinmove.nl">support@actinmove.nl</a> of via ' +
+      '<a href="https://actinmove.nl/contact" target="_blank" rel="noopener">actinmove.nl/contact</a>, dan verwerken we hem alsnog.';
+    statusEl.classList.remove('ok');
+    statusEl.classList.add('show', 'err');
   }
 });
 </script>

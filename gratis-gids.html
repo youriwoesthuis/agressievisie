@@ -137,7 +137,12 @@
 <section class="section">
   <div class="wrap">
     <div class="two-col" style="align-items:flex-start;">
-      <div class="gated locked" id="gated-content">
+      <!-- Het slot stond hier zolang de nieuwsbrief e-mailadressen kon opslaan.
+           Die koppeling is er nog niet, dus het poortje hield alleen bezoekers
+           tegen zonder ooit een adres op te leveren. De checklist staat daarom
+           open. Zet de klasse "locked" terug op de div hieronder zodra de
+           aanmelding via actinmove.nl werkt. -->
+      <div class="gated" id="gated-content">
         <div class="unlock-overlay no-print">
           <div class="newsletter-box" style="max-width:340px;">
             <h3>Ontgrendel de checklist</h3>
@@ -219,6 +224,17 @@
         <h2>Handig voor op de werkvloer</h2>
         <p style="color:var(--text-muted); font-size:16px; margin-bottom:20px;">Print 'm uit en hang 'm op bij de balie, in de personeelsruimte, of bewaar 'm digitaal. Gebaseerd op patronen die in meerdere onderzoeken naar escalatie terugkomen.</p>
         <button class="btn btn-outline" onclick="window.print()">Print / bewaar als PDF</button>
+
+        <div class="newsletter-box" style="margin-top:28px;">
+          <h3>Blijf op de hoogte</h3>
+          <p>Nieuwe checklists, cijfers en methodieken, een paar keer per jaar in je inbox.</p>
+          <form class="newsletter-form" data-newsletter>
+            <input type="email" name="email" placeholder="jouw@email.nl" required />
+            <button class="btn btn-primary" type="submit">Aanmelden</button>
+          </form>
+          <div class="form-status"></div>
+        </div>
+
         <p style="margin-top:24px; font-size:14px; color:var(--text-muted);">Op zoek naar training in het herkennen én hanteren van deze signalen? Kijk bij <a href="https://actinmove.nl/" target="_blank" rel="noopener" style="text-decoration:underline;">Act in Move Training & Coaching</a>.</p>
       </div>
     </div>
