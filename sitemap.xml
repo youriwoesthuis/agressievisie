@@ -13,7 +13,8 @@
   <url><loc>https://agressievisie.nl/cijfers.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://agressievisie.nl/gratis-gids.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://agressievisie.nl/ebook.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://agressievisie.nl/risico-check.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+"  <url><loc>https://agressievisie.nl/kosten.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+".  <url><loc>https://agressievisie.nl/risico-check.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://agressievisie.nl/trendrapport.html</loc><changefreq>yearly</changefreq><priority>0.7</priority></url>
   <url><loc>https://agressievisie.nl/rss.xml</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
   <url><loc>https://agressievisie.nl/contact.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>

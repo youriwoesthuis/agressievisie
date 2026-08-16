@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wat kost agressie jouw organisatie per jaar?</title>
+<meta name="description" content="Reken uit wat agressie je organisatie jaarlijks kost aan verzuim en vervanging. Met sectorcijfers als startpunt en alle bedragen zelf aan te passen." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="canonical" href="https://agressievisie.nl/kosten.html" />
+<meta property="og:url" content="https://agressievisie.nl/kosten.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="AgressieVisie" />
+<meta property="og:title" content="Wat kost agressie jouw organisatie per jaar?" />
+<meta property="og:description" content="Reken uit wat agressie je organisatie jaarlijks kost aan verzuim en vervanging. Met sectorcijfers als startpunt en alle bedragen zelf aan te passen." />
+<meta property="og:image" content="https://agressievisie.nl/img/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://agressievisie.nl/img/og-image.jpg" />
+<link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .kos-layout { display: grid; grid-template-columns: 380px 1fr; gap: 34px; align-items: start; }
+  @media (max-width: 940px) { .kos-layout { grid-template-columns: 1fr; } }
+
+  .kos-form { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+  @media (min-width: 941px) { .kos-form { position: sticky; top: 84px; } }
+  .kos-groep { margin-bottom: 22px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+  .kos-groep:last-of-type { border-bottom: none; margin-bottom: 8px; }
+  .kos-groep-kop { font-size: 11.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--red-dark); margin-bottom: 14px; }
+  .kos-veld { margin-bottom: 14px; }
+  .kos-veld:last-child { margin-bottom: 0; }
+  .kos-veld label { display: block; font-weight: 700; font-size: 14px; margin-bottom: 5px; }
+  .kos-veld .kos-hint { display: block; font-size: 12.5px; color: var(--text-muted); font-weight: 400; margin-top: 2px; line-height: 1.45; }
+  .kos-invoer { display: flex; align-items: center; gap: 8px; }
+  .kos-invoer .kos-prefix { font-size: 15px; color: var(--text-muted); font-weight: 700; }
+  .kos-veld input[type=number], .kos-veld select {
+    width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px;
+    font-family: inherit; font-size: 15px; font-variant-numeric: tabular-nums;
+  }
+  .kos-veld input:focus, .kos-veld select:focus { outline: 2px solid var(--red); outline-offset: 1px; }
+
+  /* Uitkomst */
+  .kos-uit { display: flex; flex-direction: column; gap: 16px; }
+  .kos-totaal {
+    position: relative; overflow: hidden; background: var(--ink); color: var(--text-inverse);
+    border-radius: var(--radius); padding: 34px 32px;
+  }
+  .kos-totaal::before {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(ellipse 620px 380px at 88% 4%, rgba(224,64,31,.30), transparent 70%);
+  }
+  .kos-totaal > * { position: relative; z-index: 1; }
+  .kos-totaal .kos-label { font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin-bottom: 10px; }
+  .kos-bedrag {
+    font-size: clamp(44px, 7vw, 76px); font-weight: 800; line-height: .95; letter-spacing: -.035em;
+    background: var(--grad-alert); -webkit-background-clip: text; background-clip: text; color: transparent;
+    font-variant-numeric: tabular-nums;
+  }
+  .kos-totaal .kos-sub { color: var(--text-inverse-muted); font-size: 15.5px; margin: 12px 0 0; max-width: 52ch; }
+  .kos-perhoofd { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.14); display: flex; gap: 34px; flex-wrap: wrap; }
+  .kos-perhoofd div span { display: block; font-size: 12px; color: var(--text-inverse-muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 800; margin-bottom: 4px; }
+  .kos-perhoofd div b { font-size: 21px; color: #fff; font-variant-numeric: tabular-nums; }
+
+  .kos-kaart { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; }
+  .kos-kaart h3 { font-size: 17px; margin: 0 0 4px; letter-spacing: -.01em; }
+  .kos-kaart .kos-kaart-sub { font-size: 14px; color: var(--text-muted); margin: 0 0 16px; }
+
+  .kos-regel { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: baseline; padding: 11px 0; border-bottom: 1px solid var(--line); }
+  .kos-regel:last-child { border-bottom: none; }
+  .kos-regel .kos-omschrijving { font-size: 14.5px; }
+  .kos-regel .kos-som { display: block; font-size: 12.5px; color: var(--text-muted); font-variant-numeric: tabular-nums; margin-top: 2px; }
+  .kos-regel .kos-waarde { font-size: 16px; font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .kos-regel--totaal { border-top: 2px solid var(--ink); border-bottom: none; padding-top: 14px; margin-top: 4px; }
+  .kos-regel--totaal .kos-omschrijving { font-weight: 800; }
+  .kos-regel--totaal .kos-waarde { font-size: 19px; color: var(--red-dark); }
+
+  .kos-bar { height: 8px; border-radius: 5px; background: var(--paper-soft); overflow: hidden; display: flex; margin-bottom: 18px; }
+  .kos-bar span { height: 100%; display: block; transition: width .5s cubic-bezier(.4,0,.2,1); }
+  .kos-bar .b-verzuim { background: var(--red); }
+  .kos-bar .b-verloop { background: var(--amber); }
+  .kos-legenda { display: flex; gap: 20px; flex-wrap: wrap; font-size: 13px; color: var(--text-muted); margin-bottom: 18px; }
+  .kos-legenda i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; margin-right: 6px; }
+
+  .kos-niet { background: var(--paper-soft); border-left: 3px solid var(--text-muted); border-radius: var(--radius); padding: 20px 22px; }
+  .kos-niet h3 { font-size: 16px; margin: 0 0 8px; }
+  .kos-niet p, .kos-niet li { font-size: 14.5px; color: var(--text-muted); line-height: 1.6; }
+  .kos-niet ul { padding-left: 20px; margin: 8px 0 0; }
+  .kos-niet li { margin-bottom: 5px; }
+
+  .kos-bron { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+  .kos-bron a { color: var(--red-dark); text-decoration: underline; }
+  .kos-acties { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+
+  @media print {
+    header.site, footer.site, #cookie-banner, .page-header, .breadcrumbs,
+    .crisis-quickaccess, .scroll-progress, .kos-acties, .no-print { display: none !important; }
+    .kos-layout { grid-template-columns: 1fr; }
+    .kos-form { position: static; }
+  }
+  @media (prefers-reduced-motion: reduce) { .kos-bar span { transition: none; } }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agressievisie.nl/"},{"@type":"ListItem","position":2,"name":"Kosten van agressie","item":"https://agressievisie.nl/kosten.html"}]}
+</script>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a class="brand" href="index.html"><span class="brand-mark"></span>AgressieVisie</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="artikelen.html">Artikelen</a>
+      <a href="methodieken.html">Methodieken</a>
+      <a href="cijfers.html">Cijfers & trends</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button">Meer <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-dropdown-menu nav-mega">
+        <div class="nav-mega-col">
+          <h4>Kennisbank</h4>
+          <a href="lexicon.html">Begrippenlijst</a>
+          <a href="beleid-en-wetgeving.html">Beleid & wetgeving</a>
+          <a href="bronnen.html">Bronnenbank</a>
+          <a href="trendrapport.html">Trendrapport</a>
+          <a href="faq.html">Veelgestelde vragen</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Interactieve tools</h4>
+          <a href="wat-nu.html">Wat nu? Na een incident<span class="nav-badge">Nieuw</span></a>
+          <a href="oefengesprek.html">Oefengesprek<span class="nav-badge">Populair</span></a>
+          <a href="protocol-generator.html">Protocol-generator<span class="nav-badge">Populair</span></a>
+          <a href="risico-check.html">Risico-check</a>
+          <a href="kosten.html" class="current">Kostenberekening<span class="nav-badge">Nieuw</span></a>
+          <a href="zelftest.html">Zelftest</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Downloads</h4>
+          <a href="gratis-gids.html">Gratis checklist</a>
+          <a href="ebook.html">Gratis e-book</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Platform</h4>
+          <a href="contact.html">Contact</a>
+          <a href="bijdragen.html">Draag bij</a>
+          <a href="over.html">Over dit platform</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="overzicht.html">Sitemap</a>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="nav-cta">
+      <a class="nav-search" href="zoeken.html" aria-label="Zoeken"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+  </nav>
+</header>
+
+<section class="page-header">
+  <div class="wrap">
+    <nav class="breadcrumbs"><a href="index.html">Home</a><span class="sep">/</span><span class="current">Kosten van agressie</span></nav>
+    <span class="eyebrow">Interactieve tool</span>
+    <h1>Wat kost agressie jouw organisatie per jaar?</h1>
+    <p class="lede">Agressie verdwijnt zelden uit de boeken, maar staat er ook nooit als post in. Deze rekentool maakt het bedrag zichtbaar, met sectorcijfers als startpunt en alle aannames zelf aan te passen.</p>
+  </div>
+</section>
+
+<section class="section--tight">
+  <div class="wrap kos-layout">
+
+    <div class="kos-form no-print">
+      <div class="kos-groep">
+        <div class="kos-groep-kop">Je organisatie</div>
+        <div class="kos-veld">
+          <label for="k-mw">Aantal medewerkers</label>
+          <input type="number" id="k-mw" value="50" min="1" max="100000" />
+        </div>
+        <div class="kos-veld">
+          <label for="k-sector">Sector</label>
+          <select id="k-sector">
+            <option value="zorg">Zorg &amp; welzijn</option>
+            <option value="onderwijs">Onderwijs</option>
+            <option value="beveiliging">Beveiliging &amp; OV</option>
+            <option value="retail" selected>Klantcontact &amp; retail</option>
+            <option value="horeca">Horeca &amp; uitgaan</option>
+            <option value="overheid">Gemeenten &amp; overheid</option>
+            <option value="anders">Anders / weet ik niet</option>
+          </select>
+          <span class="kos-hint" id="k-sectorbron"></span>
+        </div>
+      </div>
+
+      <div class="kos-groep">
+        <div class="kos-groep-kop">Hoe vaak en hoe zwaar</div>
+        <div class="kos-veld">
+          <label for="k-pct">Deel van je medewerkers dat jaarlijks met agressie te maken krijgt
+            <span class="kos-hint">Vooringevuld met het sectorcijfer. Heb je eigen meldingen? Gebruik die.</span>
+          </label>
+          <div class="kos-invoer"><input type="number" id="k-pct" value="11" min="0" max="100" step="1" /><span class="kos-prefix">%</span></div>
+        </div>
+        <div class="kos-veld">
+          <label for="k-verzuimpct">Welk deel daarvan leidt tot verzuim
+            <span class="kos-hint">De meeste incidenten leiden niet tot uitval. Reken behoudend.</span>
+          </label>
+          <div class="kos-invoer"><input type="number" id="k-verzuimpct" value="10" min="0" max="100" step="1" /><span class="kos-prefix">%</span></div>
+        </div>
+        <div class="kos-veld">
+          <label for="k-dagen">Gemiddeld aantal verzuimdagen per geval</label>
+          <input type="number" id="k-dagen" value="4" min="0" max="365" step="1" />
+        </div>
+      </div>
+
+      <div class="kos-groep">
+        <div class="kos-groep-kop">Bedragen</div>
+        <div class="kos-veld">
+          <label for="k-dagkosten">Kosten van één verzuimdag
+            <span class="kos-hint">Loondoorbetaling, werkgeverslasten, vervanging en productiviteitsverlies samen. Vul je eigen kengetal in als je dat hebt.</span>
+          </label>
+          <div class="kos-invoer"><span class="kos-prefix">&euro;</span><input type="number" id="k-dagkosten" value="300" min="0" max="5000" step="10" /></div>
+        </div>
+        <div class="kos-veld">
+          <label for="k-vertrek">Medewerkers die per jaar vertrekken, mede door agressie
+            <span class="kos-hint">Weet je dit niet? Laat op 0 staan; dan blijft dit deel buiten de berekening.</span>
+          </label>
+          <input type="number" id="k-vertrek" value="1" min="0" max="1000" step="1" />
+        </div>
+        <div class="kos-veld">
+          <label for="k-vervanging">Kosten om iemand te vervangen
+            <span class="kos-hint">Werving, selectie, inwerken en tijdelijk lagere productiviteit.</span>
+          </label>
+          <div class="kos-invoer"><span class="kos-prefix">&euro;</span><input type="number" id="k-vervanging" value="9000" min="0" max="200000" step="500" /></div>
+        </div>
+      </div>
+
+      <button class="btn btn-outline" id="k-print" style="width:100%; justify-content:center;">Print of bewaar als PDF</button>
+    </div>
+
+    <div class="kos-uit" id="k-uit"></div>
+
+  </div>
+</section>
+<footer class="site">
+  <div class="footer-accent"></div>
+  <svg class="footer-watermark" viewBox="0 0 200 200" aria-hidden="true">
+    <rect width="200" height="200" rx="44" fill="#ffffff"/>
+    <rect x="58" y="64.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(35 100 72.6)"/>
+    <rect x="58" y="117.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(-35 100 125.6)"/>
+  </svg>
+  <div class="wrap">
+    <div class="footer-top">
+      <a class="footer-brand-block" href="index.html">
+        <span class="brand-mark"></span>
+        <div>
+          <span class="footer-brand-name">AgressieVisie</span>
+          <p class="footer-brand-tag">Kennisplatform over agressie</p>
+        </div>
+      </a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p>Signalen, trends en onderzoek over agressie. Een initiatief van Act in Move Training & Coaching.</p>
+        <a class="footer-aim-logo" href="https://actinmove.nl/" target="_blank" rel="noopener" aria-label="Act in Move Training & Coaching"><span class="aim-logo-mark"></span></a>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="artikelen.html">Artikelen</a></li>
+          <li><a href="methodieken.html">Methodieken</a></li>
+          <li><a href="trendrapport.html">Trendrapport</a></li>
+          <li><a href="risico-check.html">Risico-check</a></li>
+          <li><a href="kosten.html">Kostenberekening</a></li>
+          <li><a href="oefengesprek.html">Oefengesprek</a></li>
+          <li><a href="protocol-generator.html">Protocol-generator</a></li>
+          <li><a href="ebook.html">Gratis e-book</a></li>
+          <li><a href="zelftest.html">Zelftest</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Meer</h4>
+        <ul>
+          <li><a href="cijfers.html">Cijfers & trends</a></li>
+          <li><a href="lexicon.html">Begrippenlijst</a></li>
+          <li><a href="bronnen.html">Bronnenbank</a></li>
+          <li><a href="faq.html">Veelgestelde vragen</a></li>
+          <li><a href="gratis-gids.html">Gratis checklist</a></li>
+          <li><a href="over.html">Over dit platform</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Juridisch</h4>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="overzicht.html">Sitemap</a></li>
+          <li><a href="privacy.html">Privacy & cookies</a></li>
+          <li><a href="https://actinmove.nl/" target="_blank" rel="noopener">Act in Move ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-mark"><span class="brand-mark"></span>© <span data-year></span> AgressieVisie, onderdeel van Act in Move Training & Coaching</span>
+      <span><a href="https://actinmove.nl/" target="_blank" rel="noopener">actinmove.nl</a></span>
+    </div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+<script>
+// Percentages komen uit de bronnen die elders op dit platform al worden geciteerd,
+// zodat de tool geen eigen cijfers introduceert. Ze zijn bedoeld als startpunt:
+// wie eigen meldingen heeft, gebruikt die.
+const SECTOR_PCT = {
+  zorg:        { pct: 57, bron: 'CBS AZW-werknemersenquête 2024: 57% van de zorgmedewerkers had te maken met agressie door patiënten of naasten.' },
+  onderwijs:   { pct: 85, bron: 'CNV en EenVandaag: 85% van de onderwijsmedewerkers kreeg te maken met verbaal geweld of dreigementen.' },
+  beveiliging: { pct: 67, bron: 'Veiligheidsbranche: 2 op de 3 beveiligers (67%) is slachtoffer geweest van geweld of agressie.' },
+  retail:      { pct: 11, bron: 'NEA 2025 (TNO/CBS): 11% van de medewerkers in klantcontact rapporteert ongewenst gedrag door klanten, oplopend tot 17% bij 15-24-jarigen.' },
+  horeca:      { pct: 25, bron: 'NEA 2025 (TNO/CBS): ongeveer 1 op de 4 horecamedewerkers krijgt te maken met agressie of geweld van gasten.' },
+  overheid:    { pct: 29, bron: 'Ipsos I&O: 29% van de ambtenaren met publiekscontact kreeg te maken met agressie of intimidatie, oplopend tot 45% bij lokale bestuurders.' },
+  anders:      { pct: 15, bron: 'Geen sectorcijfer gekozen. Er wordt gerekend met 15% als algemeen uitgangspunt; vul je eigen cijfer in voor een realistischer beeld.' },
+};
+
+const euro = n => '€ ' + Math.round(n).toLocaleString('nl-NL');
+const getal = id => Math.max(0, Number(document.getElementById(id).value) || 0);
+
+function bereken() {
+  const mw = getal('k-mw');
+  const pct = getal('k-pct');
+  const verzuimpct = getal('k-verzuimpct');
+  const dagen = getal('k-dagen');
+  const dagkosten = getal('k-dagkosten');
+  const vertrek = getal('k-vertrek');
+  const vervanging = getal('k-vervanging');
+
+  const geraakt = mw * (pct / 100);
+  const metVerzuim = geraakt * (verzuimpct / 100);
+  const verzuimdagen = metVerzuim * dagen;
+  const verzuimkosten = verzuimdagen * dagkosten;
+  const verloopkosten = vertrek * vervanging;
+  const totaal = verzuimkosten + verloopkosten;
+  const perMedewerker = mw > 0 ? totaal / mw : 0;
+
+  const aandeelVerzuim = totaal > 0 ? (verzuimkosten / totaal) * 100 : 0;
+  const aandeelVerloop = totaal > 0 ? (verloopkosten / totaal) * 100 : 0;
+
+  const bron = SECTOR_PCT[document.getElementById('k-sector').value];
+
+  document.getElementById('k-uit').innerHTML = `
+    <div class="kos-totaal">
+      <div class="kos-label">Geschatte kosten per jaar</div>
+      <div class="kos-bedrag">${euro(totaal)}</div>
+      <p class="kos-sub">Voor ${mw.toLocaleString('nl-NL')} medewerkers, op basis van de aannames die je links hebt ingevuld. Dit is een ondergrens: het rekent alleen met verzuim en vervanging.</p>
+      <div class="kos-perhoofd">
+        <div><span>Per medewerker</span><b>${euro(perMedewerker)}</b></div>
+        <div><span>Verzuimdagen</span><b>${Math.round(verzuimdagen).toLocaleString('nl-NL')}</b></div>
+        <div><span>Medewerkers geraakt</span><b>${Math.round(geraakt).toLocaleString('nl-NL')}</b></div>
+      </div>
+    </div>
+
+    <div class="kos-kaart">
+      <h3>Hoe dit bedrag is opgebouwd</h3>
+      <p class="kos-kaart-sub">Elke stap is navolgbaar, zodat je de berekening kunt verdedigen in een gesprek.</p>
+
+      <div class="kos-bar">
+        <span class="b-verzuim" style="width:${aandeelVerzuim}%"></span>
+        <span class="b-verloop" style="width:${aandeelVerloop}%"></span>
+      </div>
+      <div class="kos-legenda">
+        <span><i style="background:var(--red)"></i>Verzuim ${Math.round(aandeelVerzuim)}%</span>
+        <span><i style="background:var(--amber)"></i>Vervanging ${Math.round(aandeelVerloop)}%</span>
+      </div>
+
+      <div class="kos-regel">
+        <div class="kos-omschrijving">Medewerkers die met agressie te maken krijgen
+          <span class="kos-som">${mw.toLocaleString('nl-NL')} medewerkers × ${pct}%</span>
+        </div>
+        <div class="kos-waarde">${Math.round(geraakt).toLocaleString('nl-NL')}</div>
+      </div>
+      <div class="kos-regel">
+        <div class="kos-omschrijving">Daarvan met verzuim tot gevolg
+          <span class="kos-som">${Math.round(geraakt).toLocaleString('nl-NL')} × ${verzuimpct}%</span>
+        </div>
+        <div class="kos-waarde">${Math.round(metVerzuim).toLocaleString('nl-NL')}</div>
+      </div>
+      <div class="kos-regel">
+        <div class="kos-omschrijving">Totaal aantal verzuimdagen
+          <span class="kos-som">${Math.round(metVerzuim).toLocaleString('nl-NL')} × ${dagen} dagen</span>
+        </div>
+        <div class="kos-waarde">${Math.round(verzuimdagen).toLocaleString('nl-NL')}</div>
+      </div>
+      <div class="kos-regel">
+        <div class="kos-omschrijving">Verzuimkosten
+          <span class="kos-som">${Math.round(verzuimdagen).toLocaleString('nl-NL')} dagen × ${euro(dagkosten)}</span>
+        </div>
+        <div class="kos-waarde">${euro(verzuimkosten)}</div>
+      </div>
+      <div class="kos-regel">
+        <div class="kos-omschrijving">Vervangingskosten
+          <span class="kos-som">${vertrek} vertrekkende medewerker${vertrek === 1 ? '' : 's'} × ${euro(vervanging)}</span>
+        </div>
+        <div class="kos-waarde">${euro(verloopkosten)}</div>
+      </div>
+      <div class="kos-regel kos-regel--totaal">
+        <div class="kos-omschrijving">Totaal per jaar</div>
+        <div class="kos-waarde">${euro(totaal)}</div>
+      </div>
+
+      <p class="kos-bron">Sectorcijfer: ${bron.bron} Alle bronnen staan in de <a href="bronnen.html">bronnenbank</a>.</p>
+    </div>
+
+    <div class="kos-niet">
+      <h3>Wat hier bewust níét in zit</h3>
+      <p>Dit bedrag is een ondergrens. De volgende kosten zijn reëel maar lastig te becijferen, en zijn daarom weggelaten in plaats van geschat:</p>
+      <ul>
+        <li>Productiviteitsverlies bij collega's die het incident meemaakten of erover hoorden</li>
+        <li>Tijd van leidinggevenden, HR en vertrouwenspersoon aan opvolging en gesprekken</li>
+        <li>Langdurig verzuim en re-integratietrajecten na een ernstig incident</li>
+        <li>Juridische kosten, schade en herstel</li>
+        <li>Moeilijker vervulbare vacatures als de reputatie op de arbeidsmarkt bekend raakt</li>
+        <li>Medewerkers die blijven maar minder ver gaan dan voorheen</li>
+      </ul>
+    </div>
+
+    <div class="kos-kaart">
+      <h3>Van bedrag naar besluit</h3>
+      <p class="kos-kaart-sub">Een bedrag overtuigt pas als er een plan naast ligt.</p>
+      <p style="font-size:15px; margin:0 0 14px;">Zet dit cijfer naast wat het kost om het te voorkomen. Begin bij een vastgelegd protocol en een duidelijke meldroute: zonder registratie blijft dit bedrag een schatting, en met registratie wordt het een feit dat je jaarlijks kunt volgen.</p>
+      <div class="kos-acties">
+        <a class="btn btn-primary" href="protocol-generator.html">Maak een protocol</a>
+        <a class="btn btn-outline" href="risico-check.html">Doe de risico-check</a>
+        <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Bespreek training ↗</a>
+      </div>
+    </div>
+  `;
+}
+
+function vulSectorIn() {
+  const key = document.getElementById('k-sector').value;
+  const info = SECTOR_PCT[key];
+  document.getElementById('k-pct').value = info.pct;
+  document.getElementById('k-sectorbron').textContent = info.bron;
+  bereken();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('k-sector').addEventListener('change', vulSectorIn);
+  // Alles rekent direct door: wie een getal aanpast wil het effect meteen zien.
+  ['k-mw', 'k-pct', 'k-verzuimpct', 'k-dagen', 'k-dagkosten', 'k-vertrek', 'k-vervanging']
+    .forEach(id => document.getElementById(id).addEventListener('input', bereken));
+  document.getElementById('k-print').addEventListener('click', () => window.print());
+  vulSectorIn();
+});
+</script>
+</body>
+</html>
