@@ -35,6 +35,8 @@
   .gen-checks { display:flex; flex-direction:column; gap:6px; }
   .gen-check { display:flex; align-items:center; gap:8px; font-size:14px; }
   .gen-check input { width:16px; height:16px; accent-color: var(--red); }
+  .gen-live-hint { font-size:13px; color:var(--text-muted); margin:0 0 12px; padding-left:22px; position:relative; }
+  .gen-live-hint::before { content:'↻'; position:absolute; left:0; top:0; color:var(--red); font-weight:800; }
 
   .protocol-sheet {
     background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:40px; box-shadow:var(--shadow-sm);
@@ -185,7 +187,8 @@
           <label class="gen-check"><input type="checkbox" value="vrijwilligers" /> Er werken vrijwilligers of stagiairs mee</label>
         </div>
       </div>
-      <button class="btn btn-primary" id="gen-generate" style="width:100%; justify-content:center;">Genereer protocol</button>
+      <p class="gen-live-hint">Het protocol hiernaast past zich direct aan je keuzes aan.</p>
+      <button class="btn btn-primary" id="gen-generate" style="width:100%; justify-content:center;">Bekijk mijn protocol</button>
       <button class="btn btn-outline" id="gen-print" style="width:100%; justify-content:center; margin-top:10px;">Print / bewaar als PDF</button>
     </div>
 
@@ -773,8 +776,21 @@ let leadCaptured = false;
 
 document.addEventListener('DOMContentLoaded', () => {
   generateProtocol();
-  document.getElementById('gen-generate').addEventListener('click', generateProtocol);
+  document.getElementById('gen-generate').addEventListener('click', () => {
+    generateProtocol();
+    // Op mobiel staat het formulier bóven het document; zonder deze sprong lijkt
+    // de knop niets te doen.
+    document.getElementById('protocol-output').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
   document.getElementById('gen-print').addEventListener('click', () => window.print());
+
+  // Er staat vanaf het begin een protocol in beeld. Wie dan de sector wijzigt,
+  // verwacht dat het document meebeweegt en heeft geen reden om te vermoeden dat
+  // er nog een knop ingedrukt moet worden. Daarom werkt elke wijziging direct door.
+  document.querySelectorAll('.gen-form select, .gen-form input[type=checkbox]').forEach(el => {
+    el.addEventListener('change', generateProtocol);
+  });
+  document.getElementById('gen-org').addEventListener('input', generateProtocol);
 
   const form = document.getElementById('download-form');
   const errorEl = document.getElementById('download-error');
