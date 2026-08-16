@@ -181,7 +181,18 @@
       </div>
 
       <div class="wn-stap" id="wn-stap-2" hidden>
-        <div class="wn-stap-label">Vraag 2 van 3</div>
+        <div class="wn-stap-label">Vraag 2</div>
+        <p class="wn-vraag">Van wie kwam het gedrag?</p>
+        <div class="wn-opties">
+          <button class="wn-optie" data-vraag="dader" data-waarde="extern"><span class="wn-vink">&#10003;</span><span>Een klant, patiënt, bezoeker of leerling<span class="wn-sub">Iemand van buiten de organisatie</span></span></button>
+          <button class="wn-optie" data-vraag="dader" data-waarde="naaste"><span class="wn-vink">&#10003;</span><span>Een familielid of begeleider daarvan<span class="wn-sub">Bijvoorbeeld een ouder, partner of mantelzorger</span></span></button>
+          <button class="wn-optie" data-vraag="dader" data-waarde="collega"><span class="wn-vink">&#10003;</span><span>Een collega<span class="wn-sub">Iemand binnen de organisatie, geen leidinggevende</span></span></button>
+          <button class="wn-optie" data-vraag="dader" data-waarde="leidinggevende"><span class="wn-vink">&#10003;</span><span>Een leidinggevende<span class="wn-sub">Of iemand anders met zeggenschap over de betrokkene</span></span></button>
+        </div>
+      </div>
+
+      <div class="wn-stap" id="wn-stap-3" hidden>
+        <div class="wn-stap-label">Vraag 3</div>
         <p class="wn-vraag">Is er letsel of schade?</p>
         <div class="wn-opties">
           <button class="wn-optie" data-vraag="letsel" data-waarde="letsel"><span class="wn-vink">&#10003;</span><span>Ja, iemand is gewond<span class="wn-sub">Ook lichte verwondingen tellen mee</span></span></button>
@@ -190,13 +201,54 @@
         </div>
       </div>
 
-      <div class="wn-stap" id="wn-stap-3" hidden>
-        <div class="wn-stap-label">Vraag 3 van 3</div>
+      <div class="wn-stap" id="wn-stap-4" hidden>
+        <div class="wn-stap-label">Vraag 4</div>
         <p class="wn-vraag">Wie was het doelwit?</p>
         <div class="wn-opties">
           <button class="wn-optie" data-vraag="wie" data-waarde="ikzelf"><span class="wn-vink">&#10003;</span><span>Ikzelf</span></button>
           <button class="wn-optie" data-vraag="wie" data-waarde="collega"><span class="wn-vink">&#10003;</span><span>Een collega<span class="wn-sub">Je vult dit in namens of samen met diegene</span></span></button>
           <button class="wn-optie" data-vraag="wie" data-waarde="vrijwilliger"><span class="wn-vink">&#10003;</span><span>Een vrijwilliger of stagiair<span class="wn-sub">Zij vallen onder dezelfde zorgplicht</span></span></button>
+        </div>
+      </div>
+
+      <div class="wn-stap" id="wn-stap-5" hidden>
+        <div class="wn-stap-label">Vraag 5</div>
+        <p class="wn-vraag">Waar gebeurde het?</p>
+        <div class="wn-opties">
+          <button class="wn-optie" data-vraag="plek" data-waarde="locatie"><span class="wn-vink">&#10003;</span><span>Op onze eigen locatie<span class="wn-sub">Balie, spreekkamer, winkel, klaslokaal, kantine</span></span></button>
+          <button class="wn-optie" data-vraag="plek" data-waarde="onderweg"><span class="wn-vink">&#10003;</span><span>Onderweg of bij iemand thuis<span class="wn-sub">Buitendienst, thuiszorg, bezorging, handhaving, vervoer</span></span></button>
+          <button class="wn-optie" data-vraag="plek" data-waarde="digitaal"><span class="wn-vink">&#10003;</span><span>Via telefoon, mail of online<span class="wn-sub">Niet fysiek in dezelfde ruimte</span></span></button>
+        </div>
+      </div>
+
+      <div class="wn-stap" id="wn-stap-6" hidden>
+        <div class="wn-stap-label">Vraag 6</div>
+        <p class="wn-vraag" id="wn-vraag6">Is dit de eerste keer met deze persoon?</p>
+        <div class="wn-opties">
+          <button class="wn-optie" data-vraag="herhaling" data-waarde="eerste"><span class="wn-vink">&#10003;</span><span>Ja, eerste keer</span></button>
+          <button class="wn-optie" data-vraag="herhaling" data-waarde="vaker"><span class="wn-vink">&#10003;</span><span>Nee, het is eerder gebeurd<span class="wn-sub">Ook als het vorige keer niet is gemeld</span></span></button>
+          <button class="wn-optie" data-vraag="herhaling" data-waarde="onbekend"><span class="wn-vink">&#10003;</span><span>Weet ik niet</span></button>
+        </div>
+      </div>
+
+      <div class="wn-stap" id="wn-stap-7" hidden>
+        <div class="wn-stap-label">Vraag 7</div>
+        <p class="wn-vraag">Is er iets wat het incident kan onderbouwen?</p>
+        <div class="wn-opties">
+          <button class="wn-optie" data-vraag="bewijs" data-waarde="getuigen"><span class="wn-vink">&#10003;</span><span>Ja, er waren getuigen</span></button>
+          <button class="wn-optie" data-vraag="bewijs" data-waarde="opname"><span class="wn-vink">&#10003;</span><span>Ja, er is beeld, geluid of tekst<span class="wn-sub">Camerabeelden, berichten, voicemail</span></span></button>
+          <button class="wn-optie" data-vraag="bewijs" data-waarde="beide"><span class="wn-vink">&#10003;</span><span>Allebei</span></button>
+          <button class="wn-optie" data-vraag="bewijs" data-waarde="niets"><span class="wn-vink">&#10003;</span><span>Nee, niemand zag of hoorde het</span></button>
+        </div>
+      </div>
+
+      <div class="wn-stap" id="wn-stap-8" hidden>
+        <div class="wn-stap-label">Laatste vraag</div>
+        <p class="wn-vraag" id="wn-vraag8">Kun je het werk vandaag voortzetten?</p>
+        <div class="wn-opties">
+          <button class="wn-optie" data-vraag="doorwerken" data-waarde="ja"><span class="wn-vink">&#10003;</span><span>Ja, dat gaat wel</span></button>
+          <button class="wn-optie" data-vraag="doorwerken" data-waarde="twijfel"><span class="wn-vink">&#10003;</span><span>Twijfel, het zit er nog flink in</span></button>
+          <button class="wn-optie" data-vraag="doorwerken" data-waarde="nee"><span class="wn-vink">&#10003;</span><span>Nee, dit lukt nu niet</span></button>
         </div>
       </div>
     </div>
@@ -271,7 +323,7 @@
 </footer>
 <script src="js/main.js"></script>
 <script>
-const antwoord = { type: null, letsel: null, wie: null };
+const antwoord = { type: null, dader: null, letsel: null, wie: null, plek: null, herhaling: null, bewijs: null, doorwerken: null };
 
 const TYPE_NAAM = {
   verbaal: 'verbale agressie',
@@ -287,14 +339,34 @@ const TYPE_NAAM = {
 // niet zo; dan is registreren en een maatregel de route.
 const STRAFBAAR = ['bedreiging', 'fysiek', 'seksueel', 'discriminatie', 'online'];
 
+// Agressie van binnen de organisatie vraagt een fundamenteel andere route dan
+// agressie van buiten: geen toegangsontzegging maar de vertrouwenspersoon, en
+// bij een leidinggevende werkt de normale meldroute per definitie niet.
+const INTERN = ['collega', 'leidinggevende'];
+
 function kies(vraag, waarde, knop) {
   antwoord[vraag] = waarde;
   knop.parentElement.querySelectorAll('.wn-optie').forEach(b => b.classList.remove('gekozen'));
   knop.classList.add('gekozen');
 
-  if (vraag === 'type') toonStap(2);
-  if (vraag === 'letsel') toonStap(3);
-  if (vraag === 'wie') toonPlan();
+  const volgorde = { type: 2, dader: 3, letsel: 4, wie: 5, plek: 6, herhaling: 7, bewijs: 8 };
+  if (vraag === 'doorwerken') return toonPlan();
+
+  if (vraag === 'dader') {
+    // Formulering aanpassen aan wie het deed.
+    const v6 = document.getElementById('wn-vraag6');
+    if (v6) v6.textContent = INTERN.includes(waarde)
+      ? 'Is dit de eerste keer met deze persoon?'
+      : 'Is dit de eerste keer met deze persoon of situatie?';
+  }
+  if (vraag === 'wie') {
+    const v8 = document.getElementById('wn-vraag8');
+    if (v8) v8.textContent = waarde === 'ikzelf'
+      ? 'Kun je het werk vandaag voortzetten?'
+      : 'Kan de betrokkene het werk vandaag voortzetten?';
+  }
+
+  toonStap(volgorde[vraag]);
 }
 
 function toonStap(n) {
@@ -305,57 +377,122 @@ function toonStap(n) {
 }
 
 function toonPlan() {
-  const { type, letsel, wie } = antwoord;
+  const { type, dader, letsel, wie, plek, herhaling, bewijs, doorwerken } = antwoord;
   const strafbaar = STRAFBAAR.includes(type);
+  const intern = INTERN.includes(dader);
   const persoon = wie === 'ikzelf' ? 'je' : 'de betrokkene';
   const bezit = wie === 'ikzelf' ? 'je' : 'diens';
+  const heeftBewijs = bewijs === 'getuigen' || bewijs === 'opname' || bewijs === 'beide';
 
   // ── Nu meteen ──
   const nu = [];
   if (letsel === 'letsel') {
     nu.push('<strong>Zorg eerst voor de verwonding.</strong> Laat ook lichte verwondingen bekijken en laat vastleggen wat er is geconstateerd; dat is later je bewijs.');
   }
-  nu.push(`Zorg dat ${persoon} niet alleen achterblijft en neem taken over. Doorwerken alsof er niets is gebeurd lijkt sterk, maar vergroot de kans op klachten later.`);
-  nu.push('Waarschuw je leidinggevende of het aanspreekpunt agressiebeleid. Ook als het incident klein lijkt.');
-  if (strafbaar) {
-    nu.push('<strong>Leg bewijs veilig.</strong> Maak foto\'s van letsel of schade, bewaar berichten en vraag of camerabeelden bewaard kunnen blijven. Beelden worden vaak binnen enkele dagen automatisch overschreven.');
+  if (doorwerken === 'nee') {
+    nu.push(`<strong>Stop met werken voor vandaag.</strong> Dat is geen zwakte maar een verstandige inschatting. Regel vervanging en zorg dat ${persoon} niet alleen naar huis gaat.`);
+  } else if (doorwerken === 'twijfel') {
+    nu.push(`<strong>Neem eerst pauze voordat ${wie === 'ikzelf' ? 'je' : 'diegene'} verdergaat.</strong> Direct doorgaan terwijl het er nog inzit leidt vaak tot een tweede incident, omdat de lont korter is dan normaal.`);
+  } else {
+    nu.push(`Zorg dat ${persoon} niet alleen achterblijft en neem taken over waar het kan. Doorwerken alsof er niets is gebeurd lijkt sterk, maar vergroot de kans op klachten later.`);
   }
-  if (type === 'online') {
+
+  if (dader === 'leidinggevende') {
+    nu.push('<strong>De normale meldroute werkt hier niet.</strong> Melden bij de leidinggevende is geen optie als die zelf betrokken is. Ga rechtstreeks naar de vertrouwenspersoon, of naar een leidinggevende een niveau hoger.');
+  } else if (dader === 'collega') {
+    nu.push('Betrek de vertrouwenspersoon. Bij gedrag van een collega is dat de aangewezen route, ook als je nog niet weet of je er iets formeels mee wilt.');
+  } else {
+    nu.push('Waarschuw je leidinggevende of het aanspreekpunt agressiebeleid. Ook als het incident klein lijkt.');
+  }
+
+  if (strafbaar && (bewijs === 'opname' || bewijs === 'beide')) {
+    nu.push('<strong>Stel het bewijs vandaag nog veilig.</strong> Vraag expliciet of camerabeelden bewaard blijven: die worden vaak binnen enkele dagen automatisch overschreven, en daarna is het weg.');
+  } else if (strafbaar) {
+    nu.push('<strong>Leg bewijs veilig.</strong> Foto\'s van letsel of schade, bewaarde berichten, en vraag na of er camerabeelden zijn.');
+  }
+  if (bewijs === 'getuigen' || bewijs === 'beide') {
+    nu.push('Vraag getuigen om vandaag zelf op te schrijven wat zij zagen, in hun eigen woorden. Over een week is hun herinnering gekleurd door wat ze intussen gehoord hebben.');
+  }
+  if (bewijs === 'niets') {
+    nu.push('Er zijn geen getuigen of opnamen. Juist dan telt jouw eigen verslag zwaar: schrijf het vandaag op, feitelijk en gedetailleerd. Een tijdig eigen verslag is bruikbaar bewijs.');
+  }
+  if (type === 'online' || plek === 'digitaal') {
     nu.push('Maak schermafbeeldingen inclusief afzender, datum en tijd. Verwijder niets, ook niet als je het liever niet meer ziet.');
   }
   if (letsel === 'schade') {
     nu.push('Fotografeer de schade voordat er iets wordt opgeruimd of gerepareerd, en bewaar facturen.');
   }
+  if (plek === 'onderweg') {
+    nu.push('<strong>Ga niet alleen terug naar dat adres of die route.</strong> Leg vast dat dit alleen nog met twee personen gebeurt, tot er een besluit is genomen.');
+  }
 
   // ── Binnen 24 uur ──
   const dag = [];
-  dag.push(`Meld het incident formeel, zodat het in de registratie komt. Losse incidenten lijken klein; het patroon dat eruit komt is wat de organisatie laat handelen.`);
-  dag.push(`Een kort nagesprek met de leidinggevende. Vraag naar de feiten, maar vooral naar hoe het met ${persoon} gaat.`);
+  dag.push('Meld het incident formeel, zodat het in de registratie komt. Losse incidenten lijken klein; het patroon dat eruit komt is wat de organisatie laat handelen.');
+  dag.push(`Een kort nagesprek. Vraag naar de feiten, maar vooral naar hoe het met ${persoon} gaat.`);
+
   if (strafbaar) {
     dag.push(`<strong>Beslis over aangifte.</strong> Dit is strafbaar gedrag, dus aangifte is een reële optie. Twee dingen die veel mensen niet weten: de <em>werkgever</em> kan aangifte doen in plaats van ${persoon} persoonlijk, en aangifte kan onder nummer, zodat ${bezit} privéadres niet in het dossier komt. Vraag daar expliciet om, want het gebeurt niet vanzelf.`);
-  } else {
+  } else if (!intern) {
     dag.push('Bespreek welke maatregel passend is: een waarschuwing, een gesprek, of vastleggen dat bij herhaling de toegang wordt ontzegd. Een grens die niet wordt gevolgd door iets, ondermijnt de volgende.');
+  }
+
+  if (intern) {
+    dag.push('<strong>Dit loopt niet via toegangsontzegging.</strong> Bij gedrag van binnen de organisatie is de route: vertrouwenspersoon, en afhankelijk van de ernst een gesprek door HR of een formeel arbeidsrechtelijk traject. De werkgever heeft hier dezelfde zorgplicht als bij agressie van buiten.');
+    if (dader === 'leidinggevende') {
+      dag.push('Zet vanaf nu alles op papier en bewaar het buiten de werkomgeving. Bij een machtsverhouding is een schriftelijk spoor het enige dat later houvast geeft.');
+    }
+  }
+
+  if (herhaling === 'vaker') {
+    if (intern) {
+      dag.push('<strong>Dit is niet de eerste keer.</strong> Daarmee is het geen incident meer maar een patroon, en dat verandert de zaak: bij herhaald gedrag na een eerdere melding schiet de werkgever tekort in zijn zorgplicht als er niets gebeurt. Zoek de eerdere meldingen erbij en zorg dat ze samen worden beoordeeld, niet los van elkaar.');
+    } else {
+      dag.push('<strong>Dit is niet de eerste keer.</strong> Behandel het daarom niet als los incident. Zoek de eerdere meldingen erbij en leg ze naast elkaar: herhaling maakt een zwaardere maatregel proportioneel, en is precies de onderbouwing die een toegangsontzegging juridisch houdbaar maakt. Overweeg daarnaast een <a href="methodieken.html#signaleringsplan">signaleringsplan</a> voor deze persoon.');
+    }
+  }
+  if (herhaling === 'onbekend') {
+    dag.push('Zoek uit of er eerdere meldingen over deze persoon zijn. Dat kost tien minuten en verandert vaak welke maatregel passend is.');
   }
   if (wie === 'vrijwilliger') {
     dag.push('<strong>Let op bij vrijwilligers.</strong> Zij staan vaak niet in de personeelssystemen en vallen daardoor buiten de standaard opvolging, terwijl de zorgplicht van artikel 7:658 lid 4 BW ook voor hen geldt. Zet de nazorg dus handmatig in gang.');
   }
+  if (doorwerken === 'nee' || doorwerken === 'twijfel') {
+    dag.push('Meld dit bij de bedrijfsarts als er verzuim uit voortkomt. Verzuim na een incident hoort in de registratie, want het maakt de werkelijke impact zichtbaar.');
+  }
 
   // ── Deze week en daarna ──
   const week = [];
-  week.push(`Opnieuw contact na ongeveer een week. Slecht slapen, prikkelbaarheid of het vermijden van bepaalde situaties komen zelden meteen naar boven.`);
+  week.push('Opnieuw contact na ongeveer een week. Slecht slapen, prikkelbaarheid of het vermijden van bepaalde situaties komen zelden meteen naar boven.');
   week.push('Bespreek het incident geanonimiseerd in het werkoverleg. Niet om het uit te vergroten, maar omdat collega\'s ervan leren en het de norm bevestigt.');
   week.push(`Houd na ongeveer een maand nog een keer vinger aan de pols. Als klachten aanhouden: actief doorverwijzen naar de bedrijfsarts of vertrouwenspersoon, en niet wachten tot ${persoon} er zelf om vraagt.`);
   if (strafbaar) {
     week.push('Bewaar facturen, medische verklaringen en een verslag van de gevolgen. Schade kan als benadeelde partij in de strafzaak worden meegenomen.');
   }
+  if (plek === 'locatie') {
+    week.push('Loop de plek zelf na: kan de medewerker daar weg zonder langs de ander te moeten, is er zicht vanuit de omgeving, en werkt de alarmering? De inrichting van een ruimte bepaalt mede hoe snel spanning oploopt.');
+  }
+  if (plek === 'onderweg') {
+    week.push('Herzie de afspraken voor alleen werken: bereikbaarheid, in- en uitchecken, en een werkend alarmmiddel. Bij werk buiten de locatie valt de belangrijkste beschermende factor weg, namelijk een collega die meekijkt.');
+  }
+  if (intern) {
+    week.push('Kijk verder dan dit incident. Gedrag tussen collega\'s dat escaleert wijst vaak op werkdruk, onduidelijke verhoudingen of gedrag dat eerder is getolereerd. Een gesprek met alleen de betrokkenen lost dat zelden op.');
+  }
 
-  const kop = strafbaar
-    ? `Dit is strafbaar gedrag. Behandel het niet als een incident dat erbij hoort.`
-    : `Registreer dit, ook al lijkt het klein.`;
+  const kop = intern
+    ? 'Dit gebeurde binnen de organisatie. Dat vraagt een andere route.'
+    : (strafbaar ? 'Dit is strafbaar gedrag. Behandel het niet als een incident dat erbij hoort.' : 'Registreer dit, ook al lijkt het klein.');
 
-  const inleiding = strafbaar
-    ? `Er was sprake van ${TYPE_NAAM[type]}. Dat is zelfstandig strafbaar, los van de aanleiding en los van of er iemand aangifte doet. Hieronder staat wat er nu nodig is.`
-    : `Er was sprake van ${TYPE_NAAM[type]}. Dat is vaak niet strafbaar, maar wel een grens die is overschreden. Juist deze incidenten verdwijnen uit beeld, terwijl het patroon erachter het verhaal vertelt.`;
+  let inleiding;
+  if (intern && strafbaar) {
+    inleiding = `Er was sprake van ${TYPE_NAAM[type]}, door ${dader === 'leidinggevende' ? 'een leidinggevende' : 'een collega'}. Dat is zelfstandig strafbaar, en tegelijk een arbeidsrechtelijke kwestie. Beide sporen bestaan naast elkaar.`;
+  } else if (intern) {
+    inleiding = `Er was sprake van ${TYPE_NAAM[type]}, door ${dader === 'leidinggevende' ? 'een leidinggevende' : 'een collega'}. Agressie van binnenuit wordt vaker weggewuifd als "een botsing", terwijl de zorgplicht van de werkgever hier precies hetzelfde is.`;
+  } else if (strafbaar) {
+    inleiding = `Er was sprake van ${TYPE_NAAM[type]}. Dat is zelfstandig strafbaar, los van de aanleiding en los van of er iemand aangifte doet. Hieronder staat wat er nu nodig is.`;
+  } else {
+    inleiding = `Er was sprake van ${TYPE_NAAM[type]}. Dat is vaak niet strafbaar, maar wel een grens die is overschreden. Juist deze incidenten verdwijnen uit beeld, terwijl het patroon erachter het verhaal vertelt.`;
+  }
 
   document.getElementById('wn-plan').innerHTML = `
     <div class="wn-samenvatting">
@@ -416,8 +553,7 @@ function toonPlan() {
   document.getElementById('wn-opnieuw').addEventListener('click', () => {
     Object.keys(antwoord).forEach(k => antwoord[k] = null);
     document.querySelectorAll('.wn-optie').forEach(b => b.classList.remove('gekozen'));
-    document.getElementById('wn-stap-2').hidden = true;
-    document.getElementById('wn-stap-3').hidden = true;
+    for (let i = 2; i <= 8; i++) document.getElementById('wn-stap-' + i).hidden = true;
     plan.classList.remove('show');
     plan.innerHTML = '';
     document.getElementById('wn-stap-1').scrollIntoView({ behavior: 'smooth', block: 'center' });
