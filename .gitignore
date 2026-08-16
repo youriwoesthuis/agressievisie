@@ -6,3 +6,6 @@ data/aanvullingen.json
 # OS/editor cruft
 .DS_Store
 Thumbs.db
+
+# Lokale dev-server logs
+*.log
