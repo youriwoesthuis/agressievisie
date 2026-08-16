@@ -1,0 +1,601 @@
+﻿<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wat is jouw reflex? Ontdek je eerste reactie bij agressie</title>
+<meta name="description" content="Acht situaties zonder goed of fout antwoord. Ontdek wat je automatische reactie is bij spanning, en wat die reactie bij de ander oproept." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="canonical" href="https://agressievisie.nl/reflex.html" />
+<meta property="og:url" content="https://agressievisie.nl/reflex.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="AgressieVisie" />
+<meta property="og:title" content="Wat is jouw reflex? Ontdek je eerste reactie bij agressie" />
+<meta property="og:description" content="Acht situaties zonder goed of fout antwoord, op basis van de Roos van Leary." />
+<meta property="og:image" content="https://agressievisie.nl/img/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://agressievisie.nl/img/og-image.jpg" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  /* De zelftest als donker podium: zelfde vormtaal als de hero op de homepage,
+     zodat de test aanvoelt als een ervaring in plaats van een formulier. */
+  .quiz-stage { position:relative; overflow:hidden; background:var(--ink); color:var(--text-inverse); padding:54px 0 64px; }
+  .quiz-stage::before {
+    content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:radial-gradient(ellipse 760px 460px at 84% 6%, rgba(224,64,31,.28), transparent 70%);
+  }
+  .quiz-inner { position:relative; z-index:1; max-width:800px; margin:0 auto; padding:0 24px; }
+
+  .prog-top { display:flex; align-items:baseline; justify-content:space-between; gap:16px; margin-bottom:12px; }
+  .prog-count { font-size:13px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--text-inverse-muted); }
+  .prog-count b { color:#fff; font-size:15px; letter-spacing:0; }
+  .prog-tally { display:flex; gap:5px; align-items:center; }
+  .tally { width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,.16); }
+  .tally.goed { background:#2f9e5c; }
+  .tally.fout { background:#e0503a; }
+  .prog-bar { height:5px; border-radius:3px; background:rgba(255,255,255,.13); overflow:hidden; margin-bottom:34px; }
+  .prog-fill { height:100%; width:0; background:var(--grad-alert); border-radius:3px; transition:width .45s cubic-bezier(.4,0,.2,1); }
+
+  .quiz-q { font-size:clamp(22px,3.4vw,31px); font-weight:800; line-height:1.28; letter-spacing:-.02em; color:#fff; margin:0 0 30px; text-wrap:balance; }
+
+  .quiz-options { display:flex; flex-direction:column; gap:11px; }
+  .quiz-option {
+    display:flex; align-items:flex-start; gap:15px; width:100%; text-align:left;
+    padding:17px 20px; border-radius:var(--radius); cursor:pointer;
+    background:rgba(255,255,255,.055); border:1.5px solid rgba(255,255,255,.14);
+    color:var(--text-inverse); font-family:inherit; font-size:16.5px; line-height:1.45;
+    transition:background .15s ease, border-color .15s ease, transform .15s ease;
+  }
+  .quiz-option:hover:not(:disabled) { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.34); transform:translateX(3px); }
+  .quiz-option:focus-visible { outline:2px solid var(--amber); outline-offset:3px; }
+  .quiz-option:disabled { cursor:default; }
+  .quiz-option .badge-letter {
+    flex-shrink:0; width:29px; height:29px; border-radius:8px; display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,.12); font-size:13.5px; font-weight:800; color:#fff; margin-top:-1px;
+    transition:background .15s ease, color .15s ease;
+  }
+  .quiz-option:hover:not(:disabled) .badge-letter { background:rgba(255,255,255,.2); }
+  .quiz-option.correct { background:rgba(47,158,92,.17); border-color:#2f9e5c; box-shadow:0 0 0 4px rgba(47,158,92,.22); }
+  .quiz-option.correct .badge-letter { background:#2f9e5c; color:#fff; }
+  .quiz-option.incorrect { background:rgba(224,80,58,.15); border-color:#e0503a; }
+  .quiz-option.incorrect .badge-letter { background:#e0503a; color:#fff; }
+  .quiz-option.dim { opacity:.42; }
+
+  .quiz-explain {
+    margin-top:20px; padding:18px 20px; border-radius:var(--radius);
+    background:rgba(255,255,255,.06); border-left:3px solid var(--amber);
+    font-size:15.5px; line-height:1.6; color:var(--text-inverse-muted); display:none; animation:quiz-rise .3s ease;
+  }
+  .quiz-explain.show { display:block; }
+  .quiz-explain a { color:var(--amber); text-decoration:underline; }
+  .quiz-explain .explain-label { display:block; color:#fff; margin-bottom:5px; font-size:13px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+  @keyframes quiz-rise { from { opacity:0; transform:translateY(7px); } to { opacity:1; transform:none; } }
+
+  .quiz-next { margin-top:24px; }
+
+  /* ── Reflex: geen score, dus geen goed-foutkleuren ── */
+  .tally.gekozen { background:var(--amber); }
+  .quiz-option.gekozen { background:rgba(245,165,36,.16); border-color:var(--amber); }
+  .quiz-option:disabled { cursor:default; opacity:.75; }
+  .quiz-option.gekozen:disabled { opacity:1; }
+  .quiz-explain.toon { display:block; }
+  .quiz-explain b { color:#fff; }
+
+  .reflex-context {
+    display:inline-block; font-size:11.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--amber); margin-bottom:12px;
+  }
+  .reflex-hint { margin-top:18px; font-size:13.5px; color:var(--text-inverse-muted); font-style:italic; }
+
+  .reflex-kop { margin-bottom:30px; }
+  .reflex-as { display:block; font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--amber); margin-bottom:8px; }
+  .reflex-kop h2 {
+    font-size:clamp(26px,4.4vw,40px); font-weight:800; letter-spacing:-.025em; line-height:1.15; color:#fff; margin:0 0 12px;
+    text-wrap:balance;
+  }
+  .reflex-kop p { margin:0; color:var(--text-inverse-muted); font-size:16.5px; line-height:1.6; max-width:52ch; }
+
+  .reflex-verdeling { display:flex; flex-direction:column; gap:14px; margin-bottom:32px; }
+  .reflex-balk-top { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:6px; font-size:14.5px; color:var(--text-inverse-muted); }
+  .reflex-balk-top b { color:#fff; font-variant-numeric:tabular-nums; }
+  .reflex-track { height:7px; border-radius:999px; background:rgba(255,255,255,.13); overflow:hidden; }
+  .reflex-fill { height:100%; width:0; border-radius:999px; background:rgba(255,255,255,.3); transition:width .7s cubic-bezier(.16,1,.3,1); }
+  .reflex-fill.dominant { background:var(--grad-alert); }
+
+  .reflex-kaart {
+    background:rgba(255,255,255,.055); border:1px solid rgba(255,255,255,.13);
+    border-radius:var(--radius); padding:24px 26px; margin-bottom:16px;
+  }
+  .reflex-kaart h3 { font-size:19px; color:#fff; margin:0 0 16px; }
+  .reflex-regel { margin-bottom:14px; }
+  .reflex-regel:last-child { margin-bottom:0; }
+  .reflex-regel p { margin:0; font-size:15px; line-height:1.6; color:var(--text-inverse-muted); }
+  .reflex-label { display:block; font-size:11.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--amber); margin-bottom:4px; }
+  .reflex-regel--let-op .reflex-label { color:#e0803a; }
+
+  .reflex-basis {
+    border-left:3px solid rgba(255,255,255,.22); padding:4px 0 4px 18px; margin:26px 0 32px;
+  }
+  .reflex-basis p { margin:0; font-size:14.5px; line-height:1.6; color:var(--text-inverse-muted); }
+  .reflex-basis a { color:var(--amber); text-decoration:underline; }
+
+  /* Uitslag */
+  .quiz-result { animation:quiz-rise .4s ease; }
+  .score-row { display:flex; align-items:center; gap:28px; flex-wrap:wrap; margin-bottom:30px; }
+  .score-num {
+    font-size:clamp(58px,10vw,92px); font-weight:800; line-height:.9; letter-spacing:-.035em;
+    background:var(--grad-alert); -webkit-background-clip:text; background-clip:text; color:transparent; flex-shrink:0;
+  }
+  .score-txt h3 { font-size:clamp(21px,2.8vw,27px); font-weight:800; color:#fff; margin:0 0 7px; letter-spacing:-.015em; }
+  .score-txt p { margin:0; color:var(--text-inverse-muted); font-size:16px; max-width:46ch; }
+  .score-txt strong { color:#fff; }
+
+  .cat-grid { display:flex; flex-direction:column; gap:13px; margin-bottom:30px; }
+  .cat-card { background:rgba(255,255,255,.055); border:1px solid rgba(255,255,255,.13); border-left-width:3px; border-radius:var(--radius); padding:20px 22px; }
+  .cat-card--sterk { border-left-color:#2f9e5c; }
+  .cat-card--redelijk { border-left-color:var(--amber); }
+  .cat-card--aandacht { border-left-color:#e0503a; }
+  .cat-card-top { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; }
+  .cat-card-naam { font-weight:800; font-size:16px; color:#fff; }
+  .cat-card-score { font-weight:800; font-size:15px; color:var(--text-inverse-muted); font-variant-numeric:tabular-nums; }
+  .cat-track { height:7px; border-radius:4px; background:rgba(255,255,255,.13); overflow:hidden; margin-bottom:12px; }
+  .cat-fill { height:100%; border-radius:4px; background:var(--grad-alert); width:0; transition:width .7s cubic-bezier(.4,0,.2,1); }
+  .cat-card-niveau { display:inline-block; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; padding:3px 10px; border-radius:999px; margin-bottom:10px; }
+  .cat-card-niveau--sterk { background:rgba(47,158,92,.2); color:#6fd39b; }
+  .cat-card-niveau--redelijk { background:rgba(245,165,36,.18); color:var(--amber); }
+  .cat-card-niveau--aandacht { background:rgba(224,80,58,.18); color:#f08a75; }
+  .cat-card p { color:var(--text-inverse-muted); font-size:14.5px; line-height:1.6; margin:0 0 12px; }
+  .cat-card p a { color:var(--amber); text-decoration:underline; }
+  .cat-card .btn-ghost { color:#fff; border-color:rgba(255,255,255,.3); }
+  .cat-card .btn-ghost:hover { border-color:var(--amber); color:var(--amber); }
+
+  .quiz-cta { padding:24px 26px; border-radius:var(--radius); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.13); }
+  .quiz-cta h3 { margin:0 0 7px; font-size:19px; font-weight:800; color:#fff; letter-spacing:-.01em; }
+  .quiz-cta p { margin:0 0 16px; color:var(--text-inverse-muted); font-size:15.5px; max-width:52ch; }
+  .quiz-cta-row { display:flex; gap:12px; flex-wrap:wrap; }
+
+  @media (max-width:620px) {
+    .quiz-stage { padding:38px 0 46px; }
+    .score-row { gap:18px; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    .prog-fill, .cat-fill, .quiz-option, .quiz-explain, .quiz-result { transition:none; animation:none; }
+  }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agressievisie.nl/"},{"@type":"ListItem","position":2,"name":"Zelftest","item":"https://agressievisie.nl/zelftest.html"}]}
+</script>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a class="brand" href="index.html" aria-label="AgressieVisie, naar de homepage"><span class="brand-mark" aria-hidden="true"></span>AgressieVisie</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="artikelen.html">Artikelen</a>
+      <a href="methodieken.html">Methodieken</a>
+      <a href="cijfers.html">Cijfers & trends</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button">Meer <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-dropdown-menu nav-mega">
+        <div class="nav-mega-col">
+          <span class="nav-kop">Kennisbank</span>
+          <a href="lexicon.html">Begrippenlijst</a>
+          <a href="beleid-en-wetgeving.html">Beleid & wetgeving</a>
+          <a href="bronnen.html">Bronnenbank</a>
+          <a href="trendrapport.html">Trendrapport</a>
+          <a href="faq.html">Veelgestelde vragen</a>
+        </div>
+        <div class="nav-mega-col">
+          <span class="nav-kop">Direct aan de slag</span>
+          <a href="wat-nu.html">Wat nu? Na een incident</a>
+          <a href="oefengesprek.html">Oefengesprek</a>
+          <a href="reflex.html" class="current">Wat is jouw reflex?</a>
+        </div>
+        <div class="nav-mega-col">
+          <span class="nav-kop">Voor je organisatie</span>
+          <a href="protocol-generator.html">Protocol-generator</a>
+          <a href="risico-check.html">Risico-check</a>
+          <a href="kosten.html">Kostenberekening</a>
+          <a href="werkoverleg.html">Werkoverlegkaarten<span class="nav-badge">Nieuw</span></a>
+        </div>
+<div class="nav-mega-col">
+          <span class="nav-kop">Downloads</span>
+          <a href="gratis-gids.html">Gratis checklist</a>
+          <a href="ebook.html">Gratis e-book</a>
+        </div>
+        <div class="nav-mega-col">
+          <span class="nav-kop">Platform</span>
+          <a href="contact.html">Contact</a>
+          <a href="bijdragen.html">Draag bij</a>
+          <a href="over.html">Over dit platform</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="overzicht.html">Sitemap</a>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="nav-cta">
+      <a class="nav-search" href="zoeken.html" aria-label="Zoeken"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+  </nav>
+</header>
+
+<section class="page-header">
+  <div class="wrap">
+    <nav class="breadcrumbs"><a href="index.html">Home</a><span class="sep">/</span><span class="current">Wat is jouw reflex?</span></nav>
+    <span class="eyebrow">Zonder goed of fout</span>
+    <h1>Wat is jouw reflex?</h1>
+    <p class="lede">Acht situaties waarin elk antwoord verdedigbaar is. Je krijgt geen cijfer, maar zicht op je eigen eerste reactie en op wat die bij de ander oproept.</p>
+  </div>
+</section>
+
+<section class="quiz-stage">
+  <div class="quiz-inner">
+    <div class="prog-top">
+      <span class="prog-count" id="quiz-progress-text"></span>
+      <span class="prog-tally" id="quiz-tally"></span>
+    </div>
+    <div class="prog-bar"><div class="prog-fill" id="quiz-fill"></div></div>
+    <div id="quiz-content"></div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="footer-accent"></div>
+  <svg class="footer-watermark" viewBox="0 0 200 200" aria-hidden="true">
+    <rect width="200" height="200" rx="44" fill="#ffffff"/>
+    <rect x="58" y="64.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(35 100 72.6)"/>
+    <rect x="58" y="117.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(-35 100 125.6)"/>
+  </svg>
+  <div class="wrap">
+    <div class="footer-top">
+      <a class="footer-brand-block" href="index.html" aria-label="AgressieVisie, naar de homepage">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div>
+          <span class="footer-brand-name">AgressieVisie</span>
+          <p class="footer-brand-tag">Kennisplatform over agressie</p>
+        </div>
+      </a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p>Signalen, trends en onderzoek over agressie. Een initiatief van Act in Move Training & Coaching.</p>
+      </div>
+      <div>
+        <span class="footer-kop">Platform</span>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="artikelen.html">Artikelen</a></li>
+          <li><a href="methodieken.html">Methodieken</a></li>
+          <li><a href="trendrapport.html">Trendrapport</a></li>
+          <li><a href="risico-check.html">Risico-check</a></li>
+          <li><a href="kosten.html">Kostenberekening</a></li>
+          <li><a href="werkoverleg.html">Werkoverlegkaarten</a></li>
+          <li><a href="oefengesprek.html">Oefengesprek</a></li>
+          <li><a href="protocol-generator.html">Protocol-generator</a></li>
+          <li><a href="ebook.html">Gratis e-book</a></li>
+          <li><a href="reflex.html" class="current">Wat is jouw reflex?</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-kop">Meer</span>
+        <ul>
+          <li><a href="cijfers.html">Cijfers & trends</a></li>
+          <li><a href="lexicon.html">Begrippenlijst</a></li>
+          <li><a href="bronnen.html">Bronnenbank</a></li>
+          <li><a href="faq.html">Veelgestelde vragen</a></li>
+          <li><a href="gratis-gids.html">Gratis checklist</a></li>
+          <li><a href="over.html">Over dit platform</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-kop">Juridisch</span>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="overzicht.html">Sitemap</a></li>
+          <li><a href="privacy.html">Privacy & cookies</a></li>
+          <li><a href="https://actinmove.nl/" target="_blank" rel="noopener">Act in Move ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-mark"><span class="brand-mark" aria-hidden="true"></span>© <span data-year></span> AgressieVisie, onderdeel van Act in Move Training & Coaching</span>
+      <span><a href="https://actinmove.nl/" target="_blank" rel="noopener">actinmove.nl</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+// ─────────────────────────────────────────────────────────────────────────
+// Wat is jouw reflex?
+//
+// Bewust GEEN goed-foutvragen. In dit vakgebied hangt de juiste reactie af
+// van de fase, de context en je eigen toestand; één antwoord goedrekenen
+// leert mensen een versimpeling. Bovendien is bij een klassieke kennistoets
+// het sociaal wenselijke antwoord altijd herkenbaar, waardoor iedereen hoog
+// scoort en de uitslag niets zegt.
+//
+// Daarom: elke optie is verdedigbaar en staat voor één kwadrant van de Roos
+// van Leary, die elders op deze site al wordt uitgelegd en gebronde. De
+// uitslag is geen cijfer maar een spiegel: dit is je reflex, dit roept hij
+// op bij de ander, hier helpt hij, en hier werkt hij tegen je.
+// ─────────────────────────────────────────────────────────────────────────
+
+const STIJLEN = {
+  leidend: {
+    naam: 'Leidend',
+    as: 'boven + samen',
+    kort: 'Je neemt de regie en blijft betrokken.',
+    roept_op: 'Boven roept onder op: de ander laat zich makkelijker meenemen en zoekt houvast bij jou.',
+    werkt: 'Bij iemand die de draad kwijt is, in paniek raakt of niet weet wat er nu moet gebeuren. Structuur werkt dan kalmerend.',
+    botst: 'Bij iemand die zich juist niet de les wil laten lezen. Wie zich overruled voelt, gaat terugduwen — en dan wordt jouw regie het conflict.',
+    oefen: 'Oefen met een stap terugdoen: eerst vragen wat de ander nodig heeft voordat je vertelt wat er gaat gebeuren.',
+  },
+  aanvallend: {
+    naam: 'Begrenzend',
+    as: 'boven + tegen',
+    kort: 'Je zet kracht tegenover kracht en trekt een duidelijke grens.',
+    roept_op: 'Tegen roept tegen op. Dit is de reactie die de escalatiespiraal het snelst voedt, ook als je inhoudelijk gelijk hebt.',
+    werkt: 'Als er echt een grens over gaat en veiligheid voorgaat. Kort, duidelijk en zonder ruimte voor onderhandeling.',
+    botst: 'In bijna alle eerdere fases. Wat als daadkracht voelt, komt bij de ander binnen als aanval, en dan gaat het niet meer over de kwestie maar over wie wint.',
+    oefen: 'Oefen met het uitstellen van je grens: eerst benoemen wat je ziet, daarna pas begrenzen. Vaak is die tweede stap niet meer nodig.',
+  },
+  meewerkend: {
+    naam: 'Meebewegend',
+    as: 'onder + samen',
+    kort: 'Je zoekt de rust, sust en geeft de ander ruimte.',
+    roept_op: 'Samen roept samen op, en onder roept boven op: de ander ontspant, maar neemt ook makkelijker de leiding.',
+    werkt: 'Bij iemand die vooral stoom afblaast. Ruimte geven laat de spanning zakken zonder dat er iets escaleert.',
+    botst: 'Bij iemand die grenzen aan het aftasten is. Meebewegen leest dan als toegeven, en de eis wordt groter in plaats van kleiner.',
+    oefen: 'Oefen met vriendelijk maar onverzettelijk zijn: dezelfde warme toon, maar de inhoud verandert niet.',
+  },
+  teruggetrokken: {
+    naam: 'Afwachtend',
+    as: 'onder + tegen',
+    kort: 'Je houdt afstand en laat het eerst over je heen komen.',
+    roept_op: 'De ander krijgt geen richting van jou. Dat kan lucht geven, maar ook onduidelijkheid — en onduidelijkheid voedt spanning.',
+    werkt: 'Als je zelf te vol zit om helder te reageren. Even niets doen is beter dan iets doen wat je niet meent.',
+    botst: 'Als het langer duurt dan een paar tellen. Wie geen reactie krijgt, verhoogt vaak het volume om er alsnog een te krijgen.',
+    oefen: 'Oefen met hardop maken wat je doet: "Ik hoor je, ik heb even een moment nodig." Afstand nemen mag, onzichtbaar worden niet.',
+  },
+};
+
+const SITUATIES = [
+  {
+    context: 'Aan de balie',
+    tekst: 'Iemand eist luid dat hij voorgaat. De wachtenden achter hem kijken toe. Wat doe jij als eerste?',
+    opties: [
+      { t: 'Ik vertel hem hoe het werkt en wanneer hij aan de beurt is.', s: 'leidend' },
+      { t: 'Ik zeg dat dit niet de manier is om iets gedaan te krijgen.', s: 'aanvallend' },
+      { t: 'Ik kijk of ik hem toch even tussendoor kan helpen.', s: 'meewerkend' },
+      { t: 'Ik laat hem uitrazen en wacht tot het zakt.', s: 'teruggetrokken' },
+    ],
+  },
+  {
+    context: 'Op de afdeling',
+    tekst: 'Een familielid verwijt je aan het bed dat er niet goed voor zijn moeder is gezorgd. Zijn stem slaat over.',
+    opties: [
+      { t: 'Ik stel voor om even apart te gaan zitten en het rustig door te nemen.', s: 'leidend' },
+      { t: 'Ik corrigeer wat er feitelijk niet klopt aan zijn verwijt.', s: 'aanvallend' },
+      { t: 'Ik zeg dat ik me kan voorstellen dat hij boos is en laat hem praten.', s: 'meewerkend' },
+      { t: 'Ik maak mijn taak af en zeg zo min mogelijk.', s: 'teruggetrokken' },
+    ],
+  },
+  {
+    context: 'Aan de telefoon',
+    tekst: 'Een ouder belt over een beoordeling en verheft binnen een halve minuut zijn stem.',
+    opties: [
+      { t: 'Ik geef aan wat we nu gaan doen en wanneer hij iets hoort.', s: 'leidend' },
+      { t: 'Ik zeg dat ik het gesprek beëindig als hij zo blijft praten.', s: 'aanvallend' },
+      { t: 'Ik laat hem zijn verhaal doen en beloof ernaar te kijken.', s: 'meewerkend' },
+      { t: 'Ik luister en zeg weinig terug tot hij is uitgesproken.', s: 'teruggetrokken' },
+    ],
+  },
+  {
+    context: 'Tijdens een gesprek',
+    tekst: 'De ander komt tijdens het praten steeds dichterbij staan. Je voelt dat het te dichtbij wordt.',
+    opties: [
+      { t: 'Ik stel voor om te gaan zitten, dan verandert de verhouding vanzelf.', s: 'leidend' },
+      { t: 'Ik zeg direct dat hij een stap terug moet doen.', s: 'aanvallend' },
+      { t: 'Ik praat rustig door en hoop dat het zo weer ontspant.', s: 'meewerkend' },
+      { t: 'Ik doe zelf een stap achteruit en zeg er niets over.', s: 'teruggetrokken' },
+    ],
+  },
+  {
+    context: 'Onder collega\'s',
+    tekst: 'Een collega blaast na een vervelende klant stoom af, en wordt daarbij steeds harder over die klant.',
+    opties: [
+      { t: 'Ik haal hem even uit de ruimte en vraag wat er precies gebeurd is.', s: 'leidend' },
+      { t: 'Ik zeg dat hij zo niet over klanten moet praten.', s: 'aanvallend' },
+      { t: 'Ik val hem bij, hij moet het even kwijt.', s: 'meewerkend' },
+      { t: 'Ik laat hem gaan en ga verder met mijn werk.', s: 'teruggetrokken' },
+    ],
+  },
+  {
+    context: 'Vastgelopen',
+    tekst: 'Iemand herhaalt voor de derde keer exact dezelfde eis en laat geen ruimte voor iets anders.',
+    opties: [
+      { t: 'Ik benoem dat we vastlopen en stel een andere aanpak voor.', s: 'leidend' },
+      { t: 'Ik herhaal het beleid, net zo vaak als nodig is.', s: 'aanvallend' },
+      { t: 'Ik zoek naar iets wat ik hem wél kan bieden.', s: 'meewerkend' },
+      { t: 'Ik laat het even stil vallen en kijk wat hij doet.', s: 'teruggetrokken' },
+    ],
+  },
+  {
+    context: 'Bij jezelf',
+    tekst: 'Je merkt dat je hartslag omhooggaat en dat je vooral wilt overtuigen in plaats van luisteren.',
+    opties: [
+      { t: 'Ik zeg hardop dat ik even een moment neem, en neem het ook.', s: 'leidend' },
+      { t: 'Ik maak mijn punt af, anders lijkt het of ik inbind.', s: 'aanvallend' },
+      { t: 'Ik geef de ander gelijk om de spanning eruit te halen.', s: 'meewerkend' },
+      { t: 'Ik zeg minder en laat het gesprek vanzelf uitlopen.', s: 'teruggetrokken' },
+    ],
+  },
+  {
+    context: 'Erna',
+    tekst: 'Het incident is voorbij, iedereen gaat weer aan het werk. Er is niets kapot en niemand gewond.',
+    opties: [
+      { t: 'Ik zorg dat we het vandaag nog even met elkaar doornemen.', s: 'leidend' },
+      { t: 'Ik meld het, zodat er consequenties aan verbonden worden.', s: 'aanvallend' },
+      { t: 'Ik vraag mijn collega hoe het met hem gaat.', s: 'meewerkend' },
+      { t: 'Ik laat het rusten, het is tenslotte goed afgelopen.', s: 'teruggetrokken' },
+    ],
+  },
+];
+
+const VOLGORDE = ['leidend', 'aanvallend', 'meewerkend', 'teruggetrokken'];
+
+let huidige = 0;
+const keuzes = new Array(SITUATIES.length).fill(null);
+
+const $ = id => document.getElementById(id);
+
+function tekenVoortgang() {
+  $('quiz-progress-text').innerHTML = huidige < SITUATIES.length
+    ? `Situatie <b>${huidige + 1}</b> van <b>${SITUATIES.length}</b>`
+    : `<b>Je reflex</b>`;
+  $('quiz-fill').style.width = ((huidige / SITUATIES.length) * 100) + '%';
+  // Neutrale bolletjes: er valt hier niets goed of fout te kleuren.
+  $('quiz-tally').innerHTML = SITUATIES.map((_, i) =>
+    `<span class="tally${keuzes[i] !== null ? ' gekozen' : ''}"></span>`
+  ).join('');
+}
+
+function toonSituatie() {
+  const s = SITUATIES[huidige];
+  $('quiz-content').innerHTML = `
+    <span class="reflex-context">${s.context}</span>
+    <h2 class="quiz-q">${s.tekst}</h2>
+    <div class="quiz-options">
+      ${s.opties.map((o, i) => `<button class="quiz-option" data-i="${i}">${o.t}</button>`).join('')}
+    </div>
+    <p class="reflex-hint">Kies wat je in werkelijkheid zou doen, niet wat het beste klinkt. Er is hier geen goed antwoord.</p>
+  `;
+  $('quiz-content').querySelectorAll('.quiz-option').forEach(btn => {
+    btn.addEventListener('click', () => kies(Number(btn.dataset.i)));
+  });
+  tekenVoortgang();
+}
+
+function kies(i) {
+  keuzes[huidige] = SITUATIES[huidige].opties[i].s;
+  const stijl = STIJLEN[keuzes[huidige]];
+  const knoppen = [...$('quiz-content').querySelectorAll('.quiz-option')];
+  knoppen.forEach((b, j) => {
+    b.disabled = true;
+    if (j === i) b.classList.add('gekozen');
+  });
+  // Geen oordeel, wel benoemen welke stijl dit is. Zo leert iemand het model
+  // gaandeweg herkennen in plaats van pas op het eind.
+  const uitleg = document.createElement('div');
+  uitleg.className = 'quiz-explain toon';
+  uitleg.innerHTML = `<b>${stijl.naam}</b> · ${stijl.as} — ${stijl.kort}`;
+  $('quiz-content').appendChild(uitleg);
+
+  const verder = document.createElement('button');
+  verder.className = 'quiz-next';
+  verder.textContent = huidige === SITUATIES.length - 1 ? 'Bekijk je reflex' : 'Volgende situatie';
+  verder.addEventListener('click', () => {
+    huidige++;
+    if (huidige < SITUATIES.length) toonSituatie(); else toonUitslag();
+  });
+  $('quiz-content').appendChild(verder);
+  tekenVoortgang();
+}
+
+function toonUitslag() {
+  const telling = {};
+  VOLGORDE.forEach(k => telling[k] = 0);
+  keuzes.forEach(k => telling[k]++);
+
+  const hoogste = Math.max(...Object.values(telling));
+  const dominant = VOLGORDE.filter(k => telling[k] === hoogste);
+  const stijl = STIJLEN[dominant[0]];
+  const gedeeld = dominant.length > 1;
+
+  const kop = gedeeld
+    ? `Je wisselt tussen ${dominant.map(k => STIJLEN[k].naam.toLowerCase()).join(' en ')}`
+    : `Je reflex is ${stijl.naam.toLowerCase()}`;
+
+  const inleiding = gedeeld
+    ? `Je koos even vaak voor ${dominant.length} verschillende reacties. Dat is geen twijfel: het betekent dat je je gedrag aanpast aan de situatie. Hieronder staat wat elk van die reflexen oproept.`
+    : `Bij ${telling[dominant[0]]} van de ${SITUATIES.length} situaties koos je deze reactie. ${stijl.kort}`;
+
+  $('quiz-content').innerHTML = `
+    <div class="quiz-result">
+      <div class="reflex-kop">
+        <span class="reflex-as">${gedeeld ? 'Gemengd profiel' : stijl.as}</span>
+        <h2>${kop}</h2>
+        <p>${inleiding}</p>
+      </div>
+
+      <div class="reflex-verdeling">
+        ${VOLGORDE.map(k => `
+          <div class="reflex-balk">
+            <div class="reflex-balk-top">
+              <span>${STIJLEN[k].naam}</span>
+              <b>${telling[k]}×</b>
+            </div>
+            <div class="reflex-track"><div class="reflex-fill${dominant.includes(k) ? ' dominant' : ''}" data-pct="${Math.round(telling[k] / SITUATIES.length * 100)}"></div></div>
+          </div>`).join('')}
+      </div>
+
+      ${dominant.map(k => {
+        const s = STIJLEN[k];
+        return `
+        <div class="reflex-kaart">
+          <h3>${s.naam}</h3>
+          <div class="reflex-regel"><span class="reflex-label">Dit roept het op</span><p>${s.roept_op}</p></div>
+          <div class="reflex-regel"><span class="reflex-label">Hier helpt het</span><p>${s.werkt}</p></div>
+          <div class="reflex-regel reflex-regel--let-op"><span class="reflex-label">Hier werkt het tegen je</span><p>${s.botst}</p></div>
+          <div class="reflex-regel"><span class="reflex-label">Wat je kunt oefenen</span><p>${s.oefen}</p></div>
+        </div>`;
+      }).join('')}
+
+      <div class="reflex-basis">
+        <p>Deze indeling volgt de <a href="methodieken.html#roos-van-leary">Roos van Leary</a>: gedrag roept gedrag op. Boven roept onder op, samen roept samen op, tegen roept tegen op. Geen van deze vier reflexen is fout — ze passen alleen bij verschillende momenten.</p>
+      </div>
+
+      <div class="quiz-cta">
+        <h3>Oefen de reactie die je niet vanzelf kiest</h3>
+        <p>Je reflex is wat er gebeurt als je er niet over nadenkt. De enige manier om er een tweede reactie naast te zetten, is hem doen terwijl het spant.</p>
+        <div class="quiz-cta-row">
+          <a class="btn btn-primary" href="oefengesprek.html">Doe een oefengesprek</a>
+          <a class="btn btn-outline" href="methodieken.html#roos-van-leary">Lees de Roos van Leary</a>
+        </div>
+      </div>
+
+      <button class="quiz-next" id="reflex-opnieuw">Opnieuw doen</button>
+    </div>
+  `;
+
+  $('quiz-fill').style.width = '100%';
+  tekenVoortgang();
+
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.reflex-fill').forEach(el => { el.style.width = el.dataset.pct + '%'; });
+  });
+
+  $('reflex-opnieuw').addEventListener('click', () => {
+    huidige = 0;
+    keuzes.fill(null);
+    toonSituatie();
+    document.querySelector('.quiz-stage').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+toonSituatie();
+</script>
+</body>
+</html>

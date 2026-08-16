@@ -3,7 +3,7 @@
   { "titel": "LSD-methode", "url": "methodieken.html", "beschrijving": "Gesprekstechniek: Luisteren, Samenvatten, Doorvragen, met voorbeeldzinnen." },
   { "titel": "ABC-model", "url": "methodieken.html", "beschrijving": "Gedragsanalyse-model: Antecedent, Behavior, Consequence, invulbaar voor eigen situaties." },
   { "titel": "Oefengesprek", "url": "oefengesprek.html", "beschrijving": "Interactieve chatsimulatie met live spanningsmeter, kies uit 4 sectoren: zorg, onderwijs, OV, retail." },
-  { "titel": "Zelftest signalen herkennen", "url": "zelftest.html", "beschrijving": "7 vragen om te toetsen hoe goed je signalen van agressie herkent, met score en advies." },
+  { "titel": "Wat is jouw reflex?", "url": "reflex.html", "beschrijving": "Acht situaties zonder goed of fout antwoord: ontdek je automatische reactie bij spanning volgens de Roos van Leary" },
   { "titel": "Risico-check", "url": "risico-check.html", "beschrijving": "6 vragen over jouw organisatie, resulteert in een risicoscore met concrete aanbevelingen." },
   { "titel": "Protocol-generator", "url": "protocol-generator.html", "beschrijving": "Genereer direct een basisprotocol agressiebeleid op maat van jouw sector, teamgrootte en risico's." },
   { "titel": "Cijfers & trends dashboard", "url": "cijfers.html", "beschrijving": "Overzicht van CBS-, TNO- en sectorcijfers per sector, met brontabel en CSV-download." },
