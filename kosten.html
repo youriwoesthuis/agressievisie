@@ -128,15 +128,19 @@
           <a href="faq.html">Veelgestelde vragen</a>
         </div>
         <div class="nav-mega-col">
-          <h4>Interactieve tools</h4>
-          <a href="wat-nu.html">Wat nu? Na een incident<span class="nav-badge">Nieuw</span></a>
-          <a href="oefengesprek.html">Oefengesprek<span class="nav-badge">Populair</span></a>
-          <a href="protocol-generator.html">Protocol-generator<span class="nav-badge">Populair</span></a>
-          <a href="risico-check.html">Risico-check</a>
-          <a href="kosten.html" class="current">Kostenberekening<span class="nav-badge">Nieuw</span></a>
+          <h4>Direct aan de slag</h4>
+          <a href="wat-nu.html">Wat nu? Na een incident</a>
+          <a href="oefengesprek.html">Oefengesprek</a>
           <a href="zelftest.html">Zelftest</a>
         </div>
         <div class="nav-mega-col">
+          <h4>Voor je organisatie</h4>
+          <a href="protocol-generator.html">Protocol-generator</a>
+          <a href="risico-check.html">Risico-check</a>
+          <a href="kosten.html" class="current">Kostenberekening</a>
+          <a href="werkoverleg.html">Werkoverlegkaarten<span class="nav-badge">Nieuw</span></a>
+        </div>
+<div class="nav-mega-col">
           <h4>Downloads</h4>
           <a href="gratis-gids.html">Gratis checklist</a>
           <a href="ebook.html">Gratis e-book</a>
@@ -222,6 +226,26 @@
           <div class="kos-invoer"><span class="kos-prefix">&euro;</span><input type="number" id="k-dagkosten" value="300" min="0" max="5000" step="10" /></div>
         </div>
         <div class="kos-veld">
+          <label for="k-nadagen">Dagen dat iemand na afloop nog wel werkt, maar minder effectief
+            <span class="kos-hint">Slecht slapen, piekeren, vermijden van bepaalde taken. Telt alleen mee voor wie níét verzuimt.</span>
+          </label>
+          <input type="number" id="k-nadagen" value="3" min="0" max="120" step="1" />
+        </div>
+        <div class="kos-veld">
+          <label for="k-naverlies">Hoeveel minder die persoon dan presteert</label>
+          <div class="kos-invoer"><input type="number" id="k-naverlies" value="25" min="0" max="100" step="5" /><span class="kos-prefix">%</span></div>
+        </div>
+        <div class="kos-veld">
+          <label for="k-uren">Uren opvolging per incident
+            <span class="kos-hint">Leidinggevende, HR of vertrouwenspersoon: nagesprek, registratie, maatregel, contact met de dader.</span>
+          </label>
+          <input type="number" id="k-uren" value="2" min="0" max="200" step="0.5" />
+        </div>
+        <div class="kos-veld">
+          <label for="k-uurtarief">Kosten van een uur leidinggevende of HR</label>
+          <div class="kos-invoer"><span class="kos-prefix">&euro;</span><input type="number" id="k-uurtarief" value="55" min="0" max="1000" step="5" /></div>
+        </div>
+        <div class="kos-veld">
           <label for="k-vertrek">Medewerkers die per jaar vertrekken, mede door agressie
             <span class="kos-hint">Weet je dit niet? Laat op 0 staan; dan blijft dit deel buiten de berekening.</span>
           </label>
@@ -273,7 +297,7 @@
           <li><a href="methodieken.html">Methodieken</a></li>
           <li><a href="trendrapport.html">Trendrapport</a></li>
           <li><a href="risico-check.html">Risico-check</a></li>
-          <li><a href="kosten.html">Kostenberekening</a></li>
+          <li><a href="kosten.html" class="current">Kostenberekening</a></li>
           <li><a href="werkoverleg.html">Werkoverlegkaarten</a></li>
           <li><a href="oefengesprek.html">Oefengesprek</a></li>
           <li><a href="protocol-generator.html">Protocol-generator</a></li>
@@ -340,19 +364,34 @@ function bereken() {
   const verzuimdagen = metVerzuim * dagen;
   const verzuimkosten = verzuimdagen * dagkosten;
   const verloopkosten = vertrek * vervanging;
-  const totaal = verzuimkosten + verloopkosten;
-  const perMedewerker = mw > 0 ? totaal / mw : 0;
 
-  const aandeelVerzuim = totaal > 0 ? (verzuimkosten / totaal) * 100 : 0;
-  const aandeelVerloop = totaal > 0 ? (verloopkosten / totaal) * 100 : 0;
+  // Wie niet verzuimt is daarmee nog niet op volle kracht. Dit deel rekent met
+  // een dagtarief afgeleid van de verzuimdagkosten, naar rato van het verlies.
+  const nadagen = getal('k-nadagen');
+  const naverlies = getal('k-naverlies');
+  const zonderVerzuim = Math.max(0, geraakt - metVerzuim);
+  const nasleepkosten = zonderVerzuim * nadagen * dagkosten * (naverlies / 100);
+
+  // Opvolging kost tijd van mensen die duur zijn, en gebeurt bij elk incident.
+  const uren = getal('k-uren');
+  const uurtarief = getal('k-uurtarief');
+  const opvolgkosten = geraakt * uren * uurtarief;
+
+  const totaal = verzuimkosten + nasleepkosten + opvolgkosten + verloopkosten;
+  const perMedewerker = mw > 0 ? totaal / mw : 0;
+  const pctVan = x => totaal > 0 ? (x / totaal) * 100 : 0;
+  const aandeelVerzuim = pctVan(verzuimkosten);
+  const aandeelNasleep = pctVan(nasleepkosten);
+  const aandeelOpvolg = pctVan(opvolgkosten);
+  const aandeelVerloop = pctVan(verloopkosten);
 
   const bron = SECTOR_PCT[document.getElementById('k-sector').value];
 
   document.getElementById('k-uit').innerHTML = `
     <div class="kos-totaal">
-      <div class="kos-label">Geschatte kosten per jaar</div>
+      <div class="kos-label">Schatting · kosten per jaar</div>
       <div class="kos-bedrag">${euro(totaal)}</div>
-      <p class="kos-sub">Voor ${mw.toLocaleString('nl-NL')} medewerkers, op basis van de aannames die je links hebt ingevuld. Dit is een ondergrens: het rekent alleen met verzuim en vervanging.</p>
+      <p class="kos-sub"><strong>Dit is een schatting, geen meting.</strong> Het bedrag volgt uit onderzoekscijfers over hoe vaak agressie voorkomt in ${mw.toLocaleString('nl-NL')} medewerkers in jouw sector, gecombineerd met de aannames die je links zelf invult. Wie eigen incidentcijfers heeft, krijgt een preciezer beeld door die in te vullen.</p>
       <div class="kos-perhoofd">
         <div><span>Per medewerker</span><b>${euro(perMedewerker)}</b></div>
         <div><span>Verzuimdagen</span><b>${Math.round(verzuimdagen).toLocaleString('nl-NL')}</b></div>
@@ -366,10 +405,14 @@ function bereken() {
 
       <div class="kos-bar">
         <span class="b-verzuim" style="width:${aandeelVerzuim}%"></span>
+        <span style="width:${aandeelNasleep}%;background:#e0803a"></span>
+        <span style="width:${aandeelOpvolg}%;background:#8a8a95"></span>
         <span class="b-verloop" style="width:${aandeelVerloop}%"></span>
       </div>
       <div class="kos-legenda">
         <span><i style="background:var(--red)"></i>Verzuim ${Math.round(aandeelVerzuim)}%</span>
+        <span><i style="background:#e0803a"></i>Nasleep ${Math.round(aandeelNasleep)}%</span>
+        <span><i style="background:#8a8a95"></i>Opvolging ${Math.round(aandeelOpvolg)}%</span>
         <span><i style="background:var(--amber)"></i>Vervanging ${Math.round(aandeelVerloop)}%</span>
       </div>
 
@@ -398,6 +441,18 @@ function bereken() {
         <div class="kos-waarde">${euro(verzuimkosten)}</div>
       </div>
       <div class="kos-regel">
+        <div class="kos-omschrijving">Nasleep bij wie niet verzuimt
+          <span class="kos-som">${Math.round(zonderVerzuim).toLocaleString('nl-NL')} × ${nadagen} dagen × ${euro(dagkosten)} × ${naverlies}%</span>
+        </div>
+        <div class="kos-waarde">${euro(nasleepkosten)}</div>
+      </div>
+      <div class="kos-regel">
+        <div class="kos-omschrijving">Tijd aan opvolging
+          <span class="kos-som">${Math.round(geraakt).toLocaleString('nl-NL')} incidenten × ${uren} uur × ${euro(uurtarief)}</span>
+        </div>
+        <div class="kos-waarde">${euro(opvolgkosten)}</div>
+      </div>
+      <div class="kos-regel">
         <div class="kos-omschrijving">Vervangingskosten
           <span class="kos-som">${vertrek} vertrekkende medewerker${vertrek === 1 ? '' : 's'} × ${euro(vervanging)}</span>
         </div>
@@ -416,7 +471,7 @@ function bereken() {
       <p>Dit bedrag is een ondergrens. De volgende kosten zijn reëel maar lastig te becijferen, en zijn daarom weggelaten in plaats van geschat:</p>
       <ul>
         <li>Productiviteitsverlies bij collega's die het incident meemaakten of erover hoorden</li>
-        <li>Tijd van leidinggevenden, HR en vertrouwenspersoon aan opvolging en gesprekken</li>
+        <li>Tijd die het team kwijt is aan napraten en onderling opvangen</li>
         <li>Langdurig verzuim en re-integratietrajecten na een ernstig incident</li>
         <li>Juridische kosten, schade en herstel</li>
         <li>Moeilijker vervulbare vacatures als de reputatie op de arbeidsmarkt bekend raakt</li>
@@ -448,7 +503,7 @@ function vulSectorIn() {
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('k-sector').addEventListener('change', vulSectorIn);
   // Alles rekent direct door: wie een getal aanpast wil het effect meteen zien.
-  ['k-mw', 'k-pct', 'k-verzuimpct', 'k-dagen', 'k-dagkosten', 'k-vertrek', 'k-vervanging']
+  ['k-mw','k-pct','k-verzuimpct','k-dagen','k-dagkosten','k-nadagen','k-naverlies','k-uren','k-uurtarief','k-vertrek','k-vervanging']
     .forEach(id => document.getElementById(id).addEventListener('input', bereken));
   document.getElementById('k-print').addEventListener('click', () => window.print());
   vulSectorIn();

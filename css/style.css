@@ -154,7 +154,7 @@ header.site {
 .nav-dropdown-menu a:hover { background: var(--paper-soft); color: var(--red-dark); }
 .nav-dropdown-menu a.current { color: var(--red-dark); }
 .nav-dropdown-menu.nav-mega {
-  min-width: 660px; grid-template-columns: repeat(4, 1fr); gap: 0; padding: 22px 6px; left: auto; right: -40px; transform: none;
+  min-width: 840px; grid-template-columns: repeat(5, 1fr); gap: 0; padding: 22px 6px; left: auto; right: -40px; transform: none;
   border-radius: 16px;
 }
 .nav-dropdown.open .nav-dropdown-menu.nav-mega { display: grid; }
@@ -169,14 +169,15 @@ header.site {
   transition: background .12s ease, color .12s ease, transform .12s ease;
 }
 .nav-mega-col a:hover { background: var(--paper-soft); color: var(--red-dark); transform: translateX(2px); }
-/* Prioriteit in het megamenu: Interactieve tools eerst, Platform-kolom (utility) gedempt */
-.nav-mega-col:nth-child(1) { order: 2; }
+/* Prioriteit: de twee tool-kolommen eerst, Platform (utility) gedempt en achteraan */
+.nav-mega-col:nth-child(1) { order: 3; }
 .nav-mega-col:nth-child(2) { order: 1; }
-.nav-mega-col:nth-child(3) { order: 3; }
+.nav-mega-col:nth-child(3) { order: 2; }
 .nav-mega-col:nth-child(4) { order: 4; }
-.nav-mega-col:nth-child(4) h4 { color: var(--text-muted); }
-.nav-mega-col:nth-child(4) a { font-size: 13px; color: var(--text-muted); }
-.nav-mega-col:nth-child(4) a:hover { color: var(--red-dark); }
+.nav-mega-col:nth-child(5) { order: 5; }
+.nav-mega-col:nth-child(5) h4 { color: var(--text-muted); }
+.nav-mega-col:nth-child(5) a { font-size: 13px; color: var(--text-muted); }
+.nav-mega-col:nth-child(5) a:hover { color: var(--red-dark); }
 .nav-badge {
   display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 999px;
   background: var(--grad-alert); color: #fff; font-size: 9.5px; font-weight: 800;
