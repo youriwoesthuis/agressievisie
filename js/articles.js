@@ -251,32 +251,10 @@ async function renderArticleDetail(targetSelector) {
     });
   }
 
-  const ldJson = document.createElement('script');
-  ldJson.type = 'application/ld+json';
-  ldJson.textContent = JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: article.titel,
-    description: article.excerpt,
-    datePublished: article.datum,
-    articleSection: article.categorie,
-    publisher: { '@type': 'Organization', name: 'Act in Move Training & Coaching', url: 'https://actinmove.nl/' },
-    author: { '@type': 'Organization', name: 'AgressieVisie' },
-  });
-  document.head.appendChild(ldJson);
-
-  const breadcrumbLd = document.createElement('script');
-  breadcrumbLd.type = 'application/ld+json';
-  breadcrumbLd.textContent = JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://agressievisie.nl/' },
-      { '@type': 'ListItem', position: 2, name: 'Artikelen', item: 'https://agressievisie.nl/artikelen.html' },
-      { '@type': 'ListItem', position: 3, name: article.titel, item: location.href.split('#')[0] },
-    ],
-  });
-  document.head.appendChild(breadcrumbLd);
+  // Article- en BreadcrumbList-schema staan al in de pagina via
+  // injectArticleSchema() hierboven. Hier stond een tweede, magerdere kopie van
+  // allebei; die is verwijderd omdat zoekmachines dan twee keer hetzelfde
+  // artikel kregen, met tegenstrijdige publisher-gegevens.
 
   const related = articles.filter(a => a.slug !== article.slug && a.categorie === article.categorie).slice(0, 3);
   const relatedTarget = document.querySelector('#related-articles');
