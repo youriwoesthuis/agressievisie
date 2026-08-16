@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Er is net iets gebeurd: wat moet je nu doen?</title>
+<meta name="description" content="Er is net iets gebeurd op je werk. Drie korte vragen geven je een concreet plan: wat nu, wat binnen 24 uur, wat deze week, en wat je moet vastleggen." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="canonical" href="https://agressievisie.nl/wat-nu.html" />
+<meta property="og:url" content="https://agressievisie.nl/wat-nu.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="AgressieVisie" />
+<meta property="og:title" content="Er is net iets gebeurd: wat moet je nu doen?" />
+<meta property="og:description" content="Er is net iets gebeurd op je werk. Drie korte vragen geven je een concreet plan: wat nu, wat binnen 24 uur, wat deze week, en wat je moet vastleggen." />
+<meta property="og:image" content="https://agressievisie.nl/img/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://agressievisie.nl/img/og-image.jpg" />
+<link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  /* Rustige, smalle kolom: wie dit gebruikt heeft net iets meegemaakt en
+     moet niet hoeven kiezen tussen tien dingen tegelijk. */
+  .wn-wrap { max-width: 720px; margin: 0 auto; }
+
+  .wn-veiligheid {
+    background: #fdeee9; border: 1px solid #f3c4b7; border-left: 4px solid var(--red);
+    border-radius: var(--radius); padding: 20px 24px; margin-bottom: 32px;
+  }
+  .wn-veiligheid strong { display: block; font-size: 16.5px; color: var(--red-dark); margin-bottom: 6px; }
+  .wn-veiligheid p { font-size: 15px; color: var(--text); margin: 0; }
+  .wn-veiligheid a { color: var(--red-dark); font-weight: 700; text-decoration: underline; }
+
+  .wn-stap { margin-bottom: 34px; }
+  .wn-stap-label { font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+  .wn-vraag { font-size: clamp(20px, 2.8vw, 26px); font-weight: 800; letter-spacing: -.015em; line-height: 1.3; margin: 0 0 18px; text-wrap: balance; }
+
+  .wn-opties { display: flex; flex-direction: column; gap: 10px; }
+  .wn-optie {
+    display: flex; align-items: flex-start; gap: 14px; width: 100%; text-align: left;
+    padding: 16px 18px; border-radius: var(--radius); cursor: pointer;
+    background: #fff; border: 1.5px solid var(--line); color: var(--text);
+    font-family: inherit; font-size: 16px; line-height: 1.45;
+    transition: border-color .12s ease, background .12s ease, transform .12s ease;
+  }
+  .wn-optie:hover { border-color: var(--red); background: var(--paper-soft); transform: translateX(3px); }
+  .wn-optie:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+  .wn-optie.gekozen { border-color: var(--red); background: #fdeee9; }
+  .wn-optie .wn-vink {
+    flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--line);
+    margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #fff;
+  }
+  .wn-optie.gekozen .wn-vink { background: var(--red); border-color: var(--red); }
+  .wn-optie .wn-sub { display: block; font-size: 13.5px; color: var(--text-muted); margin-top: 3px; }
+
+  /* Uitkomst: een plan met vaste tijdvakken, want dat is wat mensen missen. */
+  .wn-plan { display: none; }
+  .wn-plan.show { display: block; animation: wn-in .35s ease; }
+  @keyframes wn-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  .wn-samenvatting {
+    background: var(--ink); color: var(--text-inverse); border-radius: var(--radius);
+    padding: 24px 26px; margin-bottom: 28px;
+  }
+  .wn-samenvatting h2 { color: #fff; font-size: 20px; margin: 0 0 8px; letter-spacing: -.015em; }
+  .wn-samenvatting p { color: var(--text-inverse-muted); font-size: 15.5px; margin: 0; }
+
+  .wn-blok { border: 1px solid var(--line); border-left: 3px solid var(--red); border-radius: var(--radius); padding: 20px 22px; margin-bottom: 14px; background: #fff; }
+  .wn-blok--later { border-left-color: var(--amber); }
+  .wn-blok--week { border-left-color: #8a8a95; }
+  .wn-wanneer { font-size: 11.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--red-dark); margin-bottom: 8px; }
+  .wn-blok--later .wn-wanneer { color: var(--amber-dark); }
+  .wn-blok--week .wn-wanneer { color: var(--text-muted); }
+  .wn-blok h3 { font-size: 17px; margin: 0 0 10px; letter-spacing: -.01em; }
+  .wn-blok ul { padding-left: 20px; margin: 0; }
+  .wn-blok li { font-size: 15px; margin-bottom: 7px; line-height: 1.55; }
+  .wn-blok p { font-size: 15px; margin: 0 0 10px; }
+  .wn-blok a { color: var(--red-dark); text-decoration: underline; }
+
+  .wn-vastleg { background: var(--paper-soft); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; margin-bottom: 14px; }
+  .wn-vastleg h3 { font-size: 17px; margin: 0 0 6px; }
+  .wn-vastleg p { font-size: 14.5px; color: var(--text-muted); margin: 0 0 12px; }
+  .wn-vastleg ol { padding-left: 20px; margin: 0; }
+  .wn-vastleg li { font-size: 15px; margin-bottom: 6px; }
+
+  .wn-acties { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+
+  @media (max-width: 620px) {
+    .wn-optie { font-size: 15.5px; padding: 15px 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .wn-plan.show { animation: none; } .wn-optie { transition: none; } }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agressievisie.nl/"},{"@type":"ListItem","position":2,"name":"Wat nu","item":"https://agressievisie.nl/wat-nu.html"}]}
+</script>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a class="brand" href="index.html"><span class="brand-mark"></span>AgressieVisie</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="artikelen.html">Artikelen</a>
+      <a href="methodieken.html">Methodieken</a>
+      <a href="cijfers.html">Cijfers & trends</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button">Meer <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="nav-dropdown-menu nav-mega">
+        <div class="nav-mega-col">
+          <h4>Kennisbank</h4>
+          <a href="lexicon.html">Begrippenlijst</a>
+          <a href="beleid-en-wetgeving.html">Beleid & wetgeving</a>
+          <a href="bronnen.html">Bronnenbank</a>
+          <a href="trendrapport.html">Trendrapport</a>
+          <a href="faq.html">Veelgestelde vragen</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Interactieve tools</h4>
+          <a href="wat-nu.html" class="current">Wat nu? Na een incident<span class="nav-badge">Nieuw</span></a>
+          <a href="oefengesprek.html">Oefengesprek<span class="nav-badge">Populair</span></a>
+          <a href="protocol-generator.html">Protocol-generator<span class="nav-badge">Populair</span></a>
+          <a href="risico-check.html">Risico-check</a>
+          <a href="zelftest.html">Zelftest</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Downloads</h4>
+          <a href="gratis-gids.html">Gratis checklist</a>
+          <a href="ebook.html">Gratis e-book</a>
+        </div>
+        <div class="nav-mega-col">
+          <h4>Platform</h4>
+          <a href="contact.html">Contact</a>
+          <a href="bijdragen.html">Draag bij</a>
+          <a href="over.html">Over dit platform</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="overzicht.html">Sitemap</a>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="nav-cta">
+      <a class="nav-search" href="zoeken.html" aria-label="Zoeken"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+  </nav>
+</header>
+
+<section class="page-header">
+  <div class="wrap">
+    <nav class="breadcrumbs"><a href="index.html">Home</a><span class="sep">/</span><span class="current">Wat nu</span></nav>
+    <span class="eyebrow">Direct na een incident</span>
+    <h1>Er is net iets gebeurd. Wat nu?</h1>
+    <p class="lede">Drie korte vragen, en je krijgt een concreet plan: wat je nu moet doen, wat binnen 24 uur en wat deze week. Inclusief wat je moet vastleggen voordat je het vergeet.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap wn-wrap">
+
+    <div class="wn-veiligheid">
+      <strong>Ben je op dit moment niet veilig?</strong>
+      <p>Stop met lezen en bel <a href="tel:112">112</a>. Bij acuut gevaar gaat alles hierna even niet op. Kom later terug voor de rest.</p>
+    </div>
+
+    <div id="wn-vragen">
+      <div class="wn-stap" id="wn-stap-1">
+        <div class="wn-stap-label">Vraag 1 van 3</div>
+        <p class="wn-vraag">Wat is er gebeurd?</p>
+        <div class="wn-opties">
+          <button class="wn-optie" data-vraag="type" data-waarde="verbaal"><span class="wn-vink">&#10003;</span><span>Schelden, schreeuwen of vernederen<span class="wn-sub">Verbale agressie, zonder dreiging met geweld</span></span></button>
+          <button class="wn-optie" data-vraag="type" data-waarde="bedreiging"><span class="wn-vink">&#10003;</span><span>Bedreiging<span class="wn-sub">Dreigen met geweld, ook richting je gezin, of stalken</span></span></button>
+          <button class="wn-optie" data-vraag="type" data-waarde="fysiek"><span class="wn-vink">&#10003;</span><span>Fysiek geweld<span class="wn-sub">Duwen, vastpakken, slaan, spugen, gooien</span></span></button>
+          <button class="wn-optie" data-vraag="type" data-waarde="seksueel"><span class="wn-vink">&#10003;</span><span>Seksuele intimidatie<span class="wn-sub">Ongewenste opmerkingen, toenadering of aanraking</span></span></button>
+          <button class="wn-optie" data-vraag="type" data-waarde="discriminatie"><span class="wn-vink">&#10003;</span><span>Discriminerende uitlatingen<span class="wn-sub">Gericht op afkomst, geloof, geslacht, gerichtheid of beperking</span></span></button>
+          <button class="wn-optie" data-vraag="type" data-waarde="online"><span class="wn-vink">&#10003;</span><span>Bedreiging via telefoon, mail of online<span class="wn-sub">Ook als het buiten werktijd binnenkwam</span></span></button>
+        </div>
+      </div>
+
+      <div class="wn-stap" id="wn-stap-2" hidden>
+        <div class="wn-stap-label">Vraag 2 van 3</div>
+        <p class="wn-vraag">Is er letsel of schade?</p>
+        <div class="wn-opties">
+          <button class="wn-optie" data-vraag="letsel" data-waarde="letsel"><span class="wn-vink">&#10003;</span><span>Ja, iemand is gewond<span class="wn-sub">Ook lichte verwondingen tellen mee</span></span></button>
+          <button class="wn-optie" data-vraag="letsel" data-waarde="schade"><span class="wn-vink">&#10003;</span><span>Ja, er is iets kapot<span class="wn-sub">Eigendom van de organisatie of van een medewerker</span></span></button>
+          <button class="wn-optie" data-vraag="letsel" data-waarde="geen"><span class="wn-vink">&#10003;</span><span>Nee, geen letsel of schade</span></button>
+        </div>
+      </div>
+
+      <div class="wn-stap" id="wn-stap-3" hidden>
+        <div class="wn-stap-label">Vraag 3 van 3</div>
+        <p class="wn-vraag">Wie was het doelwit?</p>
+        <div class="wn-opties">
+          <button class="wn-optie" data-vraag="wie" data-waarde="ikzelf"><span class="wn-vink">&#10003;</span><span>Ikzelf</span></button>
+          <button class="wn-optie" data-vraag="wie" data-waarde="collega"><span class="wn-vink">&#10003;</span><span>Een collega<span class="wn-sub">Je vult dit in namens of samen met diegene</span></span></button>
+          <button class="wn-optie" data-vraag="wie" data-waarde="vrijwilliger"><span class="wn-vink">&#10003;</span><span>Een vrijwilliger of stagiair<span class="wn-sub">Zij vallen onder dezelfde zorgplicht</span></span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="wn-plan" id="wn-plan"></div>
+
+  </div>
+</section>
+<footer class="site">
+  <div class="footer-accent"></div>
+  <svg class="footer-watermark" viewBox="0 0 200 200" aria-hidden="true">
+    <rect width="200" height="200" rx="44" fill="#ffffff"/>
+    <rect x="58" y="64.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(35 100 72.6)"/>
+    <rect x="58" y="117.6" width="84" height="16" rx="8" fill="#17171a" transform="rotate(-35 100 125.6)"/>
+  </svg>
+  <div class="wrap">
+    <div class="footer-top">
+      <a class="footer-brand-block" href="index.html">
+        <span class="brand-mark"></span>
+        <div>
+          <span class="footer-brand-name">AgressieVisie</span>
+          <p class="footer-brand-tag">Kennisplatform over agressie</p>
+        </div>
+      </a>
+      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p>Signalen, trends en onderzoek over agressie. Een initiatief van Act in Move Training & Coaching.</p>
+        <a class="footer-aim-logo" href="https://actinmove.nl/" target="_blank" rel="noopener" aria-label="Act in Move Training & Coaching"><span class="aim-logo-mark"></span></a>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="artikelen.html">Artikelen</a></li>
+          <li><a href="methodieken.html">Methodieken</a></li>
+          <li><a href="trendrapport.html">Trendrapport</a></li>
+          <li><a href="risico-check.html">Risico-check</a></li>
+          <li><a href="oefengesprek.html">Oefengesprek</a></li>
+          <li><a href="protocol-generator.html">Protocol-generator</a></li>
+          <li><a href="ebook.html">Gratis e-book</a></li>
+          <li><a href="zelftest.html">Zelftest</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Meer</h4>
+        <ul>
+          <li><a href="cijfers.html">Cijfers & trends</a></li>
+          <li><a href="lexicon.html">Begrippenlijst</a></li>
+          <li><a href="bronnen.html">Bronnenbank</a></li>
+          <li><a href="faq.html">Veelgestelde vragen</a></li>
+          <li><a href="gratis-gids.html">Gratis checklist</a></li>
+          <li><a href="over.html">Over dit platform</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Juridisch</h4>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="overzicht.html">Sitemap</a></li>
+          <li><a href="privacy.html">Privacy & cookies</a></li>
+          <li><a href="https://actinmove.nl/" target="_blank" rel="noopener">Act in Move ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-mark"><span class="brand-mark"></span>© <span data-year></span> AgressieVisie, onderdeel van Act in Move Training & Coaching</span>
+      <span><a href="https://actinmove.nl/" target="_blank" rel="noopener">actinmove.nl</a></span>
+    </div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+<script>
+const antwoord = { type: null, letsel: null, wie: null };
+
+const TYPE_NAAM = {
+  verbaal: 'verbale agressie',
+  bedreiging: 'een bedreiging',
+  fysiek: 'fysiek geweld',
+  seksueel: 'seksuele intimidatie',
+  discriminatie: 'discriminerende uitlatingen',
+  online: 'een bedreiging via telefoon, mail of online',
+};
+
+// Bedreiging, fysiek geweld, seksuele intimidatie en discriminatie zijn
+// zelfstandig strafbaar. Bij verbale agressie zonder dreiging is dat meestal
+// niet zo; dan is registreren en een maatregel de route.
+const STRAFBAAR = ['bedreiging', 'fysiek', 'seksueel', 'discriminatie', 'online'];
+
+function kies(vraag, waarde, knop) {
+  antwoord[vraag] = waarde;
+  knop.parentElement.querySelectorAll('.wn-optie').forEach(b => b.classList.remove('gekozen'));
+  knop.classList.add('gekozen');
+
+  if (vraag === 'type') toonStap(2);
+  if (vraag === 'letsel') toonStap(3);
+  if (vraag === 'wie') toonPlan();
+}
+
+function toonStap(n) {
+  const el = document.getElementById('wn-stap-' + n);
+  if (!el.hidden) return;
+  el.hidden = false;
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function toonPlan() {
+  const { type, letsel, wie } = antwoord;
+  const strafbaar = STRAFBAAR.includes(type);
+  const persoon = wie === 'ikzelf' ? 'je' : 'de betrokkene';
+  const bezit = wie === 'ikzelf' ? 'je' : 'diens';
+
+  // ── Nu meteen ──
+  const nu = [];
+  if (letsel === 'letsel') {
+    nu.push('<strong>Zorg eerst voor de verwonding.</strong> Laat ook lichte verwondingen bekijken en laat vastleggen wat er is geconstateerd; dat is later je bewijs.');
+  }
+  nu.push(`Zorg dat ${persoon} niet alleen achterblijft en neem taken over. Doorwerken alsof er niets is gebeurd lijkt sterk, maar vergroot de kans op klachten later.`);
+  nu.push('Waarschuw je leidinggevende of het aanspreekpunt agressiebeleid. Ook als het incident klein lijkt.');
+  if (strafbaar) {
+    nu.push('<strong>Leg bewijs veilig.</strong> Maak foto\'s van letsel of schade, bewaar berichten en vraag of camerabeelden bewaard kunnen blijven. Beelden worden vaak binnen enkele dagen automatisch overschreven.');
+  }
+  if (type === 'online') {
+    nu.push('Maak schermafbeeldingen inclusief afzender, datum en tijd. Verwijder niets, ook niet als je het liever niet meer ziet.');
+  }
+  if (letsel === 'schade') {
+    nu.push('Fotografeer de schade voordat er iets wordt opgeruimd of gerepareerd, en bewaar facturen.');
+  }
+
+  // ── Binnen 24 uur ──
+  const dag = [];
+  dag.push(`Meld het incident formeel, zodat het in de registratie komt. Losse incidenten lijken klein; het patroon dat eruit komt is wat de organisatie laat handelen.`);
+  dag.push(`Een kort nagesprek met de leidinggevende. Vraag naar de feiten, maar vooral naar hoe het met ${persoon} gaat.`);
+  if (strafbaar) {
+    dag.push(`<strong>Beslis over aangifte.</strong> Dit is strafbaar gedrag, dus aangifte is een reële optie. Twee dingen die veel mensen niet weten: de <em>werkgever</em> kan aangifte doen in plaats van ${persoon} persoonlijk, en aangifte kan onder nummer, zodat ${bezit} privéadres niet in het dossier komt. Vraag daar expliciet om, want het gebeurt niet vanzelf.`);
+  } else {
+    dag.push('Bespreek welke maatregel passend is: een waarschuwing, een gesprek, of vastleggen dat bij herhaling de toegang wordt ontzegd. Een grens die niet wordt gevolgd door iets, ondermijnt de volgende.');
+  }
+  if (wie === 'vrijwilliger') {
+    dag.push('<strong>Let op bij vrijwilligers.</strong> Zij staan vaak niet in de personeelssystemen en vallen daardoor buiten de standaard opvolging, terwijl de zorgplicht van artikel 7:658 lid 4 BW ook voor hen geldt. Zet de nazorg dus handmatig in gang.');
+  }
+
+  // ── Deze week en daarna ──
+  const week = [];
+  week.push(`Opnieuw contact na ongeveer een week. Slecht slapen, prikkelbaarheid of het vermijden van bepaalde situaties komen zelden meteen naar boven.`);
+  week.push('Bespreek het incident geanonimiseerd in het werkoverleg. Niet om het uit te vergroten, maar omdat collega\'s ervan leren en het de norm bevestigt.');
+  week.push(`Houd na ongeveer een maand nog een keer vinger aan de pols. Als klachten aanhouden: actief doorverwijzen naar de bedrijfsarts of vertrouwenspersoon, en niet wachten tot ${persoon} er zelf om vraagt.`);
+  if (strafbaar) {
+    week.push('Bewaar facturen, medische verklaringen en een verslag van de gevolgen. Schade kan als benadeelde partij in de strafzaak worden meegenomen.');
+  }
+
+  const kop = strafbaar
+    ? `Dit is strafbaar gedrag. Behandel het niet als een incident dat erbij hoort.`
+    : `Registreer dit, ook al lijkt het klein.`;
+
+  const inleiding = strafbaar
+    ? `Er was sprake van ${TYPE_NAAM[type]}. Dat is zelfstandig strafbaar, los van de aanleiding en los van of er iemand aangifte doet. Hieronder staat wat er nu nodig is.`
+    : `Er was sprake van ${TYPE_NAAM[type]}. Dat is vaak niet strafbaar, maar wel een grens die is overschreden. Juist deze incidenten verdwijnen uit beeld, terwijl het patroon erachter het verhaal vertelt.`;
+
+  document.getElementById('wn-plan').innerHTML = `
+    <div class="wn-samenvatting">
+      <h2>${kop}</h2>
+      <p>${inleiding}</p>
+    </div>
+
+    <div class="wn-blok">
+      <div class="wn-wanneer">Nu meteen</div>
+      <h3>De eerste minuten</h3>
+      <ul>${nu.map(i => `<li>${i}</li>`).join('')}</ul>
+    </div>
+
+    <div class="wn-blok wn-blok--later">
+      <div class="wn-wanneer">Binnen 24 uur</div>
+      <h3>${strafbaar ? 'Melden, nagesprek en de beslissing over aangifte' : 'Melden, nagesprek en een passende maatregel'}</h3>
+      <ul>${dag.map(i => `<li>${i}</li>`).join('')}</ul>
+    </div>
+
+    <div class="wn-blok wn-blok--week">
+      <div class="wn-wanneer">Deze week en daarna</div>
+      <h3>Opvolging die vaak wordt overgeslagen</h3>
+      <ul>${week.map(i => `<li>${i}</li>`).join('')}</ul>
+    </div>
+
+    <div class="wn-vastleg">
+      <h3>Leg dit vast voordat je het vergeet</h3>
+      <p>Details vervagen binnen een dag. Schrijf nu op, in gedragstermen en zonder interpretatie:</p>
+      <ol>
+        <li>Datum, tijdstip en locatie</li>
+        <li>Wie erbij betrokken waren en wie het zag</li>
+        <li>Wat er feitelijk gebeurde en werd gezegd</li>
+        <li>Wat eraan voorafging</li>
+        <li>Wat je hebt gedaan tijdens en direct na het incident</li>
+        <li>Of er letsel, schade of bewijsmateriaal is</li>
+      </ol>
+    </div>
+
+    <div class="wn-blok">
+      <div class="wn-wanneer">Zorg dat dit niet nog eens gebeurt</div>
+      <h3>Van incident naar beleid</h3>
+      <p>Als je organisatie geen vastgelegd agressieprotocol heeft, is dit het moment. De <a href="protocol-generator.html">protocol-generator</a> maakt er een op maat van je sector, inclusief meldroute en nazorgafspraken.</p>
+      <p>Wil je weten hoe je organisatie ervoor staat? De <a href="risico-check.html">risico-check</a> geeft in zes vragen een beeld, en de <a href="beleid-en-wetgeving.html">pagina over beleid en wetgeving</a> legt uit wat de Arbowet concreet van werkgevers vraagt.</p>
+    </div>
+
+    <div class="wn-acties">
+      <a class="btn btn-primary" href="protocol-generator.html">Maak een protocol</a>
+      <button class="btn btn-outline" id="wn-print">Print dit plan</button>
+      <button class="btn btn-outline" id="wn-opnieuw">Opnieuw invullen</button>
+    </div>
+  `;
+
+  const plan = document.getElementById('wn-plan');
+  plan.classList.add('show');
+  plan.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  document.getElementById('wn-print').addEventListener('click', () => window.print());
+  document.getElementById('wn-opnieuw').addEventListener('click', () => {
+    Object.keys(antwoord).forEach(k => antwoord[k] = null);
+    document.querySelectorAll('.wn-optie').forEach(b => b.classList.remove('gekozen'));
+    document.getElementById('wn-stap-2').hidden = true;
+    document.getElementById('wn-stap-3').hidden = true;
+    plan.classList.remove('show');
+    plan.innerHTML = '';
+    document.getElementById('wn-stap-1').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.wn-optie').forEach(knop => {
+    knop.addEventListener('click', () => kies(knop.dataset.vraag, knop.dataset.waarde, knop));
+  });
+});
+</script>
+</body>
+</html>
