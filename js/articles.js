@@ -64,6 +64,17 @@ function injectArticleSchema(article, canonicalUrl) {
   document.head.appendChild(el);
 }
 
+// Zet een attribuut op een bestaand element in de head, of maakt het aan als
+// het er nog niet is.
+function zetOfMaak(selector, maak, attribuut, waarde) {
+  let el = document.querySelector(selector);
+  if (!el) {
+    el = maak();
+    document.head.appendChild(el);
+  }
+  el.setAttribute(attribuut, waarde);
+}
+
 function articleCardHTML(a) {
   const badgeClass = CATEGORY_CLASS[a.categorie] || '';
   return `
@@ -157,8 +168,20 @@ async function renderArticleDetail(targetSelector) {
   const canonicalUrl = `https://agressievisie.nl/artikel.html?slug=${encodeURIComponent(article.slug)}`;
   const descMeta = document.querySelector('meta[name=description]');
   if (descMeta) descMeta.setAttribute('content', article.excerpt);
-  document.querySelector('link[rel=canonical]')?.setAttribute('href', canonicalUrl);
-  document.querySelector('meta[property="og:url"]')?.setAttribute('content', canonicalUrl);
+  // artikel.html heeft bewust geen vaste canonical of og:url in de HTML, omdat
+  // die naar de sjabloon-URL zou wijzen en alle artikelen zou samenvoegen.
+  // Hier worden ze aangemaakt met de echte artikel-URL.
+  zetOfMaak('link[rel=canonical]', () => {
+    const el = document.createElement('link');
+    el.rel = 'canonical';
+    return el;
+  }, 'href', canonicalUrl);
+
+  zetOfMaak('meta[property="og:url"]', () => {
+    const el = document.createElement('meta');
+    el.setAttribute('property', 'og:url');
+    return el;
+  }, 'content', canonicalUrl);
   document.querySelector('meta[property="og:title"]')?.setAttribute('content', `${article.titel} | AgressieVisie`);
   document.querySelector('meta[property="og:description"]')?.setAttribute('content', article.excerpt);
   injectArticleSchema(article, canonicalUrl);
