@@ -54,9 +54,26 @@
   /* Invulvelden opvallend markeren: het protocol is pas af als deze zijn ingevuld. */
   .invul { background:#fdf1dc; border-bottom:1px dashed var(--amber-dark); color:#8a5d0f; font-weight:600; padding:1px 4px; border-radius:2px; }
   @media print { .invul { background:none; } }
+  /* Bij printen moet alleen het protocol overblijven: alle website-onderdelen
+     eromheen horen niet in een document dat je aan je team geeft. */
+  .print-brand { display:none; }
   @media print {
-    header.site, footer.site, #cookie-banner, .gen-form, .no-print { display:none !important; }
+    header.site, footer.site, #cookie-banner, .gen-form, .no-print,
+    .page-header, .breadcrumbs, .crisis-quickaccess, .scroll-progress,
+    .cta-band, .download-gate, .vl-widget { display:none !important; }
     .gen-layout { grid-template-columns:1fr; }
+    .section--tight { padding:0 !important; }
+    .wrap { max-width:none !important; padding:0 !important; }
+    .protocol-sheet { border:none !important; box-shadow:none !important; padding:0 !important; }
+    /* Merkkop alleen op papier, zodat het document herkenbaar van AgressieVisie is. */
+    .print-brand {
+      display:flex !important; align-items:center; gap:14px;
+      margin-bottom:26px; padding-bottom:18px; border-bottom:2px solid var(--line);
+    }
+    .print-brand .pb-naam { font-size:19px; font-weight:800; color:var(--ink); }
+    .print-brand .pb-tag { font-size:12.5px; color:var(--text-muted); }
+    .protocol-section { break-inside:avoid; page-break-inside:avoid; }
+    .protocol-section h3 { break-after:avoid; page-break-after:avoid; }
   }
 
   .download-gate {
@@ -698,6 +715,13 @@ function buildProtocolSections(state) {
 
 function renderProtocolPreview(data) {
   const html = `
+    <div class="print-brand">
+      ${LOGO_SVG}
+      <div>
+        <div class="pb-naam">AgressieVisie</div>
+        <div class="pb-tag">Kennisplatform over agressie · agressievisie.nl</div>
+      </div>
+    </div>
     <h2>${data.titel}</h2>
     <p class="sub">${data.sub}</p>
     <p class="versie">${data.versie}</p>
