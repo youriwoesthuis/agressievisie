@@ -470,6 +470,11 @@ function toonPlan() {
     dag.push('Meld dit bij de bedrijfsarts als er verzuim uit voortkomt. Verzuim na een incident hoort in de registratie, want het maakt de werkelijke impact zichtbaar.');
   }
 
+  // Slachtofferhulp staat hier onvoorwaardelijk: het is gratis, er is geen
+  // aangifte voor nodig en het is de meest voor de hand liggende doorverwijzing
+  // die tot nu toe nergens op deze site stond.
+  dag.push(`<strong>Slachtofferhulp Nederland is bereikbaar op 0900-0101.</strong> Gratis, en er is géén aangifte voor nodig. Ook bij twijfel of het "erg genoeg" was ${wie === 'ikzelf' ? 'kun je er terecht' : 'kan de betrokkene er terecht'}: dat oordeel hoeft niemand zelf te vellen. Wat er verder mogelijk is aan melden, aangifte en schade verhalen staat op <a href="na-een-incident.html">Na een incident: je rechten</a>.`);
+
   // ── Deze week en daarna ──
   const week = [];
   week.push('Opnieuw contact na ongeveer een week. Slecht slapen, prikkelbaarheid of het vermijden van bepaalde situaties komen zelden meteen naar boven.');
