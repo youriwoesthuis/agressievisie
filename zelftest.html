@@ -21,44 +21,105 @@
 <link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="css/style.css" />
 <style>
-  .quiz-wrap { max-width: 680px; margin: 0 auto; }
-  .quiz-box { background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:36px; box-shadow:var(--shadow-sm); }
-  .quiz-progress-text { font-size:13px; font-weight:700; color:var(--text-muted); margin-bottom:6px; }
-  .quiz-progress { display:flex; gap:5px; margin-bottom:26px; }
-  .quiz-progress span { flex:1; height:4px; border-radius:2px; background:var(--line); }
-  .quiz-progress span.done { background: var(--grad-alert); }
-  .quiz-q { font-size:18px; font-weight:700; margin-bottom:22px; line-height:1.5; }
-  .quiz-options { display:flex; flex-direction:column; gap:10px; }
-  .quiz-option {
-    text-align:left; padding:14px 16px; border-radius:10px; border:2px solid var(--line); background:var(--paper-soft);
-    font-family:inherit; font-size:15px; cursor:pointer; transition: border-color .12s ease;
+  /* De zelftest als donker podium: zelfde vormtaal als de hero op de homepage,
+     zodat de test aanvoelt als een ervaring in plaats van een formulier. */
+  .quiz-stage { position:relative; overflow:hidden; background:var(--ink); color:var(--text-inverse); padding:54px 0 64px; }
+  .quiz-stage::before {
+    content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:radial-gradient(ellipse 760px 460px at 84% 6%, rgba(224,64,31,.28), transparent 70%);
   }
-  .quiz-option:hover:not(:disabled) { border-color: var(--red); }
-  .quiz-option:disabled { cursor:default; }
-  .quiz-option.correct { border-color:#2f9e5c; background:#eafaf0; }
-  .quiz-option.incorrect { border-color:#b8300f; background:#fdeee9; }
-  .quiz-explain { margin-top:18px; padding:14px 16px; background:var(--paper-soft); border-left:3px solid var(--red); border-radius:6px; font-size:14px; color:var(--text-muted); display:none; }
-  .quiz-explain.show { display:block; }
-  .quiz-next { margin-top:20px; display:none; }
-  .quiz-next.show { display:inline-flex; }
-  .quiz-result { text-align:center; }
-  .quiz-result .score { font-size:52px; font-weight:800; color:var(--red-dark); margin-bottom:8px; }
-  .quiz-result h3 { font-size:22px; margin-bottom:12px; }
-  .quiz-result p { color:var(--text-muted); font-size:15px; }
+  .quiz-inner { position:relative; z-index:1; max-width:800px; margin:0 auto; padding:0 24px; }
 
-  .cat-grid { display:flex; flex-direction:column; gap:14px; margin-top:28px; }
-  .cat-card { border:1px solid var(--line); border-radius:var(--radius-sm); padding:20px 22px; border-left-width:4px; }
+  .prog-top { display:flex; align-items:baseline; justify-content:space-between; gap:16px; margin-bottom:12px; }
+  .prog-count { font-size:13px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--text-inverse-muted); }
+  .prog-count b { color:#fff; font-size:15px; letter-spacing:0; }
+  .prog-tally { display:flex; gap:5px; align-items:center; }
+  .tally { width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,.16); }
+  .tally.goed { background:#2f9e5c; }
+  .tally.fout { background:#e0503a; }
+  .prog-bar { height:5px; border-radius:3px; background:rgba(255,255,255,.13); overflow:hidden; margin-bottom:34px; }
+  .prog-fill { height:100%; width:0; background:var(--grad-alert); border-radius:3px; transition:width .45s cubic-bezier(.4,0,.2,1); }
+
+  .quiz-q { font-size:clamp(22px,3.4vw,31px); font-weight:800; line-height:1.28; letter-spacing:-.02em; color:#fff; margin:0 0 30px; text-wrap:balance; }
+
+  .quiz-options { display:flex; flex-direction:column; gap:11px; }
+  .quiz-option {
+    display:flex; align-items:flex-start; gap:15px; width:100%; text-align:left;
+    padding:17px 20px; border-radius:var(--radius); cursor:pointer;
+    background:rgba(255,255,255,.055); border:1.5px solid rgba(255,255,255,.14);
+    color:var(--text-inverse); font-family:inherit; font-size:16.5px; line-height:1.45;
+    transition:background .15s ease, border-color .15s ease, transform .15s ease;
+  }
+  .quiz-option:hover:not(:disabled) { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.34); transform:translateX(3px); }
+  .quiz-option:focus-visible { outline:2px solid var(--amber); outline-offset:3px; }
+  .quiz-option:disabled { cursor:default; }
+  .quiz-option .badge-letter {
+    flex-shrink:0; width:29px; height:29px; border-radius:8px; display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,.12); font-size:13.5px; font-weight:800; color:#fff; margin-top:-1px;
+    transition:background .15s ease, color .15s ease;
+  }
+  .quiz-option:hover:not(:disabled) .badge-letter { background:rgba(255,255,255,.2); }
+  .quiz-option.correct { background:rgba(47,158,92,.17); border-color:#2f9e5c; box-shadow:0 0 0 4px rgba(47,158,92,.22); }
+  .quiz-option.correct .badge-letter { background:#2f9e5c; color:#fff; }
+  .quiz-option.incorrect { background:rgba(224,80,58,.15); border-color:#e0503a; }
+  .quiz-option.incorrect .badge-letter { background:#e0503a; color:#fff; }
+  .quiz-option.dim { opacity:.42; }
+
+  .quiz-explain {
+    margin-top:20px; padding:18px 20px; border-radius:var(--radius);
+    background:rgba(255,255,255,.06); border-left:3px solid var(--amber);
+    font-size:15.5px; line-height:1.6; color:var(--text-inverse-muted); display:none; animation:quiz-rise .3s ease;
+  }
+  .quiz-explain.show { display:block; }
+  .quiz-explain a { color:var(--amber); text-decoration:underline; }
+  .quiz-explain .explain-label { display:block; color:#fff; margin-bottom:5px; font-size:13px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+  @keyframes quiz-rise { from { opacity:0; transform:translateY(7px); } to { opacity:1; transform:none; } }
+
+  .quiz-next { margin-top:24px; display:none; }
+  .quiz-next.show { display:inline-flex; }
+
+  /* Uitslag */
+  .quiz-result { animation:quiz-rise .4s ease; }
+  .score-row { display:flex; align-items:center; gap:28px; flex-wrap:wrap; margin-bottom:30px; }
+  .score-num {
+    font-size:clamp(58px,10vw,92px); font-weight:800; line-height:.9; letter-spacing:-.035em;
+    background:var(--grad-alert); -webkit-background-clip:text; background-clip:text; color:transparent; flex-shrink:0;
+  }
+  .score-txt h3 { font-size:clamp(21px,2.8vw,27px); font-weight:800; color:#fff; margin:0 0 7px; letter-spacing:-.015em; }
+  .score-txt p { margin:0; color:var(--text-inverse-muted); font-size:16px; max-width:46ch; }
+  .score-txt strong { color:#fff; }
+
+  .cat-grid { display:flex; flex-direction:column; gap:13px; margin-bottom:30px; }
+  .cat-card { background:rgba(255,255,255,.055); border:1px solid rgba(255,255,255,.13); border-left-width:3px; border-radius:var(--radius); padding:20px 22px; }
   .cat-card--sterk { border-left-color:#2f9e5c; }
-  .cat-card--redelijk { border-left-color:#e0a024; }
-  .cat-card--aandacht { border-left-color:#b8300f; }
-  .cat-card-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
-  .cat-card-naam { font-weight:700; font-size:15.5px; }
-  .cat-card-score { font-weight:800; font-size:15px; color:var(--text-muted); }
-  .cat-card-niveau { display:inline-block; font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:.03em; padding:3px 10px; border-radius:999px; margin-bottom:10px; }
-  .cat-card-niveau--sterk { background:#eafaf0; color:#1f7a45; }
-  .cat-card-niveau--redelijk { background:#fdf1dc; color:#a3670c; }
-  .cat-card-niveau--aandacht { background:#fdeee9; color:#b8300f; }
-  .cat-card p { color:var(--text-muted); font-size:14px; margin-bottom:12px; text-align:left; }
+  .cat-card--redelijk { border-left-color:var(--amber); }
+  .cat-card--aandacht { border-left-color:#e0503a; }
+  .cat-card-top { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; }
+  .cat-card-naam { font-weight:800; font-size:16px; color:#fff; }
+  .cat-card-score { font-weight:800; font-size:15px; color:var(--text-inverse-muted); font-variant-numeric:tabular-nums; }
+  .cat-track { height:7px; border-radius:4px; background:rgba(255,255,255,.13); overflow:hidden; margin-bottom:12px; }
+  .cat-fill { height:100%; border-radius:4px; background:var(--grad-alert); width:0; transition:width .7s cubic-bezier(.4,0,.2,1); }
+  .cat-card-niveau { display:inline-block; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; padding:3px 10px; border-radius:999px; margin-bottom:10px; }
+  .cat-card-niveau--sterk { background:rgba(47,158,92,.2); color:#6fd39b; }
+  .cat-card-niveau--redelijk { background:rgba(245,165,36,.18); color:var(--amber); }
+  .cat-card-niveau--aandacht { background:rgba(224,80,58,.18); color:#f08a75; }
+  .cat-card p { color:var(--text-inverse-muted); font-size:14.5px; line-height:1.6; margin:0 0 12px; }
+  .cat-card p a { color:var(--amber); text-decoration:underline; }
+  .cat-card .btn-ghost { color:#fff; border-color:rgba(255,255,255,.3); }
+  .cat-card .btn-ghost:hover { border-color:var(--amber); color:var(--amber); }
+
+  .quiz-cta { padding:24px 26px; border-radius:var(--radius); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.13); }
+  .quiz-cta h3 { margin:0 0 7px; font-size:19px; font-weight:800; color:#fff; letter-spacing:-.01em; }
+  .quiz-cta p { margin:0 0 16px; color:var(--text-inverse-muted); font-size:15.5px; max-width:52ch; }
+  .quiz-cta-row { display:flex; gap:12px; flex-wrap:wrap; }
+
+  @media (max-width:620px) {
+    .quiz-stage { padding:38px 0 46px; }
+    .score-row { gap:18px; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    .prog-fill, .cat-fill, .quiz-option, .quiz-explain, .quiz-result { transition:none; animation:none; }
+  }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agressievisie.nl/"},{"@type":"ListItem","position":2,"name":"Zelftest","item":"https://agressievisie.nl/zelftest.html"}]}
@@ -125,25 +186,14 @@
   </div>
 </section>
 
-<section class="section">
-  <div class="wrap quiz-wrap">
-    <div class="quiz-box">
-      <div class="quiz-progress-text" id="quiz-progress-text"></div>
-      <div class="quiz-progress" id="quiz-progress"></div>
-      <div id="quiz-content"></div>
+<section class="quiz-stage">
+  <div class="quiz-inner">
+    <div class="prog-top">
+      <span class="prog-count" id="quiz-progress-text"></span>
+      <span class="prog-tally" id="quiz-tally"></span>
     </div>
-  </div>
-</section>
-
-<section class="section section--soft">
-  <div class="wrap">
-    <div class="cta-band">
-      <div>
-        <h2>Wil je deze vaardigheid structureel opbouwen?</h2>
-        <p>Act in Move Training & Coaching traint signaalherkenning in realistische, sectorspecifieke scenario's.</p>
-      </div>
-      <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
-    </div>
+    <div class="prog-bar"><div class="prog-fill" id="quiz-fill"></div></div>
+    <div id="quiz-content"></div>
   </div>
 </section>
 
@@ -326,11 +376,16 @@ let huidigeVraag = 0;
 let score = 0;
 let antwoorden = new Array(VRAGEN.length).fill(null);
 
+const LETTERS = ['A', 'B', 'C', 'D'];
+
 function renderProgress() {
-  document.getElementById('quiz-progress-text').textContent = `Vraag ${huidigeVraag + 1} van ${VRAGEN.length}`;
-  document.getElementById('quiz-progress').innerHTML = VRAGEN.map((_, i) =>
-    `<span class="${i < huidigeVraag ? 'done' : ''}"></span>`
-  ).join('');
+  document.getElementById('quiz-progress-text').innerHTML =
+    `Vraag <b>${huidigeVraag + 1}</b> van <b>${VRAGEN.length}</b>`;
+  document.getElementById('quiz-tally').innerHTML = VRAGEN.map((q, i) => {
+    if (antwoorden[i] === null) return '<span class="tally"></span>';
+    return `<span class="tally ${antwoorden[i] === q.correct ? 'goed' : 'fout'}"></span>`;
+  }).join('');
+  document.getElementById('quiz-fill').style.width = (huidigeVraag / VRAGEN.length * 100) + '%';
 }
 
 function renderVraag() {
@@ -340,10 +395,10 @@ function renderVraag() {
   content.innerHTML = `
     <p class="quiz-q">${q.vraag}</p>
     <div class="quiz-options">
-      ${q.opties.map((o, i) => `<button class="quiz-option" data-i="${i}">${o}</button>`).join('')}
+      ${q.opties.map((o, i) => `<button class="quiz-option" data-i="${i}"><span class="badge-letter" aria-hidden="true">${LETTERS[i]}</span><span>${o}</span></button>`).join('')}
     </div>
-    <div class="quiz-explain" id="quiz-explain">${q.uitleg}</div>
-    <button class="btn btn-primary quiz-next" id="quiz-next">${huidigeVraag < VRAGEN.length - 1 ? 'Volgende vraag' : 'Bekijk resultaat'}</button>
+    <div class="quiz-explain" id="quiz-explain"><span class="explain-label">Waarom</span>${q.uitleg}</div>
+    <button class="btn btn-primary quiz-next" id="quiz-next">${huidigeVraag < VRAGEN.length - 1 ? 'Volgende vraag →' : 'Bekijk mijn uitslag →'}</button>
   `;
 
   content.querySelectorAll('.quiz-option').forEach(btn => {
@@ -353,11 +408,16 @@ function renderVraag() {
         b.disabled = true;
         if (i === q.correct) b.classList.add('correct');
         else if (i === gekozen) b.classList.add('incorrect');
+        else b.classList.add('dim');
       });
       antwoorden[huidigeVraag] = gekozen;
       if (gekozen === q.correct) score++;
       document.getElementById('quiz-explain').classList.add('show');
       document.getElementById('quiz-next').classList.add('show');
+      // Voortgang meteen bijwerken zodat de balk en het bolletje reageren op het antwoord.
+      document.getElementById('quiz-fill').style.width = ((huidigeVraag + 1) / VRAGEN.length * 100) + '%';
+      const bolletje = document.getElementById('quiz-tally').children[huidigeVraag];
+      if (bolletje) bolletje.classList.add(gekozen === q.correct ? 'goed' : 'fout');
     });
   });
 
@@ -372,8 +432,11 @@ function renderVraag() {
 }
 
 function renderResultaat() {
-  document.getElementById('quiz-progress-text').textContent = 'Resultaat';
-  document.getElementById('quiz-progress').innerHTML = VRAGEN.map(() => `<span class="done"></span>`).join('');
+  document.getElementById('quiz-progress-text').innerHTML = 'Jouw uitslag';
+  document.getElementById('quiz-fill').style.width = '100%';
+  document.getElementById('quiz-tally').innerHTML = VRAGEN.map((q, i) =>
+    `<span class="tally ${antwoorden[i] === q.correct ? 'goed' : 'fout'}"></span>`
+  ).join('');
 
   let titel;
   if (score <= 3) titel = 'Nog veel te leren';
@@ -403,6 +466,7 @@ function renderResultaat() {
           <span class="cat-card-naam">${info.naam}</span>
           <span class="cat-card-score">${s.goed}/${s.totaal}</span>
         </div>
+        <div class="cat-track"><div class="cat-fill" data-pct="${Math.round(s.goed / s.totaal * 100)}"></div></div>
         <span class="cat-card-niveau cat-card-niveau--${niveau}">${niveauLabel}</span>
         <p>${info.advies}</p>
         <a class="btn-ghost" href="${info.link}">${info.linkTekst}</a>
@@ -416,15 +480,30 @@ function renderResultaat() {
 
   document.getElementById('quiz-content').innerHTML = `
     <div class="quiz-result">
-      <div class="score">${score}/${VRAGEN.length}</div>
-      <h3>${titel}</h3>
-      <p>${topAdvies}</p>
-    </div>
-    <div class="cat-grid">${catKaarten}</div>
-    <div class="center" style="margin-top:28px;">
-      <button class="btn btn-outline" id="quiz-restart">Test opnieuw doen</button>
+      <div class="score-row">
+        <span class="score-num">${score}/${VRAGEN.length}</span>
+        <div class="score-txt">
+          <h3>${titel}</h3>
+          <p>${topAdvies}</p>
+        </div>
+      </div>
+      <div class="cat-grid">${catKaarten}</div>
+      <div class="quiz-cta">
+        <h3>Wil je deze vaardigheid structureel opbouwen?</h3>
+        <p>Act in Move Training &amp; Coaching traint signaalherkenning in realistische, sectorspecifieke scenario's.</p>
+        <div class="quiz-cta-row">
+          <a class="btn btn-primary" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
+          <button class="btn btn-outline" id="quiz-restart">Test opnieuw doen</button>
+        </div>
+      </div>
     </div>
   `;
+
+  // Balken pas vullen nadat ze in beeld staan, zodat de animatie zichtbaar is.
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.cat-fill').forEach(el => { el.style.width = el.dataset.pct + '%'; });
+  });
+
   document.getElementById('quiz-restart').addEventListener('click', () => {
     huidigeVraag = 0;
     score = 0;
