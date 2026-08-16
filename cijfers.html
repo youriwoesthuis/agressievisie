@@ -30,6 +30,12 @@
   .source-table th, .source-table td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); }
   .source-table th { color:var(--text-muted); font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
   .source-table a { text-decoration:underline; }
+  /* De tabel staat in een wrapper met overflow-x:auto. Zonder min-width perst
+     de browser op een smal scherm de kolommen samen tot een letter per regel,
+     in plaats van de tabel te laten scrollen. Met een minimumbreedte blijft
+     elke kolom leesbaar en schuift de tabel als geheel. */
+  .source-table { min-width: 640px; }
+  .source-table th, .source-table td { vertical-align: top; }
   .method-note {
     display: flex; gap: 14px; align-items: flex-start; background: var(--paper-soft);
     border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 16px 20px; margin-bottom: 40px;

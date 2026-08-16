@@ -41,6 +41,7 @@
   .wo-flip.om .wo-binnen { transform: rotateY(180deg); }
   .wo-zijde {
     position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    transition: visibility 0s linear .3s;
     border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column;
     background: var(--ink); color: var(--text-inverse); box-shadow: var(--shadow-md);
     cursor: pointer; text-align: left; border: none; font-family: inherit; width: 100%;
@@ -53,6 +54,16 @@
   .wo-zijde:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
   .wo-achter { transform: rotateY(180deg); }
   .wo-achter::before { background: radial-gradient(ellipse 560px 340px at 12% 100%, rgba(245,165,36,.26), transparent 70%); }
+
+  /* Safari op iOS negeert backface-visibility zodra een zijde overflow:hidden
+     en een border-radius heeft: voor- en achterkant staan dan tegelijk in
+     beeld, met de achterkant gespiegeld. Daarom wordt de niet-actieve zijde
+     ook expliciet verborgen, halverwege de draai van .6s. visibility (en niet
+     display) houdt de layout intact, zodat de JS die de kaarthoogte meet nog
+     steeds de juiste scrollHeight van beide zijden krijgt. */
+  .wo-achter { visibility: hidden; }
+  .wo-flip.om .wo-voor { visibility: hidden; }
+  .wo-flip.om .wo-achter { visibility: visible; }
 
   .wo-vlak { padding: 28px 30px; display: flex; flex-direction: column; height: 100%; }
   .wo-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font-size: 11.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); }
@@ -83,6 +94,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .wo-binnen { transition: none; }
+    .wo-zijde { transition: none; }
     .wo-draai svg { transition: none; }
   }
   @media (max-width: 620px) { .wo-vlak { padding: 22px 20px; } }
