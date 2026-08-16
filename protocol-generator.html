@@ -48,6 +48,10 @@
   .protocol-section li { margin-bottom:6px; font-size:14.5px; color:var(--text); }
   .protocol-section p { font-size:14.5px; color:var(--text); }
   .protocol-footer { margin-top:30px; padding-top:20px; border-top:1px solid var(--line); font-size:12.5px; color:var(--text-muted); }
+  .protocol-sheet .versie { font-size:13px; color:var(--text-muted); background:var(--paper-soft); border-left:3px solid var(--red); padding:10px 14px; margin-bottom:26px; }
+  /* Invulvelden opvallend markeren: het protocol is pas af als deze zijn ingevuld. */
+  .invul { background:#fdf1dc; border-bottom:1px dashed var(--amber-dark); color:#8a5d0f; font-weight:600; padding:1px 4px; border-radius:2px; }
+  @media print { .invul { background:none; } }
   @media print {
     header.site, footer.site, #cookie-banner, .gen-form, .no-print { display:none !important; }
     .gen-layout { grid-template-columns:1fr; }
@@ -152,6 +156,7 @@
           <option value="retail">Klantcontact & retail</option>
           <option value="horeca">Horeca & uitgaan</option>
           <option value="overheid">Gemeenten & overheid</option>
+          <option value="sport">Sport & verenigingen</option>
         </select>
       </div>
       <div class="gen-field">
@@ -164,11 +169,20 @@
       </div>
       <div class="gen-field">
         <label>Belangrijkste risico's (kies wat van toepassing is)</label>
-        <div class="gen-checks">
+        <div class="gen-checks" id="gen-risicos">
           <label class="gen-check"><input type="checkbox" value="verbaal" checked /> Verbale agressie</label>
           <label class="gen-check"><input type="checkbox" value="fysiek" /> Fysieke agressie</label>
           <label class="gen-check"><input type="checkbox" value="telefonisch" /> Bedreiging via telefoon/e-mail</label>
           <label class="gen-check"><input type="checkbox" value="collegas" /> Agressie tussen collega's</label>
+        </div>
+      </div>
+      <div class="gen-field">
+        <label>Werksituatie (bepaalt welke paragrafen worden toegevoegd)</label>
+        <div class="gen-checks" id="gen-context">
+          <label class="gen-check"><input type="checkbox" value="alleen" /> Medewerkers werken soms alleen</label>
+          <label class="gen-check"><input type="checkbox" value="buitenuren" /> Er wordt 's avonds, 's nachts of in het weekend gewerkt</label>
+          <label class="gen-check"><input type="checkbox" value="balie" /> Er is een balie, receptie of publieksruimte</label>
+          <label class="gen-check"><input type="checkbox" value="vrijwilligers" /> Er werken vrijwilligers of stagiairs mee</label>
         </div>
       </div>
       <button class="btn btn-primary" id="gen-generate" style="width:100%; justify-content:center;">Genereer protocol</button>
@@ -407,14 +421,42 @@ const SECTOR_INFO = {
       { titel: 'Bestuurder online bedreigd', beschrijving: 'Een wethouder of raadslid krijgt na een lokaal besluit een golf aan dreigende reacties online, die soms doorlopen tot in de privésfeer.', tip: 'Registreer online dreigementen net zo serieus als fysieke incidenten in een signaleringsplan, en escaleer op tijd naar de veiligheidscoördinator.' },
     ],
   },
+  sport: {
+    naam: 'sport en verenigingen',
+    voorbeeld: 'spelers, ouders, supporters of bezoekers',
+    context: 'Bij sportverenigingen loopt spanning vaak op rond wedstrijdbeslissingen, uitslagen en emoties langs de lijn. Het bijzondere is dat het werk grotendeels door vrijwilligers wordt gedaan: scheidsrechters, bestuursleden en kantinemedewerkers hebben zelden een formele opleiding in de-escalatie, terwijl zij wel als eerste met het gedrag te maken krijgen.',
+    stat: 'In het seizoen 2025/2026 telde het amateurvoetbal 1.193 zware tuchtzaken op 834.553 wedstrijden. De tweewekelijkse teamschorsing bij agressie tegen een scheidsrechter werd 378 keer toegepast en blijkt een van de effectievere maatregelen, omdat een schorsing de hele groep raakt in plaats van alleen de individuele overtreder (bron: KNVB).',
+    wetAddendum: 'Let op: ook vrijwilligers vallen onder de zorgplicht van de vereniging. Artikel 7:658 lid 4 van het Burgerlijk Wetboek strekt de aansprakelijkheid van de werkgever uit tot personen die buiten dienstverband werkzaamheden verrichten. Een vereniging kan zich dus niet beroepen op het onbetaalde karakter van het werk. Daarnaast kent de sport een eigen tuchtrechtsysteem dat naast het strafrecht bestaat: een tuchtzaak sluit aangifte niet uit, en andersom.',
+    signalen: [
+      'Aanhoudend commentaar op de leiding vanaf de kant, dat gaandeweg persoonlijker en luider wordt.',
+      'Ouders die zich na afloop bij de kleedkamer of het wedstrijdsecretariaat melden om een beslissing aan te vechten.',
+      'Spelers die na een tegenslag fysiek dichter op de tegenstander of de scheidsrechter gaan staan.',
+      'Oplopende drukte en alcoholgebruik in de kantine rond het einde van een verloren wedstrijd.',
+    ],
+    dreiging: [
+      'Staak bij fysieke dreiging de wedstrijd of activiteit direct. Doorspelen "om het af te maken" verlengt de blootstelling en is nooit de veilige keuze.',
+      'Zorg dat er bij elke wedstrijd of activiteit minimaal één bestuurslid of aangewezen verantwoordelijke aanwezig is die bevoegd is om te staken en om iemand van het terrein te sturen.',
+      'Meld het incident zowel bij de bond (tuchtrechtelijk) als, bij fysiek geweld of bedreiging, bij de politie. Dit zijn twee losse trajecten die elkaar niet vervangen.',
+      'Ondersteun een scheidsrechter of vrijwilliger die het doelwit was actief bij aangifte; laat dit niet aan het individu over.',
+    ],
+    situaties: [
+      { titel: 'Scheidsrechter onder vuur', beschrijving: 'Een beslissing valt verkeerd. Spelers dringen op, het publiek reageert mee, en de scheidsrechter staat er alleen voor.', tip: 'Spreek vooraf af wie ingrijpt als dit gebeurt, zodat de scheidsrechter niet zelf hoeft te bepalen wanneer het genoeg is. Een tweewekelijkse teamschorsing werkt volgens KNVB-cijfers beter dan een individuele straf, omdat de groep zelf gaat corrigeren.' },
+      { titel: 'Ouders langs de lijn', beschrijving: 'Bij de jeugd zijn het vaak niet de kinderen maar de ouders die voor spanning zorgen, met commentaar richting de leiding of de tegenstander.', tip: 'Maak de gedragsnorm zichtbaar bij de ingang en het veld, en spreek ouders aan vóór de wedstrijd in plaats van erna. Een norm die pas ná een incident wordt genoemd, wordt ervaren als willekeur.' },
+      { titel: 'Vrijwilliger achter de bar', beschrijving: 'In de kantine loopt de sfeer na een verloren wedstrijd op. De vrijwilliger achter de bar moet iemand weigeren en krijgt de reactie over zich heen.', tip: 'Geef vrijwilligers vooraf het mandaat om te weigeren en spreek af dat een bestuurslid het overneemt. Wie zonder rugdekking moet weigeren, kiest onder druk vaak voor doorschenken.' },
+    ],
+  },
 };
 
 function getFormState() {
   const org = document.getElementById('gen-org').value.trim() || 'jouw organisatie';
   const sectorKey = document.getElementById('gen-sector').value;
   const grootte = document.getElementById('gen-grootte').value;
-  const risicos = [...document.querySelectorAll('.gen-check input:checked')].map(c => c.value);
-  return { org, sectorKey, grootte, risicos, sector: SECTOR_INFO[sectorKey] };
+  // Risico's en werksituatie staan in aparte blokken; scope de selectors zodat ze
+  // elkaar niet oppikken.
+  const risicoBlok = document.getElementById('gen-risicos');
+  const risicos = [...risicoBlok.querySelectorAll('input:checked')].map(c => c.value);
+  const context = [...document.querySelectorAll('#gen-context input:checked')].map(c => c.value);
+  return { org, sectorKey, grootte, risicos, context, sector: SECTOR_INFO[sectorKey] };
 }
 
 const GROOTTE_TEXT = {
@@ -430,29 +472,96 @@ const RISICO_LABELS = {
   collegas: 'Agressie of ongewenst gedrag tussen collega\'s onderling',
 };
 
-function buildProtocolSections(state) {
-  const { org, sector, grootte, risicos } = state;
-  const grootteText = GROOTTE_TEXT[grootte];
-  const datum = new Date().toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+// Velden die de organisatie zelf moet invullen. Ze worden in het document
+// zichtbaar gemarkeerd, zodat het protocol niet ongemerkt generiek blijft.
+function invulveld(omschrijving) {
+  return `<span class="invul">[ ${omschrijving} ]</span>`;
+}
 
-  const wetBasis = 'De Arbowet verplicht werkgevers om agressie en geweld op te nemen in de risico-inventarisatie en -evaluatie (RI&E) en hier concreet beleid op te voeren (Arbobesluit art. 2.15). Artikel 7:658 van het Burgerlijk Wetboek legt daarnaast een algemene zorgplicht op voor een veilige werkomgeving. Fysiek geweld is bovendien altijd een strafbaar feit onder het Wetboek van Strafrecht, los van of er aangifte wordt gedaan.';
+function buildProtocolSections(state) {
+  const { org, sector, grootte, risicos, context } = state;
+  const grootteText = GROOTTE_TEXT[grootte];
+  const nu = new Date();
+  const datum = nu.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+  const herzien = new Date(nu.getFullYear() + 1, nu.getMonth(), nu.getDate())
+    .toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+  const heeft = k => context.includes(k);
+
+  const wetBasis = 'De Arbowet (art. 3 lid 2) verplicht werkgevers beleid te voeren dat gericht is op het voorkomen van psychosociale arbeidsbelasting, waaronder agressie en geweld. Het Arbobesluit (art. 2.15) werkt dat uit: als medewerkers aan agressie blootgesteld kunnen worden, moet de werkgever dit opnemen in de risico-inventarisatie en -evaluatie (RI&amp;E), maatregelen vastleggen in een plan van aanpak, en medewerkers hierover voorlichten. Artikel 7:658 van het Burgerlijk Wetboek legt daarnaast een zorgplicht op voor een veilige werkomgeving; lid 4 strekt die zorgplicht uit tot mensen die zonder arbeidsovereenkomst werk verrichten, zoals vrijwilligers, stagiairs en ingeleend personeel. Fysiek geweld, bedreiging en vernieling zijn bovendien zelfstandig strafbaar (art. 300, 285 en 350 Wetboek van Strafrecht), los van of er aangifte wordt gedaan.';
+
+  // Paragrafen die alleen verschijnen als ze op de situatie van toepassing zijn.
+  const voorwaardelijk = [];
+
+  if (heeft('alleen') || heeft('buitenuren')) {
+    const wat = [];
+    if (heeft('alleen')) wat.push('alleen werken');
+    if (heeft('buitenuren')) wat.push('werken buiten reguliere uren');
+    voorwaardelijk.push({
+      kop: `Extra maatregelen bij ${wat.join(' en ')}`,
+      inhoud: `<p>Bij ${wat.join(' en ')} valt de belangrijkste beschermende factor weg: een collega die meekijkt en kan bijspringen. Dit vraagt om aanvullende afspraken.</p>
+      <ul>
+        <li><strong>Bereikbaarheid.</strong> Spreek af wie tijdens deze uren bereikbaar is en hoe. Vastleggen: ${invulveld('naam en telefoonnummer achterwacht')}.</li>
+        <li><strong>Inchecken en uitchecken.</strong> Leg vast dat een medewerker zich meldt bij aanvang en afsluiting. Als een melding uitblijft, wordt actief contact gezocht.</li>
+        <li><strong>Alarmering.</strong> Zorg voor een werkend alarmmiddel dat zonder handelingen te bedienen is (bijvoorbeeld een draagbare knop of een sneltoets). Test dit periodiek; een alarmknop die niemand ooit heeft uitgeprobeerd is geen voorziening.</li>
+        <li><strong>Afwegingsrecht.</strong> Leg schriftelijk vast dat een medewerker een bezoek, gesprek of handeling mag uitstellen of afbreken wanneer de situatie onveilig voelt, zonder dat daar achteraf verantwoording over hoeft te worden afgelegd.</li>
+        ${heeft('buitenuren') ? '<li><strong>Vervoer.</strong> Maak afspraken over veilig thuiskomen na late diensten, bijvoorbeeld over parkeerplek, verlichting en vergoeding van vervoer.</li>' : ''}
+      </ul>`,
+    });
+  }
+
+  if (heeft('balie')) {
+    voorwaardelijk.push({
+      kop: 'Inrichting van balie en publieksruimte',
+      inhoud: `<p>De fysieke inrichting beïnvloedt hoe snel spanning oploopt. Dit zijn maatregelen die aantoonbaar bijdragen en die in de RI&amp;E thuishoren.</p>
+      <ul>
+        <li><strong>Vluchtweg.</strong> Zorg dat de medewerker altijd weg kan zonder langs de bezoeker te moeten. Een balie met één uitgang achter de rug van de medewerker is een risico.</li>
+        <li><strong>Zichtlijnen.</strong> Richt de ruimte zo in dat collega's kunnen zien wat er bij de balie gebeurt, zonder dat de bezoeker zich bekeken voelt.</li>
+        <li><strong>Wachttijdcommunicatie.</strong> Onzekerheid over de wachttijd is een van de meest voorkomende aanleidingen voor oplopende spanning. Communiceer actief en eerlijk over hoe lang het duurt.</li>
+        <li><strong>Losse voorwerpen.</strong> Beperk zware of scherpe voorwerpen binnen handbereik van de bezoekerszijde.</li>
+        <li><strong>Alarmering.</strong> Een stille alarmknop op de balie, met een afgesproken opvolging: wie komt, binnen hoeveel tijd, en wat doet die persoon. Vastleggen: ${invulveld('opvolging bij stil alarm')}.</li>
+      </ul>`,
+    });
+  }
 
   return {
-    titel: 'Uitgebreid protocol agressiebeleid',
-    sub: `${org} · Sector: ${sector.naam.charAt(0).toUpperCase() + sector.naam.slice(1)} · Gegenereerd op ${datum}`,
+    titel: 'Protocol agressie en grensoverschrijdend gedrag',
+    sub: `${org} · Sector: ${sector.naam.charAt(0).toUpperCase() + sector.naam.slice(1)} · Opgesteld op ${datum}`,
+    versie: `Versie 1.0 · Vastgesteld op ${invulveld('datum vaststelling')} door ${invulveld('naam en functie')} · Eerstvolgende herziening uiterlijk ${herzien}`,
     secties: [
       {
-        kop: 'Doel en context',
-        inhoud: `<p>Dit protocol beschrijft hoe medewerkers van ${org} omgaan met agressie en grensoverschrijdend gedrag door ${sector.voorbeeld}, van vroege signalen tot nazorg. ${sector.context}</p>
-        <p style="margin-top:10px;"><strong>De cijfers achter dit protocol:</strong> ${sector.stat}</p>`,
+        kop: 'Reikwijdte: voor wie geldt dit protocol',
+        inhoud: `<p>Dit protocol geldt voor alle medewerkers van ${org}${heeft('vrijwilligers') ? ', inclusief vrijwilligers, stagiairs en ingeleend personeel' : ''}, op alle locaties en tijdens alle werkzaamheden waarbij contact met ${sector.voorbeeld} plaatsvindt.</p>
+        <p style="margin-top:10px;">Het protocol beschrijft hoe wij agressie voorkomen, hoe we handelen als het toch gebeurt, en wat er daarna gebeurt. Het is bedoeld om te gebruiken, niet om te archiveren: bespreek het bij indiensttreding en houd het minimaal jaarlijks tegen het licht.</p>`,
+      },
+      {
+        kop: 'Wat verstaan wij onder agressie',
+        inhoud: `<p>Een gedeelde definitie is de basis van consistent melden. Zonder heldere afbakening meldt de één wat de ander wegwuift, en ontstaat er een onbetrouwbaar beeld van wat er speelt. Binnen ${org} verstaan wij onder agressie en grensoverschrijdend gedrag:</p>
+        <ul>
+          <li><strong>Verbale agressie:</strong> schelden, vernederen, treiteren, schreeuwen.</li>
+          <li><strong>Bedreiging en intimidatie:</strong> dreigen met geweld richting de medewerker of diens naasten, stalken, of het opzoeken van iemand in de privésfeer.</li>
+          <li><strong>Fysieke agressie:</strong> duwen, vastpakken, slaan, spugen, gooien met voorwerpen.</li>
+          <li><strong>Seksuele intimidatie:</strong> ongewenste opmerkingen, toenadering of aanraking van seksuele aard.</li>
+          <li><strong>Discriminerend gedrag:</strong> uitlatingen gericht op afkomst, geloof, geslacht, seksuele gerichtheid of beperking.</li>
+          <li><strong>Vernieling:</strong> het beschadigen van eigendommen van de organisatie of van medewerkers.</li>
+        </ul>
+        <p style="margin-top:10px;"><strong>Uitgangspunt:</strong> niet de intentie van de ander bepaalt of iets grensoverschrijdend is, maar het effect op de medewerker. Ook gedrag dat voortkomt uit ziekte, verwardheid of onmacht valt onder dit protocol: de oorzaak verandert de aanpak, maar niet de vaststelling dat er een grens is overschreden en dat er nazorg nodig kan zijn.</p>`,
+      },
+      {
+        kop: 'Onze norm',
+        inhoud: `<p>Een norm werkt alleen als hij vooraf bekend is. Achteraf grenzen stellen wordt ervaren als willekeur en leidt tot discussie op het slechtst denkbare moment.</p>
+        <p style="margin-top:10px;"><strong>Bij ${org} geldt: agressie tegen onze medewerkers wordt niet geaccepteerd.</strong> Wij verwachten van ${sector.voorbeeld} dat zij respectvol met onze medewerkers omgaan, ook wanneer zij het niet eens zijn met een beslissing, een wachttijd of een uitkomst.</p>
+        <p style="margin-top:10px;">Maak deze norm zichtbaar: bij de ingang, in de publieksruimte en in schriftelijke communicatie. Vastleggen waar de norm zichtbaar is: ${invulveld('locaties huisregels')}.</p>
+        <p style="margin-top:10px;">Deze norm geldt ook binnen het team onderling. Leidinggevenden hebben hierin een voorbeeldrol: gedrag dat bij de top wordt getolereerd, wordt op de werkvloer de standaard.</p>`,
       },
       {
         kop: 'Wettelijk kader',
         inhoud: `<p>${wetBasis}</p>${sector.wetAddendum ? `<p style="margin-top:10px;">${sector.wetAddendum}</p>` : ''}`,
       },
       {
-        kop: 'Belangrijkste aandachtspunten',
-        inhoud: `<ul>${risicos.length ? risicos.map(r => `<li>${RISICO_LABELS[r]}</li>`).join('') : '<li>Nog geen specifieke risico\'s geselecteerd.</li>'}</ul>`,
+        kop: 'Risico\'s binnen onze organisatie',
+        inhoud: `<p>Op basis van de eigen inventarisatie zijn dit de risico's waar dit protocol zich in het bijzonder op richt:</p>
+        <ul>${risicos.length ? risicos.map(r => `<li>${RISICO_LABELS[r]}</li>`).join('') : '<li>Nog geen specifieke risico\'s geselecteerd. Vul deze aan op basis van de RI&amp;E.</li>'}</ul>
+        <p style="margin-top:10px;"><strong>De cijfers achter dit protocol:</strong> ${sector.stat}</p>`,
       },
       {
         kop: `Herkenbare situaties in ${sector.naam}`,
@@ -471,30 +580,112 @@ function buildProtocolSections(state) {
           <li>Erken eerst de emotie van de ander, voordat je een oplossing aandraagt (LSD-methode: luisteren, samenvatten, doorvragen).</li>
           <li>Blijf zelf rustig in toon en tempo, ook als de ander dat niet is.</li>
           <li>Houd de escalatieladder van Glasl in gedachten: hoe eerder je erkent in plaats van betoogt, hoe makkelijker terugkeer naar een rustiger fase blijft.</li>
+          <li>Benoem de grens één keer duidelijk en kondig het gevolg aan ("als dit doorgaat, beëindig ik het gesprek"). Voer dat gevolg vervolgens ook uit; een aangekondigde grens die niet volgt, ondermijnt elke volgende.</li>
         </ul>`,
       },
       {
         kop: 'Bij fysieke dreiging',
         inhoud: `<ul>${sector.dreiging.map(d => `<li>${d}</li>`).join('')}<li>Onthoud dat de-escalatie door communicatie niet altijd haalbaar is; veiligheid gaat vóór alles.</li></ul>`,
       },
+      ...voorwaardelijk,
       {
-        kop: 'Na een incident: melding en nazorg',
-        inhoud: `<ul>
-          <li>Meld elk incident, ook 'kleine', bij de leidinggevende of het aanspreekpunt agressiebeleid.</li>
-          <li>Bied binnen 24 uur een kort nagesprek aan, ongeacht hoe zwaar het incident leek.</li>
-          <li>Verwijs bij aanhoudende klachten naar professionele ondersteuning (bedrijfsarts, vertrouwenspersoon); onderzoek laat zien dat nazorg vaak tekortschiet terwijl tijdige opvolging het risico op langdurige klachten aantoonbaar verkleint.</li>
-        </ul>`,
+        kop: 'Maatregelen en toegangsontzegging',
+        inhoud: `<p>Zonder consequenties is een norm een intentie. Onderstaande maatregelen zijn oplopend; kies wat proportioneel is bij het gedrag.</p>
+        <ul>
+          <li><strong>Waarschuwing ter plekke.</strong> Het gedrag benoemen en aangeven wat er gebeurt als het doorgaat.</li>
+          <li><strong>Beëindigen van het contact.</strong> Het gesprek, bezoek of de dienstverlening op dat moment stoppen.</li>
+          <li><strong>Schriftelijke waarschuwing.</strong> Bevestig het incident en de norm per brief of e-mail, met vermelding van het vervolg bij herhaling.</li>
+          <li><strong>Toegangsontzegging.</strong> Een tijdelijk verbod om de locatie te betreden. Leg dit altijd schriftelijk vast, met een concrete reden, een begin- en einddatum, en informatie over bezwaar. Een ontzegging voor onbepaalde tijd of zonder motivering is juridisch kwetsbaar.</li>
+          <li><strong>Aangifte.</strong> Zie de volgende paragraaf.</li>
+        </ul>
+        <p style="margin-top:10px;">Wie bevoegd is om welke maatregel te nemen, moet vooraf duidelijk zijn. Vastleggen: ${invulveld('wie mag toegang ontzeggen')}.</p>
+        <p style="margin-top:10px;"><em>Let op bij een zorg- of hulpverleningsrelatie:</em> een toegangsontzegging kan botsen met een zorgplicht of behandelovereenkomst. Betrek in die gevallen altijd een leidinggevende of behandelverantwoordelijke, en zoek naar een alternatief zoals begeleide toegang of een andere behandelaar in plaats van volledige uitsluiting.</p>`,
       },
       {
-        kop: 'Rollen en organisatie',
-        inhoud: `<p>${grootteText}</p>`,
+        kop: 'Aangifte doen',
+        inhoud: `<p>Aangifte is geen persoonlijke afweging die je aan het slachtoffer alleen overlaat. ${org} ondersteunt medewerkers hier actief bij.</p>
+        <ul>
+          <li><strong>De werkgever kan aangifte doen.</strong> Bij geweld of bedreiging tegen een medewerker in functie kan de organisatie zelf aangifte doen, in plaats van de medewerker persoonlijk. Dat haalt de last en de zichtbaarheid bij het individu weg.</li>
+          <li><strong>Aangifte onder nummer.</strong> Een medewerker kan aangifte doen zonder dat het privéadres in het dossier komt, door domicilie te kiezen op het werkadres. Vraag hier expliciet naar bij de politie; het gebeurt niet automatisch.</li>
+          <li><strong>Doe het snel.</strong> Hoe eerder de aangifte, hoe bruikbaarder het bewijs. Leg direct na het incident vast wat er is gebeurd, wie erbij waren en of er camerabeelden zijn.</li>
+          <li><strong>Verzwaarde afhandeling.</strong> Bij geweld tegen medewerkers met een publieke taak hanteren politie en Openbaar Ministerie afspraken (de Eenduidige Landelijke Afspraken) die uitgaan van een hogere strafeis en een voortvarender afhandeling.</li>
+          <li><strong>Schade verhalen.</strong> Materiële en immateriële schade kan als benadeelde partij worden gevoegd in de strafzaak. Bewaar daarom facturen, medische verklaringen en een verslag van de gevolgen.</li>
+        </ul>
+        <p style="margin-top:10px;">Vastleggen: ${invulveld('wie begeleidt de medewerker bij aangifte')}.</p>`,
+      },
+      {
+        kop: 'Melding en registratie',
+        inhoud: `<p>Meld elk incident, ook wat op zichzelf klein lijkt. Eén scheldpartij zegt weinig; twintig meldingen op dezelfde plek en hetzelfde tijdstip zeggen alles. Registratie is bovendien de onderbouwing van de RI&amp;E.</p>
+        <p style="margin-top:10px;"><strong>Leg per incident minimaal vast:</strong></p>
+        <ul>
+          <li>Datum, tijdstip en locatie</li>
+          <li>Betrokken medewerker(s) en eventuele getuigen</li>
+          <li>Wat er feitelijk gebeurde, in gedragstermen en zonder interpretatie</li>
+          <li>Type gedrag (verbaal, bedreiging, fysiek, seksueel, discriminerend, vernieling)</li>
+          <li>Wat eraan voorafging en wat de vermoedelijke aanleiding was</li>
+          <li>Wat er is gedaan tijdens en direct na het incident</li>
+          <li>Genomen maatregelen en of er aangifte is gedaan</li>
+          <li>Afgesproken nazorg</li>
+        </ul>
+        <p style="margin-top:10px;">Meldingen gaan naar ${invulveld('naam aanspreekpunt of meldpunt')}, bereikbaar via ${invulveld('telefoon en e-mail')}. Zorg dat melden laagdrempelig is: hoe meer handelingen het kost, hoe minder er gemeld wordt.</p>`,
+      },
+      {
+        kop: 'Nazorg',
+        inhoud: `<p>Nazorg is geen gunst maar onderdeel van de zorgplicht. Onderzoek laat consistent zien dat nazorg vaak tekortschiet, terwijl tijdige opvolging het risico op langdurige klachten aantoonbaar verkleint. Werk daarom met vaste momenten in plaats van op gevoel.</p>
+        <ul>
+          <li><strong>Direct.</strong> Vang de medewerker op, neem taken over en laat niemand alleen naar huis gaan na een ingrijpend incident.</li>
+          <li><strong>Binnen 24 uur.</strong> Een kort nagesprek met de leidinggevende, ongeacht hoe zwaar het incident leek. Vraag naar feiten én naar hoe het met de persoon gaat.</li>
+          <li><strong>Na ongeveer een week.</strong> Opnieuw contact. Klachten als slecht slapen, prikkelbaarheid of vermijding komen zelden meteen naar boven.</li>
+          <li><strong>Na ongeveer een maand.</strong> Als klachten aanhouden, actief doorverwijzen naar bedrijfsarts, vertrouwenspersoon of gespecialiseerde hulp. Wacht niet tot de medewerker er zelf om vraagt.</li>
+        </ul>
+        <p style="margin-top:10px;">Vastleggen: vertrouwenspersoon ${invulveld('naam en contactgegevens')}, bedrijfsarts ${invulveld('naam en contactgegevens')}.</p>`,
+      },
+      ...(heeft('vrijwilligers') ? [{
+        kop: 'Vrijwilligers en stagiairs',
+        inhoud: `<p>Vrijwilligers en stagiairs lopen hetzelfde risico als betaalde krachten, maar hebben vaak minder ervaring, minder training en een zwakkere positie om iets te weigeren. Juist daarom verdienen zij expliciete aandacht.</p>
+        <ul>
+          <li><strong>Dezelfde zorgplicht.</strong> Artikel 7:658 lid 4 BW strekt de aansprakelijkheid van de organisatie uit tot wie zonder arbeidsovereenkomst werkt. Het onbetaalde karakter van het werk verandert daar niets aan.</li>
+          <li><strong>Mandaat vooraf.</strong> Geef vrijwilligers expliciet toestemming om te weigeren, weg te lopen of een situatie te stoppen. Zonder dat mandaat kiezen mensen onder druk vrijwel altijd voor doorgaan.</li>
+          <li><strong>Nooit alleen bij risicovolle taken.</strong> Koppel een vrijwilliger aan iemand met ervaring bij taken waar spanning te verwachten is.</li>
+          <li><strong>Dezelfde nazorg.</strong> Vrijwilligers vallen makkelijk buiten het vizier omdat zij niet in personeelssystemen staan. Neem hen expliciet mee in de nazorgafspraken.</li>
+          <li><strong>Introductie.</strong> Bespreek dit protocol bij de start, niet pas als er iets gebeurd is.</li>
+        </ul>`,
+      }] : []),
+      {
+        kop: 'Rollen en verantwoordelijkheden',
+        inhoud: `<p>${grootteText}</p>
+        <ul>
+          <li><strong>Medewerker:</strong> meldt incidenten, kent de norm en mag zich terugtrekken uit een onveilige situatie.</li>
+          <li><strong>Leidinggevende:</strong> voert het nagesprek, neemt maatregelen en bewaakt de nazorg.</li>
+          <li><strong>Aanspreekpunt agressiebeleid:</strong> houdt overzicht over meldingen, signaleert patronen en agendeert die. Vastleggen: ${invulveld('naam')}.</li>
+          <li><strong>Vertrouwenspersoon:</strong> onafhankelijk aanspreekpunt, met name bij gedrag van collega's onderling.</li>
+          <li><strong>Directie of bestuur:</strong> stelt het protocol vast, maakt middelen vrij en draagt de norm uit.</li>
+        </ul>`,
       },
       {
         kop: 'Borging en evaluatie',
         inhoud: `<ul>
-          <li>Evalueer periodiek gemelde incidenten om patronen en herhaling te herkennen.</li>
-          <li>Neem agressiebeleid op als vast onderdeel van introductie voor nieuwe medewerkers.</li>
+          <li>Bespreek de meldingen minimaal elk kwartaal en kijk naar patronen: plek, tijdstip, aanleiding, betrokkenen.</li>
+          <li>Voer wijzigingen terug in de RI&amp;E en het plan van aanpak. Een incidentenregistratie die nergens toe leidt, ondermijnt de meldingsbereidheid.</li>
+          <li>Neem dit protocol op in de introductie van elke nieuwe medewerker${heeft('vrijwilligers') ? ' en vrijwilliger' : ''}.</li>
           <li>Herhaal training in korte, frequente sessies in plaats van één jaarlijkse bijeenkomst; dat verbetert aantoonbaar het vaardigheidsbehoud.</li>
+          <li>Herzie dit protocol uiterlijk ${herzien}, en eerder bij een ernstig incident of een wijziging in de werkwijze.</li>
+        </ul>`,
+      },
+      {
+        kop: 'Nog in te vullen',
+        inhoud: `<p>Dit protocol is inhoudelijk compleet, maar wordt pas van jullie als onderstaande gegevens zijn ingevuld. Zolang hier nog lege plekken staan, is het een sjabloon en geen werkend protocol.</p>
+        <ul>
+          <li>Datum van vaststelling en door wie</li>
+          <li>Naam en contactgegevens van het aanspreekpunt agressiebeleid</li>
+          <li>Naam en contactgegevens van de vertrouwenspersoon</li>
+          <li>Naam en contactgegevens van de bedrijfsarts</li>
+          <li>Wie bevoegd is tot toegangsontzegging</li>
+          <li>Wie de medewerker begeleidt bij aangifte</li>
+          <li>Waar de huisregels zichtbaar hangen</li>
+          ${(heeft('alleen') || heeft('buitenuren')) ? '<li>Naam en telefoonnummer van de achterwacht buiten reguliere uren</li>' : ''}
+          ${heeft('balie') ? '<li>Wie opvolgt bij een stil alarm, en binnen hoeveel tijd</li>' : ''}
+          <li>Waar en hoe medewerkers een incident melden</li>
         </ul>`,
       },
     ],
@@ -506,6 +697,7 @@ function renderProtocolPreview(data) {
   const html = `
     <h2>${data.titel}</h2>
     <p class="sub">${data.sub}</p>
+    <p class="versie">${data.versie}</p>
     ${data.secties.map((s, i) => `
       <div class="protocol-section">
         <h3><span class="num">${i + 1}</span> ${s.kop}</h3>
@@ -543,6 +735,9 @@ function buildDownloadDocument(data) {
   li { margin-bottom: 6px; font-size: 14.5px; }
   p { font-size: 14.5px; }
   .doc-footer { margin-top: 36px; padding-top: 18px; border-top: 1px solid #e4e4e8; font-size: 12.5px; color: #6c6c75; }
+  .versie { font-size: 13px; color: #6c6c75; background: #f5f5f7; border-left: 3px solid #e0401f; padding: 10px 14px; margin-bottom: 26px; }
+  .invul { background: #fdf1dc; border-bottom: 1px dashed #cf8410; color: #8a5d0f; font-weight: 600; padding: 1px 4px; }
+  @media print { .invul { background: none; } }
 </style>
 </head>
 <body>
@@ -555,6 +750,7 @@ function buildDownloadDocument(data) {
   </div>
   <h1>${data.titel}</h1>
   <p class="sub">${data.sub}</p>
+  <p class="versie">${data.versie}</p>
   ${data.secties.map((s, i) => `<h2>${i + 1}. ${s.kop}</h2>${s.inhoud}`).join('')}
   <div class="doc-footer">${data.footer}</div>
 </body>
