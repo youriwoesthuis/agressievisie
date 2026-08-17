@@ -1,0 +1,47 @@
+name: Bouw artikelpagina's
+
+# Genereert artikel-<slug>.html opnieuw zodra de artikeldata of het sjabloon
+# verandert, en zet de resultaten terug in de branch. Zo hoeft niemand
+# handmatig build/build-articles.pl te draaien na het toevoegen van een
+# artikel aan data/artikelen.json — commit de JSON, de rest gebeurt hier.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/artikelen.json'
+      - 'data/lexicon.json'
+      - 'build/build-articles.pl'
+      - 'build/article.template.html'
+  workflow_dispatch: {}
+
+# Voorkomt dat twee runs tegelijk naar main proberen te schrijven.
+concurrency:
+  group: build-articles
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Genereer artikelpagina's
+        run: perl build/build-articles.pl
+
+      - name: Commit gewijzigde pagina's
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add artikel-*.html
+          if git diff --cached --quiet; then
+            echo "Geen wijzigingen na het genereren, niets te committen."
+          else
+            git commit -m "Artikelpagina's automatisch bijgewerkt
+
+Gegenereerd door build/build-articles.pl uit data/artikelen.json.
+
+Co-Authored-By: github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+            git push
+          fi

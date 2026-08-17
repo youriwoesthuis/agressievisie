@@ -280,7 +280,7 @@ function renderResults(q) {
   if (results.artikelen.length) {
     html += `<div class="result-group"><h3>Artikelen (${results.artikelen.length})</h3>` +
       results.artikelen.map(a => `
-        <a class="result-item" href="artikel.html?slug=${encodeURIComponent(a.slug)}">
+        <a class="result-item" href="artikel-${a.slug}.html">
           <span class="badge">${a.categorie}</span>
           <h4>${highlight(a.titel, q)}</h4>
           <p>${highlight(a.excerpt, q)}</p>

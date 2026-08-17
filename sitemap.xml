@@ -20,20 +20,20 @@
   <url><loc>https://agressievisie.nl/rss.xml</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
   <url><loc>https://agressievisie.nl/contact.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://agressievisie.nl/overzicht.html</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://agressievisie.nl/artikel.html?slug=agressie-in-de-sport-knvb-aanpak</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://agressievisie.nl/artikel.html?slug=bodycams-tegen-agressie-wat-werkt</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://agressievisie.nl/artikel.html?slug=jonge-werknemers-kwetsbaar-voor-agressie</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://agressievisie.nl/artikel-agressie-in-de-sport-knvb-aanpak.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://agressievisie.nl/artikel-bodycams-tegen-agressie-wat-werkt.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://agressievisie.nl/artikel-jonge-werknemers-kwetsbaar-voor-agressie.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://agressievisie.nl/over.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://agressievisie.nl/redactie.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
   <url><loc>https://agressievisie.nl/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://agressievisie.nl/artikel.html?slug=signalen-vroegtijdig-herkennen-onderzoek-2026</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://agressievisie.nl/artikel.html?slug=agressie-in-de-zorg-trends-2026</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://agressievisie.nl/artikel.html?slug=de-escalatietechnieken-wat-werkt-echt</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://agressievisie.nl/artikel.html?slug=agressie-onderwijs-signalen-leraren</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://agressievisie.nl/artikel.html?slug=agressie-ov-en-beveiliging-nieuwe-aanpak</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://agressievisie.nl/artikel.html?slug=grensoverschrijdend-gedrag-werkvloer-cijfers</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://agressievisie.nl/artikel.html?slug=trainingsfrequentie-belangrijker-dan-duur</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://agressievisie.nl/artikel.html?slug=nazorg-na-agressie-incident-wat-werkt</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://agressievisie.nl/artikel-signalen-vroegtijdig-herkennen-onderzoek-2026.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://agressievisie.nl/artikel-agressie-in-de-zorg-trends-2026.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://agressievisie.nl/artikel-de-escalatietechnieken-wat-werkt-echt.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://agressievisie.nl/artikel-agressie-onderwijs-signalen-leraren.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://agressievisie.nl/artikel-agressie-ov-en-beveiliging-nieuwe-aanpak.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://agressievisie.nl/artikel-grensoverschrijdend-gedrag-werkvloer-cijfers.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://agressievisie.nl/artikel-trainingsfrequentie-belangrijker-dan-duur.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://agressievisie.nl/artikel-nazorg-na-agressie-incident-wat-werkt.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://agressievisie.nl/sector-zorg-en-welzijn.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://agressievisie.nl/sector-onderwijs.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://agressievisie.nl/sector-beveiliging-en-ov.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -46,11 +46,11 @@
   <url><loc>https://agressievisie.nl/beleid-en-wetgeving.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://agressievisie.nl/doxing.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://agressievisie.nl/na-een-incident.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://agressievisie.nl/artikel.html?slug=agressie-tegen-bezorgers-en-zzpers</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://agressievisie.nl/artikel.html?slug=alleen-werken-agressie-huisbezoek</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://agressievisie.nl/artikel.html?slug=online-dreigementen-digitale-intimidatie</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://agressievisie.nl/artikel.html?slug=leiderschap-organisatiecultuur-preventie-agressie</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://agressievisie.nl/artikel.html?slug=agressie-in-de-horeca-nea-cijfers-2025</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://agressievisie.nl/artikel.html?slug=agressie-tegen-ambtenaren-monitor-integriteit-veiligheid</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://agressievisie.nl/artikel.html?slug=agressie-in-de-winkel-detailhandel-cijfers</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://agressievisie.nl/artikel-agressie-tegen-bezorgers-en-zzpers.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://agressievisie.nl/artikel-alleen-werken-agressie-huisbezoek.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://agressievisie.nl/artikel-online-dreigementen-digitale-intimidatie.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://agressievisie.nl/artikel-leiderschap-organisatiecultuur-preventie-agressie.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://agressievisie.nl/artikel-agressie-in-de-horeca-nea-cijfers-2025.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://agressievisie.nl/artikel-agressie-tegen-ambtenaren-monitor-integriteit-veiligheid.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://agressievisie.nl/artikel-agressie-in-de-winkel-detailhandel-cijfers.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
