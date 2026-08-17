@@ -244,6 +244,33 @@ function renderGlossary(terms, articles) {
   document.getElementById('glossary-list').innerHTML = html;
 }
 
+// De begrippenlijst wordt uit JSON opgebouwd, dus zonder dit blok ziet een
+// antwoordmachine wel de tekst maar niet dát het definities zijn. DefinedTerm
+// koppelt term en definitie expliciet aan elkaar, met een eigen anker per
+// begrip zodat er rechtstreeks naar geciteerd kan worden.
+function injecteerBegrippenSchema(terms) {
+  document.getElementById('lexicon-schema')?.remove();
+  const el = document.createElement('script');
+  el.type = 'application/ld+json';
+  el.id = 'lexicon-schema';
+  el.textContent = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'DefinedTermSet',
+    '@id': 'https://agressievisie.nl/lexicon.html#begrippen',
+    name: 'Begrippenlijst agressie en de-escalatie',
+    description: 'Kernbegrippen rond agressie, de-escalatie en veiligheid op de werkvloer, met een korte definitie per begrip.',
+    inLanguage: 'nl-NL',
+    hasDefinedTerm: terms.map(t => ({
+      '@type': 'DefinedTerm',
+      '@id': `https://agressievisie.nl/lexicon.html#${t.slug}`,
+      name: t.term,
+      description: t.definitie,
+      inDefinedTermSet: 'https://agressievisie.nl/lexicon.html#begrippen',
+    })),
+  });
+  document.head.appendChild(el);
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   let terms;
   try {
@@ -256,6 +283,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
   const articles = await loadArticlesForLexicon();
   renderGlossary(terms, articles);
+  // Schema op de volledige lijst, niet op het gefilterde zoekresultaat.
+  injecteerBegrippenSchema(terms);
 
   if (location.hash) {
     document.getElementById(location.hash.slice(1))?.scrollIntoView();

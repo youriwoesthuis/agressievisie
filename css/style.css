@@ -573,3 +573,20 @@ footer.site { background: var(--ink); color: var(--text-inverse-muted); padding:
 .eeat b { color: var(--text); }
 .eeat a { text-decoration: underline; color: var(--red-dark); }
 @media print { .eeat { display: none; } }
+
+/* ── Snippet-box: directe kerndefinitie ────────────────────────────────
+   Staat bovenaan elk begrip en elke methodiek en beantwoordt in één zin de
+   vraag "Wat is X?". Bedoeld om als geheel geciteerd te worden door
+   antwoordmachines, dus zonder klikinstructies of verwijzingen naar "hierboven".
+   De uitgebreide uitleg blijft er onder staan. */
+.snippet-box {
+  background: var(--paper-soft); border-left: 3px solid var(--red);
+  border-radius: var(--radius-sm); padding: 18px 22px; margin: 0 0 20px;
+  max-width: 70ch;
+}
+.snippet-box p { margin: 0; font-size: 15.5px; line-height: 1.62; color: var(--text); }
+.snippet-box p b, .snippet-box p strong { font-weight: 800; }
+.section--dark .snippet-box, .quiz-stage .snippet-box {
+  background: rgba(255,255,255,.06); border-left-color: var(--amber);
+}
+.section--dark .snippet-box p { color: var(--text-inverse); }
