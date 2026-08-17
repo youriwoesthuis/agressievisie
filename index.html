@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AgressieVisie: agressie herkennen, signalen en onderzoek</title>
-<meta name="description" content="Kennisplatform over agressie op de werkvloer: signalen, trends en wetenschappelijk onderzoek, dagelijks bijgewerkt door Act in Move Training & Coaching." />
+<title>AgressieVisie | Kennisplatform Agressiehantering & De-escalatie</title>
+<meta name="description" content="Onafhankelijk kennisplatform over agressie, de-escalatie en veiligheid op het werk. Cijfers per sector, interactieve tools, protocollen en wetenschappelijke inzichten." />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <link rel="canonical" href="https://agressievisie.nl/" />
 <meta property="og:url" content="https://agressievisie.nl/" />
 <link rel="alternate" type="application/rss+xml" title="AgressieVisie: Artikelen" href="rss.xml" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AgressieVisie" />
-<meta property="og:title" content="AgressieVisie: agressie herkennen, signalen en onderzoek" />
-<meta property="og:description" content="Kennisplatform over agressie op de werkvloer: signalen, trends en wetenschappelijk onderzoek, dagelijks bijgewerkt door Act in Move Training & Coaching." />
+<meta property="og:title" content="AgressieVisie | Kennisplatform Agressiehantering & De-escalatie" />
+<meta property="og:description" content="Onafhankelijk kennisplatform over agressie, de-escalatie en veiligheid op het werk. Cijfers per sector, interactieve tools, protocollen en wetenschappelijke inzichten." />
 <meta property="og:image" content="https://agressievisie.nl/img/og-image.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -22,37 +22,57 @@
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 <link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="css/style.css" />
+<!-- Eén @graph in plaats van losse blokken: zo koppelen zoekmachines en
+     AI-crawlers de entiteiten via @id aan elkaar, in plaats van dat ze twee
+     losse organisaties zien die toevallig dezelfde naam dragen. De relatie is
+     expliciet: AgressieVisie is het kennisplatform, Act in Move is de
+     initiatiefnemer en moederorganisatie. Zo ontstaat er geen verwarring over
+     wie wat doet, en concurreren de twee domeinen niet op dezelfde intentie. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "AgressieVisie",
-  "url": "https://agressievisie.nl/",
-  "description": "Kennisplatform over agressie: signalen, trends en wetenschappelijk onderzoek.",
-  "publisher": {
-    "@type": "Organization",
-    "name": "Act in Move Training & Coaching",
-    "url": "https://actinmove.nl/"
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "AgressieVisie",
-  "alternateName": "Kennisplatform over agressie",
-  "url": "https://agressievisie.nl/",
-  "inLanguage": "nl-NL",
-  "description": "Kennisplatform over agressie op de werkvloer: signalen, trends, methodieken en wetenschappelijk onderzoek, per sector uitgewerkt.",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "https://agressievisie.nl/zoeken.html?q={search_term_string}"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://agressievisie.nl/#website",
+      "url": "https://agressievisie.nl/",
+      "name": "AgressieVisie",
+      "alternateName": "Kennisplatform over agressie",
+      "description": "Onafhankelijk kennisplatform over agressie, de-escalatie en veiligheid op de werkvloer.",
+      "inLanguage": "nl-NL",
+      "publisher": { "@id": "https://actinmove.nl/#organization" },
+      "about": { "@id": "https://agressievisie.nl/#platform" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://agressievisie.nl/zoeken.html?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
     },
-    "query-input": "required name=search_term_string"
-  }
+    {
+      "@type": "EducationalOrganization",
+      "@id": "https://agressievisie.nl/#platform",
+      "name": "AgressieVisie Kennisplatform",
+      "url": "https://agressievisie.nl/",
+      "description": "Kennisplatform over agressie op de werkvloer: cijfers per sector, methodieken, protocollen en interactieve tools, met bronvermelding per cijfer.",
+      "inLanguage": "nl-NL",
+      "parentOrganization": { "@id": "https://actinmove.nl/#organization" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://actinmove.nl/#organization",
+      "name": "Act in Move Training & Coaching",
+      "url": "https://actinmove.nl/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://actinmove.nl/wp-content/uploads/2025/06/logo-aim-kleur-1-1024x491.png"
+      },
+      "description": "Trainings- en coachingbureau in agressiehantering en de-escalatie, initiatiefnemer van het kennisplatform AgressieVisie.",
+      "subOrganization": { "@id": "https://agressievisie.nl/#platform" }
+    }
+  ]
 }
 </script>
 <style>
@@ -264,10 +284,10 @@
 
   <div class="wrap">
     <div class="stat-strip" id="platform-stats">
-      <a class="stat-strip-card" href="artikelen.html"><b data-count="18">0</b><span>Artikelen</span></a>
-      <a class="stat-strip-card" href="bronnen.html"><b data-count="20">0</b><span>Onafhankelijke bronnen</span></a>
-      <a class="stat-strip-card" href="overzicht.html"><b data-count="7">0</b><span>Sectoren in kaart</span></a>
-      <a class="stat-strip-card" href="lexicon.html"><b data-count="32">0</b><span>Vaktermen uitgelegd</span></a>
+      <a class="stat-strip-card" href="artikelen.html"><b data-count="18">18</b><span>Artikelen</span></a>
+      <a class="stat-strip-card" href="bronnen.html"><b data-count="56">56</b><span>Onafhankelijke bronnen</span></a>
+      <a class="stat-strip-card" href="overzicht.html"><b data-count="7">7</b><span>Sectoren in kaart</span></a>
+      <a class="stat-strip-card" href="lexicon.html"><b data-count="32">32</b><span>Vaktermen uitgelegd</span></a>
     </div>
 
     <div class="opening-punch">
@@ -478,8 +498,8 @@
   <div class="wrap">
     <div class="cta-band">
       <div>
-        <h2>Op zoek naar training of coaching?</h2>
-        <p>AgressieVisie deelt kennis. Voor praktijkgerichte training in agressiehantering en de-escalatie ga je naar <strong>Act in Move Training & Coaching</strong>, dé specialist op dit gebied.</p>
+        <h2>Wie zit er achter dit platform?</h2>
+        <p>AgressieVisie is een onafhankelijk kennisplatform: we verkopen niets en verwijzen bij elk cijfer naar de oorspronkelijke bron. Het initiatief komt van <strong>Act in Move Training &amp; Coaching</strong>, dat de inhoud vakinhoudelijk toetst. Wie na het lezen met een team aan de slag wil, kan daar terecht voor praktijktraining.</p>
       </div>
       <a class="btn btn-outline" href="https://actinmove.nl/" target="_blank" rel="noopener">Naar Act in Move ↗</a>
     </div>

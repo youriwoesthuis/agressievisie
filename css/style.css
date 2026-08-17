@@ -557,3 +557,19 @@ footer.site { background: var(--ink); color: var(--text-inverse-muted); padding:
 .search-bar input:focus { outline: 2px solid var(--red); outline-offset: 1px; }
 .search-bar svg { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); pointer-events: none; }
 .no-results { color: var(--text-muted); padding: 40px 0; }
+
+/* ── E-E-A-T-validatie ──────────────────────────────────────────────────
+   Bewust geen verkoopblok: het vertelt op wélke bronnen een pagina rust en
+   wie de inhoud vakinhoudelijk heeft getoetst. Voor Google en voor lezers is
+   dat het verschil tussen een kennisplatform en een vermomde advertentie. */
+.eeat {
+  display: flex; gap: 16px; align-items: flex-start;
+  border: 1px solid var(--line); border-left: 3px solid var(--red);
+  border-radius: var(--radius); padding: 18px 22px; margin-top: 32px;
+  background: var(--paper-soft);
+}
+.eeat-mark { width: 34px; height: 34px; border-radius: 9px; background: var(--grad-alert); flex-shrink: 0; }
+.eeat p { margin: 0; font-size: 13.5px; line-height: 1.6; color: var(--text-muted); }
+.eeat b { color: var(--text); }
+.eeat a { text-decoration: underline; color: var(--red-dark); }
+@media print { .eeat { display: none; } }
