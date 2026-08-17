@@ -30,14 +30,14 @@
   .search-hero-bar input:focus { outline:2px solid var(--red); outline-offset:1px; }
   .search-meta { text-align:center; color:var(--text-muted); font-size:14px; margin-top:16px; }
   .result-group { margin-bottom:36px; }
-  .result-group h3 { font-size:15px; text-transform:uppercase; letter-spacing:.04em; color:var(--red-dark); margin-bottom:14px; }
+  .result-group h2 { font-size:15px; text-transform:uppercase; letter-spacing:.04em; color:var(--red-dark); margin-bottom:14px; }
   .result-item {
     display:block; padding:16px 20px; border:1px solid var(--line); border-radius:10px; margin-bottom:10px;
     background:#fff; transition: border-color .12s ease, box-shadow .12s ease;
   }
   .result-item:hover { border-color:var(--red); box-shadow:var(--shadow-sm); }
   .result-item .badge { margin-bottom:8px; }
-  .result-item h4 { font-size:16px; margin-bottom:6px; }
+  .result-item h3 { font-size:16px; margin-bottom:6px; }
   .result-item p { font-size:14px; color:var(--text-muted); }
   mark { background: #fde3a7; color: inherit; border-radius: 2px; padding: 0 1px; }
 </style>
@@ -270,35 +270,35 @@ function renderResults(q) {
 
   let html = '';
   if (results.paginas.length) {
-    html += `<div class="result-group"><h3>Tools & pagina's (${results.paginas.length})</h3>` +
+    html += `<div class="result-group"><h2>Tools & pagina's (${results.paginas.length})</h2>` +
       results.paginas.map(p => `
         <a class="result-item" href="${p.url}">
-          <h4>${highlight(p.titel, q)}</h4>
+          <h3>${highlight(p.titel, q)}</h3>
           <p>${highlight(p.beschrijving, q)}</p>
         </a>`).join('') + `</div>`;
   }
   if (results.artikelen.length) {
-    html += `<div class="result-group"><h3>Artikelen (${results.artikelen.length})</h3>` +
+    html += `<div class="result-group"><h2>Artikelen (${results.artikelen.length})</h2>` +
       results.artikelen.map(a => `
         <a class="result-item" href="artikel-${a.slug}.html">
           <span class="badge">${a.categorie}</span>
-          <h4>${highlight(a.titel, q)}</h4>
+          <h3>${highlight(a.titel, q)}</h3>
           <p>${highlight(a.excerpt, q)}</p>
         </a>`).join('') + `</div>`;
   }
   if (results.lexicon.length) {
-    html += `<div class="result-group"><h3>Begrippen (${results.lexicon.length})</h3>` +
+    html += `<div class="result-group"><h2>Begrippen (${results.lexicon.length})</h2>` +
       results.lexicon.map(l => `
         <a class="result-item" href="lexicon.html#letter-${l.letter}">
-          <h4>${highlight(l.term, q)}</h4>
+          <h3>${highlight(l.term, q)}</h3>
           <p>${highlight(l.definitie, q)}</p>
         </a>`).join('') + `</div>`;
   }
   if (results.faq.length) {
-    html += `<div class="result-group"><h3>Veelgestelde vragen (${results.faq.length})</h3>` +
+    html += `<div class="result-group"><h2>Veelgestelde vragen (${results.faq.length})</h2>` +
       results.faq.map(f => `
         <a class="result-item" href="faq.html">
-          <h4>${highlight(f.vraag, q)}</h4>
+          <h3>${highlight(f.vraag, q)}</h3>
           <p>${highlight(f.antwoord, q)}</p>
         </a>`).join('') + `</div>`;
   }
