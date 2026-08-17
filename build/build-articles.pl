@@ -78,6 +78,22 @@ sub url_encode {
   return $bytes;
 }
 
+# Knipt een omschrijving netjes af op maximaal 155 tekens (de praktische
+# grens voor een meta-omschrijving), bij voorkeur op een zinsgrens. Vindt de
+# tekst geen goede zinsgrens, dan valt hij terug op een woordgrens plus "…".
+# Bestaat de tekst al uit 155 tekens of minder, dan verandert er niets.
+sub korte_omschrijving {
+  my ($tekst, $max) = @_;
+  $max //= 155;
+  return $tekst if length($tekst) <= $max;
+  my $stuk = substr($tekst, 0, $max);
+  if ($stuk =~ /^(.{40,}?[.!?])\s/s) {
+    return $1;
+  }
+  $stuk =~ s/\s+\S*$//;
+  return "$stuk…";
+}
+
 sub formatteer_datum_nl {
   my ($iso) = @_;
   my ($jaar, $maand, $dag) = $iso =~ /^(\d{4})-(\d{2})-(\d{2})$/;
@@ -114,7 +130,13 @@ for my $a (@gesorteerd) {
   die "Artikel zonder slug gevonden, kan geen bestand schrijven\n" unless $slug;
 
   my $canonical = "https://agressievisie.nl/artikel-$slug.html";
-  my $titel_pagina = "$a->{titel} | AgressieVisie";
+  # Geen " | AgressieVisie"-achtervoegsel: elders op de site laten pagina's
+  # met een al lange, zelfstandige titel dat achtervoegsel ook weg (zie
+  # artikelen.html, doxing.html). Artikeltitels zijn per definitie lang
+  # genoeg om zonder te kunnen; met achtervoegsel kwamen alle 18 boven de
+  # aanbevolen SERP-lengte uit, gemeten met Screaming Frog op 17-08-2026.
+  my $titel_pagina = $a->{titel};
+  my $meta_omschrijving = korte_omschrijving($a->{excerpt});
   my $badge = $BADGE_CLASS{ $a->{categorie} } || '';
 
   # ── Schema: Article + BreadcrumbList, zelfde vorm als de oude injectArticleSchema() ──
@@ -208,7 +230,7 @@ SHARE
   my $pagina = $template;
   my %vervang = (
     '{{TITLE}}'          => esc_html($titel_pagina),
-    '{{DESCRIPTION}}'    => esc_attr($a->{excerpt}),
+    '{{DESCRIPTION}}'    => esc_attr($meta_omschrijving),
     '{{CANONICAL}}'      => esc_attr($canonical),
     '{{OG_TITLE}}'       => esc_attr($titel_pagina),
     '{{SCHEMA_JSON}}'    => $schema_json,
