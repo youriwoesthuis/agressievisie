@@ -1,0 +1,4 @@
+Contact: mailto:support@actinmove.nl
+Expires: 2027-08-18T00:00:00.000Z
+Preferred-Languages: nl, en
+Canonical: https://agressievisie.nl/.well-known/security.txt
