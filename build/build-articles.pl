@@ -211,7 +211,7 @@ SHARE
   # ── Artikelbody ──
   my $paragrafen = join("\n      ", map { "<p>" . esc_html($_) . "</p>" } @{ $a->{inhoud} });
   my $article_body = sprintf(
-    qq{    <span class="badge %s">%s</span>\n    <h1>%s</h1>\n    <div class="article-meta"><span>%s</span></div>\n    <div class="article-body">\n      %s\n    </div>\n    <div class="source-note">Bron: <a href="%s" target="_blank" rel="noopener" style="text-decoration:underline; color:inherit;">%s</a></div>\n    %s\n    %s\n    <div class="editorial-box">\n      <div class="editorial-avatar"></div>\n      <div>\n        <b>Redactie AgressieVisie</b>\n        <span>Kennisplatform over agressie, onderdeel van Act in Move Training &amp; Coaching</span>\n      </div>\n    </div>},
+    qq{    <span class="badge %s">%s</span>\n    <h1>%s</h1>\n    <div class="article-meta"><span>%s</span></div>\n    <div class="article-body">\n      %s\n    </div>\n    <div class="source-note">Bron: <a href="%s" target="_blank" rel="noopener" style="text-decoration:underline; color:inherit;">%s</a></div>\n    %s\n    %s\n    <div class="editorial-box">\n      <div class="editorial-avatar"></div>\n      <div>\n        <b>Redactie AgressieVisie</b>\n        <span>Kennisplatform over agressie, een initiatief van Act in Move Training &amp; Coaching</span>\n      </div>\n    </div>},
     $badge, esc_html($a->{categorie}), esc_html($a->{titel}), formatteer_datum_nl($a->{datum}),
     $paragrafen, esc_attr($a->{bron_url}), esc_html($a->{bron_naam}),
     $term_chips_html, $share_row,
