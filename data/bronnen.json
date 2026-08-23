@@ -51,7 +51,7 @@
     "onderwerp": "Agressie tegen OV-personeel",
     "sectoren": ["Beveiliging & OV"],
     "gebruikt_in": [
-      { "titel": "Agressie tegen OV- en beveiligingspersoneel: de stand van zaken", "url": "artikel-agressie-ov-en-beveiliging-nieuwe-aanpak.html" },
+      { "titel": "Agressie tegen OV- en beveiligingspersoneel: nieuwe aanpak", "url": "artikel-agressie-ov-en-beveiliging-nieuwe-aanpak.html" },
       { "titel": "Cijfers & trends", "url": "cijfers.html" }
     ]
   },
@@ -63,9 +63,9 @@
     "onderwerp": "Ongewenst gedrag op de werkvloer, breed onderzoek onder 53.000 werknemers",
     "sectoren": ["Klantcontact & retail", "Horeca & uitgaan", "Algemeen"],
     "gebruikt_in": [
-      { "titel": "Grensoverschrijdend gedrag op de werkvloer: wat de NEA 2025 laat zien", "url": "artikel-grensoverschrijdend-gedrag-werkvloer-cijfers.html" },
+      { "titel": "Grensoverschrijdend gedrag op de werkvloer: de NEA-cijfers", "url": "artikel-grensoverschrijdend-gedrag-werkvloer-cijfers.html" },
       { "titel": "Waarom jonge werknemers vaker met agressie te maken krijgen", "url": "artikel-jonge-werknemers-kwetsbaar-voor-agressie.html" },
-      { "titel": "Agressie in de horeca: een van de risicovolste sectoren volgens de NEA 2025", "url": "artikel-agressie-in-de-horeca-nea-cijfers-2025.html" },
+      { "titel": "Agressie in de horeca: risicovolle sector volgens de NEA", "url": "artikel-agressie-in-de-horeca-nea-cijfers-2025.html" },
       { "titel": "Cijfers & trends", "url": "cijfers.html" },
       { "titel": "Sector: Klantcontact & retail", "url": "sector-klantcontact-en-retail.html" },
       { "titel": "Sector: Horeca & uitgaan", "url": "sector-horeca-en-uitgaan.html" }
@@ -139,7 +139,7 @@
     "onderwerp": "Agressie tegen bestuurders en ambtenaren",
     "sectoren": ["Gemeenten & overheid"],
     "gebruikt_in": [
-      { "titel": "Agressie tegen gemeenteambtenaren: de cijfers uit de Monitor Integriteit en Veiligheid", "url": "artikel-agressie-tegen-ambtenaren-monitor-integriteit-veiligheid.html" },
+      { "titel": "Agressie tegen ambtenaren: cijfers uit de Monitor", "url": "artikel-agressie-tegen-ambtenaren-monitor-integriteit-veiligheid.html" },
       { "titel": "Sector: Gemeenten & overheid", "url": "sector-gemeenten-en-overheid.html" }
     ]
   },
@@ -151,7 +151,7 @@
     "onderwerp": "Agressie tegen beveiligers",
     "sectoren": ["Beveiliging & OV"],
     "gebruikt_in": [
-      { "titel": "Agressie tegen OV- en beveiligingspersoneel: de stand van zaken", "url": "artikel-agressie-ov-en-beveiliging-nieuwe-aanpak.html" },
+      { "titel": "Agressie tegen OV- en beveiligingspersoneel: nieuwe aanpak", "url": "artikel-agressie-ov-en-beveiliging-nieuwe-aanpak.html" },
       { "titel": "Cijfers & trends", "url": "cijfers.html" },
       { "titel": "Sector: Beveiliging & OV", "url": "sector-beveiliging-en-ov.html" }
     ]
@@ -163,7 +163,7 @@
     "jaar": null,
     "onderwerp": "Agressie en online shaming van pakketbezorgers",
     "sectoren": ["Klantcontact & retail"],
-    "gebruikt_in": [{ "titel": "Agressie tegen pakketbezorgers: hoe sociale media het erger maken", "url": "artikel-agressie-tegen-bezorgers-en-zzpers.html" }]
+    "gebruikt_in": [{ "titel": "Agressie tegen pakketbezorgers: rol van sociale media", "url": "artikel-agressie-tegen-bezorgers-en-zzpers.html" }]
   },
   {
     "organisatie": "V&VN",
@@ -181,7 +181,7 @@
     "jaar": 2022,
     "onderwerp": "Online dreigementen en digitale intimidatie",
     "sectoren": ["Algemeen"],
-    "gebruikt_in": [{ "titel": "Online dreigementen: de onzichtbare voorloper van fysieke agressie", "url": "artikel-online-dreigementen-digitale-intimidatie.html" }]
+    "gebruikt_in": [{ "titel": "Online dreigementen: voorloper van fysieke agressie", "url": "artikel-online-dreigementen-digitale-intimidatie.html" }]
   },
   {
     "organisatie": "ArboNed",
@@ -200,7 +200,7 @@
     "onderwerp": "Agressie en dreiging tegen winkelpersoneel",
     "sectoren": ["Klantcontact & retail"],
     "gebruikt_in": [
-      { "titel": "Agressie in de winkel: van kwart bedreigd tot stijgende criminaliteitscijfers", "url": "artikel-agressie-in-de-winkel-detailhandel-cijfers.html" },
+      { "titel": "Agressie in de winkel: kwart bedreigd, cijfers stijgen", "url": "artikel-agressie-in-de-winkel-detailhandel-cijfers.html" },
       { "titel": "Sector: Klantcontact & retail", "url": "sector-klantcontact-en-retail.html" }
     ]
   },
