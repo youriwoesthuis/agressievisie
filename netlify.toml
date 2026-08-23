@@ -1,0 +1,42 @@
+# Netlify-configuratie voor AgressieVisie.
+#
+# De site is volledig statisch: er valt niets te bouwen, alleen te serveren.
+# De 18 artikelpagina's worden gegenereerd door build/build-articles.pl en als
+# echte bestanden in de repo gecommit (via de GitHub Action), dus Netlify hoeft
+# daar niets voor te doen.
+
+[build]
+  publish = "."
+
+# Geen enkele nabewerking door Netlify. Dit staat er bewust:
+# de optie "Pretty URLs" leidt /pagina.html om naar /pagina, terwijl alle
+# interne links, de canonical-tags, sitemap.xml en rss.xml juist de
+# .html-variant gebruiken. Dat zou betekenen dat élke interne link een
+# omleiding krijgt en dat de canonieke URL afwijkt van de geserveerde URL —
+# precies het soort SEO-schade dat je bij een verhuizing niet wilt.
+# skip_processing zet ook de automatische CSS/JS/afbeelding-optimalisatie uit;
+# die bestanden zijn al met de hand geoptimaliseerd.
+[build.processing]
+  skip_processing = true
+
+# Securityheaders. Deze stonden eerder als Transform Rule in het
+# Cloudflare-dashboard. Nu staan ze in de repo, zodat ze samen met de site
+# versiebeheerd zijn en niet meer in een dashboard "verstopt" zitten.
+# De waarden zijn 1-op-1 gelijk aan wat er voorheen live stond.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+
+# De bouwmap bevat het paginatemplate met {{PLACEHOLDERS}} erin en het
+# Perl-script. Die zijn publiek bereikbaar (dat waren ze op GitHub Pages ook),
+# maar ze horen niet in de zoekresultaten thuis.
+[[headers]]
+  for = "/build/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
