@@ -95,8 +95,30 @@ ul { list-style: none; }
 h1 { font-size: clamp(32px, 4.4vw, 52px); }
 h2 { font-size: clamp(26px, 3.2vw, 36px); margin-bottom: 14px; }
 h3 { font-size: 20px; }
-.lede { font-size: 19px; color: var(--text-muted); max-width: 640px; }
-.section--dark .lede { color: var(--text-inverse-muted); }
+/* ─── Donkere contexten ───
+   Componenten kennen hun omgeving niet; ze lezen alleen deze variabelen. Een
+   nieuwe donkere container hoeft daardoor alleen hieronder te worden
+   toegevoegd, niet aan elke losse componentregel. Dat ging eerder twee keer
+   mis: de knop "Weigeren" in de cookiebalk viel terug op bijna-zwart op
+   bijna-zwart (contrast 1.05, dus onzichtbaar), en de lede op elke donkere
+   paginakop stond op een kleur die voor lichte vlakken bedoeld is. Beide
+   omdat de container niet in een selectorlijstje stond. */
+:root {
+  --btn-outline-rand: var(--line);
+  --btn-outline-tekst: var(--text);
+  --btn-outline-hover-rand: var(--red);
+  --btn-outline-hover-tekst: var(--red-dark);
+  --lede-tekst: var(--text-muted);
+}
+.section--dark, .hero, footer.site, #cookie-banner, .page-header {
+  --btn-outline-rand: #45454e;
+  --btn-outline-tekst: var(--text-inverse);
+  --btn-outline-hover-rand: var(--amber);
+  --btn-outline-hover-tekst: var(--amber);
+  --lede-tekst: var(--text-inverse-muted);
+}
+
+.lede { font-size: 19px; color: var(--lede-tekst); max-width: 640px; }
 
 /* ─── Buttons ─── */
 .btn {
@@ -108,10 +130,8 @@ h3 { font-size: 20px; }
 .btn:hover { transform: translateY(-1px); }
 .btn-primary { background: var(--grad-alert); border-color: var(--red); color: #fff; box-shadow: var(--shadow-sm); }
 .btn-primary:hover { box-shadow: 0 8px 22px rgba(224,64,31,.35); }
-.btn-outline { border-color: var(--line); color: var(--text); background: transparent; }
-.btn-outline:hover { border-color: var(--red); color: var(--red-dark); }
-.section--dark .btn-outline, .hero .btn-outline, footer.site .btn-outline { border-color: #45454e; color: var(--text-inverse); }
-.section--dark .btn-outline:hover, .hero .btn-outline:hover, footer.site .btn-outline:hover { border-color: var(--amber); color: var(--amber); }
+.btn-outline { border-color: var(--btn-outline-rand); color: var(--btn-outline-tekst); background: transparent; }
+.btn-outline:hover { border-color: var(--btn-outline-hover-rand); color: var(--btn-outline-hover-tekst); }
 .btn-ghost { color: var(--red-dark); font-weight: 700; padding: 8px 0; }
 .btn-ghost::after { content: '→'; margin-left: 6px; transition: transform .15s ease; display: inline-block; }
 .btn-ghost:hover::after { transform: translateX(3px); }
