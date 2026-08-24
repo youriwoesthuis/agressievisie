@@ -81,7 +81,7 @@
      zonder harde wit-onderbreking ertussen. Schuine onderrand i.p.v. rechte lijn. */
   .opening {
     position: relative; overflow: hidden; background: var(--ink); color: #fff;
-    padding: 88px 0 168px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 84px), 0 100%);
+    padding: 88px 0 84px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 84px), 0 100%);
   }
   @media (max-width: 760px) { .opening { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), 0 100%); padding-bottom: 110px; } }
   .opening::before {
@@ -125,6 +125,10 @@
   .opening-punch .punch-text .eyebrow { color: var(--amber); }
   .opening-punch .punch-text h2 { font-size: clamp(22px, 2.6vw, 32px); color: #fff; margin: 10px 0 12px; }
   .opening-punch .punch-text p { color: var(--text-inverse-muted); font-size: 16px; margin-bottom: 18px; }
+  /* Het blok staat nu in een eigen donkere sectie in plaats van onderin de hero.
+     De scheidingslijn en de ruimte erboven hoorden bij die oude plek en zouden
+     hier een losse streep bovenaan de sectie opleveren. */
+  .section--dark .opening-punch { margin-top: 0; padding-top: 0; border-top: none; }
 
   /* Sectorkaarten: rustig en consistent, met een fors uitgelicht cijfer als accent */
   .sector-card { transition: transform .15s ease, box-shadow .15s ease; }
@@ -298,15 +302,6 @@
       <a class="stat-strip-card" href="lexicon.html"><b data-count="32">32</b><span>Vaktermen uitgelegd</span></a>
     </div>
 
-    <div class="opening-punch">
-      <div class="punch-number">85%</div>
-      <div class="punch-text">
-        <span class="eyebrow">Niet de uitzondering. De norm.</span>
-        <h2>Van de onderwijsmedewerkers maakte dit jaar verbaal geweld mee</h2>
-        <p>Geen incident hier en daar: in vrijwel elke sector met publiekscontact is agressie inmiddels realiteit. Van de klas tot de zorg tot het loket.</p>
-        <a class="btn-ghost" href="cijfers.html" style="color:#fff;">Bekijk alle cijfers per sector</a>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -340,6 +335,24 @@
         <p style="color:var(--text-muted); font-size:14.5px;">18 artikelen, 8 methodieken en actuele cijfers per sector.</p>
         <span class="triage-arrow">Bekijk alle artikelen</span>
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- Dit blok stond in de hero, tussen de knoppen en de triage in. Daardoor begon
+     de triage pas op 1,77 scherm. Actie eerst, bewijs daarna leest beter en
+     scheelt ruim 350px. De donkere sectie is nodig: de tekst hierin is wit en
+     zou op een lichte achtergrond wegvallen. -->
+<section class="section section--dark">
+  <div class="wrap">
+    <div class="opening-punch">
+      <div class="punch-number">85%</div>
+      <div class="punch-text">
+        <span class="eyebrow">Niet de uitzondering. De norm.</span>
+        <h2>Van de onderwijsmedewerkers maakte dit jaar verbaal geweld mee</h2>
+        <p>Geen incident hier en daar: in vrijwel elke sector met publiekscontact is agressie inmiddels realiteit. Van de klas tot de zorg tot het loket.</p>
+        <a class="btn-ghost" href="cijfers.html" style="color:#fff;">Bekijk alle cijfers per sector</a>
+      </div>
     </div>
   </div>
 </section>
