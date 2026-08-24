@@ -260,8 +260,14 @@
       <h1>Begrijp agressie <span class="accent">voordat het escaleert.</span></h1>
       <p class="lede">AgressieVisie volgt dagelijks wetenschappelijk onderzoek, trends en praktijkcases over agressie, voor iedereen die met mensen werkt en grip wil houden op spanning en escalatie.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="artikelen.html">Lees de laatste artikelen</a>
-        <a class="btn btn-outline" href="#nieuwsbrief">Meld je aan voor updates</a>
+        <!-- Stonden hier: "Lees de laatste artikelen" en "Meld je aan voor
+             updates". Allebei vrijblijvend, terwijl de sterkste onderdelen van
+             de site (de beslisboom, de protocol-generator) in de hero helemaal
+             niet voorkwamen en de triage pas op 23% van de pagina stond. Wie
+             hier landt heeft meestal een concrete aanleiding; die twee knoppen
+             sluiten daarop aan. Artikelen en nieuwsbrief staan verderop. -->
+        <a class="btn btn-primary" href="wat-nu.html">Er is net iets gebeurd</a>
+        <a class="btn btn-outline" href="#triage">Ik wil het beter regelen</a>
       </div>
     </div>
     <div class="hero-graphic" aria-hidden="true">
@@ -304,7 +310,7 @@
   </div>
 </section>
 
-<section class="section section--soft">
+<section class="section section--soft" id="triage">
   <div class="wrap">
     <span class="eyebrow">Waar wil je beginnen?</span>
     <h2>Wat speelt er nu bij jou?</h2>
