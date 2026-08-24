@@ -8,14 +8,17 @@
 [build]
   publish = "."
 
-# Geen enkele nabewerking door Netlify. Dit staat er bewust:
-# de optie "Pretty URLs" leidt /pagina.html om naar /pagina, terwijl alle
-# interne links, de canonical-tags, sitemap.xml en rss.xml juist de
-# .html-variant gebruiken. Dat zou betekenen dat élke interne link een
-# omleiding krijgt en dat de canonieke URL afwijkt van de geserveerde URL —
-# precies het soort SEO-schade dat je bij een verhuizing niet wilt.
-# skip_processing zet ook de automatische CSS/JS/afbeelding-optimalisatie uit;
-# die bestanden zijn al met de hand geoptimaliseerd.
+# Geen nabewerking door Netlify: de CSS/JS zijn al met de hand geoptimaliseerd.
+#
+# LET OP: skip_processing hieronder blijkt "Pretty URLs" NIET uit te zetten.
+# Die staat apart in het dashboard onder Project configuration > Build & deploy
+# > Post processing, en die dashboard-instelling wint van dit bestand. Bij de
+# eerste deploy stond Pretty URLs aan, waardoor Netlify in de geserveerde HTML
+# elke interne link herschreef van href="over.html" naar href="/over". De
+# pagina's bleven werken en de canonical bleef naar de .html-variant wijzen,
+# maar daarmee wezen alle interne links wél naar niet-canonieke URL's.
+# Pretty URLs is nu in het dashboard uitgezet. Als interne links ooit weer
+# zonder .html in de broncode opduiken: dáár kijken, niet hier.
 [build.processing]
   skip_processing = true
 
