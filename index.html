@@ -345,7 +345,10 @@
     <p class="lede">Van de balie tot de klas, van de winkelvloer tot het gemeentehuis: overal waar mensen elkaar tegenkomen, kan spanning oplopen. Een greep uit de sectoren die we volgen.</p>
     <div class="resume-banner" id="resume-banner">
       <span>Ga verder waar je gebleven was:</span>
-      <a href="#" id="resume-link"></a>
+      <!-- Bewust zonder href: het script hieronder zet zowel de tekst als de
+           href zodra er een eerder bezochte sector bekend is. Een <a> zonder
+           href is geen link, zodat crawlers hier geen lege link zien staan. -->
+      <a id="resume-link"></a>
     </div>
     <div class="grid grid-4" style="margin-top:40px;">
       <a class="card sector-card" href="sector-zorg-en-welzijn.html">

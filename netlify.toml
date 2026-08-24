@@ -22,6 +22,38 @@
 [build.processing]
   skip_processing = true
 
+# Twee oude URL's die vroeger als HTML-stub bestonden, omdat GitHub Pages geen
+# echte redirects kon. Die stubs stonden op noindex én hadden een canonical naar
+# de nieuwe pagina; dat zijn tegenstrijdige signalen (canonical zegt
+# "consolideer hierheen", noindex zegt "negeer deze pagina"). Op Netlify kan het
+# wél goed: een echte 301. De stubbestanden zijn daarom verwijderd.
+#
+# Let op: de volgorde telt. Netlify pakt de eerste regel die matcht, dus de
+# variant mét ?slug= moet vóór de algemene terugval staan.
+
+# /artikel.html?slug=vroege-signalen -> /artikel-vroege-signalen.html
+[[redirects]]
+  from = "/artikel.html"
+  query = { slug = ":slug" }
+  to = "/artikel-:slug.html"
+  status = 301
+  force = true
+
+# /artikel.html zonder slug had niets om naartoe te wijzen; die ging vroeger
+# naar het overzicht. Dat gedrag blijft zo.
+[[redirects]]
+  from = "/artikel.html"
+  to = "/artikelen.html"
+  status = 301
+  force = true
+
+# De zelftest heet sinds enige tijd "Wat is jouw reflex?".
+[[redirects]]
+  from = "/zelftest.html"
+  to = "/reflex.html"
+  status = 301
+  force = true
+
 # Securityheaders. Deze stonden eerder als Transform Rule in het
 # Cloudflare-dashboard. Nu staan ze in de repo, zodat ze samen met de site
 # versiebeheerd zijn en niet meer in een dashboard "verstopt" zitten.

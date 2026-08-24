@@ -87,7 +87,19 @@ sub korte_omschrijving {
   $max //= 155;
   return $tekst if length($tekst) <= $max;
   my $stuk = substr($tekst, 0, $max);
-  if ($stuk =~ /^(.{40,}?[.!?])\s/s) {
+
+  # Knip het liefst op een zinseinde, maar alleen als daar een bruikbaar lange
+  # omschrijving uit komt. Twee dingen gaan hier anders dan eerder:
+  #
+  #  1. Gulzig (geen ?), zodat we het LAATSTE zinseinde binnen $max pakken en
+  #     niet het eerste.
+  #  2. Een ondergrens. Een excerpt dat opent met een korte zin ("Agressie
+  #     volgt zelden een willekeurig patroon.") leverde anders een description
+  #     van 46 tekens op: netjes afgerond, maar veel te mager voor de
+  #     zoekresultaten. Levert het zinseinde te weinig op, dan is afkappen op
+  #     een woordgrens de betere ruil.
+  my $ondergrens = int($max * 0.65);
+  if ($stuk =~ /^(.{40,}[.!?])\s/s && length($1) >= $ondergrens) {
     return $1;
   }
   $stuk =~ s/\s+\S*$//;
