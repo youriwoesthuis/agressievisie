@@ -15,8 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (res.ok) {
           showStatus(status, 'ok', 'Bedankt! Je ontvangt binnenkort onze eerste update.');
           form.reset();
-          const unlockTarget = form.dataset.unlock ? document.querySelector(form.dataset.unlock) : null;
-          if (unlockTarget) unlockTarget.classList.remove('locked');
         } else {
           showStatus(status, 'err', VERZENDEN_MISLUKT);
         }
@@ -24,6 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
         showStatus(status, 'err', VERZENDEN_MISLUKT);
       } finally {
         submitBtn.disabled = false;
+        // Ontgrendelen gebeurt hoe dan ook. Lukt het opslaan niet, dan ligt dat
+        // aan ons en niet aan de bezoeker; die heeft zijn adres ingevuld.
+        const unlockTarget = form.dataset.unlock ? document.querySelector(form.dataset.unlock) : null;
+        if (unlockTarget) unlockTarget.classList.remove('locked');
       }
     });
   });

@@ -265,7 +265,7 @@
         <span class="dg-icon"></span>
         <div style="flex:1; min-width:220px;">
           <h3>Ontvang dit protocol als bestand</h3>
-          <p>Download het protocol als overzichtelijk document, mét het AgressieVisie-logo. Laat je e-mailadres achter als je ook updates wilt ontvangen, of download het direct zonder aanmelding.</p>
+          <p>Laat je e-mailadres achter, dan start de download meteen. Je krijgt het protocol als overzichtelijk document mét het AgressieVisie-logo, plus onze updates over agressie en de-escalatie.</p>
           <form class="download-gate-form" id="download-form" name="nieuwsbrief" method="POST" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="nieuwsbrief" />
             <input type="hidden" name="subject" value="AgressieVisie - nieuwsbriefaanmelding (protocol-generator)" />
@@ -274,7 +274,6 @@
             <input type="email" id="download-email" name="email" placeholder="jouw@email.nl" required />
             <button class="btn btn-primary" type="submit">Download protocol</button>
           </form>
-          <p style="margin-top:12px; font-size:14px;"><a href="#" id="download-direct" style="text-decoration:underline;">Direct downloaden zonder e-mailadres</a></p>
           <div class="form-status" id="download-error"></div>
           <div class="download-success" id="download-success">
             <span class="brand-mark" aria-hidden="true"></span>
@@ -931,10 +930,6 @@ document.addEventListener('DOMContentLoaded', () => {
     doDownload();
   });
 
-  document.getElementById('download-direct').addEventListener('click', (e) => {
-    e.preventDefault();
-    doDownload();
-  });
 });
 </script>
 </body>

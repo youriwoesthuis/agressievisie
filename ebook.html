@@ -150,7 +150,7 @@
     <div class="ebook-gate" style="max-width:600px; margin:0 auto;">
       <span class="eyebrow">Download</span>
       <h3 style="font-size:19px; margin-bottom:6px;">Ontvang het gratis e-book</h3>
-      <p style="color:var(--text-muted); font-size:14.5px;">Het e-book is vrij te downloaden. Laat je e-mailadres achter als je ook nieuwe uitgaven wilt ontvangen, of download het direct zonder aanmelding.</p>
+      <p style="color:var(--text-muted); font-size:14.5px;">Laat je e-mailadres achter, dan start de download meteen en krijg je het e-book ook als link in je inbox. Je ontvangt daarnaast onze updates over agressie en de-escalatie.</p>
       <form class="ebook-gate-form" id="ebook-form" name="nieuwsbrief" method="POST" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="nieuwsbrief" />
         <input type="hidden" name="subject" value="AgressieVisie - nieuwsbriefaanmelding (e-book)" />
@@ -159,7 +159,6 @@
         <input type="email" id="ebook-email" name="email" placeholder="jouw@email.nl" required />
         <button class="btn btn-primary" type="submit">Download het e-book</button>
       </form>
-      <p style="margin-top:12px; font-size:14px;"><a href="#" id="ebook-direct" style="text-decoration:underline;">Direct downloaden zonder e-mailadres</a></p>
       <div class="form-status" id="ebook-error"></div>
       <div class="ebook-success" id="ebook-success">
         <span class="brand-mark" aria-hidden="true"></span>
@@ -316,10 +315,6 @@ document.addEventListener('DOMContentLoaded', () => {
     doDownload();
   });
 
-  document.getElementById('ebook-direct').addEventListener('click', (e) => {
-    e.preventDefault();
-    doDownload();
-  });
 });
 </script>
 </body>
