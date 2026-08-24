@@ -155,6 +155,8 @@
             <p>Vul je e-mailadres in en de checklist wordt direct zichtbaar, en je ontvangt 'm ook als link in je inbox.</p>
             <form class="newsletter-form" data-newsletter data-unlock="#gated-content" name="nieuwsbrief" method="POST" data-netlify="true" netlify-honeypot="bot-field">
               <input type="hidden" name="form-name" value="nieuwsbrief" />
+              <input type="hidden" name="subject" value="AgressieVisie - nieuwsbriefaanmelding (gratis checklist)" />
+              <input type="hidden" name="aanleiding" value="Vulde het adres in om de signalenchecklist te ontgrendelen. Wilde dus de checklist, niet per se de nieuwsbrief." />
               <p hidden><label>Laat dit veld leeg als je een mens bent: <input name="bot-field" /></label></p>
               <input type="email" name="email" placeholder="jouw@email.nl" required />
               <button class="btn btn-primary" type="submit">Ontgrendelen</button>
@@ -238,6 +240,8 @@
           <p>Nieuwe checklists, cijfers en methodieken, een paar keer per jaar in je inbox.</p>
           <form class="newsletter-form" data-newsletter name="nieuwsbrief" method="POST" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="nieuwsbrief" />
+            <input type="hidden" name="subject" value="AgressieVisie - nieuwsbriefaanmelding (checklistpagina)" />
+            <input type="hidden" name="aanleiding" value="Nieuwsbriefblok onderaan de checklistpagina. Meldde zich aan na het lezen, zonder download." />
             <p hidden><label>Laat dit veld leeg als je een mens bent: <input name="bot-field" /></label></p>
             <input type="email" name="email" placeholder="jouw@email.nl" required />
             <button class="btn btn-primary" type="submit">Aanmelden</button>

@@ -268,6 +268,8 @@
           <p>Download het protocol als overzichtelijk document, mét het AgressieVisie-logo. Laat je e-mailadres achter als je ook updates wilt ontvangen, of download het direct zonder aanmelding.</p>
           <form class="download-gate-form" id="download-form" name="nieuwsbrief" method="POST" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="nieuwsbrief" />
+            <input type="hidden" name="subject" value="AgressieVisie - nieuwsbriefaanmelding (protocol-generator)" />
+            <input type="hidden" name="aanleiding" value="Stelde zelf een agressieprotocol samen en downloadde dat. Sterkste signaal: deze persoon is bezig met beleid." />
             <p hidden><label>Laat dit veld leeg als je een mens bent: <input name="bot-field" /></label></p>
             <input type="email" id="download-email" name="email" placeholder="jouw@email.nl" required />
             <button class="btn btn-primary" type="submit">Download protocol</button>
@@ -889,7 +891,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = document.getElementById('download-email').value;
     const submitBtn = form.querySelector('button[type=submit]');
     submitBtn.disabled = true;
     errorEl.classList.remove('show');
@@ -898,7 +899,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ 'form-name': 'nieuwsbrief', email }).toString(),
+        body: new URLSearchParams(new FormData(form)).toString(),
       });
       if (res.ok) {
         leadCaptured = true;

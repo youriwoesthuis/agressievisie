@@ -153,6 +153,8 @@
       <p style="color:var(--text-muted); font-size:14.5px;">Het e-book is vrij te downloaden. Laat je e-mailadres achter als je ook nieuwe uitgaven wilt ontvangen, of download het direct zonder aanmelding.</p>
       <form class="ebook-gate-form" id="ebook-form" name="nieuwsbrief" method="POST" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="nieuwsbrief" />
+        <input type="hidden" name="subject" value="AgressieVisie - nieuwsbriefaanmelding (e-book)" />
+        <input type="hidden" name="aanleiding" value="Downloadde het gratis e-book en liet daarbij een adres achter." />
         <p hidden><label>Laat dit veld leeg als je een mens bent: <input name="bot-field" /></label></p>
         <input type="email" id="ebook-email" name="email" placeholder="jouw@email.nl" required />
         <button class="btn btn-primary" type="submit">Download het e-book</button>
@@ -275,7 +277,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = document.getElementById('ebook-email').value;
     const submitBtn = form.querySelector('button[type=submit]');
     submitBtn.disabled = true;
     errorEl.classList.remove('show');
@@ -284,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ 'form-name': 'nieuwsbrief', email }).toString(),
+        body: new URLSearchParams(new FormData(form)).toString(),
       });
       if (res.ok) {
         form.style.display = 'none';

@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('form[data-newsletter]').forEach(form => {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = form.querySelector('input[type=email]').value;
       const status = form.parentElement.querySelector('.form-status');
       const submitBtn = form.querySelector('button[type=submit]');
 
@@ -11,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const res = await fetch('/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams({ 'form-name': 'nieuwsbrief', email }).toString(),
+          body: new URLSearchParams(new FormData(form)).toString(),
         });
         if (res.ok) {
           showStatus(status, 'ok', 'Bedankt! Je ontvangt binnenkort onze eerste update.');
