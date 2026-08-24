@@ -54,6 +54,17 @@
   status = 301
   force = true
 
+# MERKGROEP.md is een intern werkdocument: het beschrijft hoe agressievisie.nl,
+# bureauweerbaarenveilig.nl en actinmove.nl hun zoekwoorden verdelen. Het staat
+# in de repo zodat iedereen die hier werkt de afspraken ziet, maar omdat de
+# publish-map "." is, zou Netlify het anders gewoon uitserveren op
+# agressievisie.nl/MERKGROEP.md. Deze regel geeft er een 404 op.
+[[redirects]]
+  from = "/MERKGROEP.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # Securityheaders. Deze stonden eerder als Transform Rule in het
 # Cloudflare-dashboard. Nu staan ze in de repo, zodat ze samen met de site
 # versiebeheerd zijn en niet meer in een dashboard "verstopt" zitten.
