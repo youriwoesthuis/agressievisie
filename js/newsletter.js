@@ -8,22 +8,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
       submitBtn.disabled = true;
       try {
-        const res = await fetch('/api/nieuwsbrief', {
+        const res = await fetch('/', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ 'form-name': 'nieuwsbrief', email }).toString(),
         });
-        const data = await res.json();
         if (res.ok) {
           showStatus(status, 'ok', 'Bedankt! Je ontvangt binnenkort onze eerste update.');
           form.reset();
           const unlockTarget = form.dataset.unlock ? document.querySelector(form.dataset.unlock) : null;
           if (unlockTarget) unlockTarget.classList.remove('locked');
         } else {
-          showStatus(status, 'err', NIET_GEKOPPELD);
+          showStatus(status, 'err', VERZENDEN_MISLUKT);
         }
       } catch {
-        showStatus(status, 'err', NIET_GEKOPPELD);
+        showStatus(status, 'err', VERZENDEN_MISLUKT);
       } finally {
         submitBtn.disabled = false;
       }
@@ -31,11 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// De nieuwsbrief-endpoint bestaat alleen op de lokale dev-server; op GitHub
-// Pages geeft /api/nieuwsbrief een 405. Zolang de koppeling met actinmove.nl
-// er niet is, zeggen we dat eerlijk in plaats van "er ging iets mis" — dat
-// laatste suggereert een storing die vanzelf overgaat.
-const NIET_GEKOPPELD = 'De nieuwsbrief is nog niet gekoppeld, je aanmelding is daarom niet opgeslagen. ' +
+// Het formulier gaat via Netlify Forms naar youri@actinmove.nl. Komt de
+// inzending toch niet aan, zeg dan eerlijk dat hij niet is opgeslagen en geef
+// een adres dat wel werkt; "er ging iets mis" laat mensen wachten op antwoord
+// dat nooit komt.
+const VERZENDEN_MISLUKT = 'Je aanmelding is niet doorgekomen en dus niet opgeslagen. ' +
   'Mail ons via <a href="mailto:support@actinmove.nl">support@actinmove.nl</a> of via ' +
   '<a href="https://actinmove.nl/contact" target="_blank" rel="noopener">actinmove.nl/contact</a>, ' +
   'dan zetten we je er handmatig op.';

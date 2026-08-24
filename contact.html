@@ -131,18 +131,20 @@
     <div class="contact-form-box" id="contact-form">
       <h2 style="font-size:18px; margin-bottom:6px;">Stuur een bericht</h2>
       <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">Over de content of werking van AgressieVisie. We reageren zo snel mogelijk.</p>
-      <form id="contact-form-el">
+      <form id="contact-form-el" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact" />
+        <p hidden><label>Laat dit veld leeg als je een mens bent: <input name="bot-field" /></label></p>
         <div class="contact-field">
           <label for="c-naam">Naam</label>
-          <input type="text" id="c-naam" required />
+          <input type="text" id="c-naam" name="naam" required />
         </div>
         <div class="contact-field">
           <label for="c-email">E-mailadres</label>
-          <input type="email" id="c-email" required />
+          <input type="email" id="c-email" name="email" required />
         </div>
         <div class="contact-field">
           <label for="c-bericht">Bericht</label>
-          <textarea id="c-bericht" required></textarea>
+          <textarea id="c-bericht" name="bericht" required></textarea>
         </div>
         <button class="btn btn-primary" type="submit" style="width:100%; justify-content:center;">Versturen</button>
       </form>
@@ -221,12 +223,11 @@ document.getElementById('contact-form-el').addEventListener('submit', async (e) 
   submitBtn.disabled = true;
 
   try {
-    const res = await fetch('/api/contact', {
+    const res = await fetch('/', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ naam, email, bericht }),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ 'form-name': 'contact', naam, email, bericht }).toString(),
     });
-    const data = await res.json();
     if (res.ok) {
       statusEl.textContent = 'Bedankt! Je bericht is verstuurd, we reageren zo snel mogelijk.';
       statusEl.classList.remove('err');
@@ -245,7 +246,7 @@ document.getElementById('contact-form-el').addEventListener('submit', async (e) 
   }
 
   function toonNietGekoppeld() {
-    statusEl.innerHTML = 'Het contactformulier is nog niet gekoppeld, je bericht is daarom <strong>niet verstuurd</strong>. ' +
+    statusEl.innerHTML = 'Je bericht is <strong>niet verstuurd</strong>. ' +
       'Mail ons direct via <a href="mailto:support@actinmove.nl">support@actinmove.nl</a> of gebruik het formulier op ' +
       '<a href="https://actinmove.nl/contact" target="_blank" rel="noopener">actinmove.nl/contact</a>.';
     statusEl.classList.remove('ok');

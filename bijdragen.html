@@ -133,10 +133,12 @@
     <div class="bijdrage-form-box" id="bijdrage-form">
       <h2 style="font-size:18px; margin-bottom:6px;">Doe een voorstel</h2>
       <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">We publiceren niets automatisch: onze redactie beoordeelt elke suggestie op betrouwbaarheid, net als de rest van de site.</p>
-      <form id="bijdrage-form-el">
+      <form id="bijdrage-form-el" name="aanvulling" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="aanvulling" />
+        <p hidden><label>Laat dit veld leeg als je een mens bent: <input name="bot-field" /></label></p>
         <div class="contact-field">
           <label for="b-type">Type bijdrage</label>
-          <select id="b-type" required>
+          <select id="b-type" name="type" required>
             <option value="" disabled selected>Kies een type...</option>
             <option value="bron">Een bron of onderzoek</option>
             <option value="sector">Een sector die we missen</option>
@@ -147,19 +149,19 @@
         </div>
         <div class="contact-field">
           <label for="b-beschrijving">Beschrijving</label>
-          <textarea id="b-beschrijving" placeholder="Wat wil je aandragen, en waarom past het bij AgressieVisie?" required></textarea>
+          <textarea id="b-beschrijving" name="beschrijving" placeholder="Wat wil je aandragen, en waarom past het bij AgressieVisie?" required></textarea>
         </div>
         <div class="contact-field">
           <label for="b-link">Link naar bron of achtergrond <span class="optional">(optioneel)</span></label>
-          <input type="url" id="b-link" placeholder="https://..." />
+          <input type="url" id="b-link" name="link" placeholder="https://..." />
         </div>
         <div class="contact-field">
           <label for="b-naam">Naam <span class="optional">(optioneel)</span></label>
-          <input type="text" id="b-naam" />
+          <input type="text" id="b-naam" name="naam" />
         </div>
         <div class="contact-field">
           <label for="b-email">E-mailadres <span class="optional">(optioneel, voor eventuele terugkoppeling)</span></label>
-          <input type="email" id="b-email" />
+          <input type="email" id="b-email" name="email" />
         </div>
         <button class="btn btn-primary" type="submit" style="width:100%; justify-content:center;">Versturen</button>
       </form>
@@ -251,12 +253,11 @@ document.getElementById('bijdrage-form-el').addEventListener('submit', async (e)
   submitBtn.disabled = true;
 
   try {
-    const res = await fetch('/api/aanvulling', {
+    const res = await fetch('/', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type, beschrijving, link, naam, email }),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ 'form-name': 'aanvulling', type, beschrijving, link, naam, email }).toString(),
     });
-    const data = await res.json();
     if (res.ok) {
       statusEl.textContent = 'Bedankt! Je suggestie is binnen, onze redactie beoordeelt hem zo snel mogelijk.';
       statusEl.classList.remove('err');
@@ -275,7 +276,7 @@ document.getElementById('bijdrage-form-el').addEventListener('submit', async (e)
   }
 
   function toonNietGekoppeld() {
-    statusEl.innerHTML = 'Het formulier is nog niet gekoppeld, je aanvulling is daarom <strong>niet verstuurd</strong>. ' +
+    statusEl.innerHTML = 'Je aanvulling is <strong>niet verstuurd</strong>. ' +
       'Stuur hem via <a href="mailto:support@actinmove.nl">support@actinmove.nl</a> of via ' +
       '<a href="https://actinmove.nl/contact" target="_blank" rel="noopener">actinmove.nl/contact</a>, dan verwerken we hem alsnog.';
     statusEl.classList.remove('ok');

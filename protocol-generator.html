@@ -266,8 +266,10 @@
         <div style="flex:1; min-width:220px;">
           <h3>Ontvang dit protocol als bestand</h3>
           <p>Download het protocol als overzichtelijk document, mét het AgressieVisie-logo. Laat je e-mailadres achter als je ook updates wilt ontvangen, of download het direct zonder aanmelding.</p>
-          <form class="download-gate-form" id="download-form">
-            <input type="email" id="download-email" placeholder="jouw@email.nl" required />
+          <form class="download-gate-form" id="download-form" name="nieuwsbrief" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="nieuwsbrief" />
+            <p hidden><label>Laat dit veld leeg als je een mens bent: <input name="bot-field" /></label></p>
+            <input type="email" id="download-email" name="email" placeholder="jouw@email.nl" required />
             <button class="btn btn-primary" type="submit">Download protocol</button>
           </form>
           <p style="margin-top:12px; font-size:14px;"><a href="#" id="download-direct" style="text-decoration:underline;">Direct downloaden zonder e-mailadres</a></p>
@@ -893,12 +895,11 @@ document.addEventListener('DOMContentLoaded', () => {
     errorEl.classList.remove('show');
 
     try {
-      const res = await fetch('/api/nieuwsbrief', {
+      const res = await fetch('/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ 'form-name': 'nieuwsbrief', email }).toString(),
       });
-      const resData = await res.json();
       if (res.ok) {
         leadCaptured = true;
         form.style.display = 'none';
@@ -918,7 +919,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function toonNietGekoppeld() {
-    errorEl.innerHTML = 'Je download is gestart. De aanmelding voor de nieuwsbrief is nog niet gekoppeld en dus niet opgeslagen. ' +
+    errorEl.innerHTML = 'Je download is gestart. De aanmelding voor de nieuwsbrief is niet doorgekomen en dus niet opgeslagen. ' +
       'Wil je updates ontvangen, mail dan naar <a href="mailto:support@actinmove.nl">support@actinmove.nl</a> of via ' +
       '<a href="https://actinmove.nl/contact" target="_blank" rel="noopener">actinmove.nl/contact</a>.';
     errorEl.classList.add('show', 'err');
