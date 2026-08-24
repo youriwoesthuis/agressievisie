@@ -321,6 +321,17 @@ footer.site { background: var(--ink); color: var(--text-inverse-muted); padding:
 .footer-grid ul li { margin-bottom: 9px; font-size: 14.5px; }
 .footer-grid ul a:hover { color: #fff; }
 .footer-brand p { font-size: 14px; margin-top: 12px; max-width: 280px; }
+
+/* Badge van Internet.nl. agressievisie.nl scoort 100% in hun websitetest en
+   staat daarmee in hun Hall of Fame; inductees mogen deze badge voeren zolang
+   die score behouden blijft. Internet.nl vraagt twee dingen, en aan beide
+   voldoen we hier: de badge zelf hosten (zodat een bezoek aan deze site geen
+   verzoek naar hún server veroorzaakt) en de badge linken naar internet.nl.
+   De tekst in de badge is als vectorpad getekend, dus de alt-tekst draagt de
+   volledige betekenis voor schermlezers. */
+.internetnl-badge { display: inline-block; margin-top: 20px; }
+.internetnl-badge img { display: block; width: 204px; height: 38px; }
+.internetnl-badge:hover { opacity: .85; }
 .footer-bottom { position: relative; border-top: 1px solid #2c2c33; padding-top: 22px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 13px; }
 .footer-bottom .footer-bottom-mark { display: inline-flex; align-items: center; gap: 8px; }
 .footer-bottom .footer-bottom-mark .brand-mark { width: 20px; height: 20px; border-radius: 6px; }
