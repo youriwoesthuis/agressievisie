@@ -151,3 +151,18 @@ function initCookieBanner() {
     banner.classList.remove('show');
   });
 }
+
+// ─── Toestemming voor de nieuwsbrief vastleggen ───
+// Een niet-aangevinkt vakje wordt door de browser niet meegestuurd. Voor een
+// toestemmingsadministratie is "nee" net zo belangrijk als "ja": je moet later
+// kunnen aantonen dat iemand géén toestemming gaf. Het vakje zelf heeft daarom
+// geen name; deze functie schrijft ja of nee in een verborgen veld.
+// De listener staat in de capture-fase op document, zodat hij draait vóórdat
+// de verzendcode van de pagina het formulier in een FormData giet.
+document.addEventListener('submit', (e) => {
+  const form = e.target;
+  if (!(form instanceof HTMLFormElement)) return;
+  const vakje = form.querySelector('input[type=checkbox][data-toestemming]');
+  const veld = form.querySelector('input[type=hidden][name="nieuwsbrief_toestemming"]');
+  if (vakje && veld) veld.value = vakje.checked ? 'ja' : 'nee';
+}, true);

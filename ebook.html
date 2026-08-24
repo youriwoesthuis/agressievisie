@@ -150,21 +150,23 @@
     <div class="ebook-gate" style="max-width:600px; margin:0 auto;">
       <span class="eyebrow">Download</span>
       <h3 style="font-size:19px; margin-bottom:6px;">Ontvang het gratis e-book</h3>
-      <p style="color:var(--text-muted); font-size:14.5px;">Laat je e-mailadres achter, dan start de download meteen en krijg je het e-book ook als link in je inbox. Je ontvangt daarnaast onze updates over agressie en de-escalatie.</p>
-      <form class="ebook-gate-form" id="ebook-form" name="nieuwsbrief" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="nieuwsbrief" />
-        <input type="hidden" name="subject" value="AgressieVisie - nieuwsbriefaanmelding (e-book)" />
-        <input type="hidden" name="aanleiding" value="Downloadde het gratis e-book en liet daarbij een adres achter." />
+      <p style="color:var(--text-muted); font-size:14.5px;">Laat je e-mailadres achter, dan start de download meteen en krijg je het e-book ook als link in je inbox. We gebruiken je adres om de download te versturen; de nieuwsbrief is een aparte keuze.</p>
+      <form class="ebook-gate-form" id="ebook-form" name="download" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="download" />
+        <input type="hidden" name="subject" value="AgressieVisie - download e-book" />
+        <input type="hidden" name="aanleiding" value="Vroeg het gratis e-book op." />
         <p hidden><label>Laat dit veld leeg als je een mens bent: <input name="bot-field" /></label></p>
         <input type="email" id="ebook-email" name="email" placeholder="jouw@email.nl" required />
         <button class="btn btn-primary" type="submit">Download het e-book</button>
+          <input type="hidden" name="nieuwsbrief_toestemming" value="nee" />
+          <label class="toestemming"><input type="checkbox" data-toestemming /><span>Ja, stuur me ook de nieuwsbrief met nieuw onderzoek en trends over agressie. Afmelden kan altijd.</span></label>
       </form>
       <div class="form-status" id="ebook-error"></div>
       <div class="ebook-success" id="ebook-success">
         <span class="brand-mark" aria-hidden="true"></span>
         <span>Bedankt! Je download is gestart. <a href="#" id="ebook-again" style="text-decoration:underline; color:inherit;">Nogmaals downloaden</a></span>
       </div>
-      <p class="newsletter-note" style="margin-top:14px;">Door te downloaden ga je akkoord met ons <a href="privacy.html" style="text-decoration:underline;">privacybeleid</a>. Je kunt je altijd weer afmelden.</p>
+      <p class="newsletter-note" style="margin-top:14px;">Hoe we met je e-mailadres omgaan lees je in ons <a href="privacy.html" style="text-decoration:underline;">privacybeleid</a>.</p>
     </div>
   </div>
 </section>

@@ -265,14 +265,16 @@
         <span class="dg-icon"></span>
         <div style="flex:1; min-width:220px;">
           <h3>Ontvang dit protocol als bestand</h3>
-          <p>Laat je e-mailadres achter, dan start de download meteen. Je krijgt het protocol als overzichtelijk document mét het AgressieVisie-logo, plus onze updates over agressie en de-escalatie.</p>
-          <form class="download-gate-form" id="download-form" name="nieuwsbrief" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="nieuwsbrief" />
-            <input type="hidden" name="subject" value="AgressieVisie - nieuwsbriefaanmelding (protocol-generator)" />
-            <input type="hidden" name="aanleiding" value="Stelde zelf een agressieprotocol samen en downloadde dat. Sterkste signaal: deze persoon is bezig met beleid." />
+          <p>Laat je e-mailadres achter, dan start de download meteen. Je krijgt het protocol als overzichtelijk document mét het AgressieVisie-logo. We gebruiken je adres om de download te versturen; de nieuwsbrief is een aparte keuze.</p>
+          <form class="download-gate-form" id="download-form" name="download" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="download" />
+            <input type="hidden" name="subject" value="AgressieVisie - download protocol" />
+            <input type="hidden" name="aanleiding" value="Stelde zelf een agressieprotocol samen en vroeg dat op. Sterkste signaal: deze persoon is bezig met beleid." />
             <p hidden><label>Laat dit veld leeg als je een mens bent: <input name="bot-field" /></label></p>
             <input type="email" id="download-email" name="email" placeholder="jouw@email.nl" required />
             <button class="btn btn-primary" type="submit">Download protocol</button>
+            <input type="hidden" name="nieuwsbrief_toestemming" value="nee" />
+            <label class="toestemming"><input type="checkbox" data-toestemming /><span>Ja, stuur me ook de nieuwsbrief met nieuw onderzoek en trends over agressie. Afmelden kan altijd.</span></label>
           </form>
           <div class="form-status" id="download-error"></div>
           <div class="download-success" id="download-success">

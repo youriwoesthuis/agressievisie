@@ -161,13 +161,15 @@
           <div class="newsletter-box" style="max-width:340px;">
             <p style="font-weight:700; margin-bottom:8px;">Ontgrendel de checklist</p>
             <p>Vul je e-mailadres in en de checklist wordt direct zichtbaar, en je ontvangt 'm ook als link in je inbox.</p>
-            <form class="newsletter-form" data-newsletter data-unlock="#gated-content" name="nieuwsbrief" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-              <input type="hidden" name="form-name" value="nieuwsbrief" />
-              <input type="hidden" name="subject" value="AgressieVisie - nieuwsbriefaanmelding (gratis checklist)" />
-              <input type="hidden" name="aanleiding" value="Vulde het adres in om de signalenchecklist te ontgrendelen. Wilde dus de checklist, niet per se de nieuwsbrief." />
+            <form class="newsletter-form" data-newsletter data-unlock="#gated-content" name="download" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+              <input type="hidden" name="form-name" value="download" />
+              <input type="hidden" name="subject" value="AgressieVisie - download checklist" />
+              <input type="hidden" name="aanleiding" value="Vroeg de signalenchecklist op via het poortje op gratis-gids.html." />
               <p hidden><label>Laat dit veld leeg als je een mens bent: <input name="bot-field" /></label></p>
               <input type="email" name="email" placeholder="jouw@email.nl" required />
               <button class="btn btn-primary" type="submit">Ontgrendelen</button>
+              <input type="hidden" name="nieuwsbrief_toestemming" value="nee" />
+              <label class="toestemming"><input type="checkbox" data-toestemming /><span>Ja, stuur me ook de nieuwsbrief met nieuw onderzoek en trends over agressie. Afmelden kan altijd.</span></label>
             </form>
             <div class="form-status"></div>
           </div>

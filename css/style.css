@@ -607,3 +607,19 @@ footer.site { background: var(--ink); color: var(--text-inverse-muted); padding:
   background: rgba(255,255,255,.06); border-left-color: var(--amber);
 }
 .section--dark .snippet-box p { color: var(--text-inverse); }
+
+/* ─── Losse toestemming voor de nieuwsbrief ───
+   Het e-mailadres is nodig om de download te kunnen leveren; de nieuwsbrief is
+   een aparte keuze die de bezoeker zelf aanvinkt. Die twee scheiden is geen
+   nettigheid maar een eis: toestemming is niet vrij gegeven als je een dienst
+   afhankelijk maakt van toestemming voor iets anders (AVG art. 7 lid 4).
+   De formulieren zijn flex met wrap, dus flex-basis:100% zet het vakje op een
+   eigen regel onder het adresveld. */
+.toestemming {
+  flex-basis: 100%; display: flex; gap: 9px; align-items: flex-start;
+  font-size: 13.5px; line-height: 1.5; cursor: pointer; color: var(--text-muted);
+}
+.toestemming input[type=checkbox] {
+  margin: 2px 0 0; width: 16px; height: 16px; flex-shrink: 0; accent-color: var(--red); cursor: pointer;
+}
+.newsletter-box .toestemming { color: var(--text-inverse-muted); }
