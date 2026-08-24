@@ -114,9 +114,13 @@ repo's van de andere twee sites.
 1. **Geen redirects vanaf actinmove.nl.** De eerder veronderstelde
    zoekwoordoverlap bestaat niet: de assen verschillen. Act in Move houdt al zijn
    agressiepagina's. Zie hoofdstuk 8.
-2. **`Course`-schema toevoegen op actinmove.nl.** 29 trainingspagina's staan nu
-   als `Article` gemarkeerd. Voor Google en AI-systemen is een training daarmee
-   een blogartikel in plaats van een boekbare cursus.
+2. **Schema van actinmove.nl rechtzetten.** Alle 66 berichten staan als `Article`
+   gemarkeerd, met een auteur genaamd "admin", en er is helemaal geen
+   `Organization` op de site. Voor Google en AI-systemen is een training daarmee
+   een blogartikel in plaats van een boekbare cursus, en is er niemand die hem
+   aanbiedt. De volledige werkinstructie, met de gemeten code, de menupaden in
+   Yoast 28.2 en de juiste volgorde, staat in
+   **ACTINMOVE-WERKINSTRUCTIE.md** in de repo van bureauweerbaarenveilig.nl.
 3. **Wachtpagina van bureauweerbaarenveilig.nl vervangen.** De huidige tekst
    belooft "trainingen, coaching en advies ... weerbaarheid, veiligheid en
    vitaliteit" — breder dan de positionering. Bij livegang moet daar
